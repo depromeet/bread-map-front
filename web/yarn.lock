@@ -405,7 +405,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.9.2":
+"@babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.9.2":
   version: 7.15.4
   resolution: "@babel/runtime@npm:7.15.4"
   dependencies:
@@ -1211,7 +1211,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:*":
+"@types/jest@npm:*, @types/jest@npm:^27.0.1":
   version: 27.0.1
   resolution: "@types/jest@npm:27.0.1"
   dependencies:
@@ -2945,6 +2945,17 @@ __metadata:
     typescript:
       optional: true
   checksum: c8de0e0a72617a7902bf2599e87acb0d83ab45f5046ed1f723a83ef8d48ed1897aebe93d560d0e901d0bff494e63bba22d09d159ab1ddbc39a36b9a5213084dc
+  languageName: node
+  linkType: hard
+
+"eslint-config-prettier@npm:^8.3.0":
+  version: 8.3.0
+  resolution: "eslint-config-prettier@npm:8.3.0"
+  peerDependencies:
+    eslint: ">=7.0.0"
+  bin:
+    eslint-config-prettier: bin/cli.js
+  checksum: df4cea3032671995bb5ab07e016169072f7fa59f44a53251664d9ca60951b66cdc872683b5c6a3729c91497c11490ca44a79654b395dd6756beb0c3903a37196
   languageName: node
   linkType: hard
 
@@ -5998,6 +6009,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"prettier@npm:^2.4.1":
+  version: 2.4.1
+  resolution: "prettier@npm:2.4.1"
+  bin:
+    prettier: bin-prettier.js
+  checksum: cc6830588b401b0d742862fe9c46bc9118204fb307c3abe0e49e95b35ed23629573807ffdf9cdd65289c252a0bb51fc0171437f6626ee36378dea80f0ee80b91
+  languageName: node
+  linkType: hard
+
 "pretty-format@npm:^27.0.0, pretty-format@npm:^27.0.2, pretty-format@npm:^27.2.0":
   version: 27.2.0
   resolution: "pretty-format@npm:27.2.0"
@@ -7546,20 +7566,24 @@ typescript@4.4.3:
   version: 0.0.0-use.local
   resolution: "web@workspace:."
   dependencies:
+    "@babel/runtime": ^7.15.4
     "@emotion/babel-plugin": ^11.3.0
     "@emotion/react": ^11.4.1
     "@emotion/styled": ^11.3.0
     "@next/eslint-plugin-next": ^11.1.2
     "@testing-library/jest-dom": ^5.14.1
     "@testing-library/react": ^12.1.0
+    "@types/jest": ^27.0.1
     "@types/node": ^16.9.1
     "@types/react": 17.0.20
     babel-jest: ^27.2.0
     eslint: 7.32.0
     eslint-config-next: ^11.1.2
+    eslint-config-prettier: ^8.3.0
     identity-obj-proxy: ^3.0.0
     jest: ^27.2.0
     next: 11.1.2
+    prettier: ^2.4.1
     react: 17.0.2
     react-dom: 17.0.2
     react-test-renderer: ^17.0.2
