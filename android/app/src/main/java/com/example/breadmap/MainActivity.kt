@@ -1,40 +1,34 @@
 package com.example.breadmap
 
 import android.os.Bundle
-import android.view.ViewGroup
-import android.webkit.WebView
-import android.webkit.WebViewClient
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.viewinterop.AndroidView
-import com.example.breadmap.ui.theme.BreadmapTheme
+import androidx.compose.runtime.*
+import com.example.breadmap.Route
+import com.example.breadmap.pages.MainPage
+import com.example.breadmap.pages.LoginPage
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            WebViewScreen(urlToRender = "")
+            Main()
         }
     }
-}
 
-@Composable
-fun WebViewScreen(urlToRender: String) {
-    AndroidView(factory = {
-        WebView(it).apply {
-            layoutParams = ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT
-            )
-            webViewClient = WebViewClient()
-            loadUrl(urlToRender)
+    @Composable
+    private fun Main() {
+        val navController = rememberNavController()
+
+        NavHost(
+            navController = navController,
+            startDestination = Route.Login.route,
+        ) {
+            composable(Route.Login.route) { LoginPage(navController) }
+            composable(Route.Main.route) { MainPage(navController) }
         }
-    }, update = {
-        it.loadUrl(urlToRender)
-    })
+    }
 }
