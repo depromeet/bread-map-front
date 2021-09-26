@@ -6,13 +6,11 @@ import useGlobalTheme from '@/hooks/useGlobalTheme';
 function MyApp({ Component, pageProps }: AppProps) {
   const [theme, toggleTheme] = useGlobalTheme();
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <Global styles={globalStyles} />
-        <button onClick={toggleTheme}>테마변경</button>
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={theme}>
+      <Global styles={globalStyles} />
+      <button onClick={toggleTheme}>테마변경</button>
+      <Component {...pageProps} />
+    </ThemeProvider>
   );
 }
 
