@@ -1,12 +1,17 @@
-import { Global } from '@emotion/react';
+import { Global, ThemeProvider } from '@emotion/react';
 import globalStyles from '@/styles/globals';
 import type { AppProps } from 'next/app';
+import useGlobalTheme from '@/hooks/useGlobalTheme';
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [theme, toggleTheme] = useGlobalTheme();
   return (
     <>
-      <Global styles={globalStyles} />
-      <Component {...pageProps} />
+      <ThemeProvider theme={theme}>
+        <Global styles={globalStyles} />
+        <button onClick={toggleTheme}>테마변경</button>
+        <Component {...pageProps} />
+      </ThemeProvider>
     </>
   );
 }
