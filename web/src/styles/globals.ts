@@ -103,7 +103,6 @@ const globalStyles = css`
     text-transform: none;
   }
 
-
   button,
   [type='button'],
   [type='reset'],
