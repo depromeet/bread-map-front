@@ -5,7 +5,7 @@ const globalStyles = css`
     color: inherit;
     text-decoration: none;
   }
-    
+
   *,
   ::before,
   ::after {
@@ -22,16 +22,8 @@ const globalStyles = css`
   body {
     padding: 0;
     margin: 0;
-    font-family:
-      system-ui,
-      -apple-system,
-      'Segoe UI',
-      Roboto,
-      Helvetica,
-      Arial,
-      sans-serif,
-      'Apple Color Emoji',
-      'Segoe UI Emoji';
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial,
+      sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
   }
 
   hr {
@@ -52,13 +44,8 @@ const globalStyles = css`
   kbd,
   samp,
   pre {
-    font-family:
-      ui-monospace,
-      SFMono-Regular,
-      Consolas,
-      'Liberation Mono',
-      Menlo,
-      monospace;
+    font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono',
+      Menlo, monospace;
     font-size: 1em;
   }
 
@@ -149,7 +136,7 @@ const globalStyles = css`
     -webkit-appearance: button;
     font: inherit;
   }
-  
+
   summary {
     display: list-item;
   }
