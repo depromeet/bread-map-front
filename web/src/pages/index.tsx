@@ -52,12 +52,7 @@ const Home: NextPage = () => {
         <Description />
         <Grid>
           {gridItems.map(({ href, title, body }) => (
-            <Card
-              href={href}
-              title={title}
-              body={body}
-              key={title}
-            />
+            <Card href={href} title={title} body={body} key={title} />
           ))}
         </Grid>
       </Main>
