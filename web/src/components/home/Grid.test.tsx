@@ -1,7 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import Grid from './Grid';
 
-const TestElement = () => <div data-testid={'test'}>test</div>;
+const TestElement = () => (
+  <div data-testid={'test'}>test</div>
+);
 
 it('home/Grid', () => {
   render(
@@ -15,3 +17,4 @@ it('home/Grid', () => {
   expect(testElement.tagName).toMatch(/^div$/i);
   expect(screen.getByText('test')).toBe(testElement);
 });
+

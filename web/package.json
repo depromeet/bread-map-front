@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prettier": "prettier -w \"src/**/*.{ts,tsx}\"",
+    "prettier": "prettier -w src/**/*.(ts|tsx)",
     "test": "jest --watch"
   },
   "dependencies": {
