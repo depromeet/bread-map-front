@@ -7,59 +7,46 @@ import type { Theme } from '@emotion/react';
 
 type ThemeName = 'dark' | 'light';
 
-type ThemeNameDispatch = (themeName: ThemeName) => void;
+type ThemeToggle = () => void;
 
 interface BreadmapThemeProviderProps {
   children: React.ReactNode;
 }
-
-export const THEME_NAME: Record<string, ThemeName> = {
-  dark: 'dark',
-  light: 'light',
-};
 
 const THEME: Record<ThemeName, Theme> = {
   dark: DarkMode,
   light: LightMode,
 };
 
-const ThemeNameContext = createContext<ThemeName | null>(null);
-const ThemeNameDispatchContext = createContext<ThemeNameDispatch | null>(null);
+const ThemeToggleContext = createContext<ThemeToggle | null>(null);
 
 export const BreadmapThemeProvider = ({
   children,
 }: BreadmapThemeProviderProps) => {
-  const [themeName, setThemeName] = useState<ThemeName>(THEME_NAME.light);
-  const handleChangeThemeName = useCallback((name: ThemeName) => {
-    setThemeName(name);
-  }, []);
+  const [themeName, setThemeName] = useState<Theme>(THEME.light);
+
+  const handleToggleTheme = useCallback(() => {
+    themeName == THEME.light
+      ? setThemeName(THEME.dark)
+      : setThemeName(THEME.light);
+  }, [themeName]);
 
   return (
-    <EmotionThemeProvider theme={THEME[themeName]}>
-      <ThemeNameContext.Provider value={themeName}>
-        <Global styles={globalStyles} />
-        <ThemeNameDispatchContext.Provider value={handleChangeThemeName}>
-          {children}
-        </ThemeNameDispatchContext.Provider>
-      </ThemeNameContext.Provider>
+    <EmotionThemeProvider theme={themeName}>
+      <Global styles={globalStyles} />
+      <ThemeToggleContext.Provider value={handleToggleTheme}>
+        {children}
+      </ThemeToggleContext.Provider>
     </EmotionThemeProvider>
   );
 };
 
-export const useThemeName = () => {
-  const context = useContext(ThemeNameContext);
-
-  if (context === null) throw new Error();
-
-  return context;
-};
-
-export const useThemeNameDispatch = () => {
-  const dispatch = useContext(ThemeNameDispatchContext);
+export const useThemeToggle = () => {
+  const dispatch = useContext(ThemeToggleContext);
 
   if (dispatch === null) throw new Error();
 
-  return (payload: ThemeName) => {
-    dispatch(payload);
+  return () => {
+    dispatch();
   };
 };

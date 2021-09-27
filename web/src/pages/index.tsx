@@ -9,11 +9,7 @@ import {
   Footer,
   Title,
 } from '@/components/home';
-import {
-  THEME_NAME,
-  useThemeName,
-  useThemeNameDispatch,
-} from '@/styles/BreadMapTheming';
+import { useThemeToggle } from '@/styles/BreadMapTheming';
 
 interface GridItem {
   href: string;
@@ -45,14 +41,7 @@ const gridItems: GridItem[] = [
 ];
 
 const Home: NextPage = () => {
-  const themeName = useThemeName();
-  const themeNameDispatch = useThemeNameDispatch();
-
-  const toggleTheme = () => {
-    themeNameDispatch(
-      themeName === THEME_NAME.dark ? THEME_NAME.light : THEME_NAME.dark
-    );
-  };
+  const toggleTheme = useThemeToggle();
 
   return (
     <Container>

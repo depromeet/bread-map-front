@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { BreadmapThemeProvider as Theme } from '@/styles/BreadMapTheming';
 import type { AppProps } from 'next/app';
 
