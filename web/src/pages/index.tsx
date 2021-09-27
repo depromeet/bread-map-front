@@ -9,6 +9,11 @@ import {
   Footer,
   Title,
 } from '@/components/home';
+import {
+  THEME_NAME,
+  useThemeName,
+  useThemeNameDispatch,
+} from '@/styles/BreadMapTheming';
 
 interface GridItem {
   href: string;
@@ -40,6 +45,15 @@ const gridItems: GridItem[] = [
 ];
 
 const Home: NextPage = () => {
+  const themeName = useThemeName();
+  const themeNameDispatch = useThemeNameDispatch();
+
+  const toggleTheme = () => {
+    themeNameDispatch(
+      themeName === THEME_NAME.dark ? THEME_NAME.light : THEME_NAME.dark
+    );
+  };
+
   return (
     <Container>
       <Head>
@@ -48,6 +62,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Main>
+        <button onClick={toggleTheme}>테마변경</button>
         <Title />
         <Description />
         <Grid>
