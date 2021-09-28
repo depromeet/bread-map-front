@@ -23,16 +23,14 @@ const ThemeToggleContext = createContext<ThemeToggle | null>(null);
 export const BreadmapThemeProvider = ({
   children,
 }: BreadmapThemeProviderProps) => {
-  const [themeName, setThemeName] = useState<Theme>(THEME.light);
+  const [themeName, setThemeName] = useState<ThemeName>('light');
 
   const handleToggleTheme = useCallback(() => {
-    themeName == THEME.light
-      ? setThemeName(THEME.dark)
-      : setThemeName(THEME.light);
+    themeName === 'light' ? setThemeName('dark') : setThemeName('light');
   }, [themeName]);
 
   return (
-    <EmotionThemeProvider theme={themeName}>
+    <EmotionThemeProvider theme={THEME[themeName]}>
       <Global styles={globalStyles} />
       <ThemeToggleContext.Provider value={handleToggleTheme}>
         {children}
