@@ -6,9 +6,11 @@ import {
   Description,
   Grid,
   Main,
-  Footer,
+  // Footer,
   Title,
 } from '@/components/home';
+
+import Footer from 'components/Footer' 
 
 interface GridItem {
   href: string;
