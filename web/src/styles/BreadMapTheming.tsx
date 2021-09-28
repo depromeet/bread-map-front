@@ -26,8 +26,8 @@ export const BreadmapThemeProvider = ({
   const [themeName, setThemeName] = useState<ThemeName>('light');
 
   const handleToggleTheme = useCallback(() => {
-    themeName === 'light' ? setThemeName('dark') : setThemeName('light');
-  }, [themeName]);
+    setThemeName((prev) => (prev === 'light' ? 'dark' : 'light'));
+  }, []);
 
   return (
     <EmotionThemeProvider theme={THEME[themeName]}>
