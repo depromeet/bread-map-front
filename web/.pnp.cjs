@@ -43,6 +43,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/jest-dom", "npm:5.14.1"],
             ["@testing-library/react", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:12.1.0"],
             ["@types/jest", "npm:27.0.1"],
+            ["@types/navermaps", "npm:3.0.9"],
             ["@types/node", "npm:16.9.1"],
             ["@types/react", "npm:17.0.20"],
             ["babel-jest", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:27.2.0"],
@@ -2001,6 +2002,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-json5-npm-0.0.29-f63a7916bd-e60b153664.zip/node_modules/@types/json5/",
           "packageDependencies": [
             ["@types/json5", "npm:0.0.29"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@types/navermaps", [
+        ["npm:3.0.9", {
+          "packageLocation": "./.yarn/cache/@types-navermaps-npm-3.0.9-7ed51e8a32-66e510c432.zip/node_modules/@types/navermaps/",
+          "packageDependencies": [
+            ["@types/navermaps", "npm:3.0.9"]
           ],
           "linkType": "HARD",
         }]
@@ -9421,6 +9431,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/jest-dom", "npm:5.14.1"],
             ["@testing-library/react", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:12.1.0"],
             ["@types/jest", "npm:27.0.1"],
+            ["@types/navermaps", "npm:3.0.9"],
             ["@types/node", "npm:16.9.1"],
             ["@types/react", "npm:17.0.20"],
             ["babel-jest", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:27.2.0"],
