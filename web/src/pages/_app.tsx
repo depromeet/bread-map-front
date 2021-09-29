@@ -1,13 +1,11 @@
-import { Global } from '@emotion/react';
-import globalStyles from '@/styles/globals';
+import { BreadmapThemeProvider as Theme } from '@/styles/BreadMapTheming';
 import type { AppProps } from 'next/app';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
-      <Global styles={globalStyles} />
+    <Theme>
       <Component {...pageProps} />
-    </>
+    </Theme>
   );
 }
 

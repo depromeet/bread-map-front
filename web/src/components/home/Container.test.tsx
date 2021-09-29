@@ -1,9 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import Container from './Container';
 
-const TestElement = () => (
-  <div data-testid={'test'}>test</div>
-);
+const TestElement = () => <div data-testid={'test'}>test</div>;
 
 it('home/Container', () => {
   render(
