@@ -10,7 +10,8 @@ import {
   Title,
 } from '@/components/home';
 
-import Footer from 'components/Footer' 
+import Footer from 'components/Footer'
+import BottomSheet from 'components/BottomSheet'
 
 interface GridItem {
   href: string;
@@ -63,6 +64,7 @@ const Home: NextPage = () => {
           ))}
         </Grid>
       </Main>
+      <BottomSheet />
       <Footer />
     </Container>
   );
