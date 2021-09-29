@@ -9,6 +9,7 @@ import {
   Footer,
   Title,
 } from '@/components/home';
+import { useThemeToggle } from '@/styles/BreadMapTheming';
 
 interface GridItem {
   href: string;
@@ -40,6 +41,8 @@ const gridItems: GridItem[] = [
 ];
 
 const Home: NextPage = () => {
+  const toggleTheme = useThemeToggle();
+
   return (
     <Container>
       <Head>
@@ -48,16 +51,12 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Main>
+        <button onClick={toggleTheme}>테마변경</button>
         <Title />
         <Description />
         <Grid>
           {gridItems.map(({ href, title, body }) => (
-            <Card
-              href={href}
-              title={title}
-              body={body}
-              key={title}
-            />
+            <Card href={href} title={title} body={body} key={title} />
           ))}
         </Grid>
       </Main>

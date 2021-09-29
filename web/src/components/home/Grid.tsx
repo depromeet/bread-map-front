@@ -2,11 +2,7 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 
 const Grid: React.FC = ({ children }) => {
-  return (
-    <Base>
-      {children}
-    </Base>
-  );
+  return <Base>{children}</Base>;
 };
 
 export default Grid;

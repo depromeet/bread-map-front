@@ -4,8 +4,7 @@ import styled from '@emotion/styled';
 const Description: React.FC = () => {
   return (
     <Base>
-      Get started by editing{' '}
-      <Code>pages/index.js</Code>
+      Get started by editing <Code>pages/index.js</Code>
     </Base>
   );
 };
@@ -20,6 +19,7 @@ const Base = styled.p`
 
 const Code = styled.code`
   background: #fafafa;
+  color: ${({ theme }) => theme.color.error};
   border-radius: 5px;
   padding: 0.75rem;
   font-size: 1.1rem;

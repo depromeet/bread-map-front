@@ -1,15 +1,33 @@
 import { css } from '@emotion/react';
 
 const globalStyles = css`
-  html,
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+    -moz-tab-size: 4;
+    tab-size: 4;
+  }
+
   body {
     padding: 0;
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial,
+      sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
   }
 
-  a {
+  hr {
+    height: 0;
     color: inherit;
     text-decoration: none;
   }
@@ -27,13 +45,8 @@ const globalStyles = css`
   kbd,
   samp,
   pre {
-    font-family:
-      ui-monospace,
-      SFMono-Regular,
-      Consolas,
-      'Liberation Mono',
-      Menlo,
-      monospace;
+    font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono',
+      Menlo, monospace;
     font-size: 1em;
   }
 
@@ -124,7 +137,7 @@ const globalStyles = css`
     -webkit-appearance: button;
     font: inherit;
   }
-  
+
   summary {
     display: list-item;
   }
