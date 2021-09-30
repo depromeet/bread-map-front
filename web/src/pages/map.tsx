@@ -12,13 +12,11 @@ const DisplayMap: React.FC = () => {
     if (el === null) return;
 
     setTimeout(() => {
+      const naverMapNamespace = naverMapInstance.getServiceNamespace();
       if (mapInstance.current !== null) return;
-      mapInstance.current = new (naverMapInstance.getServiceNamespace().Map)(
-        el,
-        {
-          zoom: 10,
-        }
-      );
+      mapInstance.current = new naverMapNamespace.Map(el, {
+        zoom: 10,
+      });
     }, 600);
   }, [naverMapInstance]);
 
