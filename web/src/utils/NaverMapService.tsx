@@ -19,7 +19,7 @@ export class NaverMapService {
 
 const NaverMapContext = React.createContext<NaverMapService | null>(null);
 
-export const NScript = ({ children }: { children: React.ReactNode }) => {
+export const NaverMapScript = ({ children }: { children: React.ReactNode }) => {
   const [instance] = React.useState<NaverMapService>(new NaverMapService());
 
   return (

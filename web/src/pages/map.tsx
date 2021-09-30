@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { NScript, useNaverMapService } from '@/utils/NaverMapService';
+import { NaverMapScript, useNaverMapService } from '@/utils/NaverMapService';
 
 const DisplayMap: React.FC = () => {
   const naverMapInstance = useNaverMapService();
@@ -26,9 +26,9 @@ const DisplayMap: React.FC = () => {
 const Map: React.FC = () => {
   return (
     <>
-      <NScript>
+      <NaverMapScript>
         <DisplayMap />
-      </NScript>
+      </NaverMapScript>
     </>
   );
 };
