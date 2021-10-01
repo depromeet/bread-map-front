@@ -1,34 +1,38 @@
 import React from 'react';
+import Script from 'next/script';
 import styled from '@emotion/styled';
-import { NaverMapScript, useNaverMapService } from '@/utils/NaverMapService';
 
 const DisplayMap: React.FC = () => {
-  const naverMapInstance = useNaverMapService();
+  const naverMapInstance = window.naver.maps;
+
   const ref = React.useRef<HTMLDivElement | null>(null);
   const mapInstance = React.useRef<naver.maps.Map | null>(null);
 
   React.useEffect(() => {
     const el = ref.current;
     if (el === null) return;
+    if (mapInstance.current !== null) return;
 
-    setTimeout(() => {
-      const naverMapNamespace = naverMapInstance.getServiceNamespace();
-      if (mapInstance.current !== null) return;
-      mapInstance.current = new naverMapNamespace.Map(el, {
-        zoom: 10,
-      });
-    }, 600);
+    mapInstance.current = new naverMapInstance.Map(el, {
+      zoom: 10,
+    });
   }, [naverMapInstance]);
 
   return <MapDiv ref={ref}></MapDiv>;
 };
 
 const Map: React.FC = () => {
+  const [isLoaded, setIsLoaded] = React.useState<boolean>(false);
+
   return (
     <>
-      <NaverMapScript>
-        <DisplayMap />
-      </NaverMapScript>
+      <Script
+        src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_ID}`}
+        onLoad={() => {
+          setIsLoaded(true);
+        }}
+      />
+      {isLoaded ? <DisplayMap /> : 'loading'}
     </>
   );
 };
