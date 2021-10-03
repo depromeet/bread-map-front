@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Breadmap</string>
+    <string name="kakao_native_key">51a512eac91d58dfcd97d331e3670f8d</string>
 </resources>

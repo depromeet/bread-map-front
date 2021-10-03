@@ -1,7 +1,6 @@
 package com.example.breadmap
 
 import android.graphics.Color
-import android.util.DisplayMetrics
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -13,13 +12,11 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.unit.dp
 import com.example.breadmap.pages.MainPage
 import com.example.breadmap.pages.LoginPage
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.breadmap.ui.theme.BreadmapTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
