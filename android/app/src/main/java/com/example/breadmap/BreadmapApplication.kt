@@ -7,6 +7,6 @@ class BreadmapApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        KakaoSdk.init(this, resources.getString(R.string.kakao_native_key))
+        KakaoSdk.init(this, resources.getString(R.string.kakao_key))
     }
 }
