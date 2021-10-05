@@ -26,13 +26,10 @@ it('lib/hooks/useGetBakeries', async () => {
         ))}
       </ul>
     );
-  }
+  };
 
   const spy = jest.spyOn(SWR, 'default');
   render(<TestComponent latitude={0} longitude={1} range={2} />);
 
-  expect(spy).toHaveBeenCalledWith(
-    ['/bakery', 0, 1, 2],
-    expect.any(Function),
-  );
+  expect(spy).toHaveBeenCalledWith(['/bakery', 0, 1, 2], expect.any(Function));
 });

@@ -1,13 +1,15 @@
 const arrayTypeGuard = (headers?: HeadersInit): headers is string[][] => {
   if (Array.isArray(headers)) return true;
   return false;
-}
+};
 
-const recordTypeGuard = (headers?: HeadersInit): headers is Record<string, string> => {
+const recordTypeGuard = (
+  headers?: HeadersInit
+): headers is Record<string, string> => {
   if (typeof headers !== 'object') return false;
   if (headers.toString() !== '[object Object]') return false;
   return true;
-}
+};
 
 const headersTypeGuard = (headers?: HeadersInit): headers is Headers => {
   if (typeof headers !== 'object') return false;
@@ -41,17 +43,19 @@ const initHeader = (init?: HeadersInit): HeadersInit | undefined => {
     }
   }
 
-  if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
+  if (
+    process.env.NODE_ENV === 'development' ||
+    process.env.NODE_ENV === 'test'
+  ) {
     ret['Authorization'] = 'TEST_TOKEN';
   }
 
   return ret;
-}
-
+};
 
 export default function fetchBase(
   info: RequestInfo,
-  init?: RequestInit | undefined,
+  init?: RequestInit | undefined
 ): Promise<Response> {
   const headers = initHeader(init?.headers);
 

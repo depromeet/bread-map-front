@@ -20,7 +20,9 @@ export const fetchBakeries = async ({
   longitude,
   range,
 }: FetchBakeriesPayload): Promise<BakeryEntity[]> => {
-  const resp = await fetchBase(`/bakery?latitude=${latitude}&longitude=${longitude}&range=${range}`);
+  const resp = await fetchBase(
+    `/bakery?latitude=${latitude}&longitude=${longitude}&range=${range}`
+  );
   const data = await resp.json();
 
   return data;

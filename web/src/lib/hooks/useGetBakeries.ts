@@ -10,6 +10,7 @@ export const useGetBakeries = ({
 }: UseGetBakeriesParams) => {
   return useSWR(
     ['/bakery', latitude, longitude, range],
-    (_, latitude, longitude, range) => fetchBakeries({ latitude, longitude, range })
+    (_, latitude, longitude, range) =>
+      fetchBakeries({ latitude, longitude, range })
   );
 };
