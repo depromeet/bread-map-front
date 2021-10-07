@@ -46,6 +46,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/navermaps", "npm:3.0.9"],
             ["@types/node", "npm:16.9.1"],
             ["@types/react", "npm:17.0.20"],
+            ["@types/react-dom", "npm:17.0.9"],
             ["babel-jest", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:27.2.0"],
             ["eslint", "npm:7.32.0"],
             ["eslint-config-next", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:11.1.2"],
@@ -1645,7 +1646,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@next/react-dev-overlay", "virtual:d7a0aae9ab147d7ab1d846d2657db2d63665f58914890bd16ebaff9f68c9661fa46c988cae789735b3b1039a1cc9d9dc6265f912c709241177253e9d77a35551#npm:11.1.2"],
             ["@babel/code-frame", "npm:7.12.11"],
             ["@types/react", "npm:17.0.20"],
-            ["@types/react-dom", null],
+            ["@types/react-dom", "npm:17.0.9"],
             ["anser", "npm:1.4.9"],
             ["chalk", "npm:4.0.0"],
             ["classnames", "npm:2.2.6"],
@@ -1872,7 +1873,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/runtime", "npm:7.15.4"],
             ["@testing-library/dom", "npm:8.5.0"],
             ["@types/react", "npm:17.0.20"],
-            ["@types/react-dom", null],
+            ["@types/react-dom", "npm:17.0.9"],
             ["react", "npm:17.0.2"],
             ["react-dom", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:17.0.2"]
           ],
@@ -2060,6 +2061,26 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/prop-types", "npm:15.7.4"],
             ["@types/scheduler", "npm:0.16.2"],
             ["csstype", "npm:3.0.9"]
+          ],
+          "linkType": "HARD",
+        }],
+        ["npm:17.0.27", {
+          "packageLocation": "./.yarn/cache/@types-react-npm-17.0.27-96dcc0d27b-3a1147d963.zip/node_modules/@types/react/",
+          "packageDependencies": [
+            ["@types/react", "npm:17.0.27"],
+            ["@types/prop-types", "npm:15.7.4"],
+            ["@types/scheduler", "npm:0.16.2"],
+            ["csstype", "npm:3.0.9"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@types/react-dom", [
+        ["npm:17.0.9", {
+          "packageLocation": "./.yarn/cache/@types-react-dom-npm-17.0.9-046b4282f3-b7e898e1a2.zip/node_modules/@types/react-dom/",
+          "packageDependencies": [
+            ["@types/react-dom", "npm:17.0.9"],
+            ["@types/react", "npm:17.0.27"]
           ],
           "linkType": "HARD",
         }]
@@ -6927,7 +6948,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/fibers", null],
             ["@types/node-sass", null],
             ["@types/react", "npm:17.0.20"],
-            ["@types/react-dom", null],
+            ["@types/react-dom", "npm:17.0.9"],
             ["@types/sass", null],
             ["assert", "npm:2.0.0"],
             ["ast-types", "npm:0.13.2"],
@@ -9467,6 +9488,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/navermaps", "npm:3.0.9"],
             ["@types/node", "npm:16.9.1"],
             ["@types/react", "npm:17.0.20"],
+            ["@types/react-dom", "npm:17.0.9"],
             ["babel-jest", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:27.2.0"],
             ["eslint", "npm:7.32.0"],
             ["eslint-config-next", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:11.1.2"],
