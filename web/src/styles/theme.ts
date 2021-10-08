@@ -1,10 +1,12 @@
 import { Theme } from '@emotion/react';
 
+// background: '#f5f5f5',
 export const LightMode: Theme = {
   name: 'light',
   color: {
     textColor: '#1e2222',
     reverseTextColor: '#fcfcfc',
+    boxShadow: 'lightgary',
     body: 'white',
     body2: '#fafafa',
     body3: '#e8e8e8',
@@ -12,7 +14,7 @@ export const LightMode: Theme = {
     label: '#8b9999',
     placeholder: '#c1c5c5',
     line: '#929696',
-    background: '#f5f5f5',
+    background: '#fff',
     offWhite: '#fcfcfc',
     primary: '#2ac1bc',
     primary2: '#a0e1e0',
@@ -29,6 +31,7 @@ export const DarkMode: Theme = {
   color: {
     textColor: '#fcfcfc',
     reverseTextColor: '#1e2222',
+    boxShadow: 'lightgary',
     body: '#3c3e3e',
     body2: '#353535',
     body3: '#2a2f2f',
