@@ -9,7 +9,7 @@ it('home/Card', () => {
     e.currentTarget.innerHTML = changeChildren;
   };
 
-  render(<MapButton clickHandler={clickHandler}>{defaultChildren}</MapButton>);
+  render(<MapButton onClick={clickHandler}>{defaultChildren}</MapButton>);
 
   expect(screen.getByText(defaultChildren).tagName).toMatch(/^button$/i);
 

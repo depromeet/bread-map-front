@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { BreadmapThemeProvider as Theme } from '@/styles/BreadMapTheming';
 import { render, RenderOptions } from '@testing-library/react';
 

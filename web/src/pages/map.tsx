@@ -1,7 +1,7 @@
 import React from 'react';
-import MapButtons from '@/components/home/mapButtons';
-import { NaverMap } from '@/lib/navermap';
 import styled from '@emotion/styled';
+import MapButtonsWrap from '@/components/home/MapButtonsWrap';
+import { NaverMap } from '@/lib/navermap';
 
 const Map = () => {
   return (
@@ -12,7 +12,7 @@ const Map = () => {
           zoom: 10,
         }}
       >
-        <MapButtons />
+        <MapButtonsWrap />
       </NaverMapDiv>
     </MapWrapper>
   );

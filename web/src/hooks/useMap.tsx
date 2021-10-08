@@ -1,5 +1,5 @@
-import { useNaverMap } from '@/lib/navermap';
 import { useRef } from 'react';
+import { useNaverMap } from '@/lib/navermap';
 
 export const getMyPosition = () => {
   return new Promise<GeolocationPosition>((resolve, reject) => {
@@ -32,7 +32,7 @@ const useMap = () => {
     if (mapInstance) {
       return mapInstance.getCenter();
     }
-    return null
+    return null;
   };
 
   return { goToMyPosition, getCenterLatLng };

@@ -1,6 +1,13 @@
+import React from 'react';
 import styled from '@emotion/styled';
 
-export const Button = styled.button`
+const MapButton = ({ ...props }: React.HTMLAttributes<HTMLButtonElement>) => {
+  return <Button {...props} />;
+};
+
+export default MapButton;
+
+const Button = styled.button`
   background: ${({ theme }) => theme.color.background};
   color: ${({ theme }) => theme.color.textColor};
   border-radius: 9999px;
