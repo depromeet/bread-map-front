@@ -50,7 +50,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:17.0.20"],
             ["@types/react-dom", "npm:17.0.9"],
             ["babel-jest", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:27.2.0"],
-            ["babel-plugin-styled-components", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:1.13.2"],
             ["eslint", "npm:7.32.0"],
             ["eslint-config-next", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:11.1.2"],
             ["eslint-config-prettier", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:8.3.0"],
@@ -4888,41 +4887,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packagePeers": [
             "@babel/core",
             "@types/babel__core"
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["babel-plugin-styled-components", [
-        ["npm:1.13.2", {
-          "packageLocation": "./.yarn/cache/babel-plugin-styled-components-npm-1.13.2-1a3e3909a5-c37e68b574.zip/node_modules/babel-plugin-styled-components/",
-          "packageDependencies": [
-            ["babel-plugin-styled-components", "npm:1.13.2"]
-          ],
-          "linkType": "SOFT",
-        }],
-        ["virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:1.13.2", {
-          "packageLocation": "./.yarn/__virtual__/babel-plugin-styled-components-virtual-0e2a943276/0/cache/babel-plugin-styled-components-npm-1.13.2-1a3e3909a5-c37e68b574.zip/node_modules/babel-plugin-styled-components/",
-          "packageDependencies": [
-            ["babel-plugin-styled-components", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:1.13.2"],
-            ["@babel/helper-annotate-as-pure", "npm:7.15.4"],
-            ["@babel/helper-module-imports", "npm:7.15.4"],
-            ["@types/styled-components", null],
-            ["babel-plugin-syntax-jsx", "npm:6.18.0"],
-            ["lodash", "npm:4.17.21"],
-            ["styled-components", null]
-          ],
-          "packagePeers": [
-            "@types/styled-components",
-            "styled-components"
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["babel-plugin-syntax-jsx", [
-        ["npm:6.18.0", {
-          "packageLocation": "./.yarn/cache/babel-plugin-syntax-jsx-npm-6.18.0-fcf0a98a71-0c7ce5b81d.zip/node_modules/babel-plugin-syntax-jsx/",
-          "packageDependencies": [
-            ["babel-plugin-syntax-jsx", "npm:6.18.0"]
           ],
           "linkType": "HARD",
         }]
@@ -12216,7 +12180,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:17.0.20"],
             ["@types/react-dom", "npm:17.0.9"],
             ["babel-jest", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:27.2.0"],
-            ["babel-plugin-styled-components", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:1.13.2"],
             ["eslint", "npm:7.32.0"],
             ["eslint-config-next", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:11.1.2"],
             ["eslint-config-prettier", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:8.3.0"],
