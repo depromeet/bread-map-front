@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@/utils/testUtils';
 import React from 'react';
 import MapButton from './MapButton';
 
-it('home/MapButton', () => {
+it('daedong/MapButton', () => {
   const defaultChildren = 'default';
   const changeChildren = 'changed';
   const clickHandler = (e: React.MouseEvent) => {

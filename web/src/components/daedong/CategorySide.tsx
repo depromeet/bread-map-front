@@ -68,7 +68,7 @@ const CategorySide = ({ isCategorySideOpen, closeCategorySide }: IProps) => {
 
 export default CategorySide;
 
-const Container = styled.div`
+const Container = styled.aside`
   position: absolute;
   width: 100%;
   padding: 0.8em;
