@@ -23,7 +23,6 @@
     "@babel/runtime": "^7.15.4",
     "@emotion/babel-plugin": "^11.3.0",
     "@next/eslint-plugin-next": "^11.1.2",
-    "@svgr/webpack": "^5.5.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.0",
     "@types/jest": "^27.0.1",
