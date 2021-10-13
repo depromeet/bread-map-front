@@ -6,7 +6,7 @@ export const LightMode: Theme = {
   color: {
     textColor: '#1e2222',
     reverseTextColor: '#fcfcfc',
-    boxShadow: 'lightgary',
+    gray: '#E0E0E0',
     body: 'white',
     body2: '#fafafa',
     body3: '#e8e8e8',
@@ -31,7 +31,7 @@ export const DarkMode: Theme = {
   color: {
     textColor: '#fcfcfc',
     reverseTextColor: '#1e2222',
-    boxShadow: 'lightgary',
+    gray: 'lightgary',
     body: '#3c3e3e',
     body2: '#353535',
     body3: '#2a2f2f',

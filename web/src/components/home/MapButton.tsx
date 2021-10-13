@@ -13,6 +13,7 @@ const Button = styled.button`
   border-radius: 9999px;
   display: flex;
   justify-content: center;
+  cursor: pointer;
   align-items: center;
   padding: 0.625rem;
   border: none;

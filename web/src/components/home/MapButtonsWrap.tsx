@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Navigation from '@assets/navigation.svg';
-import Bread from '@assets/bread.svg';
 import Flag from '@assets/flag.svg';
 import { NaverMapGoToMyPosition } from '@/lib/navermap';
+import Bread from '@assets/bread.svg';
+import CategorySide from './CategorySide';
 import MapButton from './MapButton';
 
 const MapButtonsWrap = () => {
+  const [sideOpen, setSideOpen] = React.useState(false);
   const goToMyPosition = NaverMapGoToMyPosition();
 
   React.useEffect(() => {
@@ -22,13 +24,23 @@ const MapButtonsWrap = () => {
         <div>내 위치</div>
       </MyPositionButton>
       <SideButtons>
-        <MapButton onClick={() => {}}>
+        <MapButton
+          onClick={() => {
+            setSideOpen(!sideOpen);
+          }}
+        >
           <Bread />
         </MapButton>
         <MapButton onClick={() => {}}>
           <Flag />
         </MapButton>
       </SideButtons>
+      <CategorySide
+        isCategorySideOpen={sideOpen}
+        closeCategorySide={() => {
+          setSideOpen(false);
+        }}
+      />
     </>
   );
 };

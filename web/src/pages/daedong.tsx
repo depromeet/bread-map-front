@@ -19,14 +19,15 @@ const Map = () => {
 };
 
 const MapWrapper = styled.div`
+  overflow: hidden;
   position: relative;
   width: 100%;
-  min-height: 80vh;
+  min-height: 100vh;
 `;
 
 const NaverMapDiv = styled(NaverMap)`
   width: 100vw;
-  height: 80vh;
+  height: 100vh;
 `;
 
 export default Map;
