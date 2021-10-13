@@ -10,35 +10,51 @@ interface IProps {
 
 const MOCK_DATA = [
   {
-    name: '크루아상',
+    name: '식사빵',
     checked: false,
   },
   {
-    name: '식빵',
+    name: '비건/키토 베이킹',
     checked: false,
   },
   {
-    name: '치아바타',
+    name: '구움과자류',
     checked: false,
   },
   {
-    name: '에그타르트',
-    checked: false,
-  },
-  {
-    name: '앙버터',
-    checked: false,
-  },
-  {
-    name: '크로플',
-    checked: false,
-  },
-  {
-    name: '노밀가루',
+    name: '파이/타르트',
     checked: false,
   },
   {
     name: '케이크',
+    checked: false,
+  },
+  {
+    name: '크림빵',
+    checked: false,
+  },
+  {
+    name: '도넛',
+    checked: false,
+  },
+  {
+    name: '추억의 빵',
+    checked: false,
+  },
+  {
+    name: '과자류',
+    checked: false,
+  },
+  {
+    name: '기타',
+    checked: false,
+  },
+  {
+    name: '쿠키',
+    checked: false,
+  },
+  {
+    name: '크로와상',
     checked: false,
   },
 ];
@@ -71,6 +87,8 @@ export default CategorySide;
 const Container = styled.aside`
   position: absolute;
   width: 100%;
+  height: 100vh;
+  overflow: scroll;
   padding: 0.8em;
   background: ${({ theme }) => theme.color.background};
   min-height: 100vh;
@@ -111,6 +129,7 @@ const ContentsTitle = styled.div`
 
 const CardsWrapper = styled.div`
   display: grid;
+  overflow: scroll;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 0.5em;
 `;

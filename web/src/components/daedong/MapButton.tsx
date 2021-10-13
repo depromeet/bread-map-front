@@ -18,4 +18,10 @@ const Button = styled.button`
   padding: 0.625rem;
   border: none;
   box-shadow: 0 3px 3px ${({ theme }) => theme.color.placeholder};
+
+  &::after {
+    display: block;
+    content: '';
+    padding-bottom: 100%;
+  }
 `;

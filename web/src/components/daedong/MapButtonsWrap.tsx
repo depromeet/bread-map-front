@@ -31,4 +31,7 @@ const MyPositionButton = styled(MapButton)`
   bottom: 1rem;
   left: 1rem;
   z-index: 1;
+  &::after {
+    content: none;
+  }
 `;

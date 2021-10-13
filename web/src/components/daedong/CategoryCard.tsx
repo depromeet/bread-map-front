@@ -30,11 +30,16 @@ const Container = styled.div`
   border-radius: 0.5em;
   width: 100%;
   display: flex;
+  padding: .8em;
   justify-content: center;
   text-align: center;
   align-items: center;
   cursor: pointer;
   background: ${({ theme }) => theme.color.gray};
+
+  &::-webkit-scrollbar{
+    display: none;
+  }
 
   &::after {
     display: block;
