@@ -11,8 +11,7 @@ const MapButtonsWrap = () => {
 
   React.useEffect(() => {
     goToMyPosition();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [goToMyPosition]);
 
   return (
     <>
