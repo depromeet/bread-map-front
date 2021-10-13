@@ -1,20 +1,16 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import Navigation from '@assets/navigation.svg';
-import Flag from '@assets/flag.svg';
-import { NaverMapGoToMyPosition } from '@/lib/navermap';
-import Bread from '@assets/bread.svg';
+import { useNaverMapGoToMyPosition } from '@/lib/navermap';
+import { Navigation, Flag, Bread } from '@/components/icons';
 import CategorySide from './CategorySide';
 import MapButton from './MapButton';
 
 const MapButtonsWrap = () => {
   const [sideOpen, setSideOpen] = React.useState(false);
-  const goToMyPosition = NaverMapGoToMyPosition();
+  const goToMyPosition = useNaverMapGoToMyPosition();
 
   React.useEffect(() => {
-    (async () => {
-      await goToMyPosition();
-    })();
+    goToMyPosition();
   }, [goToMyPosition]);
 
   return (
@@ -31,7 +27,7 @@ const MapButtonsWrap = () => {
         >
           <Bread />
         </MapButton>
-        <MapButton onClick={() => {}}>
+        <MapButton>
           <Flag />
         </MapButton>
       </SideButtons>
