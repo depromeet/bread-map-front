@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import LeftArrow from '@assets/leftArrow.svg';
+import { LeftArrow } from '@/components/icons';
 import CategoryCard from './CategoryCard';
 
 interface IProps {
