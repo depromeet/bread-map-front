@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import Check from '@assets/check.svg';
+import { Check } from '@/components/icons';
 
 interface IProps {
   category: {

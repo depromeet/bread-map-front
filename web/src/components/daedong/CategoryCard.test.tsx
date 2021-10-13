@@ -2,7 +2,7 @@ import { fireEvent, getById, render } from '@/utils/testUtils';
 import React from 'react';
 import CategoryCard from './CategoryCard';
 
-it('home/Card', () => {
+it('home/CategoryCard', () => {
   const MOCK_CATEGORY = {
     name: '식빵',
     checked: false,
