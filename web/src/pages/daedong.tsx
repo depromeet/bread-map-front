@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import MapButtonsWrap from '@/components/home/MapButtonsWrap';
+import MapButtonsWrap from '@/components/daedong/MapButtonsWrap';
 import { NaverMap } from '@/lib/navermap';
 
 const Map = () => {

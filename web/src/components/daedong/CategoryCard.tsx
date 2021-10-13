@@ -17,14 +17,9 @@ const CategoryCard = ({ category }: IProps) => {
       onClick={() => {
         setCheck(!isCheck);
       }}
+      id={category.name}
     >
-      {isCheck ? (
-        <div>
-          <Check />
-        </div>
-      ) : (
-        <div>{category.name}</div>
-      )}
+      {isCheck ? <Check /> : <div>{category.name}</div>}
     </Container>
   );
 };
