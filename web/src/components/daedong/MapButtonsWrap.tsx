@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useNaverMapGoToMyPosition } from '@/lib/navermap';
-import { Navigation, Flag, Bread } from '@/components/icons';
-import CategorySide from './CategorySide';
+import { Navigation } from '@/components/icons';
 import MapButton from './MapButton';
+import SideButtons from './SideButtons';
 
 const MapButtonsWrap = () => {
-  const [sideOpen, setSideOpen] = React.useState(false);
   const goToMyPosition = useNaverMapGoToMyPosition();
 
   React.useEffect(() => {
@@ -19,24 +18,7 @@ const MapButtonsWrap = () => {
         <Navigation />
         <div>내 위치</div>
       </MyPositionButton>
-      <SideButtons>
-        <MapButton
-          onClick={() => {
-            setSideOpen(!sideOpen);
-          }}
-        >
-          <Bread />
-        </MapButton>
-        <MapButton>
-          <Flag />
-        </MapButton>
-      </SideButtons>
-      <CategorySide
-        isCategorySideOpen={sideOpen}
-        closeCategorySide={() => {
-          setSideOpen(false);
-        }}
-      />
+      <SideButtons />
     </>
   );
 };
@@ -49,17 +31,4 @@ const MyPositionButton = styled(MapButton)`
   bottom: 1rem;
   left: 1rem;
   z-index: 1;
-`;
-
-const SideButtons = styled.div`
-  position: absolute;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  z-index: 1;
-  flex-direction: column;
-  list-style: none;
-  gap: 0.6rem;
-  right: 1rem;
-  top: 1rem;
 `;
