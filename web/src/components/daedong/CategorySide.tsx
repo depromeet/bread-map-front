@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { LeftArrow } from '@/components/icons';
 import CategoryCard from './CategoryCard';
 
-interface IProps {
+interface CategorySideProps {
   isCategorySideOpen: boolean;
   closeCategorySide: () => void;
 }
@@ -59,9 +59,14 @@ const MOCK_DATA = [
   },
 ];
 
-const CategorySide = ({ isCategorySideOpen, closeCategorySide }: IProps) => {
-  const Cards = MOCK_DATA.map((Category, idx) => {
-    return <CategoryCard key={idx} category={Category} />;
+const CategorySide = ({
+  isCategorySideOpen,
+  closeCategorySide,
+}: CategorySideProps) => {
+  const Cards = MOCK_DATA.map((category, idx) => {
+    return (
+      <CategoryCard key={idx} name={category.name} checked={category.checked} />
+    );
   });
 
   return (

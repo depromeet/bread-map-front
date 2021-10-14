@@ -1228,16 +1228,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/material-ui@npm:^0.21.9":
-  version: 0.21.9
-  resolution: "@types/material-ui@npm:0.21.9"
-  dependencies:
-    "@types/react": "*"
-    "@types/react-addons-linked-state-mixin": "*"
-  checksum: 36281d6e97613ffa73a779ba12f78ff7837239a4e127080ff739306ef087a860d5ebffaab46b33aead3dc5ae80f54ddef31a5b7c54a9a896ce69d58ef16cc215
-  languageName: node
-  linkType: hard
-
 "@types/navermaps@npm:^3.0.9":
   version: 3.0.9
   resolution: "@types/navermaps@npm:3.0.9"
@@ -1270,15 +1260,6 @@ __metadata:
   version: 15.7.4
   resolution: "@types/prop-types@npm:15.7.4"
   checksum: ef6e1899e59b876c273811b1bd845022fc66d5a3d11cb38a25b6c566b30514ae38fe20a40f67622f362a4f4f7f9224e22d8da101cff3d6e97e11d7b4c307cfc1
-  languageName: node
-  linkType: hard
-
-"@types/react-addons-linked-state-mixin@npm:*":
-  version: 0.14.22
-  resolution: "@types/react-addons-linked-state-mixin@npm:0.14.22"
-  dependencies:
-    "@types/react": "*"
-  checksum: f0216424eed2008845acdca7565d661ed67310cf16179da7cdc97056070552f77bb7bad6d5beb3598a46b7322dfa29e29945259d834d529c3d68c75afea9a8dc
   languageName: node
   linkType: hard
 
@@ -7638,7 +7619,6 @@ typescript@4.4.3:
     "@testing-library/jest-dom": ^5.14.1
     "@testing-library/react": ^12.1.0
     "@types/jest": ^27.0.1
-    "@types/material-ui": ^0.21.9
     "@types/navermaps": ^3.0.9
     "@types/node": ^16.9.1
     "@types/react": 17.0.20

@@ -43,7 +43,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/jest-dom", "npm:5.14.1"],
             ["@testing-library/react", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:12.1.0"],
             ["@types/jest", "npm:27.0.1"],
-            ["@types/material-ui", "npm:0.21.9"],
             ["@types/navermaps", "npm:3.0.9"],
             ["@types/node", "npm:16.9.1"],
             ["@types/react", "npm:17.0.20"],
@@ -2009,17 +2008,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
-      ["@types/material-ui", [
-        ["npm:0.21.9", {
-          "packageLocation": "./.yarn/cache/@types-material-ui-npm-0.21.9-ef7450b8f1-36281d6e97.zip/node_modules/@types/material-ui/",
-          "packageDependencies": [
-            ["@types/material-ui", "npm:0.21.9"],
-            ["@types/react", "npm:17.0.27"],
-            ["@types/react-addons-linked-state-mixin", "npm:0.14.22"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
       ["@types/navermaps", [
         ["npm:3.0.9", {
           "packageLocation": "./.yarn/cache/@types-navermaps-npm-3.0.9-7ed51e8a32-66e510c432.zip/node_modules/@types/navermaps/",
@@ -2083,16 +2071,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/prop-types", "npm:15.7.4"],
             ["@types/scheduler", "npm:0.16.2"],
             ["csstype", "npm:3.0.9"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["@types/react-addons-linked-state-mixin", [
-        ["npm:0.14.22", {
-          "packageLocation": "./.yarn/cache/@types-react-addons-linked-state-mixin-npm-0.14.22-c6d6ca4a74-f0216424ee.zip/node_modules/@types/react-addons-linked-state-mixin/",
-          "packageDependencies": [
-            ["@types/react-addons-linked-state-mixin", "npm:0.14.22"],
-            ["@types/react", "npm:17.0.27"]
           ],
           "linkType": "HARD",
         }]
@@ -9507,7 +9485,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/jest-dom", "npm:5.14.1"],
             ["@testing-library/react", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:12.1.0"],
             ["@types/jest", "npm:27.0.1"],
-            ["@types/material-ui", "npm:0.21.9"],
             ["@types/navermaps", "npm:3.0.9"],
             ["@types/node", "npm:16.9.1"],
             ["@types/react", "npm:17.0.20"],

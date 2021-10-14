@@ -2,24 +2,22 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Check } from '@/components/icons';
 
-interface IProps {
-  category: {
-    name: string;
-    checked: boolean;
-  };
+interface CategortCardProps {
+  name: string;
+  checked: boolean;
 }
 
-const CategoryCard = ({ category }: IProps) => {
-  const [isCheck, setCheck] = React.useState(category.checked);
+const CategoryCard = ({ name, checked }: CategortCardProps) => {
+  const [isCheck, setCheck] = React.useState(checked);
 
   return (
     <Container
       onClick={() => {
         setCheck(!isCheck);
       }}
-      id={category.name}
+      id={name}
     >
-      {isCheck ? <Check /> : <div>{category.name}</div>}
+      {isCheck ? <Check /> : <div>{name}</div>}
     </Container>
   );
 };
@@ -30,14 +28,14 @@ const Container = styled.div`
   border-radius: 0.5em;
   width: 100%;
   display: flex;
-  padding: .8em;
+  padding: 0.8em;
   justify-content: center;
   text-align: center;
   align-items: center;
   cursor: pointer;
   background: ${({ theme }) => theme.color.gray};
 
-  &::-webkit-scrollbar{
+  &::-webkit-scrollbar {
     display: none;
   }
 
