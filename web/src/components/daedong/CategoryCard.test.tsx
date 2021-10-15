@@ -8,7 +8,9 @@ it('daedong/CategoryCard', () => {
     checked: false,
   };
 
-  const dom = render(<CategoryCard category={MOCK_CATEGORY} />);
+  const dom = render(
+    <CategoryCard name={MOCK_CATEGORY.name} checked={MOCK_CATEGORY.checked} />
+  );
   const target = getById(dom.container, MOCK_CATEGORY.name);
 
   expect(target?.tagName).toMatch(/^div$/i);
