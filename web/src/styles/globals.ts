@@ -17,6 +17,9 @@ const globalStyles = css`
     -webkit-text-size-adjust: 100%;
     -moz-tab-size: 4;
     tab-size: 4;
+
+    //TODO : media query 설정 필요
+    font-size: 16px;
   }
 
   body {
