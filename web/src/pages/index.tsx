@@ -6,10 +6,11 @@ import {
   Description,
   Grid,
   Main,
-  Footer,
+  // Footer,
   Title,
 } from '@/components/home';
 import { useThemeToggle } from '@/styles/BreadMapTheming';
+import Footer from 'components/Footer';
 
 interface GridItem {
   href: string;
