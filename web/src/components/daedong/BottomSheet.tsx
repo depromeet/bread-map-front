@@ -68,6 +68,7 @@ const BottomSheetStyle = styled(BottomSheet)`
   --rsbs-ml: env(safe-area-inset-left);
   --rsbs-mr: env(safe-area-inset-right);
   --rsbs-overlay-rounded: 3rem;
+  z-index: 10000;
   > div {
     box-shadow: 0px -8px 10px lightgrey !important;
     bottom: ${FooterHeight}px !important;

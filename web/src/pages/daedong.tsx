@@ -36,6 +36,7 @@ const MapWrapper = styled.div`
   overflow: hidden;
   position: relative;
   display: flex;
+  z-index: 1;
   width: 100%;
   height: calc(100vh - (100vh / 4) - ${FooterHeight}px);
   transition: height 0.3s ease-in-out;
