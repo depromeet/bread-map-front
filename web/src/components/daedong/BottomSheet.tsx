@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
 import styled from '@emotion/styled';
 import 'react-spring-bottom-sheet/dist/style.css';
@@ -12,7 +12,7 @@ const DaedongBottomSheet: React.FC<BottonSheetProps> = ({
   children,
   mapRef,
 }) => {
-  const sheetRef = useRef<BottomSheetRef>(null);
+  const sheetRef = React.useRef<BottomSheetRef>(null);
   const heightButtons = ['Top', 'MiddleHigh', 'Middle', 'Bottom'];
 
   return (
