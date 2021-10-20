@@ -1,30 +1,24 @@
 import * as React from 'react';
-import Image from 'next/image';
 import styled from '@emotion/styled';
+import { Home, User, Edit, Compass } from '@/components/icons';
 
 const Footer: React.FC = () => {
   return (
     <Base>
       <IconBox active>
-        <Image src="/main.svg" alt="" width={24} height={24} layout="fixed" />
+        <Home />
       </IconBox>
 
       <IconBox>
-        <Image
-          src="/compass.svg"
-          alt=""
-          width={24}
-          height={24}
-          layout="fixed"
-        />
+        <Compass />
       </IconBox>
 
       <IconBox>
-        <Image src="/edit.svg" alt="" width={24} height={24} layout="fixed" />
+        <Edit />
       </IconBox>
 
       <IconBox>
-        <Image src="/user.svg" alt="" width={24} height={24} layout="fixed" />
+        <User />
       </IconBox>
     </Base>
   );
