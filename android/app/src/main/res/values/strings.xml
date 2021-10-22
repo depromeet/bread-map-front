@@ -2,4 +2,5 @@
     <string name="app_name">Breadmap</string>
     <string name="kakao_key">c03925727e31122e930bf35f045dfec1</string>
     <string name="kakao_oauth_scheme">kakaoc03925727e31122e930bf35f045dfec1</string>
+    <string name="google_key">395125070502-7odf6a4u023ldgrl77drufleqsh5ks01.apps.googleusercontent.com</string>
 </resources>

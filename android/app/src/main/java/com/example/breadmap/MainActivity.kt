@@ -9,16 +9,39 @@ import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.breadmap.pages.MainPage
 import com.example.breadmap.pages.LoginPage
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.breadmap.ui.theme.BreadmapTheme
+import com.example.breadmap.ui.theme.Primary
 
 class MainActivity : ComponentActivity() {
+    override fun onStart() {
+        super.onStart()
+
+        /*
+         * TODO
+         *
+         * Research onStart activity lifecycle
+         */
+
+        val viewModelFactory = BreadViewModelFactory()
+        val viewModel = ViewModelProvider(this, viewModelFactory)
+            .get(BreadViewModel::class.java)
+
+        viewModel.getSavedUserData(this.applicationContext)
+
+        viewModel.authData.observe(this, { Log.e("VIEW_MODEL", it.toString()) })
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -52,7 +75,11 @@ class MainActivity : ComponentActivity() {
         }
 
         setContent {
-            Main(bottomPaddingPx = bottomPaddingPx)
+            BreadmapTheme() {
+                Surface() {
+                    Main(bottomPaddingPx = bottomPaddingPx)
+                }
+            }
         }
     }
 

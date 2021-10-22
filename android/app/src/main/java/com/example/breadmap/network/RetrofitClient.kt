@@ -1,19 +1,14 @@
 package com.example.breadmap.network
 
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import kotlinx.serialization.json.Json
 import retrofit2.Retrofit
-import okhttp3.MediaType
-import com.example.breadmap.BuildConfig
 import com.example.breadmap.network.service.AuthService
-import kotlinx.serialization.ExperimentalSerializationApi
+import com.example.breadmap.utils.Constants
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
     private val instance: Retrofit.Builder by lazy {
-        val contentType = MediaType.get("application/json")
         Retrofit.Builder()
-            .baseUrl(BuildConfig.API_BASE_URL)
+            .baseUrl(Constants.API_BASE_URI)
             .addConverterFactory(GsonConverterFactory.create())
     }
 

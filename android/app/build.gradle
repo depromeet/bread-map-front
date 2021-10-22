@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'com.google.protobuf' version '0.8.12'
 }
 
 android {
@@ -28,8 +29,6 @@ android {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-
-            buildConfigField("String", "API_BASE_URL", "\"https://jsonplaceholder.typicode.com\"")
         }
     }
 
@@ -77,10 +76,30 @@ dependencies {
 
     implementation "com.google.code.gson:gson:2.8.8"
 
+    implementation "com.google.android.gms:play-services-auth:19.2.0"
+    implementation "androidx.datastore:datastore:1.0.0"
+    implementation "com.google.protobuf:protobuf-javalite:3.10.0"
+
     testImplementation 'junit:junit:4.+'
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+}
+
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.10.0'
+    }
+
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java {
+                    option 'lite'
+                }
+            }
+        }
+    }
 }
