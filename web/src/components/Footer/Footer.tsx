@@ -75,7 +75,3 @@ const IconBox = styled.div<{ active: boolean }>`
   margin-left: 2rem;
   margin-right: 2rem;
 `;
-
-// 1. props가 반영되지 않을 때
-// 2. TODO - Next-Router 대체
-// 3. TODO - react-router-dom 제거
