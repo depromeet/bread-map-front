@@ -6309,6 +6309,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-daum-postcode@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "react-daum-postcode@npm:3.0.0"
+  dependencies:
+    prop-types: ^15.7.2
+    react: ^17.0.2
+  checksum: cae14f6f22ef872d95f28a9d9402297295a9ae99edc4ff79833a1be9404bcfb23a054e654704acd888cbdcf58105d9efcc1fd726cba405de7622038c5358c2d7
+  languageName: node
+  linkType: hard
+
 "react-dom@npm:17.0.2":
   version: 17.0.2
   resolution: "react-dom@npm:17.0.2"
@@ -6409,7 +6419,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:17.0.2":
+"react@npm:17.0.2, react@npm:^17.0.2":
   version: 17.0.2
   resolution: "react@npm:17.0.2"
   dependencies:
@@ -7783,6 +7793,7 @@ typescript@4.4.3:
     next: 11.1.2
     prettier: ^2.4.1
     react: 17.0.2
+    react-daum-postcode: ^3.0.0
     react-dom: 17.0.2
     react-spring-bottom-sheet: ^3.4.0
     react-test-renderer: ^17.0.2
