@@ -1,25 +1,43 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+import Link from 'next/link';
 import styled from '@emotion/styled';
 import { Home, User, Edit, Compass } from '@/components/icons';
 
+const activeColor = '#FF6E40';
+
 const Footer: React.FC = () => {
+  const [currentPage, setCurrentPage] = useState("");
+  
+  const handleClick = e => {
+    setCurrentPage(e.currentTarget.name);
+  };
+
+
   return (
     <Base>
-      <IconBox active>
-        <Home />
-      </IconBox>
+      <a href="#home" name="home" onClick={handleClick}>
+        <IconBox>
+          <Home name="home" stroke={currentPage === "home" ? activeColor : 'black'} />
+        </IconBox>
+      </a>
 
-      <IconBox>
-        <Compass />
-      </IconBox>
+      <a href="#compass" name="compass" onClick={handleClick}>
+        <IconBox>
+          <Compass stroke={currentPage === "compass" ? activeColor : 'black'} />
+        </IconBox>
+      </a>
 
-      <IconBox>
-        <Edit />
-      </IconBox>
+      <a href="#edit" name="edit" onClick={handleClick} >
+        <IconBox>
+          <Edit stroke={currentPage === "edit" ? activeColor : 'black'} />
+        </IconBox>
+      </a>
 
-      <IconBox>
-        <User />
-      </IconBox>
+      <a href="#user" name="user" onClick={handleClick}>
+        <IconBox>
+          <User stroke={currentPage === "user" ? activeColor : 'black'}  />
+        </IconBox>
+      </a>
     </Base>
   );
 };
@@ -45,8 +63,8 @@ const IconBox = styled.div<{ active: boolean }>`
   align-items: center;
   margin-left: 2rem;
   margin-right: 2rem;
-
-  color: ${(props) => (props.active ? 'red' : '')};
 `;
 
 // 1. props가 반영되지 않을 때
+// 2. TODO - Next-Router 대체
+// 3. TODO - react-router-dom 제거
