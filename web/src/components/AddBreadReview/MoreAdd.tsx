@@ -39,7 +39,7 @@ const MoreAdd = ({
           <Text isRequired>메뉴명</Text>
           <Input
             name="name"
-            value={singleReview['name']}
+            value={singleReview.name}
             onChange={(e) => editContent(e)}
           />
         </Row>
@@ -48,7 +48,7 @@ const MoreAdd = ({
           <Input
             name="price"
             type="number"
-            value={singleReview['price']}
+            value={singleReview.price}
             onChange={(e) => editContent(e)}
           />
         </Row>
@@ -66,7 +66,7 @@ const MoreAdd = ({
           <Text>한줄평</Text>
           <Input
             name="text"
-            value={singleReview['text']}
+            value={singleReview.text}
             onChange={(e) => editContent(e)}
           />
         </Row>
