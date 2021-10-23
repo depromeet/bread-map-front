@@ -19,7 +19,7 @@ const Base = styled.p`
 
 const Code = styled.code`
   background: #fafafa;
-  color: ${({ theme }) => theme.color.error};
+  color: ${({ theme }) => theme.color.purple};
   border-radius: 5px;
   padding: 0.75rem;
   font-size: 1.1rem;
