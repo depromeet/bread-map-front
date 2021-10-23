@@ -8,8 +8,8 @@ const MapButton = ({ ...props }: React.HTMLAttributes<HTMLButtonElement>) => {
 export default MapButton;
 
 const Button = styled.button`
-  background: ${({ theme }) => theme.color.background};
-  color: ${({ theme }) => theme.color.textColor};
+  background: ${({ theme }) => theme.color.white};
+  color: ${({ theme }) => theme.color.black};
   border-radius: 9999px;
   display: flex;
   justify-content: center;
@@ -17,7 +17,7 @@ const Button = styled.button`
   align-items: center;
   padding: 0.625rem;
   border: none;
-  box-shadow: 0 3px 3px ${({ theme }) => theme.color.placeholder};
+  box-shadow: 0 3px 3px ${({ theme }) => theme.color.gray300};
 
   &::after {
     display: block;
