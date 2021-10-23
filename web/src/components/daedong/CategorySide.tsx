@@ -95,7 +95,7 @@ const Container = styled.aside`
   height: 100vh;
   overflow: scroll;
   padding: 0.8em;
-  background: ${({ theme }) => theme.color.background};
+  background: ${({ theme }) => theme.color.white};
   min-height: 100vh;
   z-index: 100;
   top: 0;
