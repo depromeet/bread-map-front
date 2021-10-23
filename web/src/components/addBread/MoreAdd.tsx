@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useRef } from 'react';
 import styled from '@emotion/styled';
 import { GrayStar, OrangeStar, Plus } from '@/components/icons';
-import { Review } from '.';
+import { Review } from './BreadsReviewProvider';
 
 interface MoreAddProps {
   progress: number;
