@@ -106,7 +106,7 @@ const Btn = styled.button<{ bg: string }>`
   border: none;
   padding: 1rem 0;
 
-  &:first-child {
+  &:first-of-type {
     margin-bottom: 8px;
   }
 `;

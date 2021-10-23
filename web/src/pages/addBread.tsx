@@ -1,21 +1,21 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Prev, Close } from '@/components/icons';
-import AddBread from '@/components/addBread';
+import AddBreadReview from '@/components/AddBreadReview';
 
-const addBread = () => {
+const AddBread = () => {
   return (
     <AddBreadLayout>
       <TopHeader>
         <Prev />
         <Close />
       </TopHeader>
-      <AddBread />
+      <AddBreadReview />
     </AddBreadLayout>
   );
 };
 
-export default addBread;
+export default AddBread;
 
 const AddBreadLayout = styled.section`
   position: relative;

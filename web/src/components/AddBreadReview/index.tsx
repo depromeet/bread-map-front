@@ -2,7 +2,7 @@ import React from 'react';
 import BreadsReviewProvider from './BreadsReviewProvider';
 import MainAdd from './MainAdd';
 
-const AddBread = () => {
+const AddBreadReview = () => {
   return (
     <BreadsReviewProvider>
       <MainAdd />
@@ -10,4 +10,4 @@ const AddBread = () => {
   );
 };
 
-export default AddBread;
+export default AddBreadReview;
