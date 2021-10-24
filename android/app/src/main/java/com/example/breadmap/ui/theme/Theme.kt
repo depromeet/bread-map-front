@@ -7,15 +7,15 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 
 private val DarkColorPalette = darkColors(
-        primary = Purple200,
-        primaryVariant = Purple700,
-        secondary = Teal200
+    primary = Primary,
+    secondary = Secondary,
+    surface = Primary
 )
 
 private val LightColorPalette = lightColors(
-        primary = Purple500,
-        primaryVariant = Purple700,
-        secondary = Teal200
+    primary = Primary,
+    secondary = Secondary,
+    surface = Primary
 
         /* Other default colors to override
     background = Color.White,
@@ -36,9 +36,9 @@ fun BreadmapTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composab
     }
 
     MaterialTheme(
-            colors = colors,
-            typography = Typography,
-            shapes = Shapes,
-            content = content
+        colors = colors,
+        typography = Typography,
+        shapes = Shapes,
+        content = content
     )
 }

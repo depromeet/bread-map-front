@@ -33,7 +33,7 @@ const Container = styled.div`
   text-align: center;
   align-items: center;
   cursor: pointer;
-  background: ${({ theme }) => theme.color.gray};
+  background: ${({ theme }) => theme.color.gray300};
 
   &::-webkit-scrollbar {
     display: none;

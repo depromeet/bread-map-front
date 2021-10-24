@@ -22,7 +22,7 @@ const Anchor = styled.a`
   margin: 1rem;
   padding: 1.5rem;
   text-align: left;
-  color: ${({ theme }) => theme.color.textColor};
+  color: ${({ theme }) => theme.color.black};
   text-decoration: none;
   border: 1px solid #eaeaea;
   border-radius: 10px;

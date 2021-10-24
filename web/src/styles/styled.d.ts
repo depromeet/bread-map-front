@@ -4,25 +4,26 @@ declare module '@emotion/react' {
   export interface Theme {
     name: string;
     color: {
-      textColor: string;
-      reverseTextColor: string;
-      gray: string;
-      body: string;
-      body2: string;
-      body3: string;
-      footer: string;
-      label: string;
-      placeholder: string;
-      line: string;
-      background: string;
-      offWhite: string;
-      primary: string;
-      primary2: string;
-      primary3: string;
-      recommand: string;
-      error: string;
-      borderGray: string;
-      hover: string;
+      white: string;
+      black: string;
+      gray50: string;
+      gray100: string;
+      gray200: string;
+      gray300: string;
+      gray400: string;
+      gray500: string;
+      gray600: string;
+      gray700: string;
+      gray800: string;
+      purple: string;
+      green: string;
+      primary50: string;
+      primary100: string;
+      primary200: string;
+      primary300: string;
+      primary400: string;
+      primary500: string;
+      overLay: string;
     };
   }
 }
