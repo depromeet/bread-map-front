@@ -1,28 +1,42 @@
+import React from 'react';
 import styled from '@emotion/styled';
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import {
-  Review,
-  useBreadsReview,
-  useUpdateBreadsReview,
-} from './BreadsReviewProvider';
+import { CategoryInfo } from '@/constants/breadCategory';
+import { useCategories } from '@/components/common/CategoryList';
+import { BreadsReview, BreadsUpdate, Review } from './BreadsReviewProvider';
 import MoreAdd from './MoreAdd';
 import StartAdd from './StartAdd';
+import CategorySelect from './CategorySelect';
 
 const initialStar = [0, 0, 0, 0, 0];
 
-const initialSingleReview = {
+const initialSingleReview: Review = {
+  category: null,
   name: '',
   price: 0,
   text: '',
   star: 0,
 };
 
-const MainAdd = () => {
-  const [progress, setProgress] = useState(1);
-  const [stars, setStars] = useState<number[]>(initialStar);
-  const [singleReview, setSingleReview] = useState<Review>(initialSingleReview);
-  const breadsReview = useBreadsReview();
-  const updateBreadsReview = useUpdateBreadsReview();
+interface MainAddProps {
+  breadsReview: BreadsReview;
+  updateBreadsReview: BreadsUpdate;
+}
+
+const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
+  const [progress, setProgress] = React.useState(1);
+  const [stars, setStars] = React.useState<number[]>(initialStar);
+  const [singleReview, setSingleReview] =
+    React.useState<Review>(initialSingleReview);
+
+  const isMultiSelect = false;
+  const [isCategoryPage, setIsCategoryPage] = React.useState(false);
+  const {
+    selectedCategory,
+    initializeCategories,
+    onClickCategory,
+    onCancelCategory,
+    setIsOpenFirst,
+  } = useCategories(isMultiSelect);
 
   const editScore = (clickedIndex: number) => {
     setStars((stars) =>
@@ -33,7 +47,7 @@ const MainAdd = () => {
     );
   };
 
-  const editContent = (e: ChangeEvent<HTMLInputElement>) => {
+  const editContent = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setSingleReview({
       ...singleReview,
@@ -41,7 +55,19 @@ const MainAdd = () => {
     });
   };
 
-  useEffect(() => {
+  const editCategory = (category: CategoryInfo) => {
+    setSingleReview({
+      ...singleReview,
+      category: category,
+    });
+  };
+
+  React.useEffect(() => {
+    editCategory(selectedCategory[0]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCategory]);
+
+  React.useEffect(() => {
     setSingleReview({
       ...singleReview,
       star: stars.reduce((acc, cur) => acc + cur, 0),
@@ -49,7 +75,7 @@ const MainAdd = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stars]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     updateBreadsReview({
       ...breadsReview,
       [progress]: singleReview,
@@ -60,20 +86,44 @@ const MainAdd = () => {
   const initializeSingleReview = () => {
     setStars(initialStar);
     setSingleReview(initialSingleReview);
+    initializeCategories();
   };
 
   const nextProgress = () => {
     setProgress((prev) => prev + 1);
     initializeSingleReview();
-    console.log(breadsReview);
+    console.log('reviews', breadsReview);
   };
 
   return (
     <>
-      {progress === 1 && <StartAdd {...{ stars, editScore, editContent }} />}
-      {progress >= 2 && (
+      {isCategoryPage && (
+        <CategorySelect
+          {...{
+            setIsCategoryPage,
+            selectedCategory,
+            onClickCategory,
+            onCancelCategory,
+            setIsOpenFirst,
+          }}
+        />
+      )}
+      {progress === 1 && !isCategoryPage && (
+        <StartAdd
+          {...{
+            setIsCategoryPage,
+            selectedCategory,
+            stars,
+            editScore,
+            editContent,
+          }}
+        />
+      )}
+      {progress >= 2 && !isCategoryPage && (
         <MoreAdd
           {...{
+            setIsCategoryPage,
+            selectedCategory,
             progress,
             stars,
             singleReview,
@@ -82,12 +132,14 @@ const MainAdd = () => {
           }}
         />
       )}
-      <BtnWrapper>
-        <Btn bg={'#FFF1EC'} onClick={nextProgress}>
-          + 다른 빵 리뷰 추가
-        </Btn>
-        <Btn bg={'#FF6E40'}>확인</Btn>
-      </BtnWrapper>
+      {!isCategoryPage && (
+        <BtnWrapper>
+          <Btn bg={'#FFF1EC'} onClick={nextProgress}>
+            + 다른 빵 리뷰 추가
+          </Btn>
+          <Btn bg={'#FF6E40'}>확인</Btn>
+        </BtnWrapper>
+      )}
     </>
   );
 };

@@ -1,12 +1,20 @@
 import React from 'react';
-import BreadsReviewProvider from './BreadsReviewProvider';
+import { useBreadsReview, useUpdateBreadsReview } from './BreadsReviewProvider';
 import MainAdd from './MainAdd';
 
 const AddBreadReview = () => {
+  const breadsReview = useBreadsReview();
+  const updateBreadsReview = useUpdateBreadsReview();
+
   return (
-    <BreadsReviewProvider>
-      <MainAdd />
-    </BreadsReviewProvider>
+    <>
+      <MainAdd
+        {...{
+          breadsReview,
+          updateBreadsReview,
+        }}
+      />
+    </>
   );
 };
 

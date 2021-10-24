@@ -1,17 +1,20 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Prev, Close } from '@/components/icons';
+import { ArrowPrev, Close } from '@/components/icons';
 import AddBreadReview from '@/components/AddBreadReview';
+import BreadsReviewProvider from '@/components/AddBreadReview/BreadsReviewProvider';
 
 const AddBread = () => {
   return (
-    <AddBreadLayout>
-      <TopHeader>
-        <Prev />
-        <Close />
-      </TopHeader>
-      <AddBreadReview />
-    </AddBreadLayout>
+    <BreadsReviewProvider>
+      <AddBreadLayout>
+        <TopHeader>
+          <ArrowPrev />
+          <Close />
+        </TopHeader>
+        <AddBreadReview />
+      </AddBreadLayout>
+    </BreadsReviewProvider>
   );
 };
 
@@ -21,6 +24,7 @@ const AddBreadLayout = styled.section`
   position: relative;
   padding: 16px 20px;
   overflow-x: hidden;
+  min-height: 100vh;
 `;
 
 const TopHeader = styled.div`

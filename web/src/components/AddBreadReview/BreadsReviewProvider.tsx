@@ -1,6 +1,8 @@
 import React from 'react';
+import { CategoryInfo } from '@/constants/breadCategory';
 
 export interface Review {
+  category: CategoryInfo | null;
   name: string;
   price: number;
   text: string;
@@ -11,7 +13,7 @@ export interface BreadsReview {
   [key: number]: Review;
 }
 
-type BreadsUpdate = React.Dispatch<React.SetStateAction<BreadsReview>>;
+export type BreadsUpdate = React.Dispatch<React.SetStateAction<BreadsReview>>;
 
 const BreadsReviewContext = React.createContext<BreadsReview | null>(null);
 const BreadsReviewUpdateContext = React.createContext<BreadsUpdate | null>(

@@ -1,15 +1,24 @@
-import React, { ChangeEvent, useRef } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
-import { GrayStar, OrangeStar, Plus } from '@/components/icons';
+import { CategoryInfo } from '@/constants/breadCategory';
+import { ArrowDown, GrayStar, OrangeStar, Plus } from '@/components/icons';
 
 interface StartAddProps {
+  setIsCategoryPage: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedCategory: CategoryInfo[];
   stars: number[];
   editScore: (clickedIndex: number) => void;
-  editContent: (e: ChangeEvent<HTMLInputElement>) => void;
+  editContent: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const StartAdd = ({ stars, editScore, editContent }: StartAddProps) => {
-  const fileRef = useRef<HTMLInputElement | null>(null);
+const StartAdd = ({
+  setIsCategoryPage,
+  selectedCategory,
+  stars,
+  editScore,
+  editContent,
+}: StartAddProps) => {
+  const fileRef = React.useRef<HTMLInputElement | null>(null);
   const addPhoto = () => {
     if (!fileRef.current) return;
     fileRef.current.click();
@@ -23,7 +32,14 @@ const StartAdd = ({ stars, editScore, editContent }: StartAddProps) => {
       <Content>
         <Row>
           <Text isRequired>빵 종류</Text>
-          <Input />
+          <SelectArea>
+            <SelectBreadBtn onClick={() => setIsCategoryPage(true)}>
+              {selectedCategory.length < 1
+                ? '빵 종류 선택'
+                : selectedCategory[0]?.text}
+            </SelectBreadBtn>
+            <ArrowDown />
+          </SelectArea>
         </Row>
         <Row>
           <Text isRequired>메뉴명</Text>
@@ -114,6 +130,26 @@ const StarArea = styled.div`
 
 const StarBtn = styled.div`
   display: inline-block;
+`;
+
+const SelectArea = styled.div`
+  position: relative;
+
+  > svg {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+  }
+`;
+
+const SelectBreadBtn = styled.button`
+  border: 1px solid #f5f5f5;
+  width: 100%;
+  border-radius: 8px;
+  color: #9e9e9e;
+  text-align: left;
+  padding: 0.875rem;
 `;
 
 const Input = styled.input`
