@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
+import { ClassNames, css } from '@emotion/react';
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   rounded?: boolean;
@@ -17,7 +17,7 @@ const Button = ({
   <ButtonStyle
     data-size={size}
     data-rounded={rounded}
-    className={type}
+    className={`${type} ${props.className}`}
     {...props}
   />
 );
