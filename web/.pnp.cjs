@@ -53,6 +53,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-prettier", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:8.3.0"],
             ["identity-obj-proxy", "npm:3.0.0"],
             ["jest", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:27.2.0"],
+            ["jotai", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:1.4.2"],
             ["next", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:11.1.2"],
             ["prettier", "npm:2.4.1"],
             ["react", "npm:17.0.2"],
@@ -6411,6 +6412,64 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["jotai", [
+        ["npm:1.4.2", {
+          "packageLocation": "./.yarn/cache/jotai-npm-1.4.2-f449ccbaf2-9c79cbe633.zip/node_modules/jotai/",
+          "packageDependencies": [
+            ["jotai", "npm:1.4.2"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:1.4.2", {
+          "packageLocation": "./.yarn/__virtual__/jotai-virtual-274c127621/0/cache/jotai-npm-1.4.2-f449ccbaf2-9c79cbe633.zip/node_modules/jotai/",
+          "packageDependencies": [
+            ["jotai", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:1.4.2"],
+            ["@babel/core", null],
+            ["@babel/template", null],
+            ["@types/babel__core", null],
+            ["@types/babel__template", null],
+            ["@types/immer", null],
+            ["@types/optics-ts", null],
+            ["@types/react", "npm:17.0.20"],
+            ["@types/react-query", null],
+            ["@types/urql__core", null],
+            ["@types/valtio", null],
+            ["@types/wonka", null],
+            ["@types/xstate", null],
+            ["@urql/core", null],
+            ["immer", null],
+            ["optics-ts", null],
+            ["react", "npm:17.0.2"],
+            ["react-query", null],
+            ["valtio", null],
+            ["wonka", null],
+            ["xstate", null]
+          ],
+          "packagePeers": [
+            "@babel/core",
+            "@babel/template",
+            "@types/babel__core",
+            "@types/babel__template",
+            "@types/immer",
+            "@types/optics-ts",
+            "@types/react-query",
+            "@types/react",
+            "@types/urql__core",
+            "@types/valtio",
+            "@types/wonka",
+            "@types/xstate",
+            "@urql/core",
+            "immer",
+            "optics-ts",
+            "react-query",
+            "react",
+            "valtio",
+            "wonka",
+            "xstate"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["js-tokens", [
         ["npm:4.0.0", {
           "packageLocation": "./.yarn/cache/js-tokens-npm-4.0.0-0ac852e9e2-8a95213a5a.zip/node_modules/js-tokens/",
@@ -9750,6 +9809,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-prettier", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:8.3.0"],
             ["identity-obj-proxy", "npm:3.0.0"],
             ["jest", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:27.2.0"],
+            ["jotai", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:1.4.2"],
             ["next", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:11.1.2"],
             ["prettier", "npm:2.4.1"],
             ["react", "npm:17.0.2"],

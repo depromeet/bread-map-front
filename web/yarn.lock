@@ -4877,6 +4877,43 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jotai@npm:^1.4.2":
+  version: 1.4.2
+  resolution: "jotai@npm:1.4.2"
+  peerDependencies:
+    "@babel/core": "*"
+    "@babel/template": "*"
+    "@urql/core": "*"
+    immer: "*"
+    optics-ts: "*"
+    react: ">=16.8"
+    react-query: "*"
+    valtio: "*"
+    wonka: "*"
+    xstate: "*"
+  peerDependenciesMeta:
+    "@babel/core":
+      optional: true
+    "@babel/template":
+      optional: true
+    "@urql/core":
+      optional: true
+    immer:
+      optional: true
+    optics-ts:
+      optional: true
+    react-query:
+      optional: true
+    valtio:
+      optional: true
+    wonka:
+      optional: true
+    xstate:
+      optional: true
+  checksum: 9c79cbe63329595a48a3071afdd82223ca7644dbd956990be105326400414a5e3de6835e4e6b79b4cde6a9fd2056dad38ecf7e32efc0e75fed459c181dc67ca5
+  languageName: node
+  linkType: hard
+
 "js-tokens@npm:^3.0.0 || ^4.0.0, js-tokens@npm:^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
@@ -7780,6 +7817,7 @@ typescript@4.4.3:
     eslint-config-prettier: ^8.3.0
     identity-obj-proxy: ^3.0.0
     jest: ^27.2.0
+    jotai: ^1.4.2
     next: 11.1.2
     prettier: ^2.4.1
     react: 17.0.2
