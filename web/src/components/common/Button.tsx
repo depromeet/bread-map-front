@@ -24,7 +24,7 @@ const Button = ({
 
 export default Button;
 
-const DefaultButtonStyle = css`
+const defaultButtonStyle = css`
   font-size: 14px;
   &[data-size='big'] {
     height: 52px;
@@ -57,7 +57,7 @@ const DefaultButtonStyle = css`
 `;
 
 const ButtonStyle = styled.button`
-  ${DefaultButtonStyle};
+  ${defaultButtonStyle};
 
   &.primary {
     background: ${({ theme }) => theme.color.primary500};
