@@ -4,7 +4,6 @@ import styled from '@emotion/styled';
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   rounded?: boolean;
   bgColor?: 'none' | 'primary' | 'secondery';
-  disabled?: boolean;
   size?: 'big' | 'large' | 'medium' | 'small' | 'tiny';
 }
 
@@ -12,48 +11,32 @@ const Button = ({
   children,
   rounded = false,
   bgColor = 'primary',
-  disabled = false,
   size = 'medium',
   ...props
 }: ButtonProps) => {
   switch (bgColor) {
     case 'none':
       return (
-        <NoneButtonStyle
-          size={size}
-          rounded={rounded}
-          disabled={disabled}
-          {...props}
-        >
+        <NoneButtonStyle size={size} rounded={rounded} {...props}>
           {children}
         </NoneButtonStyle>
       );
     case 'secondery':
       return (
-        <SeconderyButtonStyle
-          size={size}
-          rounded={rounded}
-          disabled={disabled}
-          {...props}
-        >
+        <SeconderyButtonStyle size={size} rounded={rounded} {...props}>
           {children}
         </SeconderyButtonStyle>
       );
     default:
       return (
-        <PrimaryButtonStyle
-          size={size}
-          rounded={rounded}
-          disabled={disabled}
-          {...props}
-        >
+        <PrimaryButtonStyle size={size} rounded={rounded} {...props}>
           {children}
         </PrimaryButtonStyle>
       );
   }
 };
 
-export default React.memo(Button);
+export default Button;
 
 const DefaultButtonStyle = styled.button<ButtonProps>`
   height: ${({ size }) =>

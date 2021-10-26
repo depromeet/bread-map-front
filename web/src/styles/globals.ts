@@ -1,8 +1,6 @@
 import { css } from '@emotion/react';
 
 const globalStyles = css`
-  @import url(https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap);
-
   @font-face {
     font-family: 'Noto Sans KR';
     font-weight: 400;
