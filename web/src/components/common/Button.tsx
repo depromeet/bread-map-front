@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import { ClassNames, css } from '@emotion/react';
+import { css } from '@emotion/react';
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   rounded?: boolean;
