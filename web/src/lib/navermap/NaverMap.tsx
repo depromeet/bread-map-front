@@ -8,7 +8,7 @@ import NaverMapProvider, {
 import BreadMarkerGlobalStyle from './BreadMarkerGlobalStyle';
 import { getNavermapSDK } from './utils';
 
-const SCRIPT_URL = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_ID}`;
+const SCRIPT_URL = `https://openapi.map.naver.com/openapi/v3/maps.js`;
 
 interface MapInitializeProps extends React.HTMLAttributes<HTMLDivElement> {
   mapOptions?: naver.maps.MapOptions;
@@ -55,7 +55,7 @@ const NaverMap: React.FC<NaverMapProps> = ({
     <>
       <Script
         id={'naver-maps-sdk'}
-        src={SCRIPT_URL}
+        src={`${SCRIPT_URL}?ncpClientId=${ncpClientId}`}
         strategy={'beforeInteractive'}
       />
       <NaverMapProvider>
