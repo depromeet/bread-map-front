@@ -2,6 +2,7 @@ import * as React from 'react';
 import Script from 'next/script';
 import { useIsomorphicLayoutEffect } from '@/lib/common';
 import NaverMapProvider, { useNaverMap, useSetNaverMap } from './NaverMapProvider';
+import BreadMarkerGlobalStyle from './BreadMarkerGlobalStyle';
 import { getNavermapSDK } from './utils';
 
 const SCRIPT_URL = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_ID}`
@@ -60,6 +61,7 @@ const NaverMap: React.FC<NaverMapProps> = ({
         </MapInitialize>
         {children}
       </NaverMapProvider>
+      <BreadMarkerGlobalStyle />
     </>
   );
 };
