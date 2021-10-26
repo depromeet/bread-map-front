@@ -2,10 +2,10 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { CategoryInfo } from '@/constants/breadCategory';
 import { useCategories } from '@/components/common/CategoryList';
-import { BreadsReview, BreadsUpdate, Review } from './BreadsReviewProvider';
 import MoreAdd from './MoreAdd';
 import StartAdd from './StartAdd';
 import CategorySelect from './CategorySelect';
+import { Review, BreadsReview, BreadsUpdate } from './index';
 
 const initialStar = [0, 0, 0, 0, 0];
 
