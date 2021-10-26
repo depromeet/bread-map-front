@@ -11,42 +11,37 @@ interface NaverMapMarkerProps {
 const NaverMapMarker = React.forwardRef<
   naver.maps.Marker | null,
   NaverMapMarkerProps
->(
-  ({
-    latitude,
-    longitude,
-  }, ref) => {
-    const naverMap = useNaverMap();
+>(({ latitude, longitude }, ref) => {
+  const naverMap = useNaverMap();
 
-    const markerRef = React.useRef<naver.maps.Marker | null>(null);
+  const markerRef = React.useRef<naver.maps.Marker | null>(null);
 
-    React.useImperativeHandle<
-      naver.maps.Marker | null,
-      naver.maps.Marker | null
-    >(ref, () => markerRef.current);
+  React.useImperativeHandle<naver.maps.Marker | null, naver.maps.Marker | null>(
+    ref,
+    () => markerRef.current
+  );
 
-    useIsomorphicLayoutEffect(() => {
-      if (naverMap === undefined) return;
+  useIsomorphicLayoutEffect(() => {
+    if (naverMap === undefined) return;
 
-      const sdk = getNavermapSDK();
-      if (sdk === undefined) return;
+    const sdk = getNavermapSDK();
+    if (sdk === undefined) return;
 
-      const position = new sdk.LatLng(latitude, longitude);
+    const position = new sdk.LatLng(latitude, longitude);
 
-      markerRef.current = new sdk.Marker({
-        position,
-        map: naverMap,
-      });
+    markerRef.current = new sdk.Marker({
+      position,
+      map: naverMap,
+    });
 
-      return () => {
-        markerRef.current?.setMap(null);
-        markerRef.current = null;
-      };
-    }, [naverMap]);
+    return () => {
+      markerRef.current?.setMap(null);
+      markerRef.current = null;
+    };
+  }, [naverMap]);
 
-    return null;
-  },
-);
+  return null;
+});
 
 NaverMapMarker.displayName = 'NaverMapMarker';
 
