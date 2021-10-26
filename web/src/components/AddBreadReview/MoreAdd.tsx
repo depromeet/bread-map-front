@@ -2,7 +2,7 @@ import React, { ChangeEvent, useRef } from 'react';
 import styled from '@emotion/styled';
 import { CategoryInfo } from '@/constants/breadCategory';
 import { ArrowDown, GrayStar, OrangeStar, Plus } from '@/components/icons';
-import { Review } from './BreadsReviewProvider';
+import { Review } from './index';
 
 interface MoreAddProps {
   setIsCategoryPage: React.Dispatch<React.SetStateAction<boolean>>;

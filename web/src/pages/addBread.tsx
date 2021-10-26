@@ -2,19 +2,16 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { ArrowPrev, Close } from '@/components/icons';
 import AddBreadReview from '@/components/AddBreadReview';
-import BreadsReviewProvider from '@/components/AddBreadReview/BreadsReviewProvider';
 
 const AddBread = () => {
   return (
-    <BreadsReviewProvider>
-      <AddBreadLayout>
-        <TopHeader>
-          <ArrowPrev />
-          <Close />
-        </TopHeader>
-        <AddBreadReview />
-      </AddBreadLayout>
-    </BreadsReviewProvider>
+    <AddBreadLayout>
+      <TopHeader>
+        <ArrowPrev />
+        <Close />
+      </TopHeader>
+      <AddBreadReview />
+    </AddBreadLayout>
   );
 };
 
