@@ -4,6 +4,8 @@ import Link from 'next/link';
 import styled from '@emotion/styled';
 import { Home, User, Edit, Compass } from '@/components/icons';
 
+const active = '#FF6E40';
+
 const Footer: React.FC = () => {
   const [currentPage, setCurrentPage] = useState('');
   const router = useRouter();
@@ -11,19 +13,21 @@ const Footer: React.FC = () => {
   const items = [
     {
       url: '/#home',
-      Icon: <Home />,
+      Icon: <Home stroke={router.asPath === '/#home' ? active : 'black'} />,
     },
     {
       url: '/#compass',
-      Icon: <Compass />,
+      Icon: (
+        <Compass stroke={router.asPath === '/#compass' ? active : 'black'} />
+      ),
     },
     {
       url: '/#edit',
-      Icon: <Edit />,
+      Icon: <Edit stroke={router.asPath === '/#edit' ? active : 'black'} />,
     },
     {
       url: '/#user',
-      Icon: <User />,
+      Icon: <User stroke={router.asPath === '/#user' ? active : 'black'} />,
     },
   ];
 
@@ -35,7 +39,11 @@ const Footer: React.FC = () => {
   };
 
   const mapToComponents = (data) => {
-    return data.map(({ url, Icon }, key) => <IconBox>{Icon}</IconBox>);
+    return data.map(({ url, Icon }, key) => (
+      <Link href={url} key={key}>
+        <IconBox>{Icon}</IconBox>
+      </Link>
+    ));
   };
 
   return <Base>{mapToComponents(items)}</Base>;
