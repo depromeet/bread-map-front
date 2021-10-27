@@ -40,7 +40,7 @@ const Footer: React.FC = () => {
 
   const mapToComponents = (data) => {
     return data.map(({ url, Icon }, key) => (
-      <Link href={url} key={key}>
+      <Link href={url} key={key} passHref={true}>
         <IconBox>{Icon}</IconBox>
       </Link>
     ));
