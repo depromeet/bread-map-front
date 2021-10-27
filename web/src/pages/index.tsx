@@ -10,7 +10,7 @@ import {
   Title,
 } from '@/components/home';
 import { useThemeToggle } from '@/styles/BreadMapTheming';
-import Footer from 'components/Footer';
+import Footer from 'components/common/Footer';
 
 interface GridItem {
   href: string;
