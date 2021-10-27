@@ -1,10 +1,14 @@
 import * as React from 'react';
 import Script from 'next/script';
 import { useIsomorphicLayoutEffect } from '@/lib/common';
-import NaverMapProvider, { useNaverMap, useSetNaverMap } from './NaverMapProvider';
+import NaverMapProvider, {
+  useNaverMap,
+  useSetNaverMap,
+} from './NaverMapProvider';
+import BreadMarkerGlobalStyle from './BreadMarkerGlobalStyle';
 import { getNavermapSDK } from './utils';
 
-const SCRIPT_URL = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_ID}`
+const SCRIPT_URL = `https://openapi.map.naver.com/openapi/v3/maps.js`;
 
 interface MapInitializeProps extends React.HTMLAttributes<HTMLDivElement> {
   mapOptions?: naver.maps.MapOptions;
@@ -36,7 +40,6 @@ const MapInitialize: React.FC<MapInitializeProps> = ({
   return <div ref={ref} {...rest} />;
 };
 
-
 interface NaverMapProps extends MapInitializeProps {
   ncpClientId?: string;
 }
@@ -52,14 +55,14 @@ const NaverMap: React.FC<NaverMapProps> = ({
     <>
       <Script
         id={'naver-maps-sdk'}
-        src={SCRIPT_URL}
+        src={`${SCRIPT_URL}?ncpClientId=${ncpClientId}`}
         strategy={'beforeInteractive'}
       />
       <NaverMapProvider>
-        <MapInitialize {...rest}>
-        </MapInitialize>
+        <MapInitialize {...rest}></MapInitialize>
         {children}
       </NaverMapProvider>
+      <BreadMarkerGlobalStyle />
     </>
   );
 };
