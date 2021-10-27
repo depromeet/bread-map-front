@@ -11,14 +11,12 @@ import {
 } from '@/components/home';
 import { useThemeToggle } from '@/styles/BreadMapTheming';
 
-import Postcode from 'components/postcode';
-
 interface GridItem {
   href: string;
   title: string;
   body: string;
 }
- 
+
 const gridItems: GridItem[] = [
   {
     href: 'https://nextjs.org/docs',
@@ -61,7 +59,6 @@ const Home: NextPage = () => {
             <Card href={href} title={title} body={body} key={title} />
           ))}
         </Grid>
-        <Postcode />    
       </Main>
       <Footer />
     </Container>
