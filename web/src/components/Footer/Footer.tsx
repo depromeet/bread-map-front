@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import styled from '@emotion/styled';
 import { Home, User, Edit, Compass } from '@/components/icons';
@@ -7,7 +7,6 @@ import { Home, User, Edit, Compass } from '@/components/icons';
 const active = '#FF6E40';
 
 const Footer: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState('');
   const router = useRouter();
 
   const items = [
@@ -31,14 +30,8 @@ const Footer: React.FC = () => {
     },
   ];
 
-  const handleClick = (e) => {
-    // e.target을 쓰면 이벤트 캡처링 문제가 생겨서 currentTarget 사용
-    setCurrentPage(e.currentTarget.dataset.name);
-    console.log(e.currentTarget);
-    console.log(`now : ${currentPage}`);
-  };
-
   const mapToComponents = (data) => {
+    // TODO: type 선언
     return data.map(({ url, Icon }, key) => (
       <Link href={url} key={key} passHref={true}>
         <IconBox>{Icon}</IconBox>
