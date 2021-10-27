@@ -1,4 +1,30 @@
+// Footer
 export { default as Home } from './Home';
 export { default as User } from './User';
 export { default as Compass } from './Compass';
 export { default as Edit } from './Edit';
+
+export { default as Bread } from './Bread';
+export { default as Check } from './Check';
+export { default as Flag } from './Flag';
+export { default as LeftArrow } from './LeftArrow';
+export { default as Navigation } from './Navigation';
+export { default as GrayStar } from './GrayStar';
+export { default as OrangeStar } from './OrangeStar';
+export { default as Plus } from './Plus';
+export { default as Close } from './Close';
+export { default as ArrowPrev } from './ArrowPrev';
+export { default as ArrowDown } from './ArrowDown';
+export { default as CategoryDonut } from './CategoryDonut';
+export { default as CategoryBaked } from './CategoryBaked';
+export { default as CategoryBringsBackBread } from './CategoryBringsBackBread';
+export { default as CategoryCake } from './CategoryCake';
+export { default as CategoryCookie } from './CategoryCookie';
+export { default as CategoryCreamBread } from './CategoryCreamBread';
+export { default as CategoryCroissant } from './CategoryCroissant';
+export { default as CategoryEtc } from './CategoryEtc';
+export { default as CategoryMacaron } from './CategoryMacaron';
+export { default as CategoryPieTart } from './CategoryPieTart';
+export { default as CategorySnack } from './CategorySnack';
+export { default as CategoryVeganQuito } from './CategoryVeganQuito';
+export { default as CategoryWhiteBread } from './CategoryWhiteBread';

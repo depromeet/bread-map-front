@@ -1,6 +1,19 @@
 import { css } from '@emotion/react';
 
 const globalStyles = css`
+  @font-face {
+    font-family: 'Noto Sans KR';
+    font-weight: 400;
+    src: local('Spoqa Han Sans Neo Regular'),
+      url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Regular.woff2')
+        format('woff2'),
+      url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Regular.woff')
+        format('woff'),
+      url('https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/Subset/SpoqaHanSansNeo/SpoqaHanSansNeo-Regular.ttf')
+        format('truetype');
+    unicode-range: U+0030-0039;
+  }
+
   a {
     color: inherit;
     text-decoration: none;
@@ -17,13 +30,15 @@ const globalStyles = css`
     -webkit-text-size-adjust: 100%;
     -moz-tab-size: 4;
     tab-size: 4;
+
+    font-size: 16px;
+    font-family: 'Noto Sans KR', system-ui, -apple-system, 'Segoe UI', Roboto,
+      Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
   }
 
   body {
     padding: 0;
     margin: 0;
-    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial,
-      sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
   }
 
   hr {

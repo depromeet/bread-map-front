@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "yarn open-browser && next dev",
+    "open-browser": "open http://localhost:3000",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -13,9 +14,11 @@
   "dependencies": {
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
+    "jotai": "^1.4.2",
     "next": "11.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-spring-bottom-sheet": "^3.4.0",
     "swr": "^1.0.1"
   },
   "devDependencies": {

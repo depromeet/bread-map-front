@@ -10,8 +10,8 @@ export default Container;
 const Base = styled.div`
   min-height: 100vh;
   padding: 0 0.5rem;
-  background: ${({ theme }) => theme.color.background};
-  color: ${({ theme }) => theme.color.textColor};
+  background: ${({ theme }) => theme.color.gray200};
+  color: ${({ theme }) => theme.color.black};
   display: flex;
   flex-direction: column;
   justify-content: center;
