@@ -1,56 +1,44 @@
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import Link from 'next/link';
 import styled from '@emotion/styled';
 import { Home, User, Edit, Compass } from '@/components/icons';
 
-const activeColor = '#FF6E40';
-
 const Footer: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState("");
-  
-  const handleClick = e => {
+  const [currentPage, setCurrentPage] = useState('');
+  const router = useRouter();
+
+  const items = [
+    {
+      url: '/#home',
+      Icon: <Home />,
+    },
+    {
+      url: '/#compass',
+      Icon: <Compass />,
+    },
+    {
+      url: '/#edit',
+      Icon: <Edit />,
+    },
+    {
+      url: '/#user',
+      Icon: <User />,
+    },
+  ];
+
+  const handleClick = (e) => {
     // e.target을 쓰면 이벤트 캡처링 문제가 생겨서 currentTarget 사용
-    setCurrentPage(e.currentTarget.name);
-    console.log(e.currentTarget)
-    console.log(`now : ${currentPage}`)
+    setCurrentPage(e.currentTarget.dataset.name);
+    console.log(e.currentTarget);
+    console.log(`now : ${currentPage}`);
   };
 
+  const mapToComponents = (data) => {
+    return data.map(({ url, Icon }, key) => <IconBox>{Icon}</IconBox>);
+  };
 
-  return (
-    <Base>
-      <Link href="#home">
-        <a name="home" onClick={handleClick}>
-          <IconBox>
-            <Home name="home" stroke={currentPage === "home" ? activeColor : 'black'} />
-          </IconBox>
-        </a>
-      </Link>
-
-      <Link href="#compass">
-        <a name="compass" onClick={handleClick}>
-          <IconBox>
-            <Compass stroke={currentPage === "compass" ? activeColor : 'black'} />
-          </IconBox>   
-        </a>
-      </Link>
-
-      <Link href="#edit" >
-        <a name="edit" onClick={handleClick}>
-          <IconBox>
-            <Edit stroke={currentPage === "edit" ? activeColor : 'black'} />
-          </IconBox>
-        </a>
-      </Link>
-
-      <Link href="#user"  >
-        <a name="user" onClick={handleClick}>
-          <IconBox>
-            <User stroke={currentPage === "user" ? activeColor : 'black'}  />
-          </IconBox>
-        </a>
-      </Link>
-    </Base>
-  );
+  return <Base>{mapToComponents(items)}</Base>;
 };
 
 export default Footer;
@@ -68,7 +56,7 @@ const Base = styled.footer`
   bottom: 0;
 `;
 
-const IconBox = styled.div<{ active: boolean }>`
+const IconBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
