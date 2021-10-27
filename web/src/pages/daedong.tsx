@@ -1,33 +1,25 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import MapButtonsWrap from '@/components/daedong/MapButtonsWrap';
-import { NaverMap } from '@/lib/navermap';
+import { FooterHeight } from '@/styles/Media';
+import { MapContainer } from '@/components/daedong';
 
 const Map = () => {
   return (
-    <MapWrapper>
-      <NaverMapDiv
-        ncpClientId={process.env.NEXT_PUBLIC_NAVER_ID}
-        mapOptions={{
-          zoom: 10,
-        }}
-      >
-        <MapButtonsWrap />
-      </NaverMapDiv>
-    </MapWrapper>
+    <>
+      <MapContainer />
+      <Footer>footer</Footer>
+    </>
   );
 };
 
-const MapWrapper = styled.div`
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-`;
-
-const NaverMapDiv = styled(NaverMap)`
-  width: 100vw;
-  height: 100vh;
-`;
-
 export default Map;
+
+const Footer = styled.div`
+  position: fixed;
+  bottom: 0%;
+  width: 100%;
+  z-index: 4;
+  height: ${FooterHeight}px;
+  border: 1px solid ${({ theme }) => theme.color.gray300};
+  background: ${({ theme }) => theme.color.white};
+`;

@@ -1,1 +1,1 @@
-export const FooterHeight = 60;
+export const FooterHeight = 52;
