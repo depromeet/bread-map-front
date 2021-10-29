@@ -70,7 +70,7 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
   };
 
   React.useEffect(() => {
-    editCategory(selectedCategory[0]);
+    editCategory(selectedCategory[0] || null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCategory]);
 
@@ -103,17 +103,23 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
     console.log('reviews', breadsReview);
   };
 
+  const checkSelected = () => {
+    const category = breadsReview[currentProgress]?.category;
+    if (category === null) return null;
+    else return [category];
+  };
+
   return (
     <>
       {isCategoryPage && (
         <CategorySelect
           {...{
             setIsCategoryPage,
-            selectedCategory,
             onClickCategory,
             onCancelCategory,
             setIsOpenFirst,
           }}
+          selectedCategory={checkSelected()}
         />
       )}
       {progress >= 2 && !isCategoryPage && (

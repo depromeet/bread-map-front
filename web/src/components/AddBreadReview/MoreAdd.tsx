@@ -33,12 +33,6 @@ const MoreAdd = ({
     fileRef.current.click();
   };
 
-  const newReviewCategory = (): string | CategoryText => {
-    return selectedCategory.length < 1
-      ? '빵 종류 선택'
-      : selectedCategory[0]?.text;
-  };
-
   const renderStar = (stars: number[]): JSX.Element[] => {
     return stars.map((star, i) => (
       <StarBtn key={i} onClick={() => editScore(i)}>
@@ -58,8 +52,7 @@ const MoreAdd = ({
           <Text isRequired>빵 종류</Text>
           <SelectArea>
             <SelectBreadBtn onClick={() => setIsCategoryPage(true)}>
-              {breadsReview[currentProgress]?.category?.text ||
-                newReviewCategory()}
+              {breadsReview[currentProgress]?.category?.text || '빵 종류 선택'}
             </SelectBreadBtn>
             <ArrowDown />
           </SelectArea>
@@ -68,8 +61,7 @@ const MoreAdd = ({
           <Text isRequired>메뉴명</Text>
           <Input
             name="name"
-            defaultValue={breadsReview[currentProgress]?.name}
-            value={singleReview?.name}
+            value={breadsReview[currentProgress]?.name || singleReview?.name}
             onChange={(e) => editContent(e)}
           />
         </Row>
@@ -78,8 +70,7 @@ const MoreAdd = ({
           <Input
             name="price"
             type="number"
-            defaultValue={breadsReview[currentProgress]?.price}
-            value={singleReview?.price}
+            value={breadsReview[currentProgress]?.price || singleReview?.price}
             onChange={(e) => editContent(e)}
           />
         </Row>
@@ -96,8 +87,9 @@ const MoreAdd = ({
           <Text>한줄평</Text>
           <Input
             name="text"
-            defaultValue={breadsReview[currentProgress]?.text}
-            value={singleReview?.text || ''}
+            value={
+              breadsReview[currentProgress]?.text || singleReview?.text || ''
+            }
             onChange={(e) => editContent(e)}
           />
         </Row>
