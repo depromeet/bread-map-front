@@ -31,6 +31,7 @@ it('AddBreadReview/MoreAdd', () => {
     currentProgress: 2,
     stars: fakeStars,
     singleReview: fakeReview,
+    deleteSingleReview: jest.fn(),
     editScore: jest.fn(),
     editContent: jest.fn(),
   };

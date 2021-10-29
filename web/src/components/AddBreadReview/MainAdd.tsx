@@ -69,6 +69,20 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
     });
   };
 
+  const deleteSingleReview = (targetProgress: number) => {
+    let updatedReview: BreadsReview = {};
+    let i = 1;
+    for (const [key, value] of Object.entries(breadsReview)) {
+      if (targetProgress.toString() !== key) {
+        updatedReview[i] = value;
+        i++;
+      }
+    }
+
+    updateBreadsReview(updatedReview);
+    setProgress((prev) => prev - 1);
+  };
+
   React.useEffect(() => {
     editCategory(selectedCategory[0] || null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -148,6 +162,7 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
             currentProgress,
             stars,
             singleReview,
+            deleteSingleReview,
             editScore,
             editContent,
           }}

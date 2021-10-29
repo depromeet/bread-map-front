@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useRef } from 'react';
 import styled from '@emotion/styled';
-import { CategoryInfo, CategoryText } from '@/constants/breadCategory';
+import { CategoryInfo } from '@/constants/breadCategory';
 import { ArrowDown, GrayStar, OrangeStar, Plus } from '@/components/icons';
-import { BreadsReview, Review } from './index';
+import { BreadsReview, Review } from '.';
 
 interface MoreAddProps {
   breadsReview: BreadsReview;
@@ -11,6 +11,7 @@ interface MoreAddProps {
   currentProgress: number;
   stars: number[];
   singleReview: Review | null;
+  deleteSingleReview: (targetProgress: number) => void;
   editScore: (clickedIndex: number) => void;
   editContent: (e: ChangeEvent<HTMLInputElement>) => void;
 }
@@ -22,6 +23,7 @@ const MoreAdd = ({
   currentProgress,
   stars,
   singleReview,
+  deleteSingleReview,
   editScore,
   editContent,
 }: MoreAddProps) => {
@@ -45,7 +47,9 @@ const MoreAdd = ({
     <>
       <BreadHeader>
         <Title>{currentProgress}번째 빵</Title>
-        <DeleteBtn>삭제</DeleteBtn>
+        <DeleteBtn onClick={() => deleteSingleReview(currentProgress)}>
+          삭제
+        </DeleteBtn>
       </BreadHeader>
       <Content>
         <Row>
