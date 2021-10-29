@@ -1,5 +1,6 @@
 import { render, screen } from '@/utils/testUtils';
 import { CategoryInfo } from '@/constants/breadCategory';
+import { BreadsReview } from '.';
 import MoreAdd from './MoreAdd';
 
 it('AddBreadReview/MoreAdd', () => {
@@ -24,9 +25,10 @@ it('AddBreadReview/MoreAdd', () => {
   const fakeStars = [0, 0, 0, 0, 0];
 
   const props = {
+    breadsReview: [fakeReview] as BreadsReview,
     setIsCategoryPage: jest.fn(),
     selectedCategory: fakeCategoryInfo,
-    progress: 2,
+    currentProgress: 2,
     stars: fakeStars,
     singleReview: fakeReview,
     editScore: jest.fn(),

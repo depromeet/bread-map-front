@@ -1,13 +1,14 @@
 import React, { ChangeEvent, useRef } from 'react';
 import styled from '@emotion/styled';
-import { CategoryInfo } from '@/constants/breadCategory';
+import { CategoryInfo, CategoryText } from '@/constants/breadCategory';
 import { ArrowDown, GrayStar, OrangeStar, Plus } from '@/components/icons';
-import { Review } from './index';
+import { BreadsReview, Review } from './index';
 
 interface MoreAddProps {
+  breadsReview: BreadsReview;
   setIsCategoryPage: React.Dispatch<React.SetStateAction<boolean>>;
   selectedCategory: CategoryInfo[];
-  progress: number;
+  currentProgress: number;
   stars: number[];
   singleReview: Review | null;
   editScore: (clickedIndex: number) => void;
@@ -15,24 +16,41 @@ interface MoreAddProps {
 }
 
 const MoreAdd = ({
+  breadsReview,
   setIsCategoryPage,
   selectedCategory,
-  progress,
+  currentProgress,
   stars,
   singleReview,
   editScore,
   editContent,
 }: MoreAddProps) => {
+  const currentStar = breadsReview[currentProgress]?.star || 0;
+
   const fileRef = useRef<HTMLInputElement | null>(null);
   const addPhoto = () => {
     if (!fileRef.current) return;
     fileRef.current.click();
   };
 
+  const newReviewCategory = (): string | CategoryText => {
+    return selectedCategory.length < 1
+      ? '빵 종류 선택'
+      : selectedCategory[0]?.text;
+  };
+
+  const renderStar = (stars: number[]): JSX.Element[] => {
+    return stars.map((star, i) => (
+      <StarBtn key={i} onClick={() => editScore(i)}>
+        {star === 1 ? <OrangeStar /> : <GrayStar />}
+      </StarBtn>
+    ));
+  };
+
   return (
     <>
       <BreadHeader>
-        <Title>{progress}번째 빵</Title>
+        <Title>{currentProgress}번째 빵</Title>
         <DeleteBtn>삭제</DeleteBtn>
       </BreadHeader>
       <Content>
@@ -40,9 +58,8 @@ const MoreAdd = ({
           <Text isRequired>빵 종류</Text>
           <SelectArea>
             <SelectBreadBtn onClick={() => setIsCategoryPage(true)}>
-              {selectedCategory.length < 1
-                ? '빵 종류 선택'
-                : selectedCategory[0]?.text}
+              {breadsReview[currentProgress]?.category?.text ||
+                newReviewCategory()}
             </SelectBreadBtn>
             <ArrowDown />
           </SelectArea>
@@ -51,6 +68,7 @@ const MoreAdd = ({
           <Text isRequired>메뉴명</Text>
           <Input
             name="name"
+            defaultValue={breadsReview[currentProgress]?.name}
             value={singleReview?.name}
             onChange={(e) => editContent(e)}
           />
@@ -60,6 +78,7 @@ const MoreAdd = ({
           <Input
             name="price"
             type="number"
+            defaultValue={breadsReview[currentProgress]?.price}
             value={singleReview?.price}
             onChange={(e) => editContent(e)}
           />
@@ -67,18 +86,18 @@ const MoreAdd = ({
         <Row>
           <Text>별점</Text>
           <StarArea>
-            {stars.map((star, i) => (
-              <StarBtn key={i} onClick={() => editScore(i)}>
-                {star === 1 ? <OrangeStar /> : <GrayStar />}
-              </StarBtn>
-            ))}
+            {renderStar([
+              ...Array(currentStar).fill(1),
+              ...Array(5 - currentStar).fill(0),
+            ])}
           </StarArea>
         </Row>
         <Row>
           <Text>한줄평</Text>
           <Input
             name="text"
-            value={singleReview?.text}
+            defaultValue={breadsReview[currentProgress]?.text}
+            value={singleReview?.text || ''}
             onChange={(e) => editContent(e)}
           />
         </Row>

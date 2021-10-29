@@ -6,6 +6,7 @@ import MoreAdd from './MoreAdd';
 import StartAdd from './StartAdd';
 import CategorySelect from './CategorySelect';
 import { Review, BreadsReview, BreadsUpdate } from './index';
+import ReviewTab from './ReviewTab';
 
 const initialStar = [0, 0, 0, 0, 0];
 
@@ -24,6 +25,7 @@ interface MainAddProps {
 
 const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
   const [progress, setProgress] = React.useState(1);
+  const [currentProgress, setCurrentProgress] = React.useState(1);
   const [stars, setStars] = React.useState<number[]>(initialStar);
   const [singleReview, setSingleReview] =
     React.useState<Review>(initialSingleReview);
@@ -37,6 +39,11 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
     onCancelCategory,
     setIsOpenFirst,
   } = useCategories(isMultiSelect);
+
+  React.useEffect(() => {
+    setSingleReview(breadsReview[currentProgress]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentProgress]);
 
   const editScore = (clickedIndex: number) => {
     setStars((stars) =>
@@ -78,7 +85,7 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
   React.useEffect(() => {
     updateBreadsReview({
       ...breadsReview,
-      [progress]: singleReview,
+      [currentProgress]: singleReview,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [singleReview]);
@@ -91,6 +98,7 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
 
   const nextProgress = () => {
     setProgress((prev) => prev + 1);
+    setCurrentProgress(progress + 1);
     initializeSingleReview();
     console.log('reviews', breadsReview);
   };
@@ -108,6 +116,12 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
           }}
         />
       )}
+      {progress >= 2 && !isCategoryPage && (
+        <ReviewTab
+          length={Object.keys(breadsReview).length}
+          {...{ currentProgress, setCurrentProgress }}
+        />
+      )}
       {progress === 1 && !isCategoryPage && (
         <StartAdd
           {...{
@@ -122,9 +136,10 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
       {progress >= 2 && !isCategoryPage && (
         <MoreAdd
           {...{
+            breadsReview,
             setIsCategoryPage,
             selectedCategory,
-            progress,
+            currentProgress,
             stars,
             singleReview,
             editScore,
