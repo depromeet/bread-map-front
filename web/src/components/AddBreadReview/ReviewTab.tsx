@@ -20,15 +20,16 @@ const ReviewTab = ({
     if (tabRef.current === null) return;
 
     const itemWidth = tabRef.current.getBoundingClientRect().width!;
-    setTabsWidth((prev) => prev + itemWidth);
+    setTabsWidth(length * itemWidth);
   }, [tabRef, length]);
 
   React.useEffect(() => {
     if (wrapperRef.current === null) return;
 
     const wrapperWidth = wrapperRef.current.getBoundingClientRect().width!;
-    if (wrapperWidth > tabsWidth) return;
+    if (currentProgress < 5 || wrapperWidth > tabsWidth) return;
     wrapperRef.current.scrollLeft = tabsWidth;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tabsWidth]);
 
   const onClickTab = (i: number) => {
