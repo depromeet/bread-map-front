@@ -43,11 +43,20 @@ const StartAdd = ({
         </Row>
         <Row>
           <Text isRequired>메뉴명</Text>
-          <Input name="name" onChange={(e) => editContent(e)} />
+          <Input
+            name="name"
+            placeholder="메뉴명을 입력해주세요"
+            onChange={(e) => editContent(e)}
+          />
         </Row>
         <Row>
           <Text isRequired>가격</Text>
-          <Input name="price" type="number" onChange={(e) => editContent(e)} />
+          <Input
+            name="price"
+            type="number"
+            placeholder="원"
+            onChange={(e) => editContent(e)}
+          />
         </Row>
         <Row>
           <Text>별점</Text>
@@ -63,12 +72,12 @@ const StartAdd = ({
           <Text>한줄평</Text>
           <Input
             name="text"
-            onChange={(e) => editContent(e)}
             placeholder="한줄평을 적어주세요"
+            onChange={(e) => editContent(e)}
           />
         </Row>
         <Row>
-          <Text>사진 업로드</Text>
+          <PhotoUploadText>사진 업로드</PhotoUploadText>
           <Scroll>
             <PhotoWrapper>
               <AddPhotoBtn onClick={addPhoto}>
@@ -110,6 +119,9 @@ const Text = styled.span<{ isRequired?: boolean }>`
   position: relative;
   display: inline-block;
   margin-bottom: 0.75rem;
+  font-weight: bold;
+  font-size: 0.87rem;
+  color: ${({ theme }) => theme.color.gray800};
 
   &::before {
     content: '';
@@ -122,6 +134,14 @@ const Text = styled.span<{ isRequired?: boolean }>`
     border-radius: 50%;
     opacity: ${({ isRequired }) => (isRequired ? 1 : 0)};
   }
+`;
+
+const PhotoUploadText = styled.span`
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  font-weight: bold;
+  font-size: 1rem;
+  color: ${({ theme }) => theme.color.black};
 `;
 
 const StarArea = styled.div`
@@ -162,10 +182,10 @@ const Input = styled.input`
   -moz-border-radius: 0;
   border: none;
   padding: 0;
-  color: #757575;
+  color: ${({ theme }) => theme.color.gray600};
 
   &::placeholder {
-    color: #bdbdbd;
+    color: ${({ theme }) => theme.color.gray400};
   }
 `;
 

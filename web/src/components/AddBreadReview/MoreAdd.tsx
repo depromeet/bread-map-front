@@ -43,6 +43,13 @@ const MoreAdd = ({
     ));
   };
 
+  const renderPrice = (): number | string => {
+    const price = breadsReview[currentProgress]?.price || singleReview?.price;
+    if (price === 0) return '';
+
+    return price as number;
+  };
+
   return (
     <>
       <BreadHeader>
@@ -65,6 +72,7 @@ const MoreAdd = ({
           <Text isRequired>메뉴명</Text>
           <Input
             name="name"
+            placeholder="메뉴명을 입력해주세요"
             value={breadsReview[currentProgress]?.name || singleReview?.name}
             onChange={(e) => editContent(e)}
           />
@@ -74,7 +82,8 @@ const MoreAdd = ({
           <Input
             name="price"
             type="number"
-            value={breadsReview[currentProgress]?.price || singleReview?.price}
+            placeholder="원"
+            value={renderPrice()}
             onChange={(e) => editContent(e)}
           />
         </Row>
@@ -91,6 +100,7 @@ const MoreAdd = ({
           <Text>한줄평</Text>
           <Input
             name="text"
+            placeholder="한줄평을 적어주세요"
             value={
               breadsReview[currentProgress]?.text || singleReview?.text || ''
             }
@@ -98,7 +108,7 @@ const MoreAdd = ({
           />
         </Row>
         <Row>
-          <Text>사진 업로드</Text>
+          <PhotoUploadText>사진 업로드</PhotoUploadText>
           <Scroll>
             <PhotoWrapper>
               <AddPhotoBtn onClick={addPhoto}>
@@ -126,13 +136,18 @@ const BreadHeader = styled.div`
 `;
 
 const Title = styled.h1`
+  font-weight: bold;
   margin: 0;
 `;
 
 const DeleteBtn = styled.button`
-  border: 1px solid #eee;
+  padding: 10px;
+  border: ${({ theme }) => ` 1px solid ${theme.color.gray300}`};
   border-radius: 0.5rem;
   background: none;
+  font-size: 0.87rem;
+  font-weight: bold;
+  color: ${({ theme }) => theme.color.gray700};
 `;
 
 const Content = styled.div``;
@@ -149,6 +164,9 @@ const Text = styled.span<{ isRequired?: boolean }>`
   position: relative;
   display: inline-block;
   margin-bottom: 0.75rem;
+  font-weight: bold;
+  font-size: 0.87rem;
+  color: ${({ theme }) => theme.color.gray800};
 
   &::before {
     content: '';
@@ -161,6 +179,14 @@ const Text = styled.span<{ isRequired?: boolean }>`
     border-radius: 50%;
     opacity: ${({ isRequired }) => (isRequired ? 1 : 0)};
   }
+`;
+
+const PhotoUploadText = styled.span`
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  font-weight: bold;
+  font-size: 1rem;
+  color: ${({ theme }) => theme.color.black};
 `;
 
 const StarArea = styled.div`
@@ -201,10 +227,10 @@ const Input = styled.input`
   -moz-border-radius: 0;
   border: none;
   padding: 0;
-  color: #757575;
+  color: ${({ theme }) => theme.color.gray600};
 
   &::placeholder {
-    color: #bdbdbd;
+    color: ${({ theme }) => theme.color.gray400};
   }
 `;
 

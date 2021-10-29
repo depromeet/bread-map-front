@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { CategoryInfo } from '@/constants/breadCategory';
 import { useCategories } from '@/components/common/CategoryList';
+import { Plus } from '@/components/icons';
 import MoreAdd from './MoreAdd';
 import StartAdd from './StartAdd';
 import CategorySelect from './CategorySelect';
@@ -170,10 +171,11 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
       )}
       {!isCategoryPage && (
         <BtnWrapper>
-          <Btn bg={'#FFF1EC'} onClick={nextProgress}>
-            + 다른 빵 리뷰 추가
-          </Btn>
-          <Btn bg={'#FF6E40'}>확인</Btn>
+          <MoreAddBtn onClick={nextProgress}>
+            <Plus />
+            <span>다른 빵 추가하기</span>
+          </MoreAddBtn>
+          <SubmitBtn>확인</SubmitBtn>
         </BtnWrapper>
       )}
     </>
@@ -186,15 +188,40 @@ const BtnWrapper = styled.div`
   width: 100%;
 `;
 
-const Btn = styled.button<{ bg: string }>`
+const MoreAddBtn = styled.button`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ theme }) => theme.color.white};
+  border: ${({ theme }) => `1px solid ${theme.color.gray400}`};
+  border-radius: 0.5rem;
+  padding: 0.85rem 0;
+  margin-bottom: 8px;
+
+  > span {
+    color: ${({ theme }) => theme.color.gray700};
+    font-weight: bold;
+    font-size: 0.87rem;
+    margin-left: 4px;
+  }
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+  path {
+    stroke: ${({ theme }) => theme.color.gray400};
+  }
+`;
+
+const SubmitBtn = styled.button`
   width: 100%;
   display: block;
-  background-color: ${({ bg }) => (bg ? `${bg}` : `white`)};
+  background-color: ${({ theme }) => theme.color.primary500};
   border-radius: 0.5rem;
   border: none;
   padding: 1rem 0;
-
-  &:first-of-type {
-    margin-bottom: 8px;
-  }
+  color: ${({ theme }) => theme.color.white};
+  font-size: 1rem;
 `;
