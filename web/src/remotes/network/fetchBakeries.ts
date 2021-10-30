@@ -29,7 +29,7 @@ export interface BakeryEntity {
   imgPath: string;
   latitude: number;
   longitude: number;
-  menuReviewList: MenuReviewEntity[],
+  menuReviewList: MenuReviewEntity[];
   menuReviewsCount: number;
   ratingCount: number;
 }

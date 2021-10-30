@@ -1,8 +1,21 @@
 import * as React from 'react';
 
 const Flag: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg width={24} height={24} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
-    <path d="M4.7 3v18" stroke="#222" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+  <svg
+    width={24}
+    height={24}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      d="M4.7 3v18"
+      stroke="#222"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
     <mask id="prefix__a" fill="#fff">
       <path d="M3.7 2.856c0-.752.8-1.232 1.483-.918 2.377 1.094 3.848 1.226 7.438 1.226 3.322 0 4.375-.46 6.219-1.066.933-.307 1.86.406 1.86 1.388v8.742c0 .638-.297 1.25-.862 1.546-1.59.832-4.017 1.426-7.217 1.426-3.398 0-5.907-.361-8.076-1.435-.537-.266-.845-.83-.845-1.43V2.857z" />
     </mask>

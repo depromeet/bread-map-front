@@ -4,18 +4,9 @@ import Link from 'next/link';
 import styled from '@emotion/styled';
 import { Home, User, Edit, Compass } from '@/components/icons';
 
-type NavigationRoute =
-  | 'home'
-  | 'search'
-  | 'edit'
-  | 'user'
+type NavigationRoute = 'home' | 'search' | 'edit' | 'user';
 
-const navigationIters: NavigationRoute[] = [
-  'home',
-  'search',
-  'edit',
-  'user',
-];
+const navigationIters: NavigationRoute[] = ['home', 'search', 'edit', 'user'];
 
 interface NavigationItem {
   path: string;
@@ -77,7 +68,7 @@ const Base = styled.footer`
   border-top: 1px solid ${(props) => props.theme.color.gray200};
 `;
 
-const NavigationLink = styled.a<{ isSelected: boolean; }>`
+const NavigationLink = styled.a<{ isSelected: boolean }>`
   height: 100%;
   flex: 1;
   display: flex;
@@ -86,7 +77,6 @@ const NavigationLink = styled.a<{ isSelected: boolean; }>`
 
   transition: color 225ms;
 
-  color: ${(props) => props.isSelected
-    ? props.theme.color.primary500
-    : props.theme.color.black};
+  color: ${(props) =>
+    props.isSelected ? props.theme.color.primary500 : props.theme.color.black};
 `;
