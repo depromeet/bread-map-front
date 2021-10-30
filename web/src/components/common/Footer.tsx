@@ -4,63 +4,89 @@ import Link from 'next/link';
 import styled from '@emotion/styled';
 import { Home, User, Edit, Compass } from '@/components/icons';
 
-const active = '#FF6E40';
+type NavigationRoute =
+  | 'home'
+  | 'search'
+  | 'edit'
+  | 'user'
+
+const navigationIters: NavigationRoute[] = [
+  'home',
+  'search',
+  'edit',
+  'user',
+];
+
+interface NavigationItem {
+  path: string;
+  Icon: React.FC<React.SVGProps<SVGSVGElement>>;
+}
+
+type NavigationMap = Record<NavigationRoute, NavigationItem>;
+
+const navigationMap: NavigationMap = {
+  home: {
+    path: '/daedong/map',
+    Icon: Home,
+  },
+  search: {
+    path: '/daedong#search',
+    Icon: Compass,
+  },
+  edit: {
+    path: '/daedong#edit',
+    Icon: Edit,
+  },
+  user: {
+    path: '/daedong/#user',
+    Icon: User,
+  },
+};
 
 const Footer: React.FC = () => {
   const router = useRouter();
 
-  const items = [
-    {
-      url: '/#home',
-      Icon: <Home stroke={router.asPath === '/#home' ? active : 'black'} />,
-    },
-    {
-      url: '/#compass',
-      Icon: (
-        <Compass stroke={router.asPath === '/#compass' ? active : 'black'} />
-      ),
-    },
-    {
-      url: '/#edit',
-      Icon: <Edit stroke={router.asPath === '/#edit' ? active : 'black'} />,
-    },
-    {
-      url: '/#user',
-      Icon: <User stroke={router.asPath === '/#user' ? active : 'black'} />,
-    },
-  ];
+  return (
+    <Base>
+      {navigationIters.map((iter) => {
+        const { path, Icon } = navigationMap[iter];
 
-  const mapToComponents = (data) => {
-    // TODO: type 선언
-    return data.map(({ url, Icon }, key) => (
-      <Link href={url} key={key} passHref={true}>
-        <IconBox>{Icon}</IconBox>
-      </Link>
-    ));
-  };
-
-  return <Base>{mapToComponents(items)}</Base>;
+        return (
+          <Link href={path} key={iter} passHref>
+            <NavigationLink isSelected={path === router.asPath}>
+              <Icon />
+            </NavigationLink>
+          </Link>
+        );
+      })}
+    </Base>
+  );
 };
 
 export default Footer;
 
 const Base = styled.footer`
-  width: 100%;
-  height: 3rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #fff;
+  z-index: 4;
   position: fixed;
-  left: 0;
   bottom: 0;
+  width: 100%;
+  height: ${(props) => props.theme.height.footer}px;
+  display: flex;
+  align-items: center;
+  background-color: ${(props) => props.theme.color.white};
+  border-top: 1px solid ${(props) => props.theme.color.gray200};
 `;
 
-const IconBox = styled.div`
+const NavigationLink = styled.a<{ isSelected: boolean; }>`
+  height: 100%;
+  flex: 1;
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin-left: 2rem;
-  margin-right: 2rem;
+  justify-content: center;
+
+  transition: color 225ms;
+
+  color: ${(props) => props.isSelected
+    ? props.theme.color.primary500
+    : props.theme.color.black};
 `;

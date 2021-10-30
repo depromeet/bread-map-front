@@ -1,16 +1,9 @@
 import * as React from 'react';
 
-export const Navigation: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg
-    width={15}
-    height={15}
-    viewBox="0 0 15 15"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    {...props}
-  >
+const Navigation: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 16 16" fill="none" {...props}>
     <path
-      d="M14.217 1L1 7.26l5.565 1.392 1.392 5.565L14.217 1z"
+      d="M14.667 2L2 8l5.333 1.333 1.334 5.334 6-12.667z"
       stroke="#000"
       strokeWidth={1.391}
       strokeLinecap="round"

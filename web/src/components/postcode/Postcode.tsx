@@ -1,9 +1,9 @@
 import React from 'react';
 import DaumPostcode from 'react-daum-postcode';
-import styled from '@emotion/styled';
+import type { Address } from 'react-daum-postcode';
 
 const Postcode: React.FC = (props) => {
-  const handleComplete = (data) => {
+  const handleComplete = (data: Address) => {
     let fullAddress = data.address;
     let extraAddress = '';
 

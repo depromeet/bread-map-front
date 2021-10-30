@@ -1,1 +1,1 @@
-export { default } from './postcode'; 
+export { default as Postcode } from './Postcode';

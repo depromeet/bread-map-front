@@ -1,4 +1,3 @@
-import { FooterHeight } from '@/styles/Media';
 import styled from '@emotion/styled';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import 'react-spring-bottom-sheet/dist/style.css';
@@ -13,8 +12,7 @@ const BottomSheetStyle = styled(BottomSheet)`
   --rsbs-overlay-rounded: 0.6rem !important;
 
   > div {
-    box-shadow: 0px -4px 4px ${({ theme }) => theme.color.gray300} !important;
-    bottom: ${FooterHeight}px !important;
+    bottom: ${(props) => props.theme.height.footer}px !important;
   }
 `;
 

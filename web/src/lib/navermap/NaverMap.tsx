@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Script from 'next/script';
-import { useIsomorphicLayoutEffect } from '@/lib/common';
+import { NoSSR, useIsomorphicLayoutEffect } from '@/lib/common';
 import NaverMapProvider, {
   useNaverMap,
   useSetNaverMap,
@@ -58,10 +58,12 @@ const NaverMap: React.FC<NaverMapProps> = ({
         src={`${SCRIPT_URL}?ncpClientId=${ncpClientId}`}
         strategy={'beforeInteractive'}
       />
-      <NaverMapProvider>
-        <MapInitialize {...rest}></MapInitialize>
-        {children}
-      </NaverMapProvider>
+      <NoSSR>
+        <NaverMapProvider>
+          <MapInitialize {...rest}></MapInitialize>
+          {children}
+        </NaverMapProvider>
+      </NoSSR>
       <BreadMarkerGlobalStyle />
     </>
   );
