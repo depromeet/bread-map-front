@@ -2,10 +2,12 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { CategoryInfo } from '@/constants/breadCategory';
 import { useCategories } from '@/components/common/CategoryList';
+import { Plus } from '@/components/icons';
 import MoreAdd from './MoreAdd';
 import StartAdd from './StartAdd';
 import CategorySelect from './CategorySelect';
 import { Review, BreadsReview, BreadsUpdate } from './index';
+import ReviewTab from './ReviewTab';
 
 const initialStar = [0, 0, 0, 0, 0];
 
@@ -24,6 +26,7 @@ interface MainAddProps {
 
 const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
   const [progress, setProgress] = React.useState(1);
+  const [currentProgress, setCurrentProgress] = React.useState(1);
   const [stars, setStars] = React.useState<number[]>(initialStar);
   const [singleReview, setSingleReview] =
     React.useState<Review>(initialSingleReview);
@@ -37,6 +40,11 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
     onCancelCategory,
     setIsOpenFirst,
   } = useCategories(isMultiSelect);
+
+  React.useEffect(() => {
+    setSingleReview(breadsReview[currentProgress]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentProgress]);
 
   const editScore = (clickedIndex: number) => {
     setStars((stars) =>
@@ -62,8 +70,22 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
     });
   };
 
+  const deleteSingleReview = (targetProgress: number) => {
+    let updatedReview: BreadsReview = {};
+    let i = 1;
+    for (const [key, value] of Object.entries(breadsReview)) {
+      if (targetProgress.toString() !== key) {
+        updatedReview[i] = value;
+        i++;
+      }
+    }
+
+    updateBreadsReview(updatedReview);
+    setProgress((prev) => prev - 1);
+  };
+
   React.useEffect(() => {
-    editCategory(selectedCategory[0]);
+    editCategory(selectedCategory[0] || null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCategory]);
 
@@ -78,7 +100,7 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
   React.useEffect(() => {
     updateBreadsReview({
       ...breadsReview,
-      [progress]: singleReview,
+      [currentProgress]: singleReview,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [singleReview]);
@@ -91,8 +113,15 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
 
   const nextProgress = () => {
     setProgress((prev) => prev + 1);
+    setCurrentProgress(progress + 1);
     initializeSingleReview();
     console.log('reviews', breadsReview);
+  };
+
+  const checkSelected = () => {
+    const category = breadsReview[currentProgress]?.category;
+    if (category === null) return null;
+    else return [category];
   };
 
   return (
@@ -101,11 +130,17 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
         <CategorySelect
           {...{
             setIsCategoryPage,
-            selectedCategory,
             onClickCategory,
             onCancelCategory,
             setIsOpenFirst,
           }}
+          selectedCategory={checkSelected()}
+        />
+      )}
+      {progress >= 2 && !isCategoryPage && (
+        <ReviewTab
+          length={Object.keys(breadsReview).length}
+          {...{ currentProgress, setCurrentProgress }}
         />
       )}
       {progress === 1 && !isCategoryPage && (
@@ -122,11 +157,13 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
       {progress >= 2 && !isCategoryPage && (
         <MoreAdd
           {...{
+            breadsReview,
             setIsCategoryPage,
             selectedCategory,
-            progress,
+            currentProgress,
             stars,
             singleReview,
+            deleteSingleReview,
             editScore,
             editContent,
           }}
@@ -134,10 +171,11 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
       )}
       {!isCategoryPage && (
         <BtnWrapper>
-          <Btn bg={'#FFF1EC'} onClick={nextProgress}>
-            + 다른 빵 리뷰 추가
-          </Btn>
-          <Btn bg={'#FF6E40'}>확인</Btn>
+          <MoreAddBtn onClick={nextProgress}>
+            <Plus />
+            <span>다른 빵 추가하기</span>
+          </MoreAddBtn>
+          <SubmitBtn>확인</SubmitBtn>
         </BtnWrapper>
       )}
     </>
@@ -150,15 +188,40 @@ const BtnWrapper = styled.div`
   width: 100%;
 `;
 
-const Btn = styled.button<{ bg: string }>`
+const MoreAddBtn = styled.button`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ theme }) => theme.color.white};
+  border: ${({ theme }) => `1px solid ${theme.color.gray400}`};
+  border-radius: 0.5rem;
+  padding: 0.85rem 0;
+  margin-bottom: 8px;
+
+  > span {
+    color: ${({ theme }) => theme.color.gray700};
+    font-weight: bold;
+    font-size: 0.87rem;
+    margin-left: 4px;
+  }
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+  path {
+    stroke: ${({ theme }) => theme.color.gray400};
+  }
+`;
+
+const SubmitBtn = styled.button`
   width: 100%;
   display: block;
-  background-color: ${({ bg }) => (bg ? `${bg}` : `white`)};
+  background-color: ${({ theme }) => theme.color.primary500};
   border-radius: 0.5rem;
   border: none;
   padding: 1rem 0;
-
-  &:first-of-type {
-    margin-bottom: 8px;
-  }
+  color: ${({ theme }) => theme.color.white};
+  font-size: 1rem;
 `;

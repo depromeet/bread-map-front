@@ -3,12 +3,13 @@ import styled from '@emotion/styled';
 import breadCategory, { CategoryInfo } from '@/constants/breadCategory';
 
 interface CategoriesProps {
-  selectedCategory: CategoryInfo[];
+  selectedCategory: CategoryInfo[] | null;
   onClickCategory: (category: CategoryInfo) => void;
 }
 
 const Categories = ({ selectedCategory, onClickCategory }: CategoriesProps) => {
   const isSelected = (id: number): boolean => {
+    if (selectedCategory === null) return false;
     return selectedCategory.some((s) => s.id === id);
   };
 
