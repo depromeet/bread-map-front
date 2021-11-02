@@ -2,26 +2,38 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { CategoryInfo } from '@/constants/breadCategory';
 import { ArrowDown, GrayStar, OrangeStar, Plus } from '@/components/icons';
+import { Review } from '.';
 
 interface StartAddProps {
   setIsCategoryPage: React.Dispatch<React.SetStateAction<boolean>>;
   selectedCategory: CategoryInfo[];
   stars: number[];
+  singleReview: Review;
   editScore: (clickedIndex: number) => void;
   editContent: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isSubmitted: boolean;
 }
 
 const StartAdd = ({
   setIsCategoryPage,
   selectedCategory,
   stars,
+  singleReview,
   editScore,
   editContent,
+  isSubmitted,
 }: StartAddProps) => {
   const fileRef = React.useRef<HTMLInputElement | null>(null);
   const addPhoto = () => {
     if (!fileRef.current) return;
     fileRef.current.click();
+  };
+
+  const renderPrice = (): number | string => {
+    const price = singleReview?.price;
+    if (price === 0) return '';
+
+    return price as number;
   };
 
   return (
@@ -40,14 +52,21 @@ const StartAdd = ({
             </SelectBreadBtn>
             <ArrowDown />
           </SelectArea>
+          {isSubmitted && selectedCategory.length < 1 && (
+            <AlertText>빵 종류를 선택해주세요.</AlertText>
+          )}
         </Row>
         <Row>
           <Text isRequired>메뉴명</Text>
           <Input
             name="name"
             placeholder="메뉴명을 입력해주세요"
+            value={singleReview?.name}
             onChange={(e) => editContent(e)}
           />
+          {isSubmitted && singleReview.name === '' && (
+            <AlertText>메뉴명을 입력해주세요.</AlertText>
+          )}
         </Row>
         <Row>
           <Text isRequired>가격</Text>
@@ -55,8 +74,12 @@ const StartAdd = ({
             name="price"
             type="number"
             placeholder="원"
+            value={renderPrice()}
             onChange={(e) => editContent(e)}
           />
+          {isSubmitted && singleReview.price === 0 && (
+            <AlertText>가격을 입력해주세요.</AlertText>
+          )}
         </Row>
         <Row>
           <Text>별점</Text>
@@ -228,4 +251,9 @@ const EmptyPhoto = styled.div`
   border-radius: 0.5rem;
   background: #eeeeee;
   margin-right: 0.75rem;
+`;
+
+const AlertText = styled.p`
+  font-size: 0.75rem;
+  color: ${({ theme }) => theme.color.primary500};
 `;

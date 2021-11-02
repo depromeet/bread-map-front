@@ -40,6 +40,12 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
     onCancelCategory,
     setIsOpenFirst,
   } = useCategories(isMultiSelect);
+  const [isSubmitted, setIsSubmitted] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsSubmitted(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentProgress]);
 
   React.useEffect(() => {
     setSingleReview(breadsReview[currentProgress]);
@@ -111,7 +117,17 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
     initializeCategories();
   };
 
+  const checkEmptySection = (): boolean => {
+    if (singleReview.category === null) return true;
+    else if (singleReview.name === '') return true;
+    else if (singleReview.price === 0) return true;
+    else return false;
+  };
+
   const nextProgress = () => {
+    setIsSubmitted(true);
+    if (checkEmptySection()) return;
+
     setProgress((prev) => prev + 1);
     setCurrentProgress(progress + 1);
     initializeSingleReview();
@@ -149,8 +165,10 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
             setIsCategoryPage,
             selectedCategory,
             stars,
+            singleReview,
             editScore,
             editContent,
+            isSubmitted,
           }}
         />
       )}
@@ -166,6 +184,7 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
             deleteSingleReview,
             editScore,
             editContent,
+            isSubmitted,
           }}
         />
       )}
