@@ -57,5 +57,5 @@ export const DarkMode: Theme = {
   height: {
     footer: 52, // 52px, 3.25rem
     bottomSheetHeader: 24, // 48px, 3rem;
-  }
+  },
 };
