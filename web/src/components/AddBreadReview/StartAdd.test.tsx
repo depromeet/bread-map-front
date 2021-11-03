@@ -31,7 +31,7 @@ it('AddBreadReview/StartAdd', () => {
     editScore: jest.fn(),
     editContent: jest.fn(),
     isSubmitted: false,
-    setIsSubmitted: jest.fn(),
+    toastStatus: false,
   };
 
   render(<StartAdd {...props} />);

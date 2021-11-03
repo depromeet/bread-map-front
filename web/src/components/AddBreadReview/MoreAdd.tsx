@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useRef } from 'react';
 import styled from '@emotion/styled';
 import { CategoryInfo } from '@/constants/breadCategory';
+import { Toast } from '@/components/common/ToastPopup';
 import { ArrowDown, GrayStar, OrangeStar, Plus } from '@/components/icons';
 import { BreadsReview, Review } from '.';
 
@@ -15,6 +16,7 @@ interface MoreAddProps {
   editScore: (clickedIndex: number) => void;
   editContent: (e: ChangeEvent<HTMLInputElement>) => void;
   isSubmitted: boolean;
+  toastStatus: boolean;
 }
 
 const MoreAdd = ({
@@ -28,6 +30,7 @@ const MoreAdd = ({
   editScore,
   editContent,
   isSubmitted,
+  toastStatus,
 }: MoreAddProps) => {
   const currentStar = breadsReview[currentProgress]?.star || 0;
 
@@ -133,6 +136,7 @@ const MoreAdd = ({
           </Scroll>
         </Row>
       </Content>
+      {toastStatus && <Toast message={'필수정보를 입력해주세요 💪'} />}
     </>
   );
 };

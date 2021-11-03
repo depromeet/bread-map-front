@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { CategoryInfo } from '@/constants/breadCategory';
+import { Toast } from '@/components/common/ToastPopup';
 import { ArrowDown, GrayStar, OrangeStar, Plus } from '@/components/icons';
 import { Review } from '.';
 
@@ -12,6 +13,7 @@ interface StartAddProps {
   editScore: (clickedIndex: number) => void;
   editContent: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isSubmitted: boolean;
+  toastStatus: boolean;
 }
 
 const StartAdd = ({
@@ -22,6 +24,7 @@ const StartAdd = ({
   editScore,
   editContent,
   isSubmitted,
+  toastStatus,
 }: StartAddProps) => {
   const fileRef = React.useRef<HTMLInputElement | null>(null);
   const addPhoto = () => {
@@ -114,6 +117,7 @@ const StartAdd = ({
           </Scroll>
         </Row>
       </Content>
+      {toastStatus && <Toast message={'필수정보를 입력해주세요 💪'} />}
     </>
   );
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { CategoryInfo } from '@/constants/breadCategory';
 import { useCategories } from '@/components/common/CategoryList';
+import { useToast } from '@/components/common/ToastPopup';
 import { Plus } from '@/components/icons';
 import MoreAdd from './MoreAdd';
 import StartAdd from './StartAdd';
@@ -41,6 +42,7 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
     setIsOpenFirst,
   } = useCategories(isMultiSelect);
   const [isSubmitted, setIsSubmitted] = React.useState(false);
+  const { toastStatus, openToast } = useToast();
 
   React.useEffect(() => {
     setIsSubmitted(false);
@@ -126,7 +128,7 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
 
   const nextProgress = () => {
     setIsSubmitted(true);
-    if (checkEmptySection()) return;
+    if (checkEmptySection()) return openToast();
 
     setProgress((prev) => prev + 1);
     setCurrentProgress(progress + 1);
@@ -169,6 +171,7 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
             editScore,
             editContent,
             isSubmitted,
+            toastStatus,
           }}
         />
       )}
@@ -185,6 +188,7 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
             editScore,
             editContent,
             isSubmitted,
+            toastStatus,
           }}
         />
       )}
