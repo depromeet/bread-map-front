@@ -89,6 +89,7 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
     }
 
     updateBreadsReview(updatedReview);
+    setSingleReview(initialSingleReview);
     setProgress((prev) => prev - 1);
   };
 
@@ -120,15 +121,18 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
   };
 
   const checkEmptySection = (): boolean => {
-    if (singleReview.category === null) return true;
-    else if (singleReview.name === '') return true;
-    else if (singleReview.price === 0) return true;
+    if (breadsReview[progress].category === null) return true;
+    else if (breadsReview[progress].name === '') return true;
+    else if (breadsReview[progress].price === 0) return true;
     else return false;
   };
 
   const nextProgress = () => {
     setIsSubmitted(true);
-    if (checkEmptySection()) return openToast();
+    if (checkEmptySection()) {
+      setCurrentProgress(progress);
+      return openToast();
+    }
 
     setProgress((prev) => prev + 1);
     setCurrentProgress(progress + 1);
