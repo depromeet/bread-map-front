@@ -57,7 +57,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["next", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:11.1.2"],
             ["prettier", "npm:2.4.1"],
             ["react", "npm:17.0.2"],
-            ["react-daum-postcode", "npm:3.0.0"],
             ["react-dom", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:17.0.2"],
             ["react-spring-bottom-sheet", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:3.4.0"],
             ["react-test-renderer", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:17.0.2"],
@@ -8091,17 +8090,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
-      ["react-daum-postcode", [
-        ["npm:3.0.0", {
-          "packageLocation": "./.yarn/cache/react-daum-postcode-npm-3.0.0-5397f1a703-cae14f6f22.zip/node_modules/react-daum-postcode/",
-          "packageDependencies": [
-            ["react-daum-postcode", "npm:3.0.0"],
-            ["prop-types", "npm:15.7.2"],
-            ["react", "npm:17.0.2"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
       ["react-dom", [
         ["npm:17.0.2", {
           "packageLocation": "./.yarn/cache/react-dom-npm-17.0.2-f551215af1-1c1eaa3bca.zip/node_modules/react-dom/",
@@ -9825,7 +9813,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["next", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:11.1.2"],
             ["prettier", "npm:2.4.1"],
             ["react", "npm:17.0.2"],
-            ["react-daum-postcode", "npm:3.0.0"],
             ["react-dom", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:17.0.2"],
             ["react-spring-bottom-sheet", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:3.4.0"],
             ["react-test-renderer", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:17.0.2"],
