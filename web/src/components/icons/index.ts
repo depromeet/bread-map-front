@@ -31,3 +31,4 @@ export { default as CircleReview } from './CircleReview';
 export { default as CircleWent } from './CircleWent';
 export { default as CircleStar } from './CircleStar';
 export { default as Quote } from './Quote';
+export { default as Setting } from './Setting';
