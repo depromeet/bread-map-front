@@ -24,6 +24,10 @@ export const LightMode: Theme = {
     primary500: '#ff6e40',
     overLay: 'rgba(0, 0, 0, 60%)',
   },
+  height: {
+    footer: 52, // 52px, 3.25rem;
+    bottomSheetHeader: 48, // 48px, 3rem;
+  },
 };
 
 export const DarkMode: Theme = {
@@ -49,5 +53,9 @@ export const DarkMode: Theme = {
     primary400: '#ff8b66',
     primary500: '#ff6e40',
     overLay: 'rgba(0, 0, 0, 60%)',
+  },
+  height: {
+    footer: 52, // 52px, 3.25rem
+    bottomSheetHeader: 24, // 48px, 3rem;
   },
 };

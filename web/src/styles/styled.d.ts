@@ -25,5 +25,9 @@ declare module '@emotion/react' {
       primary500: string;
       overLay: string;
     };
+    height: {
+      footer: number;
+      bottomSheetHeader: number;
+    };
   }
 }

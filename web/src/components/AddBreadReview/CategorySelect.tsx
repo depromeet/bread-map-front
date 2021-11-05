@@ -5,7 +5,7 @@ import { Categories } from '@/components/common/CategoryList';
 
 interface CategorySelectProps {
   setIsCategoryPage: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedCategory: CategoryInfo[];
+  selectedCategory: CategoryInfo[] | null;
   onClickCategory: (categoryInfo: CategoryInfo) => void;
   onCancelCategory: () => void;
   setIsOpenFirst: React.Dispatch<React.SetStateAction<boolean>>;

@@ -2,47 +2,68 @@ import React, { ChangeEvent, useRef } from 'react';
 import styled from '@emotion/styled';
 import { CategoryInfo } from '@/constants/breadCategory';
 import { ArrowDown, GrayStar, OrangeStar, Plus } from '@/components/icons';
-import { Review } from './index';
+import { BreadsReview, Review } from '.';
 
 interface MoreAddProps {
+  breadsReview: BreadsReview;
   setIsCategoryPage: React.Dispatch<React.SetStateAction<boolean>>;
   selectedCategory: CategoryInfo[];
-  progress: number;
+  currentProgress: number;
   stars: number[];
   singleReview: Review | null;
+  deleteSingleReview: (targetProgress: number) => void;
   editScore: (clickedIndex: number) => void;
   editContent: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const MoreAdd = ({
+  breadsReview,
   setIsCategoryPage,
   selectedCategory,
-  progress,
+  currentProgress,
   stars,
   singleReview,
+  deleteSingleReview,
   editScore,
   editContent,
 }: MoreAddProps) => {
+  const currentStar = breadsReview[currentProgress]?.star || 0;
+
   const fileRef = useRef<HTMLInputElement | null>(null);
   const addPhoto = () => {
     if (!fileRef.current) return;
     fileRef.current.click();
   };
 
+  const renderStar = (stars: number[]): JSX.Element[] => {
+    return stars.map((star, i) => (
+      <StarBtn key={i} onClick={() => editScore(i)}>
+        {star === 1 ? <OrangeStar /> : <GrayStar />}
+      </StarBtn>
+    ));
+  };
+
+  const renderPrice = (): number | string => {
+    const price = breadsReview[currentProgress]?.price || singleReview?.price;
+    if (price === 0) return '';
+
+    return price as number;
+  };
+
   return (
     <>
       <BreadHeader>
-        <Title>{progress}번째 빵</Title>
-        <DeleteBtn>삭제</DeleteBtn>
+        <Title>{currentProgress}번째 빵</Title>
+        <DeleteBtn onClick={() => deleteSingleReview(currentProgress)}>
+          삭제
+        </DeleteBtn>
       </BreadHeader>
       <Content>
         <Row>
           <Text isRequired>빵 종류</Text>
           <SelectArea>
             <SelectBreadBtn onClick={() => setIsCategoryPage(true)}>
-              {selectedCategory.length < 1
-                ? '빵 종류 선택'
-                : selectedCategory[0]?.text}
+              {breadsReview[currentProgress]?.category?.text || '빵 종류 선택'}
             </SelectBreadBtn>
             <ArrowDown />
           </SelectArea>
@@ -51,7 +72,8 @@ const MoreAdd = ({
           <Text isRequired>메뉴명</Text>
           <Input
             name="name"
-            value={singleReview?.name}
+            placeholder="메뉴명을 입력해주세요"
+            value={breadsReview[currentProgress]?.name || singleReview?.name}
             onChange={(e) => editContent(e)}
           />
         </Row>
@@ -60,30 +82,33 @@ const MoreAdd = ({
           <Input
             name="price"
             type="number"
-            value={singleReview?.price}
+            placeholder="원"
+            value={renderPrice()}
             onChange={(e) => editContent(e)}
           />
         </Row>
         <Row>
           <Text>별점</Text>
           <StarArea>
-            {stars.map((star, i) => (
-              <StarBtn key={i} onClick={() => editScore(i)}>
-                {star === 1 ? <OrangeStar /> : <GrayStar />}
-              </StarBtn>
-            ))}
+            {renderStar([
+              ...Array(currentStar).fill(1),
+              ...Array(5 - currentStar).fill(0),
+            ])}
           </StarArea>
         </Row>
         <Row>
           <Text>한줄평</Text>
           <Input
             name="text"
-            value={singleReview?.text}
+            placeholder="한줄평을 적어주세요"
+            value={
+              breadsReview[currentProgress]?.text || singleReview?.text || ''
+            }
             onChange={(e) => editContent(e)}
           />
         </Row>
         <Row>
-          <Text>사진 업로드</Text>
+          <PhotoUploadText>사진 업로드</PhotoUploadText>
           <Scroll>
             <PhotoWrapper>
               <AddPhotoBtn onClick={addPhoto}>
@@ -111,13 +136,18 @@ const BreadHeader = styled.div`
 `;
 
 const Title = styled.h1`
+  font-weight: bold;
   margin: 0;
 `;
 
 const DeleteBtn = styled.button`
-  border: 1px solid #eee;
+  padding: 10px;
+  border: ${({ theme }) => ` 1px solid ${theme.color.gray300}`};
   border-radius: 0.5rem;
   background: none;
+  font-size: 0.87rem;
+  font-weight: bold;
+  color: ${({ theme }) => theme.color.gray700};
 `;
 
 const Content = styled.div``;
@@ -134,6 +164,9 @@ const Text = styled.span<{ isRequired?: boolean }>`
   position: relative;
   display: inline-block;
   margin-bottom: 0.75rem;
+  font-weight: bold;
+  font-size: 0.87rem;
+  color: ${({ theme }) => theme.color.gray800};
 
   &::before {
     content: '';
@@ -146,6 +179,14 @@ const Text = styled.span<{ isRequired?: boolean }>`
     border-radius: 50%;
     opacity: ${({ isRequired }) => (isRequired ? 1 : 0)};
   }
+`;
+
+const PhotoUploadText = styled.span`
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  font-weight: bold;
+  font-size: 1rem;
+  color: ${({ theme }) => theme.color.black};
 `;
 
 const StarArea = styled.div`
@@ -186,10 +227,10 @@ const Input = styled.input`
   -moz-border-radius: 0;
   border: none;
   padding: 0;
-  color: #757575;
+  color: ${({ theme }) => theme.color.gray600};
 
   &::placeholder {
-    color: #bdbdbd;
+    color: ${({ theme }) => theme.color.gray400};
   }
 `;
 

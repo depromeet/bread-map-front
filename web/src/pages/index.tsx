@@ -1,16 +1,15 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { Footer } from '@/components/common';
 import {
   Card,
   Container,
   Description,
   Grid,
   Main,
-  // Footer,
   Title,
 } from '@/components/home';
 import { useThemeToggle } from '@/styles/BreadMapTheming';
-import Footer from 'components/common/Footer';
 
 interface GridItem {
   href: string;

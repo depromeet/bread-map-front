@@ -3,7 +3,6 @@ export { default as Home } from './Home';
 export { default as User } from './User';
 export { default as Compass } from './Compass';
 export { default as Edit } from './Edit';
-
 export { default as Bread } from './Bread';
 export { default as Check } from './Check';
 export { default as Flag } from './Flag';
@@ -28,3 +27,7 @@ export { default as CategoryPieTart } from './CategoryPieTart';
 export { default as CategorySnack } from './CategorySnack';
 export { default as CategoryVeganQuito } from './CategoryVeganQuito';
 export { default as CategoryWhiteBread } from './CategoryWhiteBread';
+export { default as CircleReview } from './CircleReview';
+export { default as CircleWent } from './CircleWent';
+export { default as CircleStar } from './CircleStar';
+export { default as Quote } from './Quote';
