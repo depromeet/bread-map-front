@@ -34,6 +34,8 @@ it('AddBreadReview/MoreAdd', () => {
     deleteSingleReview: jest.fn(),
     editScore: jest.fn(),
     editContent: jest.fn(),
+    isSubmitted: false,
+    toastStatus: false,
   };
 
   render(<MoreAdd {...props} />);

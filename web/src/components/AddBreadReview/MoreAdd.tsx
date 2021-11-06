@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useRef } from 'react';
 import styled from '@emotion/styled';
 import { CategoryInfo } from '@/constants/breadCategory';
+import { Toast } from '@/components/common/ToastPopup';
 import { ArrowDown, GrayStar, OrangeStar, Plus } from '@/components/icons';
 import { BreadsReview, Review } from '.';
 
@@ -10,10 +11,12 @@ interface MoreAddProps {
   selectedCategory: CategoryInfo[];
   currentProgress: number;
   stars: number[];
-  singleReview: Review | null;
+  singleReview: Review;
   deleteSingleReview: (targetProgress: number) => void;
   editScore: (clickedIndex: number) => void;
   editContent: (e: ChangeEvent<HTMLInputElement>) => void;
+  isSubmitted: boolean;
+  toastStatus: boolean;
 }
 
 const MoreAdd = ({
@@ -26,6 +29,8 @@ const MoreAdd = ({
   deleteSingleReview,
   editScore,
   editContent,
+  isSubmitted,
+  toastStatus,
 }: MoreAddProps) => {
   const currentStar = breadsReview[currentProgress]?.star || 0;
 
@@ -67,6 +72,9 @@ const MoreAdd = ({
             </SelectBreadBtn>
             <ArrowDown />
           </SelectArea>
+          {isSubmitted && singleReview.category === null && (
+            <AlertText>빵 종류를 선택해주세요.</AlertText>
+          )}
         </Row>
         <Row>
           <Text isRequired>메뉴명</Text>
@@ -76,6 +84,9 @@ const MoreAdd = ({
             value={breadsReview[currentProgress]?.name || singleReview?.name}
             onChange={(e) => editContent(e)}
           />
+          {isSubmitted && singleReview.name === '' && (
+            <AlertText>메뉴명을 입력해주세요.</AlertText>
+          )}
         </Row>
         <Row>
           <Text isRequired>가격</Text>
@@ -86,6 +97,9 @@ const MoreAdd = ({
             value={renderPrice()}
             onChange={(e) => editContent(e)}
           />
+          {isSubmitted && singleReview.price === 0 && (
+            <AlertText>가격을 입력해주세요.</AlertText>
+          )}
         </Row>
         <Row>
           <Text>별점</Text>
@@ -122,6 +136,7 @@ const MoreAdd = ({
           </Scroll>
         </Row>
       </Content>
+      {toastStatus && <Toast message={'필수정보를 입력해주세요 💪'} />}
     </>
   );
 };
@@ -272,4 +287,11 @@ const EmptyPhoto = styled.div`
   border-radius: 0.5rem;
   background: #eeeeee;
   margin-right: 0.75rem;
+`;
+
+const AlertText = styled.p`
+  font-size: 0.75rem;
+  color: ${({ theme }) => theme.color.primary500};
+  transition: 1s;
+  transition-delay: 1s;
 `;
