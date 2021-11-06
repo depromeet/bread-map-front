@@ -4,3 +4,4 @@ export { default as NaverMapMarker } from './NaverMapMarker';
 export { default as NaverMapProvider } from './NaverMapProvider';
 export { default as useNaverMapGoToMyPosition } from './useNaverMapGoToMyPosition';
 export { useNaverMap } from './NaverMapProvider';
+export type { Modifier as BreadMarkerModifier } from './BreadMarker';

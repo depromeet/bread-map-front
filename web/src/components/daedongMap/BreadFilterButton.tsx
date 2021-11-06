@@ -1,12 +1,22 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import { Bread } from '@/components/icons';
+import BreadFilterSelect from './BreadFilterSelect';
 
 const BreadFilterButton: React.FC = () => {
+  const [open, setOpen] = React.useState<boolean>(false);
+  const toggleOpen = () => setOpen((prev) => !prev);
+
   return (
-    <Button>
-      <Bread />
-    </Button>
+    <>
+      <Button onClick={toggleOpen}>
+        <Bread />
+      </Button>
+      <BreadFilterSelect
+        open={open}
+        onClose={toggleOpen}
+      />
+    </>
   );
 };
 

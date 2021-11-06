@@ -98,13 +98,11 @@ const sizeRecord: Record<Size, MarkerSize> = {
   large: LARGE_MARKER_SIZE,
 };
 
-interface Modifier {
+export interface BreadMarkerModifier {
   modifySize: (size: Size) => void;
   modifyType: (type: Flag) => void;
   marker: naver.maps.Marker;
 }
-
-type BreadMarkerClickHandler = (modifier: Modifier) => void;
 
 interface BreadMarkerProps {
   latitude: number;
@@ -112,11 +110,11 @@ interface BreadMarkerProps {
   defaultType?: Flag;
   defaultBread?: Bread;
   defaultSize?: Size;
-  onClick?: BreadMarkerClickHandler;
+  onClick?: () => void;
 }
 
 const BreadMarker = React.forwardRef<
-  naver.maps.Marker | null,
+  BreadMarkerModifier | null,
   BreadMarkerProps
 >(
   (
@@ -152,10 +150,12 @@ const BreadMarker = React.forwardRef<
       markerEl.setAttribute('data-type', nextType);
     }, []);
 
+    const modifierRef = React.useRef<BreadMarkerModifier | null>(null);
+
     React.useImperativeHandle<
-      naver.maps.Marker | null,
-      naver.maps.Marker | null
-    >(ref, () => markerRef.current);
+      BreadMarkerModifier | null,
+      BreadMarkerModifier | null
+    >(ref, () => modifierRef.current);
 
     const content = wrapMarker(
       breadRecord[defaultBread],
@@ -184,16 +184,17 @@ const BreadMarker = React.forwardRef<
       let listener: naver.maps.MapEventListener | undefined = undefined;
 
       if (onClick) {
-        listener = sdk.Event.addListener(marker, 'click', () => {
-          onClick({
-            modifySize: modifyMarkerSize,
-            modifyType: modifyMarkerType,
-            marker,
-          });
-        });
+        listener = sdk.Event.addListener(marker, 'click', onClick);
       }
 
       markerRef.current = marker;
+
+      modifierRef.current = {
+        modifySize: modifyMarkerSize,
+        modifyType: modifyMarkerType,
+        marker,
+      };
+      console.log(modifierRef.current);
 
       return () => {
         if (listener !== undefined) {
@@ -202,6 +203,7 @@ const BreadMarker = React.forwardRef<
 
         markerRef.current?.setMap(null);
         markerRef.current = null;
+        modifierRef.current = null;
       };
     }, [
       naverMap,

@@ -54,10 +54,10 @@ const initHeader = (init?: HeadersInit): HeadersInit | undefined => {
 };
 
 export default function fetchBase(
-  info: RequestInfo,
+  url: string,
   init?: RequestInit | undefined
 ): Promise<Response> {
   const headers = initHeader(init?.headers);
 
-  return fetch(info, { ...init, headers });
+  return fetch(`${process.env.NEXT_PUBLIC_BASE_URI}${url}`, { ...init, headers });
 }

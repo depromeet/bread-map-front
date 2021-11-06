@@ -8,22 +8,36 @@ const DEFAULT_POSITION = {
   lng: 126.9783882,
 };
 
-const CurrentPositionButton: React.FC = () => {
-  const naverMap = useNaverMap();
+const CurrentPositionButton = React.forwardRef<
+  HTMLButtonElement | null,
+  {}
+>(
+  (_, ref) => {
+    const naverMap = useNaverMap();
 
-  const handleClick = () => {
-    if (naverMap === undefined) return;
+    const buttonRef = React.useRef<HTMLButtonElement | null>(null);
 
-    naverMap.setCenter(DEFAULT_POSITION);
-  };
+    React.useImperativeHandle<
+      HTMLButtonElement | null,
+      HTMLButtonElement | null
+    >(ref, () => buttonRef.current);
 
-  return (
-    <Button onClick={handleClick}>
-      <Navigation width={16} height={16} />
-      <span>내 위치</span>
-    </Button>
-  );
-};
+    const handleClick = () => {
+      if (naverMap === undefined) return;
+
+      naverMap.setCenter(DEFAULT_POSITION);
+    };
+
+    return (
+      <Button onClick={handleClick} ref={buttonRef}>
+        <Navigation width={16} height={16} />
+        <span>내 위치</span>
+      </Button>
+    );
+  }
+);
+
+CurrentPositionButton.displayName = 'CurrentPositionButton';
 
 export default CurrentPositionButton;
 
