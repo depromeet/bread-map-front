@@ -5208,6 +5208,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"keen-slider@npm:^5.5.1":
+  version: 5.5.1
+  resolution: "keen-slider@npm:5.5.1"
+  checksum: 478838457739dca7cb238d1183552abe6c84ca36811a3a5d515fc2f57edacbe035557fc0a50b3e13a66257c8432b5bb769ff524511a5d643d83fb381ec90e82f
+  languageName: node
+  linkType: hard
+
 "kleur@npm:^3.0.3":
   version: 3.0.3
   resolution: "kleur@npm:3.0.3"
@@ -8044,6 +8051,7 @@ typescript@4.4.3:
     identity-obj-proxy: ^3.0.0
     jest: ^27.2.0
     jotai: ^1.4.2
+    keen-slider: ^5.5.1
     next: 11.1.2
     prettier: ^2.4.1
     react: 17.0.2

@@ -19,6 +19,7 @@
     "@react-spring/web": "^9.3.0",
     "@use-gesture/react": "^10.1.1",
     "jotai": "^1.4.2",
+    "keen-slider": "^5.5.1",
     "next": "11.1.2",
     "react": "17.0.2",
     "react-daum-postcode": "^3.0.0",
