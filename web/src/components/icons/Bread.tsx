@@ -9,6 +9,7 @@ const Bread: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
+    <title>Bread</title>
     <path
       fillRule="evenodd"
       clipRule="evenodd"
