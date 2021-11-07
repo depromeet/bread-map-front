@@ -1,22 +1,13 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import MapButton from './MapButton';
-import { Flag, Bread } from '@/components/icons';
-import { useAtom } from 'jotai';
-import { breadMapCategorySlideAtom } from '@/store';
+import { Flag } from '@/components/icons';
+import CategoryButton from './CategoryButton';
 
 const SideButtons = () => {
-  const [_, setSideOpen] = useAtom(breadMapCategorySlideAtom);
-
   return (
     <Container>
-      <MapButton
-        onClick={() => {
-          setSideOpen(true);
-        }}
-      >
-        <Bread />
-      </MapButton>
+      <CategoryButton />
       <MapButton>
         <Flag />
       </MapButton>

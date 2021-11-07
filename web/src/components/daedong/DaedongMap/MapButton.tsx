@@ -24,4 +24,30 @@ const Button = styled.button`
     content: '';
     padding-bottom: 100%;
   }
+
+  &.black {
+    position: relative;
+    background: ${({ theme }) => theme.color.black};
+    color: ${({ theme }) => theme.color.white};
+
+    svg.white {
+      fill: ${({ theme }) => theme.color.white};
+      path {
+        fill: ${({ theme }) => theme.color.white};
+      }
+    }
+
+    &::before {
+      content: attr(data-count);
+      border-radius: 9999px;
+      font-size: 12px;
+      padding: 2px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      background-color: ${({ theme }) => theme.color.primary500};
+    }
+  }
 `;
