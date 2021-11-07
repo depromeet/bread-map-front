@@ -32,7 +32,11 @@ const Search = () => {
 
 export default Search;
 
-const Base = styled.div``;
+const Base = styled.div`
+  height: calc(100vh - ${({ theme }) => theme.height.footer}px);
+  display: flex;
+  flex-direction: column;
+`;
 
 const Blank = styled.div`
   width: 24px;
@@ -53,7 +57,7 @@ const Layout = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  height: 100%;
 `;
 
 const Content = styled.div`
