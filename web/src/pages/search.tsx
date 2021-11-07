@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Setting, Construction } from '@/components/icons';
-import { Footer } from '@/components/common';
 
 const Search = () => {
   return (
@@ -25,7 +24,6 @@ const Search = () => {
           </Description>
         </Content>
       </Layout>
-      <Footer />
     </Base>
   );
 };
