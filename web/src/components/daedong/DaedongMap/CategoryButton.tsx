@@ -11,20 +11,17 @@ import {
 const CategoryButton = () => {
   const [_, setSideOpen] = useAtom(breadMapCategorySlideAtom);
   const [mapCategories] = useAtom(breadMapSelectedCategotyItem);
+  const categoryLength = mapCategories.length;
 
   return (
     <MapButton
       onClick={() => {
         setSideOpen(true);
       }}
-      className={mapCategories.length > 0 ? 'black' : ''}
-			data-count={mapCategories.length}
+      className={categoryLength > 0 ? 'black' : ''}
+      data-count={categoryLength}
     >
-      {mapCategories.length > 0 ? (
-        <Bread className={mapCategories.length > 0 ? 'white' : ''} />
-      ) : (
-        <Bread />
-      )}
+      <Bread className={categoryLength > 0 ? 'white' : ''} />
     </MapButton>
   );
 };
