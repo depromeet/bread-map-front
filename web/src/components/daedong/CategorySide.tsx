@@ -1,79 +1,41 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { LeftArrow } from '@/components/icons';
-import CategoryCard from './CategoryCard';
+import { ArrowPrev, Close } from '@/components/icons';
 import { useAtom } from 'jotai';
-import { breadMapCategorySlideAtom } from '@/store';
-
-const MOCK_DATA = [
-  {
-    name: '식사빵',
-    checked: false,
-  },
-  {
-    name: '비건/키토 베이킹',
-    checked: false,
-  },
-  {
-    name: '구움과자류',
-    checked: false,
-  },
-  {
-    name: '파이/타르트',
-    checked: false,
-  },
-  {
-    name: '케이크',
-    checked: false,
-  },
-  {
-    name: '크림빵',
-    checked: false,
-  },
-  {
-    name: '도넛',
-    checked: false,
-  },
-  {
-    name: '추억의 빵',
-    checked: false,
-  },
-  {
-    name: '과자류',
-    checked: false,
-  },
-  {
-    name: '기타',
-    checked: false,
-  },
-  {
-    name: '쿠키',
-    checked: false,
-  },
-  {
-    name: '크로와상',
-    checked: false,
-  },
-];
+import {
+  breadMapCategorySlideAtom,
+  breadMapSelectedCategotyItem,
+} from '@/store';
+import { Categories, useCategories } from '../common/CategoryList';
 
 const CategorySide = () => {
+  const [mapCategories, setMapCategories] = useAtom(
+    breadMapSelectedCategotyItem
+  );
+  const { selectedCategory, onClickCategory } = useCategories(
+    true,
+    mapCategories
+  );
   const [isOpen, setIsOpen] = useAtom(breadMapCategorySlideAtom);
-
-  const Cards = MOCK_DATA.map((category, idx) => {
-    return (
-      <CategoryCard key={idx} name={category.name} checked={category.checked} />
-    );
-  });
 
   return (
     <Container className={isOpen ? 'open' : ''}>
       <Header>
-        <LeftArrow
+        <ArrowPrev
           onClick={() => {
+            setMapCategories(selectedCategory);
             setIsOpen(false);
           }}
         />
         <div>빵종류 모아보기</div>
+        <Close
+          width={18}
+          height={18}
+          onClick={() => {
+            setMapCategories(selectedCategory);
+            setIsOpen(false);
+          }}
+        />
       </Header>
       <Contents>
         <ContentsTitle>
@@ -81,7 +43,11 @@ const CategorySide = () => {
           <br />
           주종목이 있죠!
         </ContentsTitle>
-        <CardsWrapper>{Cards}</CardsWrapper>
+
+        <Categories
+          selectedCategory={selectedCategory}
+          onClickCategory={onClickCategory}
+        />
       </Contents>
     </Container>
   );
@@ -120,21 +86,23 @@ const Header = styled.div`
 
   svg {
     cursor: pointer;
+
+    &:first-child {
+      justify-self: flex-start;
+    }
+    &:last-child {
+      justify-self: flex-end;
+    }
   }
 `;
 
-const Contents = styled.div``;
+const Contents = styled.div`
+  overflow: scroll;
+`;
 
 const ContentsTitle = styled.div`
   font-size: 1.3rem;
   margin: 1em 0;
   font-weight: 700;
   line-height: 1.3;
-`;
-
-const CardsWrapper = styled.div`
-  display: grid;
-  overflow: scroll;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 0.5em;
 `;

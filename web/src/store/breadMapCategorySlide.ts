@@ -1,7 +1,5 @@
 import { atom } from 'jotai';
 
-type BreadMapCategorySlide = boolean;
-
-const breadMapCategorySlideAtom = atom<BreadMapCategorySlide>(false);
+const breadMapCategorySlideAtom = atom<boolean>(false);
 
 export default breadMapCategorySlideAtom;
