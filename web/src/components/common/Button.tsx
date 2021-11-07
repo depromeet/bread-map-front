@@ -44,9 +44,9 @@ const defaultButtonStyle = css`
     font-size: 12px;
   }
   &[data-rounded='true'] {
-    border-radius: 1.5rem;
+    border-radius: 20px;
   }
-  border-radius: '.4rem';
+  border-radius: 6px;
   font-weight: 700;
   width: 100%;
   padding: 0 15px;
