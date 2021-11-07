@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { LeftArrow } from '@/components/icons';
 import CategoryCard from './CategoryCard';
 import { useAtom } from 'jotai';
-import categorySlideAtom from '@/store/breadMapCategory';
+import { breadMapCategorySlideAtom } from '@/store';
 
 const MOCK_DATA = [
   {
@@ -57,7 +57,7 @@ const MOCK_DATA = [
 ];
 
 const CategorySide = () => {
-  const [isOpen, setIsOpen] = useAtom(categorySlideAtom);
+  const [isOpen, setIsOpen] = useAtom(breadMapCategorySlideAtom);
 
   const Cards = MOCK_DATA.map((category, idx) => {
     return (

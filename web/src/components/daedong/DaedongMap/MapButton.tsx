@@ -15,7 +15,7 @@ const Button = styled.button`
   justify-content: center;
   cursor: pointer;
   align-items: center;
-  padding: 0.625rem;
+  padding: 10px;
   border: none;
   box-shadow: 0 3px 3px ${({ theme }) => theme.color.gray300};
 
