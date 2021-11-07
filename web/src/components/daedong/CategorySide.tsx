@@ -2,11 +2,8 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { LeftArrow } from '@/components/icons';
 import CategoryCard from './CategoryCard';
-
-interface CategorySideProps {
-  isCategorySideOpen: boolean;
-  closeCategorySide: () => void;
-}
+import { useAtom } from 'jotai';
+import categorySlideAtom from '@/store/breadMapCategory';
 
 const MOCK_DATA = [
   {
@@ -59,10 +56,9 @@ const MOCK_DATA = [
   },
 ];
 
-const CategorySide = ({
-  isCategorySideOpen,
-  closeCategorySide,
-}: CategorySideProps) => {
+const CategorySide = () => {
+  const [isOpen, setIsOpen] = useAtom(categorySlideAtom);
+
   const Cards = MOCK_DATA.map((category, idx) => {
     return (
       <CategoryCard key={idx} name={category.name} checked={category.checked} />
@@ -70,9 +66,13 @@ const CategorySide = ({
   });
 
   return (
-    <Container className={isCategorySideOpen ? 'open' : ''}>
+    <Container className={isOpen ? 'open' : ''}>
       <Header>
-        <LeftArrow onClick={closeCategorySide} />
+        <LeftArrow
+          onClick={() => {
+            setIsOpen(false);
+          }}
+        />
         <div>빵종류 모아보기</div>
       </Header>
       <Contents>

@@ -1,3 +1,5 @@
+import categorySlideAtom from '@/store/breadMapCategory';
+import { useAtom } from 'jotai';
 import React from 'react';
 import { BottomSheetRef } from 'react-spring-bottom-sheet';
 import {
@@ -27,9 +29,11 @@ const DaedongBottomSheet = React.forwardRef<BottomSheetRef, BottonSheetProps>(
     },
     ref
   ) => {
+    const [sideOpen] = useAtom(categorySlideAtom);
+
     return (
       <BottomSheet
-        open={open}
+        open={sideOpen ? false : open}
         skipInitialTransition
         blocking={false}
         ref={ref}

@@ -3,9 +3,11 @@ import styled from '@emotion/styled';
 import { MapButton } from '.';
 import { Flag, Bread } from '@/components/icons';
 import CategorySide from './CategorySide';
+import { useAtom } from 'jotai';
+import categorySlideAtom from '@/store/breadMapCategory';
 
 const SideButtons = () => {
-  const [sideOpen, setSideOpen] = React.useState(false);
+  const [sideOpen, setSideOpen] = useAtom(categorySlideAtom);
 
   return (
     <>
@@ -21,12 +23,7 @@ const SideButtons = () => {
           <Flag />
         </MapButton>
       </Container>
-      <CategorySide
-        isCategorySideOpen={sideOpen}
-        closeCategorySide={() => {
-          setSideOpen(false);
-        }}
-      />
+      <CategorySide />
     </>
   );
 };
