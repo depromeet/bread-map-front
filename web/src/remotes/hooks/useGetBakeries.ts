@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import { fetchBakeries } from '@/lib/remotes/fetchBakeries';
+import { fetchBakeries } from '@/remotes/network/fetchBakeries';
 
 type UseGetBakeriesParams = Parameters<typeof fetchBakeries>[0];
 
