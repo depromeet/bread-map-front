@@ -1,6 +1,6 @@
-import fetchBase from './fetchBase';
+import fetchBase from '@/remotes/network/fetchBase';
 
-export interface FetchBakeriesPayload {
+export interface GetBakeriesPayload {
   latitude: number;
   longitude: number;
   range: number;
@@ -34,7 +34,7 @@ export interface BakeryEntity {
   ratingCount: number;
 }
 
-export const fetchBakeries = async ({
+const requestGetBakeries = async ({
   latitude,
   longitude,
   range,
@@ -46,3 +46,5 @@ export const fetchBakeries = async ({
 
   return data;
 };
+
+export default requestGetBakeries;

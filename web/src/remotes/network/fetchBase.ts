@@ -59,5 +59,8 @@ export default function fetchBase(
 ): Promise<Response> {
   const headers = initHeader(init?.headers);
 
-  return fetch(`${process.env.NEXT_PUBLIC_BASE_URI}${url}`, { ...init, headers });
+  return fetch(`${process.env.NEXT_PUBLIC_BASE_URI}${url}`, {
+    ...init,
+    headers,
+  });
 }
