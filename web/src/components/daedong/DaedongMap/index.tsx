@@ -12,17 +12,14 @@ import CurrentPositionButton from './CurrentPositionButton';
 import SideButtons from './SideButtons';
 
 const MapContainer = () => {
-  const mapRef = React.useRef<HTMLDivElement>(null);
+  const currentButtonRef = React.useRef<HTMLDivElement>(null);
   const bottomSheetRef = React.useRef<BottomSheetRef>(null);
 
   const bottomSheetSpringMapHeightChanger = React.useCallback(() => {
     requestAnimationFrame(() => {
-      if (mapRef?.current && bottomSheetRef?.current) {
-        mapRef.current.style.height =
-          window.innerHeight -
-          bottomSheetRef.current.height -
-          FooterHeight +
-          'px';
+      if (currentButtonRef?.current && bottomSheetRef?.current) {
+        currentButtonRef.current.style.bottom =
+          bottomSheetRef.current.height + FooterHeight + 10 + 'px';
       }
     });
   }, []);
@@ -55,10 +52,10 @@ const MapContainer = () => {
             zoom: 10,
           }}
         >
-          <MapButtonWrapper ref={mapRef}>
+          <SideButtons />
+          <CurrentButtonWrapper ref={currentButtonRef}>
             <CurrentPositionButton />
-            <SideButtons />
-          </MapButtonWrapper>
+          </CurrentButtonWrapper>
           <CategorySide />
         </NaverMapDiv>
       </MapWrapper>
@@ -98,13 +95,11 @@ const MapWrapper = styled.div`
   z-index: 0;
 `;
 
-const MapButtonWrapper = styled.div`
+const CurrentButtonWrapper = styled.div`
   position: absolute;
   width: 100%;
-  top: 0;
-  left: 0;
-  height: calc(100vh - (100vh / 5) - ${FooterHeight}px);
-  transition: height 0.3s ease-in-out;
+  bottom: 0;
+  transition: bottom 0.3s ease-in-out;
 `;
 
 const NaverMapDiv = styled(NaverMap)`
