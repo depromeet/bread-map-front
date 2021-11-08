@@ -1,4 +1,5 @@
 // Footer
+import { Construction } from './Construction';
 export { default as Home } from './Home';
 export { default as User } from './User';
 export { default as Compass } from './Compass';
@@ -31,6 +32,8 @@ export { default as CircleReview } from './CircleReview';
 export { default as CircleWent } from './CircleWent';
 export { default as CircleStar } from './CircleStar';
 export { default as Quote } from './Quote';
+export { default as Setting } from './Setting';
+export { default as Construction } from './Construction';
 
 // Icon
 export { default as BreadBeganKitoIcon } from './BreadBeganKitoIcon';

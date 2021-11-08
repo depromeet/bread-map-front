@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { CategoryInfo } from '@/constants/breadCategory';
 import { useCategories } from '@/components/common/CategoryList';
+import { useToast } from '@/components/common/ToastPopup';
 import { Plus } from '@/components/icons';
 import MoreAdd from './MoreAdd';
 import StartAdd from './StartAdd';
@@ -40,6 +41,13 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
     onCancelCategory,
     setIsOpenFirst,
   } = useCategories(isMultiSelect);
+  const [isSubmitted, setIsSubmitted] = React.useState(false);
+  const { toastStatus, openToast } = useToast();
+
+  React.useEffect(() => {
+    setIsSubmitted(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentProgress]);
 
   React.useEffect(() => {
     setSingleReview(breadsReview[currentProgress]);
@@ -81,6 +89,7 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
     }
 
     updateBreadsReview(updatedReview);
+    setSingleReview(initialSingleReview);
     setProgress((prev) => prev - 1);
   };
 
@@ -111,7 +120,20 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
     initializeCategories();
   };
 
+  const checkEmptySection = (): boolean => {
+    if (breadsReview[progress].category === null) return true;
+    else if (breadsReview[progress].name === '') return true;
+    else if (breadsReview[progress].price === 0) return true;
+    else return false;
+  };
+
   const nextProgress = () => {
+    setIsSubmitted(true);
+    if (checkEmptySection()) {
+      setCurrentProgress(progress);
+      return openToast();
+    }
+
     setProgress((prev) => prev + 1);
     setCurrentProgress(progress + 1);
     initializeSingleReview();
@@ -149,8 +171,11 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
             setIsCategoryPage,
             selectedCategory,
             stars,
+            singleReview,
             editScore,
             editContent,
+            isSubmitted,
+            toastStatus,
           }}
         />
       )}
@@ -166,6 +191,8 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
             deleteSingleReview,
             editScore,
             editContent,
+            isSubmitted,
+            toastStatus,
           }}
         />
       )}

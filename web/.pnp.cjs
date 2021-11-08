@@ -59,6 +59,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["identity-obj-proxy", "npm:3.0.0"],
             ["jest", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:27.2.0"],
             ["jotai", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:1.4.2"],
+            ["keen-slider", "npm:5.5.1"],
             ["msw", "npm:0.35.0"],
             ["next", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:11.1.2"],
             ["prettier", "npm:2.4.1"],
@@ -7156,6 +7157,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["keen-slider", [
+        ["npm:5.5.1", {
+          "packageLocation": "./.yarn/cache/keen-slider-npm-5.5.1-58840bdf2b-4788384577.zip/node_modules/keen-slider/",
+          "packageDependencies": [
+            ["keen-slider", "npm:5.5.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["kleur", [
         ["npm:3.0.3", {
           "packageLocation": "./.yarn/cache/kleur-npm-3.0.3-f6f53649a4-df82cd1e17.zip/node_modules/kleur/",
@@ -10633,6 +10643,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["identity-obj-proxy", "npm:3.0.0"],
             ["jest", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:27.2.0"],
             ["jotai", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:1.4.2"],
+            ["keen-slider", "npm:5.5.1"],
             ["msw", "npm:0.35.0"],
             ["next", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:11.1.2"],
             ["prettier", "npm:2.4.1"],
