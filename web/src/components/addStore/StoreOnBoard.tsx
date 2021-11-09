@@ -5,6 +5,8 @@ import { Button } from '../common';
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
 import { TDetails } from 'keen-slider';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const previewStore = [
   {
@@ -41,7 +43,8 @@ const previewStore = [
   },
 ];
 
-const OnBoardStore: React.FC = () => {
+const StoreOnBoard = () => {
+  const router = useRouter();
   const [details, setDetails] = React.useState<TDetails>();
   const [sliderRef] = useKeenSlider<HTMLDivElement>({
     initial: 0,
@@ -64,7 +67,14 @@ const OnBoardStore: React.FC = () => {
       setDetails(s.details());
     },
   });
+  const buttonClickHandler = React.useCallback(() => {
+    router.push({
+      pathname: '/addStore',
+      query: { tab: '2' },
+    });
+  }, [router]);
 
+  const newLocal = '2';
   return (
     <>
       <Title>
@@ -99,7 +109,7 @@ const OnBoardStore: React.FC = () => {
   );
 };
 
-export default OnBoardStore;
+export default StoreOnBoard;
 
 const Title = styled.h1`
   margin: 2rem 0 0;
