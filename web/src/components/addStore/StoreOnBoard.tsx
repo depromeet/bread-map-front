@@ -49,6 +49,17 @@ const OnBoardStore: React.FC = () => {
     centered: true,
     slidesPerView: 2,
     spacing: 40,
+    breakpoints: {
+      '(min-width: 768px)': {
+        slidesPerView: 5,
+      },
+      '(max-width: 767px)': {
+        slidesPerView: 3,
+      },
+      '(max-width: 420px)': {
+        slidesPerView: 2,
+      },
+    },
     slideChanged(s) {
       setDetails(s.details());
     },
@@ -83,7 +94,7 @@ const OnBoardStore: React.FC = () => {
           ))}
         </Slider>
       </SliderWrapper>
-      <Button>개척하기</Button>
+      <Button size={'large'}>개척하기</Button>
     </>
   );
 };
@@ -99,12 +110,15 @@ const SliderWrapper = styled.div`
   align-items: center;
   width: 100%;
   justify-content: center;
-  //TO-DO width가 넓어지면 무지하게 커져서 고정값으로 임시 고정. 따로 공통적인 media 설정필요
-  max-width: 500px;
+  max-width: 1000px;
   height: 100%;
   flex-grow: 1;
   margin: auto;
-  overflow-x: hidden;
+  overflow-x: visible;
+
+  @media (min-width: 1000px) {
+    overflow: hidden;
+  }
 `;
 
 const Slider = styled.div`
@@ -138,14 +152,14 @@ const Slide = styled.div`
 const StoreName = styled.div`
   font-weight: bold;
   font-size: 1em;
-  font-size: clamp(10px, 4vw, 1rem);
+  font-size: clamp(11px, 4vw, 0.9rem);
   margin-bottom: 1em;
 `;
 
 const StorePioneer = styled.span`
   padding: 2px 4px;
   border-radius: 2px;
-  font-size: clamp(10px, 2vw, 1rem);
+  font-size: clamp(10px, 2vw, 0.6rem);
   background: ${({ theme }) => theme.color.primary100};
 
   > b {
