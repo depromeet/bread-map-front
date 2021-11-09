@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { useAtom } from 'jotai';
 import styled from '@emotion/styled';
+import { useAtom } from 'jotai';
+import { CategoryList } from '@/components/common';
 import { ChevronLeftIcon, XIcon } from '@/components/icons';
-import CategoryList from './CategoryList';
-import { currentFilterAtom } from './store';
-import type { Bread } from './types';
+import { currentFilterAtom } from '@/store/map';
+import type { BreadCategory } from '@/constants/breadCategory';
 
 const summaryText = '모든 먹부림에는\n주종목이 있죠!';
 
@@ -19,19 +19,7 @@ const BreadFilterSelect: React.FC<BreadFilterSelectProps> = ({
 }) => {
   const [currentFilter, setCurrentFilter] = useAtom(currentFilterAtom);
 
-  const [selectedItems, setSelectedItems] = React.useState<Bread[]>([]);
-
-  const handleChange = (item: Bread) => {
-    setSelectedItems((prev) => {
-      const idx = prev.indexOf(item);
-
-      if (idx > -1) {
-        return [...prev.slice(0, idx), ...prev.slice(idx + 1)];
-      } else {
-        return [...prev, item];
-      }
-    });
-  };
+  const [selectedItems, setSelectedItems] = React.useState<BreadCategory[]>([]);
 
   const handleCancel = () => {
     setSelectedItems(currentFilter);
@@ -59,7 +47,17 @@ const BreadFilterSelect: React.FC<BreadFilterSelectProps> = ({
         <ContentSummary>{summaryText}</ContentSummary>
         <CategoryList
           selectedItems={selectedItems}
-          onChange={handleChange}
+          onChange={(item) => {
+            setSelectedItems((prev) => {
+              const idx = prev.indexOf(item);
+
+              if (idx > -1) {
+                return [...prev.slice(0, idx), ...prev.slice(idx + 1)];
+              } else {
+                return [...prev, item];
+              }
+            });
+          }}
         />
         <ButtonGroup>
           <CancelButton onClick={handleCancel}>

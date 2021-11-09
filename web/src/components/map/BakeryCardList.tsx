@@ -2,8 +2,8 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
 import { useGetBakeries } from '@/remotes/hooks';
+import { bottomSheetTypeAtom, currentBakeryIdAtom } from '@/store/map'
 import BakeryInfoCard from './BakeryInfoCard';
-import { bottomSheetTypeAtom, currentBakeryIdAtom } from './store';
 import { DEFAULT_POSITION } from './constants';
 
 const BakeryCardList: React.FC = () => {
