@@ -1,34 +1,39 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { ArrowPrev, Close } from '@/components/icons';
-import OnBoardStore from '@/components/addStore/StoreOnBoard';
+import { withRouter } from 'next/router';
+import { StoreOnBoard, StoreAddress, StoreInfo } from '@/components/addStore';
+import { WithRouterProps } from 'next/dist/client/with-router';
+import { NextComponentType, NextPageContext } from 'next';
+import { Header } from '@/components/common';
 
-const AddBread = () => {
+const AddBread: NextComponentType<NextPageContext, any, WithRouterProps> = ({
+  router,
+}) => {
+  const {
+    query: { tab },
+  } = router;
+
   return (
     <AddStoreLayout>
-      <TopHeader>
-        <ArrowPrev />
-        <Close />
-      </TopHeader>
-      <OnBoardStore />
+      <Header />
+      {(tab === '1' || !tab) && <StoreOnBoard />}
+      {tab === '2' && <StoreAddress />}
+      {tab === '3' && <StoreInfo />}
     </AddStoreLayout>
   );
 };
 
-export default AddBread;
+export default withRouter(AddBread);
 
 const AddStoreLayout = styled.section`
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
-  padding: 16px 20px;
+  padding: 0 20px;
   overflow-x: hidden;
   min-height: 100vh;
   height: 100%;
-`;
-
-const TopHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
+  max-height: 100vh;
 `;
