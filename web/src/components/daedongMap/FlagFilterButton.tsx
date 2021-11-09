@@ -1,11 +1,11 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import { Flag } from '@/components/icons';
+import { FlagIcon } from '@/components/icons';
 
 const FlagFilterButton: React.FC = () => {
   return (
     <Button>
-      <Flag />
+      <FlagIcon />
     </Button>
   );
 };

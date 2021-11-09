@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as SWR from 'swr';
 import { render } from '@testing-library/react';
-import { useGetBakeries } from './useGetBakeries';
+import useGetBakeries from './useGetBakeries';
 
 interface TestComponentProps {
   latitude: number;
