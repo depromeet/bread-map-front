@@ -33,6 +33,7 @@
     "@next/eslint-plugin-next": "^11.1.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.0",
+    "@testing-library/react-hooks": "^7.0.2",
     "@types/jest": "^27.0.1",
     "@types/navermaps": "^3.0.9",
     "@types/node": "^16.9.1",

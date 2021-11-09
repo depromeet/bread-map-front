@@ -1,10 +1,12 @@
 import React from 'react';
 import { CategoryInfo } from '@/constants/breadCategory';
 
-const useCategories = (isMultiSelect: boolean) => {
-  const [selectedCategory, setSelectedCategory] = React.useState<
-    CategoryInfo[]
-  >([]);
+const useCategories = (
+  isMultiSelect: boolean,
+  selected: CategoryInfo[] = []
+) => {
+  const [selectedCategory, setSelectedCategory] =
+    React.useState<CategoryInfo[]>(selected);
   const [prevCategory, setPrevCategory] = React.useState<CategoryInfo[]>([]);
   const [isOpenFirst, setIsOpenFirst] = React.useState(true);
 

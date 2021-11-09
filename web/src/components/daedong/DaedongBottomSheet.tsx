@@ -1,3 +1,4 @@
+import { useAtom } from 'jotai';
 import React from 'react';
 import { BottomSheetRef } from 'react-spring-bottom-sheet';
 import {
@@ -5,7 +6,8 @@ import {
   snapPoints,
   SpringEvent,
 } from 'react-spring-bottom-sheet/dist/types';
-import { BottomSheet } from '../common';
+import { breadMapCategorySlideAtom } from '@/store';
+import { BottomSheet } from '@/components/common';
 
 interface BottonSheetProps extends React.HTMLAttributes<HTMLDivElement> {
   defaultSnap?: number | ((props: defaultSnapProps) => number) | undefined;
@@ -27,9 +29,11 @@ const DaedongBottomSheet = React.forwardRef<BottomSheetRef, BottonSheetProps>(
     },
     ref
   ) => {
+    const [sideOpen] = useAtom(breadMapCategorySlideAtom);
+
     return (
       <BottomSheet
-        open={open}
+        open={sideOpen ? false : open}
         skipInitialTransition
         blocking={false}
         ref={ref}
