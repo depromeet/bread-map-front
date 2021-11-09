@@ -29,8 +29,6 @@ const CategorySide = () => {
         />
         <div>빵종류 모아보기</div>
         <Close
-          width={18}
-          height={18}
           onClick={() => {
             setMapCategories(selectedCategory);
             setIsOpen(false);
