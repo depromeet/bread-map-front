@@ -4,28 +4,25 @@ import { BottomSheetRef } from 'react-spring-bottom-sheet';
 import {
   defaultSnapProps,
   snapPoints,
-  SpringEvent,
 } from 'react-spring-bottom-sheet/dist/types';
 import { NaverMap } from '@/lib/navermap';
-import { MapButtonsWrap, DaedongBottomSheet } from '@/components/daedong';
+import { DaedongBottomSheet, CategorySide } from '@/components/daedong';
 import { FooterHeight } from '@/styles/Media';
+import CurrentPositionButton from './CurrentPositionButton';
+import SideButtons from './SideButtons';
 
 const MapContainer = () => {
-  const mapRef = React.useRef<HTMLDivElement>(null);
+  const currentButtonRef = React.useRef<HTMLDivElement>(null);
   const bottomSheetRef = React.useRef<BottomSheetRef>(null);
 
-  const bottomSheetSpringStart: (event: SpringEvent) => void =
-    React.useCallback(() => {
-      requestAnimationFrame(() => {
-        if (mapRef?.current && bottomSheetRef?.current) {
-          mapRef.current.style.height =
-            window.innerHeight -
-            bottomSheetRef.current.height -
-            FooterHeight +
-            'px';
-        }
-      });
-    }, []);
+  const bottomSheetSpringMapHeightChanger = React.useCallback(() => {
+    requestAnimationFrame(() => {
+      if (currentButtonRef?.current && bottomSheetRef?.current) {
+        currentButtonRef.current.style.bottom =
+          bottomSheetRef.current.height + FooterHeight + 10 + 'px';
+      }
+    });
+  }, []);
 
   const bottomSheetSnapPoints: snapPoints = React.useCallback(
     ({ maxHeight }) => [
@@ -38,7 +35,13 @@ const MapContainer = () => {
   );
 
   const bottomSheetDefaultSnap: number | ((props: defaultSnapProps) => number) =
-    React.useCallback(({ maxHeight }) => maxHeight / 5, []);
+    React.useCallback(
+      ({ maxHeight }) => {
+        bottomSheetSpringMapHeightChanger();
+        return maxHeight / 5;
+      },
+      [bottomSheetSpringMapHeightChanger]
+    );
 
   return (
     <>
@@ -49,16 +52,18 @@ const MapContainer = () => {
             zoom: 10,
           }}
         >
-          <MapButtonWrapper ref={mapRef}>
-            <MapButtonsWrap />
-          </MapButtonWrapper>
+          <SideButtons />
+          <CurrentButtonWrapper ref={currentButtonRef}>
+            <CurrentPositionButton />
+          </CurrentButtonWrapper>
+          <CategorySide />
         </NaverMapDiv>
       </MapWrapper>
       <DaedongBottomSheet
         ref={bottomSheetRef}
         defaultSnap={bottomSheetDefaultSnap}
         snapPoints={bottomSheetSnapPoints}
-        onSpringStart={bottomSheetSpringStart}
+        onSpringStart={bottomSheetSpringMapHeightChanger}
       >
         <BottomSheetButtonWrap>
           {['Top', 'MiddleHigh', 'Middle', 'Bottom'].map((height, idx) => (
@@ -90,13 +95,11 @@ const MapWrapper = styled.div`
   z-index: 0;
 `;
 
-const MapButtonWrapper = styled.div`
+const CurrentButtonWrapper = styled.div`
   position: absolute;
   width: 100%;
-  top: 0;
-  left: 0;
-  height: calc(100vh - (100vh / 5) - ${FooterHeight}px);
-  transition: height 0.3s ease-in-out;
+  bottom: 0;
+  transition: bottom 0.3s ease-in-out;
 `;
 
 const NaverMapDiv = styled(NaverMap)`
