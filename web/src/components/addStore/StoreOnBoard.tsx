@@ -6,7 +6,6 @@ import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
 import { TDetails } from 'keen-slider';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 
 const previewStore = [
   {
@@ -67,14 +66,13 @@ const StoreOnBoard = () => {
       setDetails(s.details());
     },
   });
+
   const buttonClickHandler = React.useCallback(() => {
     router.push({
-      pathname: '/addStore',
       query: { tab: '2' },
     });
   }, [router]);
 
-  const newLocal = '2';
   return (
     <>
       <Title>
@@ -104,7 +102,13 @@ const StoreOnBoard = () => {
           ))}
         </Slider>
       </SliderWrapper>
-      <Button size={'large'}>개척하기</Button>
+      <ButtonStyle
+        styleType={'primary'}
+        size={'large'}
+        onClick={buttonClickHandler}
+      >
+        개척하기
+      </ButtonStyle>
     </>
   );
 };
@@ -112,7 +116,7 @@ const StoreOnBoard = () => {
 export default StoreOnBoard;
 
 const Title = styled.h1`
-  margin: 2rem 0 0;
+  margin: 1rem 0 0;
 `;
 
 const SliderWrapper = styled.div`
@@ -175,4 +179,10 @@ const StorePioneer = styled.span`
   > b {
     color: #ff6e40;
   }
+`;
+
+const ButtonStyle = styled(Button)`
+  position: sticky;
+  bottom: 16px;
+  width: 100%;
 `;
