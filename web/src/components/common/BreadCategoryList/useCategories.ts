@@ -1,13 +1,15 @@
 import React from 'react';
-import { CategoryInfo } from '@/constants/breadCategory';
+import { BreadCategoeryInfo } from '@/constants/breadCategories';
 
 const useCategories = (
   isMultiSelect: boolean,
-  selected: CategoryInfo[] = []
+  selected: BreadCategoeryInfo[] = []
 ) => {
   const [selectedCategory, setSelectedCategory] =
-    React.useState<CategoryInfo[]>(selected);
-  const [prevCategory, setPrevCategory] = React.useState<CategoryInfo[]>([]);
+    React.useState<BreadCategoeryInfo[]>(selected);
+  const [prevCategory, setPrevCategory] = React.useState<BreadCategoeryInfo[]>(
+    []
+  );
   const [isOpenFirst, setIsOpenFirst] = React.useState(true);
 
   React.useEffect(() => {
@@ -16,7 +18,7 @@ const useCategories = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpenFirst]);
 
-  const multiSelectFn = (categoryInfo: CategoryInfo) => {
+  const multiSelectFn = (categoryInfo: BreadCategoeryInfo) => {
     const isSelected = selectedCategory.some((s) => s.id === categoryInfo.id);
 
     if (isSelected) {
@@ -28,11 +30,11 @@ const useCategories = (
     }
   };
 
-  const oneSelectFn = (categoryInfo: CategoryInfo) => {
+  const oneSelectFn = (categoryInfo: BreadCategoeryInfo) => {
     setSelectedCategory([categoryInfo]);
   };
 
-  const onClickCategory = (categoryInfo: CategoryInfo) => {
+  const onClickCategory = (categoryInfo: BreadCategoeryInfo) => {
     if (isOpenFirst) setIsOpenFirst(false);
     isMultiSelect ? multiSelectFn(categoryInfo) : oneSelectFn(categoryInfo);
   };
