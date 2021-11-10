@@ -1,30 +1,38 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import breadCategory, { CategoryInfo } from '@/constants/breadCategory';
+import storeBaseInfo from '@/constants/storeBaseInfo';
 
 interface CategoriesProps {
-  selectedCategory: CategoryInfo[] | null;
+  categortKind?: typeof breadCategory | typeof storeBaseInfo | null;
+  selectedCategory?: CategoryInfo[] | null;
   onClickCategory: (category: CategoryInfo) => void;
 }
 
-const Categories = ({ selectedCategory, onClickCategory }: CategoriesProps) => {
+const Categories = ({
+  categortKind,
+  selectedCategory,
+  onClickCategory,
+}: CategoriesProps) => {
   const isSelected = (id: number): boolean => {
-    if (selectedCategory === null) return false;
+    if (!selectedCategory) return false;
     return selectedCategory.some((s) => s.id === id);
   };
 
   return (
     <CategoriesWrapper>
-      {Object.values(breadCategory).map((value) => (
-        <Category
-          key={value.id}
-          onClick={() => onClickCategory(value)}
-          isSelected={isSelected(value.id)}
-        >
-          <value.icon />
-          <span>{value.text}</span>
-        </Category>
-      ))}
+      {Object.values(categortKind ? categortKind : breadCategory).map(
+        (value) => (
+          <Category
+            key={value.id}
+            onClick={() => onClickCategory(value)}
+            isSelected={isSelected(value.id)}
+          >
+            <value.icon />
+            <span>{value.text}</span>
+          </Category>
+        )
+      )}
     </CategoriesWrapper>
   );
 };
@@ -62,7 +70,15 @@ const Category = styled.div<{ isSelected: boolean }>`
     margin-top: 0.5rem;
   }
 
-  path {
-    fill: ${({ isSelected }) => (isSelected ? '#FF6E40' : '#bdbdbd')};
+  svg {
+    path {
+      fill: ${({ isSelected }) => (isSelected ? '#FF6E40' : '#bdbdbd')};
+    }
+    &.nofill {
+      path {
+        stroke: ${({ isSelected }) => (isSelected ? '#FF6E40' : '#bdbdbd')};
+        fill: none;
+      }
+    }
   }
 `;
