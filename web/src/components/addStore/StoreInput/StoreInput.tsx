@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { CategoryInfo } from '@/constants/breadCategory';
+import { StoreBaseCategoryInfo } from '@/constants/storeBaseCategories';
 
 export interface StoreInputBaseProps {
   isRequired?: boolean;
@@ -12,7 +12,7 @@ export interface StoreInputBaseProps {
   name: string;
   changeHandler?: (
     name: string,
-    value: string | string[] | CategoryInfo[] | null
+    value: string | string[] | StoreBaseCategoryInfo[] | null
   ) => void;
 }
 

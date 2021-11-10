@@ -3,8 +3,11 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import { Button } from '@/components/common';
 import { StoreMultiInput, StoreInput, StoreCardInput } from './StoreInput';
-import { CategoryInfo } from '@/constants/breadCategory';
-import { useCategories } from '@/components/common/CategoryList';
+import { StoreBaseCategoryInfo } from '@/constants/storeBaseCategories';
+import {
+  useStoreBaseCategories,
+  StoreBaseCategory,
+} from '@/components/common/StoreBaseCategoryList';
 import { addStoreAddress } from '@/store';
 import { useAtom } from 'jotai';
 
@@ -13,18 +16,18 @@ export type SubmitData = {
   storeTel?: string;
   homepages?: string[];
   businessHour?: string;
-  baseInfo?: CategoryInfo[];
+  baseInfo?: StoreBaseCategoryInfo[];
 };
 
 const StoreAddress: React.FC = () => {
   const [subMitData, setSubMitData] = React.useState<SubmitData>({});
   const [isSubmit, setIsSubmit] = React.useState<boolean>(false);
   const [addressInfo, _] = useAtom(addStoreAddress);
-  const { selectedCategory, onClickCategory } = useCategories(true);
+  const { selectedCategory, onClickCategory } = useStoreBaseCategories(true);
 
   const valueChangeHandler = (
     name: string,
-    value: string | string[] | CategoryInfo[] | null
+    value: string | string[] | StoreBaseCategoryInfo[] | null
   ) => {
     setSubMitData((prev) =>
       prev ? { ...prev, [name]: value } : { [name]: value }

@@ -5,24 +5,24 @@ import {
   InfoWifiIcon,
 } from '@/components/icons';
 
-export type StoreBaseCategoryText =
+type StoreBaseCategoryText =
   | null
   | '주차 가능'
   | '와이파이'
   | '배달'
   | '반려동물';
 
-export interface StoreBaseInfo {
+export interface StoreBaseCategoryInfo {
   id: number;
   icon: React.FC<React.SVGProps<SVGSVGElement>>;
   text: StoreBaseCategoryText;
 }
 
 interface StoreBaseCategory {
-  [key: string]: StoreBaseInfo;
+  [key: string]: StoreBaseCategoryInfo;
 }
 
-const storeBaseInfo: StoreBaseCategory = {
+const storeBaseCategory: StoreBaseCategory = {
   Parking: {
     id: 1,
     icon: InfoParkingIcon,
@@ -45,4 +45,4 @@ const storeBaseInfo: StoreBaseCategory = {
   },
 };
 
-export default storeBaseInfo;
+export default storeBaseCategory;

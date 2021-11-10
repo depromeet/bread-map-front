@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Categories } from '@/components/common/CategoryList';
-import storeBaseInfo from '@/constants/storeBaseInfo';
+import { StoreBaseCategory } from '@/components/common/StoreBaseCategoryList';
 import { StoreInputBaseProps } from './StoreInput';
-import { CategoryInfo } from '@/constants/breadCategory';
+import { StoreBaseCategoryInfo } from '@/constants/storeBaseCategories';
 
 type StoreMultiInputProps = Omit<StoreInputBaseProps, 'changeHandler'> & {
-  changeHandler: (categoryInfo: CategoryInfo) => void;
-  value: CategoryInfo[] | undefined;
+  changeHandler: (categoryInfo: StoreBaseCategoryInfo) => void;
+  value: StoreBaseCategoryInfo[] | undefined;
 };
 
 const StoreCardInput = ({
@@ -23,8 +22,7 @@ const StoreCardInput = ({
     {isSubmit && isRequired && value?.length === 0 && (
       <AlertText>{alertText}</AlertText>
     )}
-    <Categories
-      categortKind={storeBaseInfo}
+    <StoreBaseCategory
       selectedCategory={value}
       onClickCategory={changeHandler}
     />
