@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Button } from '@/components/common';
+import { Button, ConfirmModal } from '@/components/common';
 import { Close, Plus } from '@/components/icons';
 import { StoreInputBaseProps } from './StoreInput';
 
@@ -18,6 +18,7 @@ const StoreMultiInput = ({
   isSubmit = false,
   changeHandler,
 }: StoreMultiInputProps) => {
+  const [deleteIdx, setDeleteIdx] = React.useState(-1);
   const [inputValue, setInputValue] = React.useState('');
   const inputChangeHandler = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +26,15 @@ const StoreMultiInput = ({
     },
     []
   );
-  const addInput = React.useCallback(() => {
+
+  const ConfirmModalOpen = React.useCallback(
+    (idx: number) => setDeleteIdx(idx),
+    []
+  );
+  
+  const ConfirmModalClose = React.useCallback(() => setDeleteIdx(-1), []);
+
+  const addHomepage = React.useCallback(() => {
     if (inputValue == '' || !changeHandler) return;
     if (!value) changeHandler(name, [inputValue]);
     else changeHandler(name, [...value, inputValue]);
@@ -40,6 +49,7 @@ const StoreMultiInput = ({
         ...value.slice(0, idx),
         ...value.slice(idx + 1, value.length),
       ]);
+      setDeleteIdx(-1);
     },
     [changeHandler, name, value]
   );
@@ -49,14 +59,12 @@ const StoreMultiInput = ({
       <Text isRequired={isRequired}>{label}</Text>
       {value?.map((inputValue: string, idx: number) => (
         <InputValueText key={idx}>
-          {inputValue}{' '}
-          <span
+          {inputValue}
+          <Close
             onClick={() => {
-              removeInputHandler(idx);
+              ConfirmModalOpen(idx);
             }}
-          >
-            <Close />
-          </span>
+          />
         </InputValueText>
       ))}
       <Input
@@ -64,13 +72,22 @@ const StoreMultiInput = ({
         value={inputValue}
         onChange={inputChangeHandler}
       />
-      <AddButtonStyle styleType="none" onClick={addInput}>
+      <AddButtonStyle styleType="none" onClick={addHomepage}>
         <Plus width={16} height={16} />
         {label} 추가
       </AddButtonStyle>
       {value?.length === 0 && isSubmit && !alertText && (
         <AlertText>{alertText}</AlertText>
       )}
+      <ConfirmModal
+        open={deleteIdx >= 0}
+        cancelText={'취소하기'}
+        confirmText={'삭제하기'}
+        cancelButtonHandler={ConfirmModalClose}
+        acceptButtonHandler={() => removeInputHandler(deleteIdx)}
+      >
+        <ConfirmText>정말로 삭제할까요?</ConfirmText>
+      </ConfirmModal>
     </Row>
   );
 };
@@ -88,6 +105,13 @@ const Row = styled.div`
   &:last-child {
     margin-bottom: 4.5rem;
   }
+`;
+
+const ConfirmText = styled.h4`
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  padding: 30px;
 `;
 
 const Text = styled.span<{ isRequired?: boolean }>`

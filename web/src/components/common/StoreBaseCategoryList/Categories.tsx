@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import storeBaseCategory, {
   StoreBaseCategoryInfo,
-} from '@/constants/storeBaseInfo';
+} from '@/constants/storeBaseCategories';
 
 interface CategoriesProps {
   selectedCategory?: StoreBaseCategoryInfo[] | null;
