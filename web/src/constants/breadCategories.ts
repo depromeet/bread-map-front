@@ -13,9 +13,8 @@ import {
   CategoryBringsBackBread,
   CategoryEtc,
 } from '@/components/icons';
-import { StoreBaseCategoryText } from './storeBaseInfo';
 
-export type CategoryText =
+type CategoryText =
   | null
   | '식빵'
   | '비건·키토'
@@ -32,14 +31,14 @@ export type CategoryText =
   | '기타';
 
 //TODO StoreBaseCategoryText, CategoryText 같이 다룰 수있도록 폴더화
-export interface CategoryInfo {
+export interface BreadCategoeryInfo {
   id: number;
   icon: React.FC<React.SVGProps<SVGSVGElement>>;
-  text: CategoryText | StoreBaseCategoryText;
+  text: CategoryText;
 }
 
 interface BreadCategory {
-  [key: string]: CategoryInfo;
+  [key: string]: BreadCategoeryInfo;
 }
 
 const breadCategory: BreadCategory = {

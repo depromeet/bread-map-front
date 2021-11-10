@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { CategoryInfo } from '@/constants/breadCategory';
-import { Categories } from '@/components/common/CategoryList';
+import { BreadCategoeryInfo } from '@/constants/breadCategories';
+import { Categories } from '@/components/common/BreadCategoryList';
 
 interface CategorySelectProps {
   setIsCategoryPage: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedCategory: CategoryInfo[] | null;
-  onClickCategory: (categoryInfo: CategoryInfo) => void;
+  selectedCategory: BreadCategoeryInfo[] | null;
+  onClickCategory: (categoryInfo: BreadCategoeryInfo) => void;
   onCancelCategory: () => void;
   setIsOpenFirst: React.Dispatch<React.SetStateAction<boolean>>;
 }
