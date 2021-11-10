@@ -9,7 +9,7 @@ const requestModifyBakeryRating = async ({
   bakeryId,
   rating,
 }: ModifyBakeryRatingPayload): Promise<void> => {
-  const resp = await fetchBase(`/bakery/${bakeryId}/rating`, {
+  await fetchBase(`/bakery/${bakeryId}/rating`, {
     method: 'POST',
     body: JSON.stringify({ rating }),
   });

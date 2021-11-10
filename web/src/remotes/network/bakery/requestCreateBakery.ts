@@ -15,7 +15,7 @@ interface CreateBakeryPayload {
 const requestCreateBakery = async (
   payload: CreateBakeryPayload
 ): Promise<void> => {
-  const resp = await fetchBase('/bakery', {
+  await fetchBase('/bakery', {
     method: 'POST',
     body: JSON.stringify(payload),
   });

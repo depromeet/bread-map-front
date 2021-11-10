@@ -1,4 +1,4 @@
-import fetchBase from '@/remote/network/fetchBase';
+import fetchBase from '@/remotes/network/fetchBase';
 import type { SocialProvider, LoginResponse } from './types';
 
 interface SocialLoginPayload {

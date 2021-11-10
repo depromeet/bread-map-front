@@ -1,17 +1,19 @@
 import fetchBase from '@/remotes/network/fetchBase';
 
+type FlagType = 'NONE' | 'PICKED' | 'GONE';
+
 interface ModifyBakeryFlagPayload {
   bakeryId: number;
-  createFlagsRequest: 'NONE' | 'PICKED' | 'GONE';
+  flagType: FlagType;
 }
 
 const requestModifyBakeryFlag = async ({
   bakeryId,
-  createFlagsRequest,
+  flagType,
 }: ModifyBakeryFlagPayload): Promise<void> => {
-  const resp = await fetchBase(`/bakery/${bakeryId}/flag`, {
+  await fetchBase(`/bakery/${bakeryId}/flag`, {
     method: 'POST',
-    body: JSON.stringify({ createFlagsRequest }),
+    body: JSON.stringify({ flagType }),
   });
   return;
 };
