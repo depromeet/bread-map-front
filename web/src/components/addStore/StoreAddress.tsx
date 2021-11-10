@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import { Button } from '../common';
+import { Button, ConfirmModal } from '../common';
 import Postcode from '../postcode/Postcode';
 import { useRouter } from 'next/router';
 import StoreInput from './StoreInput/StoreInput';
@@ -10,6 +10,7 @@ import { addStoreAddress } from '@/store';
 
 const StoreAddress: React.FC = () => {
   const router = useRouter();
+  const [confirmModalIsOpen, setConfirmModalIsOpen] = React.useState(false);
   const [address, setAddress] = useAtom(addStoreAddress);
 
   const postCompliteHandler = React.useCallback(
@@ -33,6 +34,18 @@ const StoreAddress: React.FC = () => {
     router.push({ query: { tab: 3 } });
   }, [router]);
 
+  const confirmModalClose = React.useCallback(() => {
+    setConfirmModalIsOpen(false);
+  }, []);
+
+  const confirmModalOpen = React.useCallback(() => {
+    setConfirmModalIsOpen(true);
+  }, []);
+
+  const onConfirmHandler = React.useCallback(() => {
+    resetAddress();
+  }, [resetAddress]);
+
   return (
     <>
       <Title>
@@ -52,7 +65,7 @@ const StoreAddress: React.FC = () => {
               value={address?.address}
               alertText={'주소를 입력해주세요.'}
             />
-            <Close onClick={resetAddress} />
+            <Close onClick={confirmModalOpen} />
           </Address>
 
           <StoreInput
@@ -62,6 +75,16 @@ const StoreAddress: React.FC = () => {
             value={address?.addressDetail}
             onChange={addressDetailChangeHandler}
           />
+
+          <ConfirmModal
+            open={confirmModalIsOpen}
+            cancelText={'취소하기'}
+            confirmText={'삭제하기'}
+            cancelButtonHandler={confirmModalClose}
+            acceptButtonHandler={onConfirmHandler}
+          >
+            <ConfirmText>정말로 삭제할까요?</ConfirmText>
+          </ConfirmModal>
         </AddressContents>
       )}
       <ButtonStyle
@@ -113,4 +136,11 @@ const ButtonStyle = styled(Button)`
   bottom: 16px;
   left: 0%;
   width: 100%;
+`;
+
+const ConfirmText = styled.h4`
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  padding: 30px;
 `;
