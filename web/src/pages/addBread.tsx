@@ -1,15 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { ArrowPrev, Close } from '@/components/icons';
 import AddBreadReview from '@/components/AddBreadReview';
+import { Header } from '@/components/common';
 
 const AddBread = () => {
   return (
     <AddBreadLayout>
-      <TopHeader>
-        <ArrowPrev />
-        <Close />
-      </TopHeader>
+      <Header />
       <AddBreadReview />
     </AddBreadLayout>
   );
@@ -22,9 +19,4 @@ const AddBreadLayout = styled.section`
   padding: 16px 20px;
   overflow-x: hidden;
   min-height: 100vh;
-`;
-
-const TopHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
 `;

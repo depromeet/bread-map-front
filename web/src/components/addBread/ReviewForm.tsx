@@ -2,35 +2,32 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
 import { useAtomDevtools } from 'jotai/devtools';
+import { BreadCategorySelect } from '@/components/addBread';
 import { 
 	ChevronDownIcon,
 	PlusIcon,
 	StarTrueIcon,
 	StarFalseIcon,
  } from '@/components/icons';
+ import { currentBreadReviewAtom } from '@/store/addBread';
 
 const ReviewForm: React.FC = () => {
 	const ref = React.useRef<HTMLInputElement | null>(null);
 
+  const [review, setReview] = useAtom(currentBreadReviewAtom);
+
 	return (
 		<Content>
-			<Row>
-				<Text isRequired>빵 종류</Text>
-				<SelectArea>
-					<SelectBreadBtn>
-						빵 종류 선택
-					</SelectBreadBtn>
-					<ChevronDownIcon />
-				</SelectArea>
-				{/*isSubmitted && selectedCategory.length < 1 && (
-					<AlertText>빵 종류를 선택해주세요.</AlertText>
-				)*/}
-			</Row>
+			<BreadCategorySelect />
 			<Row>
 				<Text isRequired>메뉴명</Text>
 				<Input
 					name="name"
 					placeholder="메뉴명을 입력해주세요"
+          value={review.name}
+          onChange={(e) => {
+            setReview({ name: e.target.value });
+          }}
 				/>
 				{/*isSubmitted && singleReview.name === '' && (
 					<AlertText>메뉴명을 입력해주세요.</AlertText>
@@ -42,6 +39,9 @@ const ReviewForm: React.FC = () => {
 					name="price"
 					type="number"
 					placeholder="원"
+          onChange={(e) => {
+            setReview({ price: Number(e.target.value) });
+          }}
 				/>
 				{/*isSubmitted && singleReview.price === 0 && (
 					<AlertText>가격을 입력해주세요.</AlertText>
@@ -50,8 +50,11 @@ const ReviewForm: React.FC = () => {
 			<Row>
 				<Text>별점</Text>
 				<StarArea>
-					{[0, 0, 0, 0, 0].map((star, i) => (
-						<StarBtn key={i}>
+					{[1, 2, 3, 4, 5].map((star, i) => (
+						<StarBtn
+              onClick={() => setReview({ star })}
+              key={i}
+            >
 							<StarFalseIcon />
 						</StarBtn>
 					))}
@@ -62,6 +65,9 @@ const ReviewForm: React.FC = () => {
 				<Input
 					name="text"
 					placeholder="한줄평을 적어주세요"
+          onChange={(e) => {
+            setReview({ text: e.target.value })
+          }}
 				/>
 			</Row>
 			<Row>
@@ -217,5 +223,3 @@ const AlertText = styled.p`
   font-size: 0.75rem;
   color: ${({ theme }) => theme.color.primary500};
 `;
-
-

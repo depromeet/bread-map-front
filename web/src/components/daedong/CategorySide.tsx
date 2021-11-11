@@ -6,7 +6,7 @@ import {
   breadMapCategorySlideAtom,
   breadMapSelectedCategotyItem,
 } from '@/store';
-import { Categories, useCategories } from '../common/CategoryList';
+import { Categories, useCategories } from '../common/BreadCategoryList';
 
 const CategorySide = () => {
   const [mapCategories, setMapCategories] = useAtom(

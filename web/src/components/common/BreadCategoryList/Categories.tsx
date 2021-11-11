@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import breadCategory, { CategoryInfo } from '@/constants/breadCategory';
+import breadCategory, { BreadCategoeryInfo } from '@/constants/breadCategories';
 
 interface CategoriesProps {
-  selectedCategory: CategoryInfo[] | null;
-  onClickCategory: (category: CategoryInfo) => void;
+  selectedCategory?: BreadCategoeryInfo[] | null;
+  onClickCategory: (category: BreadCategoeryInfo) => void;
 }
 
 const Categories = ({ selectedCategory, onClickCategory }: CategoriesProps) => {
   const isSelected = (id: number): boolean => {
-    if (selectedCategory === null) return false;
+    if (!selectedCategory) return false;
     return selectedCategory.some((s) => s.id === id);
   };
 
@@ -47,9 +47,10 @@ const Category = styled.div<{ isSelected: boolean }>`
   text-align: center;
   align-items: center;
   cursor: pointer;
-  background-color: ${({ isSelected }) => (isSelected ? '#FFF1EC' : '#fff')};
+  background-color: ${({ isSelected, theme }) =>
+    isSelected ? theme.color.primary100 : theme.color.white};
   border-color: ${({ isSelected, theme }) =>
-    isSelected ? '#FF6E40' : theme.color.gray300};
+    isSelected ? theme.color.primary500 : theme.color.gray300};
   border-width: 1px;
   border-style: solid;
 
@@ -58,11 +59,22 @@ const Category = styled.div<{ isSelected: boolean }>`
   }
 
   > span {
-    color: ${({ isSelected }) => (isSelected ? '#FF6E40' : '#bdbdbd')};
+    color: ${({ isSelected, theme }) =>
+      isSelected ? theme.color.primary500 : theme.color.gray400};
     margin-top: 0.5rem;
   }
 
-  path {
-    fill: ${({ isSelected }) => (isSelected ? '#FF6E40' : '#bdbdbd')};
+  svg {
+    path {
+      fill: ${({ isSelected, theme }) =>
+        isSelected ? theme.color.primary500 : theme.color.gray400};
+    }
+    &.nofill {
+      path {
+        stroke: ${({ isSelected, theme }) =>
+          isSelected ? theme.color.primary500 : theme.color.gray400};
+        fill: none;
+      }
+    }
   }
 `;

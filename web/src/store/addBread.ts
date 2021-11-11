@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import type { BreadCategory } from '@/constants/breadCategory';
+import type { BreadCategory } from '@/constants/breadCategories';
 
 export interface BreadReview {
 	category: BreadCategory;
@@ -108,7 +108,7 @@ export const breadReviewsAtom = atom<BreadReview[]>([initialBreadReview]);
 
 export const currentBreadReviewIndexAtom = atom<number>(0);
 
-export const currentBreadReviewAtom = atom<BreadReview, BreadReview>(
+export const currentBreadReviewAtom = atom<BreadReview, Partial<BreadReview>>(
 	(get) => {
 		const reviews = get(breadReviewsAtom);
 		const currentIdx = get(currentBreadReviewIndexAtom);
@@ -118,8 +118,9 @@ export const currentBreadReviewAtom = atom<BreadReview, BreadReview>(
 	(get, set, arg) => {
 		const reviews = get(breadReviewsAtom);
 		const currentIdx = get(currentBreadReviewIndexAtom);
-		reviews[currentIdx] = arg;
 
-		set(breadReviewsAtom, [...reviews.slice(0, currentIdx), arg, ...reviews.slice(currentIdx + 1)]);
+		const newItem = { ...reviews[currentIdx],	...arg };
+
+		set(breadReviewsAtom, [...reviews.slice(0, currentIdx), newItem, ...reviews.slice(currentIdx + 1)]);
 	},
 );

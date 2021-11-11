@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { CategoryList } from '@/components/common';
-import type { CategoryItem } from '@/constants/breadCategory';
+import type { BreadCategoryItem } from '@/constants/breadCategories';
 
 interface CategorySelectProps {
   setIsCategoryPage: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedCategory: CategoryItem[] | null;
-  onClickCategory: (categoryInfo: CategoryItem) => void;
+  selectedCategory: BreadCategoryItem[] | null;
+  onClickCategory: (categoryInfo: BreadCategoryItem) => void;
   onCancelCategory: () => void;
   setIsOpenFirst: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -34,7 +34,7 @@ const CategorySelect = ({
 
   return (
     <>
-      <CategoryList selectedItems={[]} />
+      <CategoryList selectedItems={[]} onChange={() => {}} />
       <BtnWrapper>
         <CancelBtn onClick={onClickCancel}>취소</CancelBtn>
         <OkBtn onClick={onClickOk}>확인</OkBtn>

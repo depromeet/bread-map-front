@@ -2,7 +2,13 @@ import React from 'react';
 import DaumPostcode from 'react-daum-postcode';
 import type { Address } from 'react-daum-postcode';
 
-const Postcode: React.FC = (props) => {
+interface PostcodeProps {
+  compliteHandler: (addr: string) => void;
+}
+
+const Postcode: React.FC<PostcodeProps> = (props) => {
+  const { compliteHandler } = props;
+
   const handleComplete = (data: Address) => {
     let fullAddress = data.address;
     let extraAddress = '';
@@ -17,8 +23,9 @@ const Postcode: React.FC = (props) => {
       }
       fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
     }
-
-    console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
+    
+    // console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
+    compliteHandler(fullAddress);
   };
 
   return <DaumPostcode onComplete={handleComplete} {...props} />;

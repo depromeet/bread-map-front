@@ -17,17 +17,17 @@ import {
 export type BreadCategory =
   | '기본'
   | '식사빵'
-  | '비건/키토'
-  | '크로와상'
   | '구움과자류'
-  | '케이크'
-  | '파이/타르트'
   | '마카롱'
-  | '도넛'
-  | '쿠키'
+  | '케이크'
   | '크림빵'
+  | '도넛'
+  | '추억의 빵'
   | '과자류'
-  | '추억의빵'
+  | '크로와상'
+  | '쿠키'
+  | '파이/타르트'
+  | '비건/키토'
   | '기타';
 
 export type BreadCategoryText =
@@ -45,7 +45,7 @@ export type BreadCategoryText =
   | '추억의 빵'
   | '기타';
 
-export interface CategoryItem {
+export interface BreadCategoryItem {
   Icon: React.FC<React.SVGProps<SVGSVGElement>>;
   category: BreadCategory;
   text: BreadCategoryText;
@@ -109,7 +109,7 @@ export const categoryItems: CategoryItem[] = [
   },
   {
     Icon: BreadMemoryIcon,
-    category: '추억의빵',
+    category: '추억의 빵',
     text: '추억의 빵',
   },
   {

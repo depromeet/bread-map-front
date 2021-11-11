@@ -1,11 +1,11 @@
 import React from 'react';
 import { atom, useAtom } from 'jotai';
 import { useAtomDevtools } from 'jotai/devtools';
-import { CategoryInfo } from '@/constants/breadCategory';
+import { BreadCategoryItem } from '@/constants/breadCategories';
 import MainAdd from './MainAdd';
 
 export interface Review {
-  category: CategoryInfo | null;
+  category: BreadCategoryItem | null;
   name: string;
   price: number;
   text: string;

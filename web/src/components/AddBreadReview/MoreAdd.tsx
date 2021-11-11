@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useRef } from 'react';
 import styled from '@emotion/styled';
-import { CategoryInfo } from '@/constants/breadCategory';
+import { BreadCategory } from '@/constants/breadCategories';
 import { Toast } from '@/components/common/ToastPopup';
 import { ArrowDown, GrayStar, OrangeStar, Plus } from '@/components/icons';
 import { BreadsReview, Review } from '.';
@@ -8,7 +8,7 @@ import { BreadsReview, Review } from '.';
 interface MoreAddProps {
   breadsReview: BreadsReview;
   setIsCategoryPage: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedCategory: CategoryInfo[];
+  selectedCategory: BreadCategory[];
   currentProgress: number;
   stars: number[];
   singleReview: Review;

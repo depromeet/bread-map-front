@@ -21,8 +21,6 @@ export default AddBread;
 const AddBreadLayout = styled.section`
   position: relative;
   padding: 16px 20px;
-  overflow-x: hidden;
-  min-height: 100vh;
 `;
 
 const TopHeader = styled.div`

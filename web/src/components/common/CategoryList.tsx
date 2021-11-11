@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import { categoryItems } from '@/constants/breadCategory';
-import type { BreadCategory } from '@/constants/breadCategory';
+import { categoryItems } from '@/constants/breadCategories';
+import type { BreadCategory } from '@/constants/breadCategories';
 
 interface CategoryListProps {
 	selectedItems: BreadCategory[];

@@ -13,14 +13,14 @@ export const Close: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     <g clipPath="url(#clip0_363:21103)">
       <path
         d="M19.5 4.5L4.5 19.5"
-        stroke="black"
+        stroke="current"
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M4.5 4.5L19.5 19.5"
-        stroke="black"
+        stroke="current"
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
