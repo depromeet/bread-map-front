@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
+import { CategoryList } from '@/components/common';
 import { ChevronDownIcon } from '@/components/icons';
 import { currentBreadReviewAtom } from '@/store/addBread';
 
