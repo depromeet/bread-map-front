@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
-import { useAtomDevtools } from 'jotai/devtools';
+import { Button } from '@/components/common';
 import { BreadCategorySelect } from '@/components/addBread';
 import { 
 	ChevronDownIcon,
@@ -29,9 +29,7 @@ const ReviewForm: React.FC = () => {
             setReview({ name: e.target.value });
           }}
 				/>
-				{/*isSubmitted && singleReview.name === '' && (
-					<AlertText>메뉴명을 입력해주세요.</AlertText>
-				)*/}
+        <AlertText>메뉴명을 입력해주세요.</AlertText>
 			</Row>
 			<Row>
 				<Text isRequired>가격</Text>
@@ -43,9 +41,7 @@ const ReviewForm: React.FC = () => {
             setReview({ price: Number(e.target.value) });
           }}
 				/>
-				{/*isSubmitted && singleReview.price === 0 && (
-					<AlertText>가격을 입력해주세요.</AlertText>
-				)*/}
+				<AlertText>가격을 입력해주세요.</AlertText>
 			</Row>
 			<Row>
 				<Text>별점</Text>
@@ -84,6 +80,19 @@ const ReviewForm: React.FC = () => {
 					</PhotoWrapper>
 				</Scroll>
 			</Row>
+      <ButtonBox>
+        <Button
+          styleType={'none'}
+        >
+          <PlusIcon />
+          <span>다른 빵 추가하기</span>
+        </Button>
+        <Button
+          styleType={'primary'}
+        >
+          확인
+        </Button>
+      </ButtonBox>
 		</Content>
 	);
 };
@@ -93,11 +102,7 @@ export default ReviewForm;
 const Content = styled.div``;
 
 const Row = styled.div`
-  margin-bottom: 32px;
-
-  &:last-child {
-    margin-bottom: 72px;
-  }
+  margin: 0 20px 24px;
 `;
 
 const Text = styled.span<{ isRequired?: boolean }>`
@@ -135,26 +140,6 @@ const StarArea = styled.div`
 
 const StarBtn = styled.div`
   display: inline-block;
-`;
-
-const SelectArea = styled.div`
-  position: relative;
-
-  > svg {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 10px;
-  }
-`;
-
-const SelectBreadBtn = styled.button`
-  border: 1px solid #f5f5f5;
-  width: 100%;
-  border-radius: 8px;
-  color: #9e9e9e;
-  text-align: left;
-  padding: 0.875rem;
 `;
 
 const Input = styled.input`
@@ -222,4 +207,22 @@ const EmptyPhoto = styled.div`
 const AlertText = styled.p`
   font-size: 0.75rem;
   color: ${({ theme }) => theme.color.primary500};
+`;
+
+const ButtonBox = styled.div`
+  margin: 0 20px;
+
+  button + button {
+    margin-top: 8px;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg + span {
+      margin-left: 4px;
+    }
+  }
 `;

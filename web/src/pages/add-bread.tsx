@@ -20,11 +20,12 @@ export default AddBread;
 
 const AddBreadLayout = styled.section`
   position: relative;
-  padding: 16px 20px;
+  padding: 16px 0;
 `;
 
 const TopHeader = styled.div`
   display: flex;
   justify-content: space-between;
+  margin: 0 20px;
 `;
 

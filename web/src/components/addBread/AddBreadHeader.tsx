@@ -22,6 +22,5 @@ const AddBreadHeader: React.FC = () => {
 export default AddBreadHeader;
 
 const Base = styled.div`
-  margin-top: 12px;
-	margin-bottom: 36px;
+	margin: 12px 20px 36px;
 `;

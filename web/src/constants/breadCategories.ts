@@ -51,7 +51,7 @@ export interface BreadCategoryItem {
   text: BreadCategoryText;
 }
 
-export const categoryItems: CategoryItem[] = [
+export const categoryItems: BreadCategoryItem[] = [
   {
     Icon: BreadMealIcon,
     category: '식사빵',

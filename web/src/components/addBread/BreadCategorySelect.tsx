@@ -1,27 +1,35 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
-import { CategoryList } from '@/components/common';
 import { ChevronDownIcon } from '@/components/icons';
+import { BreadCategoryList } from '@/components/addBread';
 import { currentBreadReviewAtom } from '@/store/addBread';
+import { categoryItems } from '@/constants/breadCategories';
 
 const BreadCategorySelect: React.FC = () => {
 	const [review] = useAtom(currentBreadReviewAtom);
 
+	const [isOpen, setIsOpen] = React.useState<boolean>(false);
+	const toggleIsOpen = () => setIsOpen((prev) => !prev);
+
 	return (
-		<Base>
+		<Base onClick={() => setIsOpen(true)}>
 		  <Title>빵 종류</Title>
 			<SelectButton>
 				<span>
 					{review.category === '기본'
 					  ? '빵 종류 선택'
-						: review.category}
+						: categoryItems.find((el) => el.category === review.category)?.text ?? '빵 종류 선택'}
 				</span>
 				<ChevronDownIcon width={16} height={16} />
 			</SelectButton>
 			<HelperText>
 				빵 종류를 선택해주세요.
 			</HelperText>
+			<BreadCategoryList
+				open={isOpen}
+				onClose={toggleIsOpen}
+			/>
 		</Base>
 	);
 };
@@ -29,7 +37,7 @@ const BreadCategorySelect: React.FC = () => {
 export default BreadCategorySelect;
 
 const Base = styled.div`
-  margin-bottom: 32px;
+	margin: 0 20px 32px;
 `;
 
 const Title = styled.span`
