@@ -1,10 +1,10 @@
-import { useCallback, useState } from 'react';
+import React from 'react';
 
 const useSetState = <T extends object>(
   initialState: T = {} as T
 ): [T, (patch: Partial<T> | ((prevState: T) => Partial<T>)) => void] => {
-  const [state, set] = useState<T>(initialState);
-  const setState = useCallback((patch) => {
+  const [state, set] = React.useState<T>(initialState);
+  const setState = React.useCallback((patch) => {
     set((prevState) =>
       Object.assign(
         {},

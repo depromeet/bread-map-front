@@ -1,5 +1,5 @@
-import { CSSProperties, RefObject, useEffect, useRef } from 'react';
-import { isBrowser, noop, off, on } from './slideUtils';
+import React, { CSSProperties, RefObject } from 'react';
+import { isBrowser, noop, off, on } from '@/utils/slideUtils';
 import useMountedState from './useMountedState';
 import useSetState from './useSetState';
 
@@ -24,9 +24,9 @@ const useSlider = (
   options: Partial<Options> = {}
 ): State => {
   const isMounted = useMountedState();
-  const isSliding = useRef(false);
-  const valueRef = useRef(0);
-  const frame = useRef(0);
+  const isSliding = React.useRef(false);
+  const valueRef = React.useRef(0);
+  const frame = React.useRef(0);
   const [state, setState] = useSetState<State>({
     isSliding: false,
     value: 0,
@@ -36,7 +36,7 @@ const useSlider = (
 
   valueRef.current = state.value;
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (isBrowser) {
       const styles = options.styles === undefined ? true : options.styles;
       const reverse = options.reverse === undefined ? false : options.reverse;
@@ -102,26 +102,17 @@ const useSlider = (
           if (isMounted() && ref.current) {
             const rect = ref.current.getBoundingClientRect();
             const pos = options.vertical ? rect.top : rect.left;
-            setState({ ...state, pos });
-            // const pos = options.vertical ? rect.top : rect.left;
+            setState({ pos });
             const length = options.vertical ? rect.height : rect.width;
-            setState({ ...state, length });
-            // Prevent returning 0 when element is hidden by CSS
-            if (!length) {
-              return;
-            }
+            setState({ length });
+            if (!length) return;
 
             let value = (clientXY - pos) / length;
 
-            if (value > 1) {
-              value = 1;
-            } else if (value < 0) {
-              value = 0;
-            }
+            if (value > 1) value = 1;
+            else if (value < 0) value = 0;
 
-            if (reverse) {
-              value = 1 - value;
-            }
+            if (reverse) value = 1 - value;
 
             setState({
               value,
