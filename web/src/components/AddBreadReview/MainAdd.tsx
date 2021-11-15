@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { BreadCategoeryInfo } from '@/constants/breadCategories';
+import { BreadCategory } from '@/constants/breadCategories';
 import { useCategories } from '@/components/common/BreadCategoryList';
 import { useToast } from '@/components/common/ToastPopup';
 import { Plus } from '@/components/icons';
@@ -71,7 +71,7 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
     });
   };
 
-  const editCategory = (category: BreadCategoeryInfo) => {
+  const editCategory = (category: BreadCategory) => {
     setSingleReview({
       ...singleReview,
       category: category,

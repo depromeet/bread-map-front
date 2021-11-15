@@ -1,22 +1,37 @@
 import {
-  CategoryWhiteBread,
-  CategoryVeganQuito,
-  CategoryCroissant,
-  CategoryBaked,
-  CategoryCake,
-  CategoryPieTart,
-  CategoryMacaron,
-  CategoryDonut,
-  CategoryCookie,
-  CategoryCreamBread,
-  CategorySnack,
-  CategoryBringsBackBread,
-  CategoryEtc,
+  BreadBeganKitoIcon,
+  BreadCakeIcon,
+  BreadCaneleIcon,
+  BreadCookieIcon,
+  BreadCreamIcon,
+  BreadCroissantIcon,
+  BreadDonutIcon,
+  BreadHotdogIcon,
+  BreadMacaronIcon,
+  BreadMealIcon,
+  BreadMemoryIcon,
+  BreadPieTartIcon,
+  BreadPretzelIcon,
 } from '@/components/icons';
 
-type CategoryText =
-  | null
-  | '식빵'
+export type BreadCategory =
+  | '기본'
+  | '식사빵'
+  | '구움과자류'
+  | '마카롱'
+  | '케이크'
+  | '크림빵'
+  | '도넛'
+  | '추억의 빵'
+  | '과자류'
+  | '크로와상'
+  | '쿠키'
+  | '파이/타르트'
+  | '비건/키토'
+  | '기타';
+
+export type BreadCategoryText =
+  | '식사빵'
   | '비건·키토'
   | '크로와상'
   | '구움과자류'
@@ -30,83 +45,76 @@ type CategoryText =
   | '추억의 빵'
   | '기타';
 
-//TODO StoreBaseCategoryText, CategoryText 같이 다룰 수있도록 폴더화
-export interface BreadCategoeryInfo {
-  id: number;
-  icon: React.FC<React.SVGProps<SVGSVGElement>>;
-  text: CategoryText;
+export interface BreadCategoryItem {
+  Icon: React.FC<React.SVGProps<SVGSVGElement>>;
+  category: BreadCategory;
+  text: BreadCategoryText;
 }
 
-interface BreadCategory {
-  [key: string]: BreadCategoeryInfo;
-}
-
-const breadCategory: BreadCategory = {
-  WhiteBread: {
-    id: 1,
-    icon: CategoryWhiteBread,
-    text: '식빵',
+export const categoryItems: BreadCategoryItem[] = [
+  {
+    Icon: BreadMealIcon,
+    category: '식사빵',
+    text: '식사빵',
   },
-  VeganQuito: {
-    id: 2,
-    icon: CategoryVeganQuito,
+  {
+    Icon: BreadBeganKitoIcon,
+    category: '비건/키토',
     text: '비건·키토',
   },
-  Croissant: {
-    id: 3,
-    icon: CategoryCroissant,
-    text: '크로와상',
+  {
+    Icon: BreadCroissantIcon,
+    category: '크로와상',
+    text: '크로와상'
   },
-  Baked: {
-    id: 4,
-    icon: CategoryBaked,
+  {
+    Icon: BreadCaneleIcon,
+    category: '구움과자류',
     text: '구움과자류',
   },
-  Cake: {
-    id: 5,
-    icon: CategoryCake,
-    text: '케이크',
+  {
+    Icon: BreadCakeIcon,
+    category: '케이크',
+    text: '케이크'
   },
-  PieTart: {
-    id: 6,
-    icon: CategoryPieTart,
+  {
+    Icon: BreadPieTartIcon,
+    category: '파이/타르트',
     text: '파이/타르트',
   },
-  Macaron: {
-    id: 7,
-    icon: CategoryMacaron,
+  {
+    Icon: BreadMacaronIcon,
+    category: '마카롱',
     text: '마카롱',
   },
-  Donut: {
-    id: 8,
-    icon: CategoryDonut,
+  {
+    Icon: BreadDonutIcon,
+    category: '도넛',
     text: '도넛',
   },
-  Cookie: {
-    id: 9,
-    icon: CategoryCookie,
+  {
+    Icon: BreadCookieIcon,
+    category: '쿠키',
     text: '쿠키',
   },
-  CreamBread: {
-    id: 10,
-    icon: CategoryCreamBread,
+  {
+    Icon: BreadCreamIcon,
+    category: '크림빵',
     text: '크림빵',
   },
-  Snack: {
-    id: 11,
-    icon: CategorySnack,
+  {
+    Icon: BreadPretzelIcon,
+    category: '과자류',
     text: '과자류',
   },
-  BringsBackBread: {
-    id: 12,
-    icon: CategoryBringsBackBread,
+  {
+    Icon: BreadMemoryIcon,
+    category: '추억의 빵',
     text: '추억의 빵',
   },
-  Etc: {
-    id: 13,
-    icon: CategoryEtc,
+  {
+    Icon: BreadHotdogIcon,
+    category: '기타',
     text: '기타',
   },
-};
-
-export default breadCategory;
+];

@@ -17,19 +17,19 @@ type NavigationMap = Record<NavigationRoute, NavigationItem>;
 
 const navigationMap: NavigationMap = {
   home: {
-    path: '/daedong/map',
+    path: '/map',
     Icon: Home,
   },
   search: {
-    path: '/daedong#search',
+    path: '/search',
     Icon: Compass,
   },
   edit: {
-    path: '/daedong#edit',
+    path: '/map#edit',
     Icon: Edit,
   },
   user: {
-    path: '/daedong/#user',
+    path: '/#user',
     Icon: User,
   },
 };

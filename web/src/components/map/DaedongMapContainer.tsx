@@ -4,9 +4,9 @@ import { useTheme } from '@emotion/react';
 import { useAtom } from 'jotai';
 import { BottomSheet } from '@/components/common';
 import { useGetBakeries } from '@/remotes/hooks';
+import { bottomSheetRefAtom } from '@/store/map';
 import BakeryMap from './BakeryMap';
 import BakeryCardList from './BakeryCardList';
-import { bottomSheetRefAtom } from './store';
 import { DEFAULT_POSITION } from './constants';
 
 const DaedongMapContainer: React.FC = () => {

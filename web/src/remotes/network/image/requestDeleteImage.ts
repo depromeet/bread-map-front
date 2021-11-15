@@ -7,7 +7,7 @@ interface DeleteImagePayload {
 const requestDeleteImage = async ({
   fileName,
 }: DeleteImagePayload): Promise<void> => {
-  const resp = await fetchBase(`/s3/image?fileName=${fileName}`);
+  await fetchBase(`/s3/image?fileName=${fileName}`);
   return;
 };
 

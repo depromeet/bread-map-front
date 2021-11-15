@@ -49,8 +49,8 @@ const requestGetBakeryMenuReview = async ({
   bakeryId,
   limit,
   page,
-}: GetBakeryMenuPayload): Promise<GetBakeryMenuReviewResponse> => {
-  const resp = await fetchBase(`/bakery/${bakeryId}/menu-review`);
+}: GetBakeryMenuReviewPayload): Promise<GetBakeryMenuReviewResponse> => {
+  const resp = await fetchBase(`/bakery/${bakeryId}/menu-review?page=${page}&limit=${limit}`);
   const data = await resp.json();
   return data;
 };

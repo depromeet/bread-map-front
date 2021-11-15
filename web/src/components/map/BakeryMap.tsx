@@ -5,7 +5,7 @@ import { NaverMap } from '@/lib/navermap';
 import CurrentPositionButton from './CurrentPositionButton';
 import BreadFilterButton from './BreadFilterButton';
 import FlagFilterButton from './FlagFilterButton';
-import type { BakeryEntity } from './types';
+import type { BakeryEntity } from '@/remotes/network/fetchBakeries';
 
 const BakeryMarkers = dynamic(
   () => import('./BakeryMarkers'),

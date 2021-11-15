@@ -1,7 +1,11 @@
 import useSWR from 'swr';
 import { requestGetBakeries } from '@/remotes/network/bakery';
 
-type UseGetBakeriesParams = Parameters<typeof fetchBakeries>[0];
+interface UseGetBakeriesParams {
+  latitude: number;
+  longitude: number;
+  range: number;
+}
 
 const useGetBakeries = ({
   latitude,

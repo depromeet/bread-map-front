@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { CategoryInfo } from '@/constants/breadCategory';
+import { BreadCategoryItem } from '@/constants/breadCategories';
 import { Toast } from '@/components/common/ToastPopup';
 import { ArrowDown, GrayStar, OrangeStar, Plus } from '@/components/icons';
 import { Review } from '.';
 
 interface StartAddProps {
   setIsCategoryPage: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedCategory: CategoryInfo[];
+  selectedCategory: BreadCategoryItem[];
   stars: number[];
   singleReview: Review;
   editScore: (clickedIndex: number) => void;

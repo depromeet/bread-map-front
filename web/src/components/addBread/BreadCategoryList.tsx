@@ -1,72 +1,56 @@
 import * as React from 'react';
-import { useAtom } from 'jotai';
 import styled from '@emotion/styled';
-import { ChevronLeftIcon, XIcon } from '@/components/icons';
-import CategoryList from './CategoryList';
-import { currentFilterAtom } from './store';
-import type { Bread } from './types';
+import { useAtom } from 'jotai';
+import { CategoryList } from '@/components/common';
+import { ChevronLeftIcon } from '@/components/icons';
+import { currentBreadReviewAtom } from '@/store/addBread';
+import type { BreadCategory } from '@/constants/breadCategories';
 
-const summaryText = '모든 먹부림에는\n주종목이 있죠!';
-
-interface BreadFilterSelectProps {
-  open: boolean;
+interface BreadCategoryListProps {
+	open: boolean;
   onClose: () => void;
 }
 
-const BreadFilterSelect: React.FC<BreadFilterSelectProps> = ({
-  open,
+const BreadCategoryList: React.FC<BreadCategoryListProps> = ({
+	open,
   onClose,
 }) => {
-  const [currentFilter, setCurrentFilter] = useAtom(currentFilterAtom);
+	const [review, setReview] = useAtom(currentBreadReviewAtom);
 
-  const [selectedItems, setSelectedItems] = React.useState<Bread[]>([]);
+  const [selectedItems, setSelectedItems] = React.useState<BreadCategory[]>([]);
 
-  const handleChange = (item: Bread) => {
-    setSelectedItems((prev) => {
-      const idx = prev.indexOf(item);
-
-      if (idx > -1) {
-        return [...prev.slice(0, idx), ...prev.slice(idx + 1)];
-      } else {
-        return [...prev, item];
-      }
-    });
-  };
-
-  const handleCancel = () => {
-    setSelectedItems(currentFilter);
+  const handleCancel: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+		e.stopPropagation();
+		setSelectedItems([review.category]);
     onClose();
   };
 
-  const handleSubmit = () => {
-    setCurrentFilter(selectedItems);
+  const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+		e.stopPropagation();
+		setReview({ category: selectedItems[0] });
     onClose();
   };
 
-  if (!open) return null;
+	if (!open) return null;
   return (
     <Base>
       <Header>
         <IconButton onClick={handleCancel}>
           <ChevronLeftIcon />
         </IconButton>
-        <Title>빵종류 모아보기</Title>
-        <IconButton onClick={handleCancel}>
-          <XIcon />
-        </IconButton>
+        <Title>빵종류</Title>
       </Header>
       <Content>
-        <ContentSummary>{summaryText}</ContentSummary>
         <CategoryList
           selectedItems={selectedItems}
-          onChange={handleChange}
+          onChange={(item) => setSelectedItems([item])}
         />
         <ButtonGroup>
           <CancelButton onClick={handleCancel}>
-            취소하기
+						취소
           </CancelButton>
           <SubmitButton onClick={handleSubmit}>
-            모아보기
+						확인
           </SubmitButton>
         </ButtonGroup>
       </Content>
@@ -74,7 +58,7 @@ const BreadFilterSelect: React.FC<BreadFilterSelectProps> = ({
   );
 }
 
-export default BreadFilterSelect;
+export default BreadCategoryList;
 
 const Base = styled.div`
   position: fixed;
@@ -89,7 +73,6 @@ const Base = styled.div`
 const Header = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
   width: 100%;
   height: 48px;
 `;
@@ -107,6 +90,7 @@ const IconButton = styled.button`
 `;
 
 const Title = styled.span`
+  margin-left: calc(50% - 72px);
   font-size: 18px;
   font-weight: 700;
   line-height: 24px;
@@ -116,17 +100,9 @@ const Title = styled.span`
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 20px 0;
+  padding: 0 0 20px;
   width: 100%;
   height: calc(100% - 48px);
-`;
-
-const ContentSummary = styled.span`
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 28px;
-  white-space: pre;
-  margin-left: 20px;
 `;
 
 const ButtonGroup = styled.div`
@@ -157,3 +133,4 @@ const SubmitButton = styled.button`
   font-weight: 700;
   line-height: 20px;
 `;
+
