@@ -7,18 +7,13 @@ import BreadFilterButton from './BreadFilterButton';
 import FlagFilterButton from './FlagFilterButton';
 import type { BakeryEntity } from '@/remotes/network/fetchBakeries';
 
-const BakeryMarkers = dynamic(
-  () => import('./BakeryMarkers'),
-  { ssr: false },
-);
+const BakeryMarkers = dynamic(() => import('./BakeryMarkers'), { ssr: false });
 
 interface BakeryMapProps {
   entities: BakeryEntity[] | undefined;
 }
 
-const BakeryMap: React.FC<BakeryMapProps> = ({
-  entities,
-}) => {
+const BakeryMap: React.FC<BakeryMapProps> = ({ entities }) => {
   return (
     <Map
       ncpClientId={process.env.NEXT_PUBLIC_NAVER_ID}

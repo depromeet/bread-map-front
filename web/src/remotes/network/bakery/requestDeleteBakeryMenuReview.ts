@@ -9,12 +9,9 @@ const requestDeleteBakeryMenuReview = async ({
   bakeryId,
   menuReviewId,
 }: DeleteBakeryMenuReviewPayload): Promise<void> => {
-  await fetchBase(
-    `/bakery/${bakeryId}/menu-review/${menuReviewId}`,
-    {
-      method: 'DELETE',
-    }
-  );
+  await fetchBase(`/bakery/${bakeryId}/menu-review/${menuReviewId}`, {
+    method: 'DELETE',
+  });
   return;
 };
 

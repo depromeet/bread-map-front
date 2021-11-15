@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
 import { useGetBakeries } from '@/remotes/hooks';
-import { bottomSheetTypeAtom, currentBakeryIdAtom } from '@/store/map'
+import { bottomSheetTypeAtom, currentBakeryIdAtom } from '@/store/map';
 import BakeryInfoCard from './BakeryInfoCard';
 import { DEFAULT_POSITION } from './constants';
 
@@ -16,7 +16,9 @@ const BakeryCardList: React.FC = () => {
     range: 100,
   });
 
-  const currentBakeryEntity = data?.find((el) => el.bakeryId === currentBakeryId);
+  const currentBakeryEntity = data?.find(
+    (el) => el.bakeryId === currentBakeryId
+  );
 
   if (data === undefined) return null;
   return (
@@ -27,7 +29,9 @@ const BakeryCardList: React.FC = () => {
           wentCount={currentBakeryEntity.flagsCount}
           starCount={currentBakeryEntity.ratingCount}
           reviewCount={currentBakeryEntity.menuReviewsCount}
-          reviews={currentBakeryEntity.menuReviewList.map((review) => review.contents)}
+          reviews={currentBakeryEntity.menuReviewList.map(
+            (review) => review.contents
+          )}
         />
       )}
       {bottomSheetType === 'multiple' && (

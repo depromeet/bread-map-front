@@ -4,8 +4,8 @@ import { categoryItems } from '@/constants/breadCategories';
 import type { BreadCategory } from '@/constants/breadCategories';
 
 interface CategoryListProps {
-	selectedItems: BreadCategory[];
-	onChange: (item: BreadCategory) => void;
+  selectedItems: BreadCategory[];
+  onChange: (item: BreadCategory) => void;
 }
 
 const CategoryList: React.FC<CategoryListProps> = ({
@@ -14,11 +14,7 @@ const CategoryList: React.FC<CategoryListProps> = ({
 }) => {
   return (
     <Base>
-      {categoryItems.map(({
-        Icon,
-        category,
-        text,
-      }) => (
+      {categoryItems.map(({ Icon, category, text }) => (
         <Item
           isSelected={selectedItems.find((el) => el === category) !== undefined}
           onClick={() => onChange(category)}
@@ -46,19 +42,17 @@ const Base = styled.ul`
   overflow-y: auto;
 `;
 
-const Item = styled.li<{ isSelected: boolean; }>`
+const Item = styled.li<{ isSelected: boolean }>`
   width: 100px;
   height: 100px;
-  background-color: ${({ isSelected, theme }) => isSelected
-    ? theme.color.primary100
-    : theme.color.white};
-  border: 1px solid ${({ isSelected, theme }) => isSelected
-    ? theme.color.primary500
-    : theme.color.gray200};
+  background-color: ${({ isSelected, theme }) =>
+    isSelected ? theme.color.primary100 : theme.color.white};
+  border: 1px solid
+    ${({ isSelected, theme }) =>
+      isSelected ? theme.color.primary500 : theme.color.gray200};
   border-radius: 10px;
-  color: ${({ isSelected, theme }) => isSelected 
-    ? theme.color.primary500
-    : theme.color.gray400};
+  color: ${({ isSelected, theme }) =>
+    isSelected ? theme.color.primary500 : theme.color.gray400};
   display: flex;
   flex-direction: column;
   align-items: center;

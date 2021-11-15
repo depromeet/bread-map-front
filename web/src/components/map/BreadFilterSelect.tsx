@@ -60,17 +60,13 @@ const BreadFilterSelect: React.FC<BreadFilterSelectProps> = ({
           }}
         />
         <ButtonGroup>
-          <CancelButton onClick={handleCancel}>
-            취소하기
-          </CancelButton>
-          <SubmitButton onClick={handleSubmit}>
-            모아보기
-          </SubmitButton>
+          <CancelButton onClick={handleCancel}>취소하기</CancelButton>
+          <SubmitButton onClick={handleSubmit}>모아보기</SubmitButton>
         </ButtonGroup>
       </Content>
     </Base>
   );
-}
+};
 
 export default BreadFilterSelect;
 

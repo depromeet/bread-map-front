@@ -99,9 +99,7 @@ interface BakeryMarkersProps {
   entities: BakeryEntity[] | undefined;
 }
 
-const BakeryMarkers: React.FC<BakeryMarkersProps> = ({
-  entities,
-}) => {
+const BakeryMarkers: React.FC<BakeryMarkersProps> = ({ entities }) => {
   const markerItems = React.useRef<MarkerItem[]>([]);
   const activeMarkerItem = React.useRef<MarkerItem | null>(null);
 
@@ -112,53 +110,47 @@ const BakeryMarkers: React.FC<BakeryMarkersProps> = ({
   const [bottomSheetRef] = useAtom(bottomSheetRefAtom);
   const [currentFilter] = useAtom(currentFilterAtom);
 
-  const clearMarkers = React.useCallback(
-    () => {
-      markerItems.current.forEach(({ marker }) => {
-        marker.setMap(null);
-        marker.clearListeners('click');
+  const clearMarkers = React.useCallback(() => {
+    markerItems.current.forEach(({ marker }) => {
+      marker.setMap(null);
+      marker.clearListeners('click');
+    });
+
+    markerItems.current = [];
+  }, []);
+
+  const initializedMarkers = React.useCallback(() => {
+    if (entities === undefined) return;
+    if (naverMap === undefined) return;
+
+    const sdk = getNavermapSDK();
+    if (sdk === undefined) return;
+
+    clearMarkers();
+
+    entities.forEach((entity) => {
+      const marker = new sdk.Marker({
+        position: {
+          lat: entity.latitude,
+          lng: entity.longitude,
+        },
+        map: naverMap,
+        icon: {
+          content: wrapMarker(breadRecord['기본'], 'default', 'small'),
+          size: sizeRecord.small,
+        },
       });
 
-      markerItems.current = [];
-    },
-    [],
-  );
+      sdk.Event.addListener(marker, 'click', (e) => {
+        const markerEl = e.overlay.get('eventTarget');
+        if (!(markerEl instanceof HTMLElement)) return;
 
-  const initializedMarkers = React.useCallback(
-    () => {
-      if (entities === undefined) return;
-      if (naverMap === undefined) return;
-
-      const sdk = getNavermapSDK();
-      if (sdk === undefined) return;
-
-      clearMarkers();
-
-      entities.forEach((entity) => {
-        const marker = new sdk.Marker({
-          position: {
-            lat: entity.latitude,
-            lng: entity.longitude,
-          },
-          map: naverMap,
-          icon: {
-            content: wrapMarker(breadRecord['기본'], 'default', 'small'),
-            size: sizeRecord.small,
-          }
-        });
-
-        sdk.Event.addListener(marker, 'click', (e) => {
-          const markerEl = e.overlay.get('eventTarget');
-          if (!(markerEl instanceof HTMLElement)) return;
-
-          setCurrentBakeryId(entity.bakeryId);
-        });
-
-        markerItems.current.push({ entity, marker });
+        setCurrentBakeryId(entity.bakeryId);
       });
-    },
-    [entities, naverMap, clearMarkers, setCurrentBakeryId],
-  );
+
+      markerItems.current.push({ entity, marker });
+    });
+  }, [entities, naverMap, clearMarkers, setCurrentBakeryId]);
 
   React.useEffect(() => {
     if (currentFilter.length === 0) {
@@ -166,23 +158,26 @@ const BakeryMarkers: React.FC<BakeryMarkersProps> = ({
       return;
     }
 
-    const filteredMarkerItems = markerItems.current.reduce<MarkerItem[]>((acc, item) => {
-      let filtered = false;
+    const filteredMarkerItems = markerItems.current.reduce<MarkerItem[]>(
+      (acc, item) => {
+        let filtered = false;
 
-      for (const filterKey of currentFilter) {
-        if (item.entity.breadCategoryList.includes(filterKey)) {
-          filtered = true;
+        for (const filterKey of currentFilter) {
+          if (item.entity.breadCategoryList.includes(filterKey)) {
+            filtered = true;
+          }
         }
-      }
 
-      if (filtered) {
-        acc.push(item);
-      } else {
-        item.marker.setMap(null);
-      }
+        if (filtered) {
+          acc.push(item);
+        } else {
+          item.marker.setMap(null);
+        }
 
-      return acc;
-    }, []);
+        return acc;
+      },
+      []
+    );
 
     for (const filteredItem of filteredMarkerItems) {
       const markerEl = filteredItem.marker.get('eventTarget');
@@ -203,7 +198,9 @@ const BakeryMarkers: React.FC<BakeryMarkersProps> = ({
   }, [currentFilter, initializedMarkers]);
 
   React.useEffect(() => {
-    const currentItem = markerItems.current.find(({ entity }) => entity.bakeryId === currentBakeryId);
+    const currentItem = markerItems.current.find(
+      ({ entity }) => entity.bakeryId === currentBakeryId
+    );
     if (currentItem === undefined) return;
 
     const { marker } = currentItem;

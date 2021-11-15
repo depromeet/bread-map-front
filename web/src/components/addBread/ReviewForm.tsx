@@ -3,98 +3,89 @@ import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
 import { Button } from '@/components/common';
 import { BreadCategorySelect } from '@/components/addBread';
-import { 
-	ChevronDownIcon,
-	PlusIcon,
-	StarTrueIcon,
-	StarFalseIcon,
- } from '@/components/icons';
- import { currentBreadReviewAtom } from '@/store/addBread';
+import {
+  ChevronDownIcon,
+  PlusIcon,
+  StarTrueIcon,
+  StarFalseIcon,
+} from '@/components/icons';
+import { currentBreadReviewAtom } from '@/store/addBread';
 
 const ReviewForm: React.FC = () => {
-	const ref = React.useRef<HTMLInputElement | null>(null);
+  const ref = React.useRef<HTMLInputElement | null>(null);
 
   const [review, setReview] = useAtom(currentBreadReviewAtom);
 
-	return (
-		<Content>
-			<BreadCategorySelect />
-			<Row>
-				<Text isRequired>메뉴명</Text>
-				<Input
-					name="name"
-					placeholder="메뉴명을 입력해주세요"
+  return (
+    <Content>
+      <BreadCategorySelect />
+      <Row>
+        <Text isRequired>메뉴명</Text>
+        <Input
+          name="name"
+          placeholder="메뉴명을 입력해주세요"
           value={review.name}
           onChange={(e) => {
             setReview({ name: e.target.value });
           }}
-				/>
+        />
         <AlertText>메뉴명을 입력해주세요.</AlertText>
-			</Row>
-			<Row>
-				<Text isRequired>가격</Text>
-				<Input
-					name="price"
-					type="number"
-					placeholder="원"
+      </Row>
+      <Row>
+        <Text isRequired>가격</Text>
+        <Input
+          name="price"
+          type="number"
+          placeholder="원"
           onChange={(e) => {
             setReview({ price: Number(e.target.value) });
           }}
-				/>
-				<AlertText>가격을 입력해주세요.</AlertText>
-			</Row>
-			<Row>
-				<Text>별점</Text>
-				<StarArea>
-					{[1, 2, 3, 4, 5].map((star, i) => (
-						<StarBtn
-              onClick={() => setReview({ star })}
-              key={i}
-            >
-							<StarFalseIcon />
-						</StarBtn>
-					))}
-				</StarArea>
-			</Row>
-			<Row>
-				<Text>한줄평</Text>
-				<Input
-					name="text"
-					placeholder="한줄평을 적어주세요"
+        />
+        <AlertText>가격을 입력해주세요.</AlertText>
+      </Row>
+      <Row>
+        <Text>별점</Text>
+        <StarArea>
+          {[1, 2, 3, 4, 5].map((star, i) => (
+            <StarBtn onClick={() => setReview({ star })} key={i}>
+              <StarFalseIcon />
+            </StarBtn>
+          ))}
+        </StarArea>
+      </Row>
+      <Row>
+        <Text>한줄평</Text>
+        <Input
+          name="text"
+          placeholder="한줄평을 적어주세요"
           onChange={(e) => {
-            setReview({ text: e.target.value })
+            setReview({ text: e.target.value });
           }}
-				/>
-			</Row>
-			<Row>
-				<PhotoUploadText>사진 업로드</PhotoUploadText>
-				<Scroll>
-					<PhotoWrapper>
-						<AddPhotoBtn>
-							<PlusIcon width={36} height={36} />
-							<input ref={ref} type={'file'} multiple />
-						</AddPhotoBtn>
-						{[...Array(5)].map((photo, i) => (
-							<EmptyPhoto key={i}></EmptyPhoto>
-						))}
-					</PhotoWrapper>
-				</Scroll>
-			</Row>
+        />
+      </Row>
+      <Row>
+        <PhotoUploadText>사진 업로드</PhotoUploadText>
+        <Scroll>
+          <PhotoWrapper>
+            <AddPhotoBtn>
+              <PlusIcon width={36} height={36} />
+              <input ref={ref} type={'file'} multiple />
+            </AddPhotoBtn>
+            {[...Array(5)].map((photo, i) => (
+              <EmptyPhoto key={i}></EmptyPhoto>
+            ))}
+          </PhotoWrapper>
+        </Scroll>
+      </Row>
       <ButtonBox>
-        <Button
-          styleType={'none'}
-        >
+        <Button styleType={'none'}>
           <PlusIcon />
           <span>다른 빵 추가하기</span>
         </Button>
-        <Button
-          styleType={'primary'}
-        >
-          확인
-        </Button>
+        <Button styleType={'primary'}>확인</Button>
       </ButtonBox>
-		</Content>
-	);
+    </Content>
+  );
 };
 
 export default ReviewForm;
@@ -109,8 +100,8 @@ const Text = styled.span<{ isRequired?: boolean }>`
   position: relative;
   display: inline-block;
   margin-bottom: 12px;
-	font-size: 14px;
-	font-weight: 700;
+  font-size: 14px;
+  font-weight: 700;
   color: ${({ theme }) => theme.color.gray800};
 
   &::before {
@@ -190,9 +181,9 @@ const AddPhotoBtn = styled.div`
     display: none;
   }
 
-	svg path {
-		stroke: ${({ theme }) => theme.color.primary500};
-	}
+  svg path {
+    stroke: ${({ theme }) => theme.color.primary500};
+  }
 `;
 
 const EmptyPhoto = styled.div`

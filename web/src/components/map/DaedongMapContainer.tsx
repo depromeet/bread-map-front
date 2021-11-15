@@ -11,7 +11,7 @@ import { DEFAULT_POSITION } from './constants';
 
 const DaedongMapContainer: React.FC = () => {
   const theme = useTheme();
-  
+
   const [, setBottomSheetRef] = useAtom(bottomSheetRefAtom);
 
   const { data } = useGetBakeries({

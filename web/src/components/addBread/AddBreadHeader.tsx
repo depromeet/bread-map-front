@@ -6,21 +6,15 @@ import ReviewTabs from './ReviewTabs';
 import StartTitle from './StartTitle';
 
 const AddBreadHeader: React.FC = () => {
-	const [breadReviews] = useAtom(breadReviewsAtom);
+  const [breadReviews] = useAtom(breadReviewsAtom);
 
-	return (
-		<Base>
-		  {breadReviews.length > 1 ? (
-				<ReviewTabs />
-			) : (
-		    <StartTitle />
-			)}
-		</Base>
-	);
+  return (
+    <Base>{breadReviews.length > 1 ? <ReviewTabs /> : <StartTitle />}</Base>
+  );
 };
 
 export default AddBreadHeader;
 
 const Base = styled.div`
-	margin: 12px 20px 36px;
+  margin: 12px 20px 36px;
 `;

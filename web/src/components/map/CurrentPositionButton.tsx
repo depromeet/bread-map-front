@@ -8,10 +8,7 @@ const DEFAULT_POSITION = {
   lng: 126.9783882,
 };
 
-const CurrentPositionButton = React.forwardRef<
-  HTMLButtonElement | null,
-  {}
->(
+const CurrentPositionButton = React.forwardRef<HTMLButtonElement | null, {}>(
   (_, ref) => {
     const naverMap = useNaverMap();
 

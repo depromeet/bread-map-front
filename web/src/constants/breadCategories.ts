@@ -65,7 +65,7 @@ export const categoryItems: BreadCategoryItem[] = [
   {
     Icon: BreadCroissantIcon,
     category: '크로와상',
-    text: '크로와상'
+    text: '크로와상',
   },
   {
     Icon: BreadCaneleIcon,
@@ -75,7 +75,7 @@ export const categoryItems: BreadCategoryItem[] = [
   {
     Icon: BreadCakeIcon,
     category: '케이크',
-    text: '케이크'
+    text: '케이크',
   },
   {
     Icon: BreadPieTartIcon,

@@ -7,8 +7,8 @@ const AddBread: NextPage = () => {
   return (
     <AddBreadLayout>
       <TopHeader>
-				<ChevronLeftIcon />
-				<XIcon />
+        <ChevronLeftIcon />
+        <XIcon />
       </TopHeader>
       <AddBreadHeader />
       <ReviewForm />
@@ -28,4 +28,3 @@ const TopHeader = styled.div`
   justify-content: space-between;
   margin: 0 20px;
 `;
-

@@ -7,31 +7,31 @@ import { currentBreadReviewAtom } from '@/store/addBread';
 import type { BreadCategory } from '@/constants/breadCategories';
 
 interface BreadCategoryListProps {
-	open: boolean;
+  open: boolean;
   onClose: () => void;
 }
 
 const BreadCategoryList: React.FC<BreadCategoryListProps> = ({
-	open,
+  open,
   onClose,
 }) => {
-	const [review, setReview] = useAtom(currentBreadReviewAtom);
+  const [review, setReview] = useAtom(currentBreadReviewAtom);
 
   const [selectedItems, setSelectedItems] = React.useState<BreadCategory[]>([]);
 
   const handleCancel: React.MouseEventHandler<HTMLButtonElement> = (e) => {
-		e.stopPropagation();
-		setSelectedItems([review.category]);
+    e.stopPropagation();
+    setSelectedItems([review.category]);
     onClose();
   };
 
   const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = (e) => {
-		e.stopPropagation();
-		setReview({ category: selectedItems[0] });
+    e.stopPropagation();
+    setReview({ category: selectedItems[0] });
     onClose();
   };
 
-	if (!open) return null;
+  if (!open) return null;
   return (
     <Base>
       <Header>
@@ -46,17 +46,13 @@ const BreadCategoryList: React.FC<BreadCategoryListProps> = ({
           onChange={(item) => setSelectedItems([item])}
         />
         <ButtonGroup>
-          <CancelButton onClick={handleCancel}>
-						취소
-          </CancelButton>
-          <SubmitButton onClick={handleSubmit}>
-						확인
-          </SubmitButton>
+          <CancelButton onClick={handleCancel}>취소</CancelButton>
+          <SubmitButton onClick={handleSubmit}>확인</SubmitButton>
         </ButtonGroup>
       </Content>
     </Base>
   );
-}
+};
 
 export default BreadCategoryList;
 
@@ -133,4 +129,3 @@ const SubmitButton = styled.button`
   font-weight: 700;
   line-height: 20px;
 `;
-

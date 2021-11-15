@@ -50,9 +50,10 @@ const MapInitialize: React.FC<MapInitializeProps> = ({
         map.setOptions('zoomControl', false);
         map.setOptions('mapTypeControl', false);
 
-
         const scaleControl = map.get('scaleControl') as naver.maps.ScaleControl;
-        const mapDataControl = map.get('mapDataControl') as naver.maps.MapDataControl;
+        const mapDataControl = map.get(
+          'mapDataControl'
+        ) as naver.maps.MapDataControl;
 
         const scaleControlEl = scaleControl.getElement();
         const mapDataControlEl = mapDataControl.getElement();

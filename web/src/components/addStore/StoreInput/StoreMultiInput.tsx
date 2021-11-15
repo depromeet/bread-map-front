@@ -31,7 +31,7 @@ const StoreMultiInput = ({
     (idx: number) => setDeleteIdx(idx),
     []
   );
-  
+
   const ConfirmModalClose = React.useCallback(() => setDeleteIdx(-1), []);
 
   const addHomepage = React.useCallback(() => {

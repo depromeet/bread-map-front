@@ -10,4 +10,3 @@ export const currentBakeryIdAtom = atom<number | undefined>(undefined);
 export const bottomSheetRefAtom = atom<BottomSheetRef | null>(null);
 
 export const currentFilterAtom = atom<BreadCategory[]>([]);
-
