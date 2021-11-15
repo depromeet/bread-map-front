@@ -12,28 +12,20 @@ const BreadFilterButton: React.FC = () => {
 
   return (
     <>
-      <Button
-        onClick={toggleOpen}
-        isFiltered={currentFilter.length > 0}
-      >
+      <Button onClick={toggleOpen} isFiltered={currentFilter.length > 0}>
         {currentFilter.length > 0 && (
-          <FilteredCount>
-            {currentFilter.length}
-          </FilteredCount>
+          <FilteredCount>{currentFilter.length}</FilteredCount>
         )}
         <BreadDefaultIcon width={30} height={30} />
       </Button>
-      <BreadFilterSelect
-        open={open}
-        onClose={toggleOpen}
-      />
+      <BreadFilterSelect open={open} onClose={toggleOpen} />
     </>
   );
 };
 
 export default BreadFilterButton;
 
-const Button = styled.button<{ isFiltered: boolean; }>`
+const Button = styled.button<{ isFiltered: boolean }>`
   position: absolute;
   top: 60px;
   right: 22px;
@@ -42,12 +34,10 @@ const Button = styled.button<{ isFiltered: boolean; }>`
   height: 44px;
   border: none;
   border-radius: 50%;
-  background-color: ${({ theme, isFiltered }) => isFiltered
-    ? theme.color.black
-    : theme.color.white};
-  color: ${({ theme, isFiltered }) => isFiltered
-    ? theme.color.white
-    : theme.color.black};
+  background-color: ${({ theme, isFiltered }) =>
+    isFiltered ? theme.color.black : theme.color.white};
+  color: ${({ theme, isFiltered }) =>
+    isFiltered ? theme.color.white : theme.color.black};
   box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 

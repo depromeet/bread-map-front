@@ -3,12 +3,12 @@ import { DaedongMapContainer } from '@/components/map';
 import type { NextPage } from 'next';
 
 const Map: NextPage = () => {
-	return (
-		<>
-		  <DaedongMapContainer />
-			<Footer />
-		</>
-	);
+  return (
+    <>
+      <DaedongMapContainer />
+      <Footer />
+    </>
+  );
 };
 
 export default Map;
