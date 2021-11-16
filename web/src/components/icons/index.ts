@@ -2,6 +2,7 @@
 import { Construction } from './Construction';
 export { default as Home } from './Home';
 export { default as User } from './User';
+export { default as UserCircle } from './UserCircle';
 export { default as Compass } from './Compass';
 export { default as Edit } from './Edit';
 export { default as Bread } from './Bread';
