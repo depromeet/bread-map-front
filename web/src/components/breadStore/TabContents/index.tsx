@@ -10,7 +10,7 @@ const TabContents = ({ tab }: { tab: Tabs }) => {
   return (
     <Container>
       {tab === 'home' && <HomeSection />}
-      {tab === 'menu' && <MenuSection tab={tab} />}
+      {tab === 'menu' && <MenuSection />}
       {tab === 'review' && <ReviewSection tab={tab} />}
       {tab === 'info' && <InfoSection tab={tab} />}
     </Container>
