@@ -27,7 +27,7 @@ interface MenuReviewEntity {
   rating: number;
 }
 
-interface BakeryEntity {
+export interface BakeryEntity {
   address: string;
   avgRating: number;
   bakeryId: number;
