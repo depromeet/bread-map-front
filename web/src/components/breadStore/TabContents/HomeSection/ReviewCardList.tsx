@@ -3,6 +3,25 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { BakeryEntity } from '@/remotes/network/bakery/requestGetBakery';
 
+const MINUTE = 60;
+const HOUR = 3600;
+const DAY = 3600 * 24;
+const MONTH = 3600 * 24 * 30;
+const YEAR = 3600 * 24 * 30 * 12;
+
+export const dateDiff = (date: string) => {
+  const modifyDate = new Date(date).getTime();
+  const nowDate = new Date().getTime();
+  const timeDiff = Math.round((nowDate - modifyDate) / 1000);
+
+  if (timeDiff < MINUTE) return `${timeDiff}초 전`;
+  if (timeDiff < HOUR) return `${Math.round(timeDiff / MINUTE)}분 전`;
+  if (timeDiff < DAY) return `${Math.round(timeDiff / HOUR)}시간 전`;
+  if (timeDiff < MONTH) return `${Math.round(timeDiff / DAY)}일 전`;
+  if (timeDiff < YEAR) return `${Math.round(timeDiff / MONTH)}개월 전`;
+  return `${Math.round(timeDiff / YEAR)}년 전`;
+};
+
 const ReviewCardList = ({
   reviews,
 }: {
@@ -17,9 +36,9 @@ const ReviewCardList = ({
               <Member>
                 <img src={'/images/noProfileImg.png'} alt={'noprofile'} />
                 <div>
-                  <b>{review.memberName}</b>
+                  <b>{review.memberName}님</b>
                   <LastModifiedDate>
-                    {review.lastModifiedDateTime}
+                    {dateDiff(review.lastModifiedDateTime)}
                   </LastModifiedDate>
                 </div>
               </Member>
@@ -106,11 +125,15 @@ const Member = styled.div`
 `;
 
 const LastModifiedDate = styled.div`
-  color: ${({ theme }) => theme.color.gray400};
+  display: block;
+  font-size: 12px;
+  color: ${({ theme }) => theme.color.gray700};
 `;
 
 const MenuInfo = styled.div`
   display: flex;
+  font-size: 13px;
+  color: ${({ theme }) => theme.color.gray600};
   gap: 10px;
   margin: 12px 0;
 `;
@@ -130,5 +153,6 @@ const MenuImage = styled.div`
   }
 `;
 const MenuContent = styled.div`
+  font-size: 14px;
   margin: 12px 0;
 `;
