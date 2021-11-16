@@ -1374,6 +1374,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/gapi.auth2@npm:^0.0.55":
+  version: 0.0.55
+  resolution: "@types/gapi.auth2@npm:0.0.55"
+  dependencies:
+    "@types/gapi": "*"
+  checksum: e6afb5d350360d0db698ac5eccf2fb62f61acdf973d63374a423ce8f270a8d113da4bd1e189f7331269336a4af2725eb0f85a049569e602b4dc11575eb109f74
+  languageName: node
+  linkType: hard
+
+"@types/gapi@npm:*":
+  version: 0.0.41
+  resolution: "@types/gapi@npm:0.0.41"
+  checksum: 1fcb42de9ffcdc736de6c986c987c8d18471371fb876a9f3c4df29fbb51ac7a1e1c4daca4c852eae832f59072b190f1639fc75bd307d33c6db9f9fad85f7eaff
+  languageName: node
+  linkType: hard
+
 "@types/graceful-fs@npm:^4.1.2":
   version: 4.1.5
   resolution: "@types/graceful-fs@npm:4.1.5"
@@ -1439,6 +1455,13 @@ __metadata:
   version: 0.0.29
   resolution: "@types/json5@npm:0.0.29"
   checksum: e60b153664572116dfea673c5bda7778dbff150498f44f998e34b5886d8afc47f16799280e4b6e241c0472aef1bc36add771c569c68fc5125fc2ae519a3eb9ac
+  languageName: node
+  linkType: hard
+
+"@types/kakao-js-sdk@npm:^1.39.1":
+  version: 1.39.1
+  resolution: "@types/kakao-js-sdk@npm:1.39.1"
+  checksum: e64c68a3c5554fa312a7f59f0068f720c5513eff56ed8fbb225820d300b922911eab4c01bd3027fd5712a65d776fd12241405869bcc640f7087ab81269a666bd
   languageName: node
   linkType: hard
 
@@ -8558,7 +8581,9 @@ typescript@4.4.3:
     "@testing-library/jest-dom": ^5.14.1
     "@testing-library/react": ^12.1.0
     "@testing-library/react-hooks": ^7.0.2
+    "@types/gapi.auth2": ^0.0.55
     "@types/jest": ^27.0.1
+    "@types/kakao-js-sdk": ^1.39.1
     "@types/navermaps": ^3.0.9
     "@types/node": ^16.9.1
     "@types/react": 17.0.20

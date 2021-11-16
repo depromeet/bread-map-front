@@ -1,5 +1,7 @@
+import Script from 'next/script';
 import * as React from 'react';
 import styled from '@emotion/styled';
+import { requestSocialLogin } from '@/remotes/network/auth';
 
 const KakaoTalkIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
@@ -20,8 +22,57 @@ const KakaoTalkIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 );
 
 const KakaoSignInButton: React.FC = () => {
+  const handleClickSignIn = () => {
+    window.Kakao.Auth.getStatusInfo(async (obj) => {
+      /*
+      if (obj.status === 'connected') {
+        const accessToken = window.Kakao.Auth.getAccessToken();
+        const resp = await requestSocialLogin({ accessToken, provider: 'kakao' });
+        console.log(resp);
+
+        return;
+      }
+      */
+
+      try {
+        window.Kakao.Auth.authorize({
+          redirectUri: `${window.origin}/auth/signin`,
+          scope: 'account_email,gender',
+        });
+      } catch (error) {
+        console.error(error);
+      }
+
+      /*
+      window.Kakao.Auth.login({
+        throughTalk: true,
+        persistAccessToken: true,
+        scope: 'account_email,gender',
+        async success(resp) {
+          window.Kakao.Auth.setAccessToken(resp.access_token);
+
+          const login = await requestSocialLogin({ accessToken: resp.access_token, provider: 'kakao' });
+          console.log(login);
+
+          console.log(resp.access_token);
+        },
+        fail(error) {
+          console.error(error);
+        },
+      });
+      */
+    });
+  };
+
   return (
-    <Base>
+    <Base onClick={handleClickSignIn}>
+      <Script
+        id={'kakao-js-sdk'}
+        src={'https://developers.kakao.com/sdk/js/kakao.min.js'}
+        onLoad={() => {
+          window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_APP_KEY as string);
+        }}
+      />
       <KakaoTalkIcon />
       <span>카카오 계정으로 로그인</span>
     </Base>

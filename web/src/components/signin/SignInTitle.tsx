@@ -23,8 +23,8 @@ const SignInTitle: React.FC = () => {
     <Base>
       <Image
         src={'/images/signin.png'}
-        width={221}
-        height={170}
+        width={181}
+        height={134}
         alt={'sign in character'}
       />
       <TitleSvg />
@@ -38,9 +38,9 @@ const Base = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: auto;
-  margin-left: 29px;
 `;
 
 const Image = styled.img`
+  margin-left: auto;
   margin-bottom: 32px;
 `;
