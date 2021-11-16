@@ -13,30 +13,32 @@ const MenuCardList = ({
   menus: BakeryEntity['bakeryMenuListResponseList'];
 }) => {
   return (
-    <Container>
+    <>
       {menus?.length ? (
-        menus.map((menu, idx) => (
-          <li key={idx}>
-            <img src={menu.imgPath} alt={'menu'} />
-            <MenuInfo>
-              <div>
-                <MenuName>{menu.menuName}</MenuName>
-                <div>star: {menu.avgRating}</div>
-              </div>
-              <b>{addComma(menu.price)}원</b>
-            </MenuInfo>
-          </li>
-        ))
+        <Container>
+          {menus.map((menu, idx) => (
+            <li key={idx}>
+              <img src={menu.imgPath} alt={'menu'} />
+              <MenuInfo>
+                <div>
+                  <MenuName>{menu.menuName}</MenuName>
+                  <div>star: {menu.avgRating}</div>
+                </div>
+                <b>{addComma(menu.price)}원</b>
+              </MenuInfo>
+            </li>
+          ))}
+        </Container>
       ) : (
-        <>
+        <Container className={'nodata'}>
           <img src={'/images/sadSobbang.png'} alt={'nodata'} />
           <NoDataText>
             <div>빵순이를 위해 맛있는</div>
             <div>빵 정보를 공유해주세요.</div>
           </NoDataText>
-        </>
+        </Container>
       )}
-    </Container>
+    </>
   );
 };
 
@@ -52,6 +54,10 @@ const Container = styled.ul`
   align-items: center;
   justify-content: center;
   gap: 16px;
+
+  &.nodata {
+    margin: auto 0;
+  }
 
   li {
     width: 100%;

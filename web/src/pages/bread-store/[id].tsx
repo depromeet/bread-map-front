@@ -12,18 +12,26 @@ const Store = () => {
   const { tab, id } = router.query;
   const { data, error } = useGetBakery(id ? +id : 2);
 
+  const toDaedong = () => router.push('/daedong');
+  const shareClickHandler = () => {
+    if (navigator && 'share' in navigator) {
+      navigator.share({
+        title: data?.bakeryName,
+        text: `${data?.bakeryName}정보를 확인하세요 !`,
+        url: router.asPath,
+      });
+    }
+  };
+
   return (
     <>
       <Container>
         <TopHeader>
-          <ArrowPrev />
+          <ArrowPrev onClick={toDaedong} />
           <BakeryName>{data?.bakeryName}</BakeryName>
-          <Share />
+          <Share onClick={shareClickHandler} />
         </TopHeader>
         <StoreDetailTabs currentTab={tab} />
-
-        {error && <div>에러발생이지롱</div>}
-        {!data && <div>로딩중이지롱</div>}
       </Container>
       <Footer />
     </>

@@ -23,5 +23,8 @@ const Container = styled.div`
   padding: 9px 0 0;
   flex-grow: 1;
   overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   background-color: ${({ theme }) => theme.color.gray200};
 `;

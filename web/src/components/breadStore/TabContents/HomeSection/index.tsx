@@ -21,10 +21,15 @@ const HomeSection = () => {
 
   return (
     <Container>
-      <Section>
+      <Section className={'h100'}>
         <SectionHeader>
           <Title>
-            메뉴 <b>5</b>
+            메뉴{' '}
+            <b>
+              {data.bakeryMenuListResponseList
+                ? data.bakeryMenuListResponseList.length
+                : 0}
+            </b>
           </Title>
           <AddButtonStyle styleType={'primary'} rounded size="small">
             메뉴 입력
@@ -48,7 +53,7 @@ const HomeSection = () => {
         />
       </Section>
 
-      <Section>
+      <Section className={'h100'}>
         <SectionHeader>
           <Title>
             리뷰 <b>{data.menuReviewsCount}</b>
@@ -74,11 +79,18 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+  height: 100%;
 `;
 
 const Section = styled.div`
+  display: flex;
+  flex-direction: column;
   background: ${({ theme }) => theme.color.white};
   padding: 18px 12px;
+
+  &.h100 {
+    height: 100%;
+  }
 `;
 
 const SectionHeader = styled.div`

@@ -9,42 +9,44 @@ const ReviewCardList = ({
   reviews: BakeryEntity['menuReviewsResponseList'];
 }) => {
   return (
-    <Container>
+    <>
       {reviews?.length ? (
-        reviews?.map((review, idx) => (
-          <li key={idx}>
-            <Member>
-              <img src={'/images/noProfileImg.png'} alt={'noprofile'} />
-              <div>
-                <b>{review.memberName}</b>
-                <LastModifiedDate>
-                  {review.lastModifiedDateTime}
-                </LastModifiedDate>
-              </div>
-            </Member>
-            <MenuInfo>
-              <div>{review.menuName}</div>
-              <div>star</div>
-              <div>{review.rating}</div>
-            </MenuInfo>
-            <MenuImage>
-              {review.imgPathList.map((img, idx) => (
-                <img key={idx} src={img} alt="review" />
-              ))}
-            </MenuImage>
-            <MenuContent>{review.contents}</MenuContent>
-          </li>
-        ))
+        <Container>
+          {reviews?.map((review, idx) => (
+            <li key={idx}>
+              <Member>
+                <img src={'/images/noProfileImg.png'} alt={'noprofile'} />
+                <div>
+                  <b>{review.memberName}</b>
+                  <LastModifiedDate>
+                    {review.lastModifiedDateTime}
+                  </LastModifiedDate>
+                </div>
+              </Member>
+              <MenuInfo>
+                <div>{review.menuName}</div>
+                <div>star</div>
+                <div>{review.rating}</div>
+              </MenuInfo>
+              <MenuImage>
+                {review.imgPathList.map((img, idx) => (
+                  <img key={idx} src={img} alt="review" />
+                ))}
+              </MenuImage>
+              <MenuContent>{review.contents}</MenuContent>
+            </li>
+          ))}
+        </Container>
       ) : (
-        <NoDataContainer>
+        <Container className={'nodata'}>
           <img src={'/images/sadSobbang.png'} alt={'nodata'} />
           <NoDataText>
             <div>빵순이를 위해 맛있는</div>
             <div>빵 정보를 공유해주세요.</div>
           </NoDataText>
-        </NoDataContainer>
+        </Container>
       )}
-    </Container>
+    </>
   );
 };
 
@@ -62,6 +64,13 @@ const Container = styled.ul`
   justify-content: center;
   gap: 16px;
 
+  &.nodata {
+    margin: auto 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
   li {
     width: 100%;
     display: flex;
@@ -76,13 +85,6 @@ const Container = styled.ul`
   }
 `;
 
-const NoDataContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
 const NoDataText = styled.div`
   text-align: center;
   margin: 8px 0;
@@ -117,6 +119,9 @@ const MenuImage = styled.div`
   flex-basis: 140px;
   gap: 10px;
   overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   img {
     border-radius: 8px;
     flex-shrink: 0;
