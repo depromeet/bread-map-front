@@ -21,7 +21,7 @@ const HomeSection = ({ bakeryData }: HomeSectionProps) => {
 
   return (
     <Container>
-      <Section className={'h100'}>
+      <Section className={'grow'}>
         <SectionHeader>
           <Title>
             메뉴{' '}
@@ -53,7 +53,7 @@ const HomeSection = ({ bakeryData }: HomeSectionProps) => {
         />
       </Section>
 
-      <Section className={'h100'}>
+      <Section className={'grow'}>
         <SectionHeader>
           <Title>
             리뷰 <b>{bakeryData.menuReviewsCount}</b>
@@ -88,8 +88,8 @@ const Section = styled.div`
   background: ${({ theme }) => theme.color.white};
   padding: 18px 12px;
 
-  &.h100 {
-    height: 100%;
+  &.grow {
+    flex-grow: 1;
   }
 `;
 

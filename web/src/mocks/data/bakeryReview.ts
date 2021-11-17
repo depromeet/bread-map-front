@@ -26,8 +26,8 @@ const MOCK_BAKERY_REVIEW = {
   empty: true,
   first: true,
   last: true,
-  number: 0,
-  numberOfElements: 0,
+  number: 10,
+  numberOfElements: 100,
   pageable: {
     offset: 0,
     pageNumber: 0,

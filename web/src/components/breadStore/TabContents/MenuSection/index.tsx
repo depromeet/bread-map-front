@@ -15,7 +15,7 @@ const MenuSection = () => {
 
   return (
     <Container>
-      <Section className={'h100'}>
+      <Section className={'grow'}>
         <SectionHeader>
           <Title>
             메뉴 <b>{data?.number}</b>
@@ -45,8 +45,8 @@ const Section = styled.div`
   background: ${({ theme }) => theme.color.white};
   padding: 18px 12px;
 
-  &.h100 {
-    height: 100%;
+  &.grow {
+    flex-grow: 1;
   }
 `;
 

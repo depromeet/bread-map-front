@@ -31,10 +31,10 @@ const ReviewSection = ({ bakeryData }: ReviewSectionProps) => {
         />
       </Section>
 
-      <Section className={'h100'}>
+      <Section className={'grow'}>
         <SectionHeader>
           <Title>
-            리뷰 <b>{bakeryData.menuReviewsCount}</b>
+            리뷰 <b>{data.numberOfElements}</b>
           </Title>
           <AddButtonStyle styleType={'primary'} rounded size="small">
             리뷰 작성
@@ -61,8 +61,8 @@ const Section = styled.div`
   background: ${({ theme }) => theme.color.white};
   padding: 18px 12px;
 
-  &.h100 {
-    height: 100%;
+  &.grow {
+    flex-grow: 1;
   }
 `;
 
