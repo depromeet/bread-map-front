@@ -19,11 +19,13 @@ const useCategories = (
   }, [isOpenFirst]);
 
   const multiSelectFn = (categoryInfo: StoreBaseCategoryInfo) => {
-    const isSelected = selectedCategory.some((s) => s.id === categoryInfo.id);
+    const isSelected = selectedCategory.some(
+      (s) => s.category === categoryInfo.category
+    );
 
     if (isSelected) {
       setSelectedCategory((prev) =>
-        prev.filter((p) => p.id !== categoryInfo.id)
+        prev.filter((p) => p.category !== categoryInfo.category)
       );
     } else {
       setSelectedCategory([...selectedCategory, categoryInfo]);

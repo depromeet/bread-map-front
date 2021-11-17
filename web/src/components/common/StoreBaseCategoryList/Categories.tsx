@@ -10,18 +10,18 @@ interface CategoriesProps {
 }
 
 const Categories = ({ selectedCategory, onClickCategory }: CategoriesProps) => {
-  const isSelected = (id: number): boolean => {
+  const isSelected = (category: string | null): boolean => {
     if (!selectedCategory) return false;
-    return selectedCategory.some((s) => s.id === id);
+    return selectedCategory.some((s) => s.category === category);
   };
 
   return (
     <CategoriesWrapper>
       {Object.values(storeBaseCategory).map((value) => (
         <Category
-          key={value.id}
+          key={value.category}
           onClick={() => onClickCategory(value)}
-          isSelected={isSelected(value.id)}
+          isSelected={isSelected(value.category)}
         >
           <value.icon />
           <span>{value.text}</span>
