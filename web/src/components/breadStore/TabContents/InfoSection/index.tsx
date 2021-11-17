@@ -10,35 +10,41 @@ import {
   PhoneIcon,
 } from '@/components/icons';
 import BakeryCategories from './BakeryCategories';
+import { useGetBakery } from '@/remotes/hooks';
 
 type ReviewSectionProps = {
-  bakeryData: BakeryEntity;
+  bakeryId: number;
 };
 
-const InfoSection = ({ bakeryData }: ReviewSectionProps) => {
+const InfoSection = ({ bakeryId }: ReviewSectionProps) => {
+  const { data, error } = useGetBakery(bakeryId);
+
+  if (error) return <div>Error</div>;
+  if (!data) return <div>Loading...</div>;
+
   return (
     <Container>
       <Section className={'grow'}>
         <InfoList>
           <li>
             <MapPinIcon />
-            <div>{bakeryData.address}</div>
+            <div>{data.address}</div>
           </li>
           <li>
             <ClockIcon />
-            <div>{bakeryData.businessHour || '제공된 정보가 없습니다.'}</div>
+            <div>{data.businessHour || '제공된 정보가 없습니다.'}</div>
           </li>
           <li>
             <EarthIcon />
             <WebSiteList>
-              {bakeryData.websiteUrlList?.map((url, idx) => (
+              {data.websiteUrlList?.map((url, idx) => (
                 <div key={idx}>{url}</div>
               ))}
             </WebSiteList>
           </li>
           <li>
             <PhoneIcon />
-            <div>{bakeryData.telNumber}</div>
+            <div>{data.telNumber}</div>
           </li>
         </InfoList>
         <EditButtonStyle styleType={'none'} size={'tiny'} rounded>
@@ -49,7 +55,7 @@ const InfoSection = ({ bakeryData }: ReviewSectionProps) => {
         <SectionHeader>
           <Title>시설정보</Title>
         </SectionHeader>
-        <BakeryCategories selectedCategory={bakeryData.basicInfoList as any} />
+        <BakeryCategories selectedCategory={data.basicInfoList as any} />
       </Section>
     </Container>
   );

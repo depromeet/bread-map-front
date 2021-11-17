@@ -3,21 +3,20 @@ import styled from '@emotion/styled';
 import { Button } from '@/components/common';
 import StoreRating from './StoreRating';
 import ReviewCardList from '../HomeSection/ReviewCardList';
-import { BakeryEntity } from '@/remotes/network/bakery/requestGetBakery';
 import useGetBakeryMenuReivew from '@/remotes/hooks/useGetBakeryMenuReivew';
-import { useRouter } from 'next/router';
+import { useGetBakery } from '@/remotes/hooks';
 
 type ReviewSectionProps = {
-  bakeryData: BakeryEntity;
+  bakeryId: number;
 };
 
-const ReviewSection = ({ bakeryData }: ReviewSectionProps) => {
-  const router = useRouter();
-  const { id } = router.query;
-  const { data, error } = useGetBakeryMenuReivew(id ? +id : 0, 0, 10);
+const ReviewSection = ({ bakeryId }: ReviewSectionProps) => {
+  const { data: bakeryData, error: bakeryError } = useGetBakery(bakeryId);
+  const { data: bakeryMenuData, error: bakeryMenuError } =
+    useGetBakeryMenuReivew(bakeryId, 0, 10);
 
-  if (!data) return <div>Loading...</div>;
-  if (error) return <div>Error</div>;
+  if (!bakeryMenuData || !bakeryData) return <div>Loading...</div>;
+  if (bakeryMenuError || bakeryError) return <div>Error</div>;
 
   return (
     <Container>
@@ -34,13 +33,13 @@ const ReviewSection = ({ bakeryData }: ReviewSectionProps) => {
       <Section className={'grow'}>
         <SectionHeader>
           <Title>
-            리뷰 <b>{data.numberOfElements}</b>
+            리뷰 <b>{bakeryMenuData.numberOfElements}</b>
           </Title>
           <AddButtonStyle styleType={'primary'} rounded size="small">
             리뷰 작성
           </AddButtonStyle>
         </SectionHeader>
-        <ReviewCardList reviews={data.content} />
+        <ReviewCardList reviews={bakeryMenuData.content} />
       </Section>
     </Container>
   );

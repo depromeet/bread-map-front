@@ -2,16 +2,18 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import { ArrowPrev, ShareIcon } from '../icons';
+import { useGetBakery } from '@/remotes/hooks';
 
-const BakeryHeader = ({ bakeryName }: { bakeryName: string | undefined }) => {
+const BakeryHeader = ({ bakeryId }: { bakeryId: number }) => {
+  const { data } = useGetBakery(bakeryId);
   const router = useRouter();
   const toDaedong = () => router.push('/daedong');
-  
+
   const shareClickHandler = () => {
     if (navigator && 'share' in navigator) {
       navigator.share({
-        title: bakeryName,
-        text: `${bakeryName}정보를 확인하세요 !`,
+        title: data?.bakeryName,
+        text: `${data?.bakeryName}정보를 확인하세요 !`,
         url: router.asPath,
       });
     }
@@ -20,7 +22,7 @@ const BakeryHeader = ({ bakeryName }: { bakeryName: string | undefined }) => {
   return (
     <Container>
       <ArrowPrev onClick={toDaedong} />
-      <BakeryName>{bakeryName}</BakeryName>
+      <BakeryName>{data?.bakeryName}</BakeryName>
       <ShareIcon onClick={shareClickHandler} />
     </Container>
   );

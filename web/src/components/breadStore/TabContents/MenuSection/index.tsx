@@ -2,29 +2,31 @@ import React from 'react';
 import styled from '@emotion/styled';
 import MenuCardList from './MenuCardList';
 import useGetBakeryMenu from '@/remotes/hooks/useGetBakeryMenu';
-import { useRouter } from 'next/router';
 import { Button } from '@/components/common';
+import { useGetBakery } from '@/remotes/hooks';
 
-const MenuSection = () => {
-  const router = useRouter();
-  const { id } = router.query;
-  const { data, error } = useGetBakeryMenu(id ? +id : 0, 0, 10);
+type MenuSectionProps = {
+  bakeryId: number;
+};
 
-  if (!data) return <div>Loading...</div>;
+const MenuSection = ({ bakeryId }: MenuSectionProps) => {
+  const { data, error } = useGetBakeryMenu(bakeryId, 0, 10);
+
   if (error) return <div>Error</div>;
+  if (!data) return <div>Loading...</div>;
 
   return (
     <Container>
       <Section className={'grow'}>
         <SectionHeader>
           <Title>
-            메뉴 <b>{data?.number}</b>
+            메뉴 <b>{data.number}</b>
           </Title>
           <AddButtonStyle styleType={'primary'} rounded size="small">
             메뉴 입력
           </AddButtonStyle>
         </SectionHeader>
-        <MenuCardList menus={data?.content} />
+        <MenuCardList menus={data.content} />
       </Section>
     </Container>
   );

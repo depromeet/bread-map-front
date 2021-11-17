@@ -18,7 +18,10 @@ const MenuCardList = ({
         <Container>
           {menus.map((menu, idx) => (
             <li key={idx}>
-              <img src={menu.imgPath} alt={'menu'} />
+              <img
+                src={menu.imgPath || 'http://placehold.it/140'}
+                alt={'menu'}
+              />
               <MenuInfo>
                 <div>
                   <MenuName>{menu.menuName}</MenuName>

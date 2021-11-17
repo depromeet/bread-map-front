@@ -24,22 +24,19 @@ const isTab = (tabName: string | string[] | undefined): tabName is Tabs => {
 const StoreDetailTabs = () => {
   const router = useRouter();
   const { tab, id } = router.query;
-  const { data, error } = useGetBakery(id ? +id : 0);
-  const _currentTab = isTab(tab) ? tab : 'home';
+  const _bakeryId = id ? +id : 0;
+  const currentTab = isTab(tab) ? tab : 'home';
 
   const tabClickHandler = (tab: Tabs) => {
-    if (tab === _currentTab || !isTab(_currentTab)) return;
+    if (tab === currentTab || !isTab(currentTab)) return;
     router.push({ pathname: router.pathname, query: { ...router.query, tab } });
   };
 
-  if (!data) return <div>Loading...</div>;
-  if (error) return <div>Error!!</div>;
-
   return (
     <>
-      <BakeryHeader bakeryName={data?.bakeryName} />
+      <BakeryHeader bakeryId={_bakeryId} />
       <Container>
-        <Tabs className={_currentTab}>
+        <Tabs className={currentTab}>
           <li onClick={() => tabClickHandler('home')}>홈</li>
           <li onClick={() => tabClickHandler('menu')}>메뉴</li>
           <li onClick={() => tabClickHandler('review')}>리뷰</li>
@@ -47,10 +44,10 @@ const StoreDetailTabs = () => {
         </Tabs>
 
         <TabContainer>
-          {_currentTab === 'home' && <HomeSection bakeryData={data} />}
-          {_currentTab === 'menu' && <MenuSection />}
-          {_currentTab === 'review' && <ReviewSection bakeryData={data} />}
-          {_currentTab === 'info' && <InfoSection bakeryData={data} />}
+          {currentTab === 'home' && <HomeSection bakeryId={_bakeryId} />}
+          {currentTab === 'menu' && <MenuSection bakeryId={_bakeryId} />}
+          {currentTab === 'review' && <ReviewSection bakeryId={_bakeryId} />}
+          {currentTab === 'info' && <InfoSection bakeryId={_bakeryId} />}
         </TabContainer>
       </Container>
     </>
