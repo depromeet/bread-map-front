@@ -32,7 +32,9 @@ const GoogleIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 );
 
 const GoogleSignInButton: React.FC = () => {
-  const [instance, setInstance] = React.useState<gapi.auth2.GoogleAuth | null>(null);
+  const [instance, setInstance] = React.useState<gapi.auth2.GoogleAuth | null>(
+    null
+  );
 
   const handleClickSignIn = () => {
     if (instance === null) return;
@@ -41,13 +43,16 @@ const GoogleSignInButton: React.FC = () => {
       async (currentUser) => {
         try {
           const { id_token } = currentUser.getAuthResponse();
-          const resp = await requestSocialLogin({ accessToken: id_token, provider: 'google' });
+          const resp = await requestSocialLogin({
+            accessToken: id_token,
+            provider: 'google',
+          });
           console.log(resp);
         } catch (error) {
           console.error(error);
         }
       },
-      (error) => console.error(error),
+      (error) => console.error(error)
     );
   };
 

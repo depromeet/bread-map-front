@@ -26,7 +26,10 @@ const KakaoSignInButton: React.FC = () => {
     window.Kakao.Auth.getStatusInfo(async (obj) => {
       if (obj.status === 'connected') {
         const accessToken = window.Kakao.Auth.getAccessToken();
-        const resp = await requestSocialLogin({ accessToken, provider: 'kakao' });
+        const resp = await requestSocialLogin({
+          accessToken,
+          provider: 'kakao',
+        });
         console.log(resp);
 
         return;
@@ -37,7 +40,10 @@ const KakaoSignInButton: React.FC = () => {
         async success(resp) {
           window.Kakao.Auth.setAccessToken(resp.access_token);
 
-          const login = await requestSocialLogin({ accessToken: resp.access_token, provider: 'kakao' });
+          const login = await requestSocialLogin({
+            accessToken: resp.access_token,
+            provider: 'kakao',
+          });
 
           console.log(login);
         },
