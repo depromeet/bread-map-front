@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { useGetBakeries } from '@/lib/hooks/useGetBakeries';
+import { useGetBakeries } from '@/remotes/hooks';
 
 const Bakery = () => {
   return (
