@@ -6,13 +6,12 @@ import {
 } from '@/components/icons';
 
 type StoreBaseCategoryText =
-  | null
   | '주차 가능'
   | '와이파이'
   | '배달'
   | '반려동물';
 
-type StoreBaseCategoryTextEng = null | 'PARKING' | 'WIFI' | 'DELIVERY' | 'PET';
+type StoreBaseCategoryTextEng = 'PARKING' | 'WIFI' | 'DELIVERY' | 'PET';
 
 export interface StoreBaseCategoryInfo {
   icon: React.FC<React.SVGProps<SVGSVGElement>>;
