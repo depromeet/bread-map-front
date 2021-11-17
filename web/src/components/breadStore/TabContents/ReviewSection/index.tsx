@@ -1,36 +1,52 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import MenuCardList from './MenuCardList';
-import useGetBakeryMenu from '@/remotes/hooks/useGetBakeryMenu';
-import { useRouter } from 'next/router';
 import { Button } from '@/components/common';
+import StoreRating from './StoreRating';
+import ReviewCardList from '../HomeSection/ReviewCardList';
+import { BakeryEntity } from '@/remotes/network/bakery/requestGetBakery';
+import useGetBakeryMenuReivew from '@/remotes/hooks/useGetBakeryMenuReivew';
+import { useRouter } from 'next/router';
 
-const MenuSection = () => {
+type ReviewSectionProps = {
+  bakeryData: BakeryEntity;
+};
+
+const ReviewSection = ({ bakeryData }: ReviewSectionProps) => {
   const router = useRouter();
   const { id } = router.query;
-  const { data, error } = useGetBakeryMenu(id ? +id : 0, 0, 10);
+  const { data, error } = useGetBakeryMenuReivew(id ? +id : 0, 0, 10);
 
   if (!data) return <div>Loading...</div>;
   if (error) return <div>Error</div>;
 
   return (
     <Container>
+      <Section>
+        <StoreRating
+          userName={'소빵이'}
+          bakeryName={bakeryData.bakeryName}
+          personalRating={bakeryData.personalRating}
+          ratingCount={bakeryData.ratingCount}
+          avgRating={bakeryData.avgRating}
+        />
+      </Section>
+
       <Section className={'h100'}>
         <SectionHeader>
           <Title>
-            메뉴 <b>{data?.number}</b>
+            리뷰 <b>{bakeryData.menuReviewsCount}</b>
           </Title>
           <AddButtonStyle styleType={'primary'} rounded size="small">
-            메뉴 입력
+            리뷰 작성
           </AddButtonStyle>
         </SectionHeader>
-        <MenuCardList menus={data?.content} />
+        <ReviewCardList reviews={data.content} />
       </Section>
     </Container>
   );
 };
 
-export default MenuSection;
+export default ReviewSection;
 
 const Container = styled.div`
   display: flex;
