@@ -38,9 +38,8 @@ const KakaoSignInButton: React.FC = () => {
           window.Kakao.Auth.setAccessToken(resp.access_token);
 
           const login = await requestSocialLogin({ accessToken: resp.access_token, provider: 'kakao' });
-          console.log(login);
 
-          console.log(resp.access_token);
+          console.log(login);
         },
         fail(error) {
           console.error(error);
