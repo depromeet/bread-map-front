@@ -49,7 +49,7 @@ const StoreDetailTabs = () => {
         <TabContainer>
           {_currentTab === 'home' && <HomeSection bakeryData={data} />}
           {_currentTab === 'menu' && <MenuSection />}
-          {_currentTab === 'review' && <ReviewSection tab={_currentTab} />}
+          {_currentTab === 'review' && <ReviewSection bakeryData={data} />}
           {_currentTab === 'info' && <InfoSection tab={_currentTab} />}
         </TabContainer>
       </Container>

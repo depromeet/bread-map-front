@@ -1,5 +1,10 @@
 import { rest } from 'msw';
-import { MOCK_BAKERY, MOCK_BAKERY_MENU, MOCK_MAP_BAKERY } from './data';
+import {
+  MOCK_BAKERY,
+  MOCK_BAKERY_MENU,
+  MOCK_BAKERY_REVIEW,
+  MOCK_MAP_BAKERY,
+} from './data';
 
 const setUri = (pathname: string) => {
   if (process.env.NEXT_PUBLIC_BASE_URI === '/') {
@@ -26,5 +31,8 @@ export const handlers = [
   }),
   rest.get(setUri('/bakery/1/menu'), (req, res, ctx) => {
     return res(ctx.json(MOCK_BAKERY_MENU));
+  }),
+  rest.get(setUri('/bakery/1/menu-review'), (req, res, ctx) => {
+    return res(ctx.json(MOCK_BAKERY_REVIEW));
   }),
 ];
