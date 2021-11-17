@@ -1,13 +1,16 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
-import TabContents from './TabContents';
+import {
+  HomeSection,
+  InfoSection,
+  MenuSection,
+  ReviewSection,
+} from './TabContents';
+import { useGetBakery } from '@/remotes/hooks';
+import BakeryHeader from './BakeryHeader';
 
 export type Tabs = 'home' | 'menu' | 'review' | 'info';
-
-type StoreDetailTabsProps = {
-  currentTab: string | string[] | undefined;
-};
 
 const isTab = (tabName: string | string[] | undefined): tabName is Tabs => {
   const tabs = ['home', 'menu', 'review', 'info'];
@@ -18,25 +21,39 @@ const isTab = (tabName: string | string[] | undefined): tabName is Tabs => {
   return true;
 };
 
-const StoreDetailTabs = ({ currentTab }: StoreDetailTabsProps) => {
+const StoreDetailTabs = () => {
   const router = useRouter();
-  const _currentTab = isTab(currentTab) ? currentTab : 'home';
+  const { tab, id } = router.query;
+  const { data, error } = useGetBakery(id ? +id : 0);
+  const _currentTab = isTab(tab) ? tab : 'home';
 
   const tabClickHandler = (tab: Tabs) => {
     if (tab === _currentTab || !isTab(_currentTab)) return;
     router.push({ pathname: router.pathname, query: { ...router.query, tab } });
   };
 
+  if (!data) return <div>Loading...</div>;
+  if (error) return <div>Error!!</div>;
+
   return (
-    <Container>
-      <Tabs className={_currentTab}>
-        <li onClick={() => tabClickHandler('home')}>홈</li>
-        <li onClick={() => tabClickHandler('menu')}>메뉴</li>
-        <li onClick={() => tabClickHandler('review')}>리뷰</li>
-        <li onClick={() => tabClickHandler('info')}>정보</li>
-      </Tabs>
-      <TabContents tab={_currentTab} />
-    </Container>
+    <>
+      <BakeryHeader bakeryName={data?.bakeryName} />
+      <Container>
+        <Tabs className={_currentTab}>
+          <li onClick={() => tabClickHandler('home')}>홈</li>
+          <li onClick={() => tabClickHandler('menu')}>메뉴</li>
+          <li onClick={() => tabClickHandler('review')}>리뷰</li>
+          <li onClick={() => tabClickHandler('info')}>정보</li>
+        </Tabs>
+
+        <TabContainer>
+          {_currentTab === 'home' && <HomeSection bakeryData={data} />}
+          {_currentTab === 'menu' && <MenuSection />}
+          {_currentTab === 'review' && <ReviewSection tab={_currentTab} />}
+          {_currentTab === 'info' && <InfoSection tab={_currentTab} />}
+        </TabContainer>
+      </Container>
+    </>
   );
 };
 
@@ -48,6 +65,16 @@ const Container = styled.div`
   overflow: hidden;
   flex-direction: column;
   flex-grow: 1;
+`;
+
+const TabContainer = styled.div`
+  padding: 9px 0 0;
+  flex-grow: 1;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  background-color: ${({ theme }) => theme.color.gray200};
 `;
 
 const Tabs = styled.div`
