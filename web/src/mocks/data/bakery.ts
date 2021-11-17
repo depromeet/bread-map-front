@@ -1,6 +1,7 @@
 const MOCK_BREAD_STORE = {
   address: '서울시 중구 죽기 좋은 날씨',
   avgRating: 4.4,
+  businessHour: '매일 08:00-12:00',
   bakeryId: 1,
   bakeryMenuListResponseList: [
     {
@@ -68,7 +69,8 @@ const MOCK_BREAD_STORE = {
 
 const MOCK_NO_DATA_STORE = {
   address: '서울시 중구 죽기 좋은 날씨',
-  avgRating: 0,
+  avgRating: 4.4,
+  businessHour: '매일 08:00-12:00',
   bakeryId: 2,
   bakeryMenuListResponseList: null,
   bakeryName: '데이터 없는집',

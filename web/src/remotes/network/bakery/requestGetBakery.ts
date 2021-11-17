@@ -34,6 +34,7 @@ export interface BakeryEntity {
   bakeryMenuListResponseList: MenuItemEntity[];
   bakeryName: string;
   basicInfoList: string[]; /// ['PET']
+  businessHour: string;
   flagType: 'NONE';
   flagsCount: number;
   imgPath: string;
