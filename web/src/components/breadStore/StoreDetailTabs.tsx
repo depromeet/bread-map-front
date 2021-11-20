@@ -7,7 +7,6 @@ import {
   MenuSection,
   ReviewSection,
 } from './TabContents';
-import { useGetBakery } from '@/remotes/hooks';
 import BakeryHeader from './BakeryHeader';
 
 export type Tabs = 'home' | 'menu' | 'review' | 'info';
@@ -15,16 +14,17 @@ export type Tabs = 'home' | 'menu' | 'review' | 'info';
 const isTab = (tabName: string | string[] | undefined): tabName is Tabs => {
   const tabs = ['home', 'menu', 'review', 'info'];
 
-  if (Array.isArray(tabName) || !tabName || !tabs.includes(tabName)) {
-    return false;
-  }
+  if (Array.isArray(tabName)) return false;
+  if (tabName === undefined) return false;
+  if (!tabs.includes(tabName)) return false;
+
   return true;
 };
 
 const StoreDetailTabs = () => {
   const router = useRouter();
   const { tab, id } = router.query;
-  const _bakeryId = id ? +id : 0;
+  const bakeryId = id ? +id : 0;
   const currentTab = isTab(tab) ? tab : 'home';
 
   const tabClickHandler = (tab: Tabs) => {
@@ -34,7 +34,7 @@ const StoreDetailTabs = () => {
 
   return (
     <>
-      <BakeryHeader bakeryId={_bakeryId} />
+      <BakeryHeader bakeryId={bakeryId} />
       <Container>
         <Tabs className={currentTab}>
           <li onClick={() => tabClickHandler('home')}>홈</li>
@@ -44,10 +44,10 @@ const StoreDetailTabs = () => {
         </Tabs>
 
         <TabContainer>
-          {currentTab === 'home' && <HomeSection bakeryId={_bakeryId} />}
-          {currentTab === 'menu' && <MenuSection bakeryId={_bakeryId} />}
-          {currentTab === 'review' && <ReviewSection bakeryId={_bakeryId} />}
-          {currentTab === 'info' && <InfoSection bakeryId={_bakeryId} />}
+          {currentTab === 'home' && <HomeSection bakeryId={bakeryId} />}
+          {currentTab === 'menu' && <MenuSection bakeryId={bakeryId} />}
+          {currentTab === 'review' && <ReviewSection bakeryId={bakeryId} />}
+          {currentTab === 'info' && <InfoSection bakeryId={bakeryId} />}
         </TabContainer>
       </Container>
     </>

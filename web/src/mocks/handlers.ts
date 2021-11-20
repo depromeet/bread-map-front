@@ -4,7 +4,7 @@ import {
   MOCK_BAKERY_MENU,
   MOCK_BAKERY_REVIEW,
   MOCK_MAP_BAKERY,
-} from './data';
+} from '@/mocks/data';
 
 const setUri = (pathname: string) => {
   if (process.env.NEXT_PUBLIC_BASE_URI === '/') {
