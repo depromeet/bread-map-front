@@ -19,7 +19,7 @@ const MenuCardList = ({
           {menus.map((menu, idx) => (
             <li key={idx}>
               <img
-                src={menu.imgPath || 'http://placehold.it/140'}
+                src={menu.imgPath || '/images/default_bread.png'}
                 alt={'menu'}
               />
               <MenuInfo>
