@@ -2,6 +2,7 @@
 import { Construction } from './Construction';
 export { default as Home } from './Home';
 export { default as User } from './User';
+export { default as UserCircle } from './UserCircle';
 export { default as Compass } from './Compass';
 export { default as Edit } from './Edit';
 export { default as Bread } from './Bread';
@@ -62,6 +63,8 @@ export { default as CircleStarIcon } from './CircleStarIcon';
 export { default as CircleWentIcon } from './CircleWentIcon';
 export { default as ClockIcon } from './ClockIcon';
 export { default as DiscoverIcon } from './DiscoverIcon';
+export { default as EarthIcon } from './EarthIcon';
+export { default as FileTextIcon } from './FileTextIcon';
 export { default as FlagIcon } from './FlagIcon';
 export { default as HomeIcon } from './HomeIcon';
 export { default as ImageIcon } from './ImageIcon';

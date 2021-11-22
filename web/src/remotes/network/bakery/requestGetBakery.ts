@@ -27,13 +27,14 @@ interface MenuReviewEntity {
   rating: number;
 }
 
-interface BakeryEntity {
+export interface BakeryEntity {
   address: string;
   avgRating: number;
   bakeryId: number;
   bakeryMenuListResponseList: MenuItemEntity[];
   bakeryName: string;
   basicInfoList: string[]; /// ['PET']
+  businessHour: string;
   flagType: 'NONE';
   flagsCount: number;
   imgPath: string;

@@ -57,6 +57,7 @@ const defaultButtonStyle = css`
   font-weight: 700;
   width: 100%;
   padding: 0 15px;
+  cursor: pointer;
 
   &:focus {
     outline: none;
@@ -96,7 +97,7 @@ const ButtonStyle = styled.button`
   &.none {
     background: ${({ theme }) => theme.color.white};
     border: 1px solid ${({ theme }) => theme.color.gray300};
-    color: ${({ theme }) => theme.color.gray700};
+    color: ${({ theme }) => theme.color.black};
 
     &:disabled {
       color: ${({ theme }) => theme.color.gray700}4d;

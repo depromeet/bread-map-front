@@ -1,27 +1,27 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import breadCategory, { BreadCategoeryInfo } from '@/constants/breadCategories';
+import { categoryItems, BreadCategoryItem } from '@/constants/breadCategories';
 
 interface CategoriesProps {
-  selectedCategory?: BreadCategoeryInfo[] | null;
-  onClickCategory: (category: BreadCategoeryInfo) => void;
+  selectedCategory?: BreadCategoryItem[] | null;
+  onClickCategory: (category: BreadCategoryItem) => void;
 }
 
 const Categories = ({ selectedCategory, onClickCategory }: CategoriesProps) => {
-  const isSelected = (id: number): boolean => {
+  const isSelected = (id: string): boolean => {
     if (!selectedCategory) return false;
-    return selectedCategory.some((s) => s.id === id);
+    return selectedCategory.some((s) => s.category === id);
   };
 
   return (
     <CategoriesWrapper>
-      {Object.values(breadCategory).map((value) => (
+      {Object.values(categoryItems).map((value, idx) => (
         <Category
-          key={value.id}
+          key={idx}
           onClick={() => onClickCategory(value)}
-          isSelected={isSelected(value.id)}
+          isSelected={isSelected(value.category)}
         >
-          <value.icon />
+          <value.Icon />
           <span>{value.text}</span>
         </Category>
       ))}

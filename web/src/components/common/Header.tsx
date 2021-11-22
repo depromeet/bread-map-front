@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { useRouter, withRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { ArrowPrev, Close } from '@/components/icons';
 
 const Header: React.FC = ({ children }) => {
