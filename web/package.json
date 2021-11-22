@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "export": "next export",
     "prettier": "prettier -w \"src/**/*.{ts,tsx}\"",
     "test": "jest --watch"
   },

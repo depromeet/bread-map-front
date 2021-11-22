@@ -29,7 +29,7 @@ const navigationMap: NavigationMap = {
     Icon: Edit,
   },
   user: {
-    path: '/#user',
+    path: '/profile',
     Icon: User,
   },
 };

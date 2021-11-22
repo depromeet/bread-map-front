@@ -1,4 +1,3 @@
-
 const MOCK_DATA = [
   {
     address: '1',
