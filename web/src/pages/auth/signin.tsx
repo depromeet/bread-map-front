@@ -46,7 +46,7 @@ const Content = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: auto;
-  margin-bottom: 20%;
+  margin-bottom: auto;
 
   button:first-of-type {
     margin-top: 122px;

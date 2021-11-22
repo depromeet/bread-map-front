@@ -46,7 +46,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/jest-dom", "npm:5.14.1"],
             ["@testing-library/react", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:12.1.0"],
             ["@testing-library/react-hooks", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:7.0.2"],
+            ["@types/gapi.auth2", "npm:0.0.55"],
             ["@types/jest", "npm:27.0.1"],
+            ["@types/kakao-js-sdk", "npm:1.39.1"],
             ["@types/navermaps", "npm:3.0.9"],
             ["@types/node", "npm:16.9.1"],
             ["@types/react", "npm:17.0.20"],
@@ -2267,6 +2269,25 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["@types/gapi", [
+        ["npm:0.0.41", {
+          "packageLocation": "./.yarn/cache/@types-gapi-npm-0.0.41-a3ffbf13bb-1fcb42de9f.zip/node_modules/@types/gapi/",
+          "packageDependencies": [
+            ["@types/gapi", "npm:0.0.41"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@types/gapi.auth2", [
+        ["npm:0.0.55", {
+          "packageLocation": "./.yarn/cache/@types-gapi.auth2-npm-0.0.55-da66f34a10-e6afb5d350.zip/node_modules/@types/gapi.auth2/",
+          "packageDependencies": [
+            ["@types/gapi.auth2", "npm:0.0.55"],
+            ["@types/gapi", "npm:0.0.41"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["@types/graceful-fs", [
         ["npm:4.1.5", {
           "packageLocation": "./.yarn/cache/@types-graceful-fs-npm-4.1.5-91d62e1050-d076bb61f4.zip/node_modules/@types/graceful-fs/",
@@ -2342,6 +2363,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-json5-npm-0.0.29-f63a7916bd-e60b153664.zip/node_modules/@types/json5/",
           "packageDependencies": [
             ["@types/json5", "npm:0.0.29"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@types/kakao-js-sdk", [
+        ["npm:1.39.1", {
+          "packageLocation": "./.yarn/cache/@types-kakao-js-sdk-npm-1.39.1-baf2c0cd08-e64c68a3c5.zip/node_modules/@types/kakao-js-sdk/",
+          "packageDependencies": [
+            ["@types/kakao-js-sdk", "npm:1.39.1"]
           ],
           "linkType": "HARD",
         }]
@@ -10695,7 +10725,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/jest-dom", "npm:5.14.1"],
             ["@testing-library/react", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:12.1.0"],
             ["@testing-library/react-hooks", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:7.0.2"],
+            ["@types/gapi.auth2", "npm:0.0.55"],
             ["@types/jest", "npm:27.0.1"],
+            ["@types/kakao-js-sdk", "npm:1.39.1"],
             ["@types/navermaps", "npm:3.0.9"],
             ["@types/node", "npm:16.9.1"],
             ["@types/react", "npm:17.0.20"],

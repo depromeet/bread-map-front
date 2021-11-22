@@ -1,5 +1,7 @@
+import Script from 'next/script';
 import * as React from 'react';
 import styled from '@emotion/styled';
+import { requestSocialLogin } from '@/remotes/network/auth';
 
 const GoogleIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
@@ -29,16 +31,62 @@ const GoogleIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   </svg>
 );
 
-const GogoleSignInButton: React.FC = () => {
+const GoogleSignInButton: React.FC = () => {
+  const [instance, setInstance] = React.useState<gapi.auth2.GoogleAuth | null>(
+    null
+  );
+
+  const handleClickSignIn = () => {
+    if (instance === null) return;
+
+    instance.signIn().then(
+      async (currentUser) => {
+        try {
+          const { id_token } = currentUser.getAuthResponse();
+          const resp = await requestSocialLogin({
+            accessToken: id_token,
+            provider: 'google',
+          });
+          console.log(resp);
+        } catch (error) {
+          console.error(error);
+        }
+      },
+      (error) => console.error(error)
+    );
+  };
+
   return (
-    <Base>
+    <Base onClick={handleClickSignIn}>
+      <Script
+        id={'google-js-sdk'}
+        src={'https://apis.google.com/js/platform.js'}
+        onLoad={() => {
+          window.gapi.load('auth2', () => {
+            const googleAuthInstance = window.gapi.auth2.getAuthInstance();
+
+            if (googleAuthInstance) {
+              setInstance(googleAuthInstance);
+              return;
+            }
+
+            const initInstance = window.gapi.auth2.init({
+              client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+              scope: 'profile email',
+              ux_mode: 'popup',
+              redirect_uri: `${window.origin}/auth/signin`,
+            });
+            setInstance(initInstance);
+          });
+        }}
+      />
       <GoogleIcon />
       <span>구글 계정으로 로그인</span>
     </Base>
   );
 };
 
-export default GogoleSignInButton;
+export default GoogleSignInButton;
 
 const Base = styled.button`
   --color-white: #ffffff;

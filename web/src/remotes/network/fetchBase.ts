@@ -35,19 +35,9 @@ const initHeader = (init?: HeadersInit): HeadersInit | undefined => {
   }
 
   if (headersTypeGuard(init)) {
-    const iter = init.entries();
-
-    while (!iter.next().done) {
-      const [key, value] = iter.next().value;
+    for (const [key, value] of init.entries()) {
       ret[key] = value;
     }
-  }
-
-  if (
-    process.env.NODE_ENV === 'development' ||
-    process.env.NODE_ENV === 'test'
-  ) {
-    ret['Authorization'] = 'TEST_TOKEN';
   }
 
   return ret;
