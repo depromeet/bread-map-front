@@ -74,7 +74,6 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
   const editCategory = (category: BreadCategory) => {
     setSingleReview({
       ...singleReview,
-      category: category,
     });
   };
 

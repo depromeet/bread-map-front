@@ -12,6 +12,7 @@ const requestSocialLogin = async ({
 }: SocialLoginPayload): Promise<LoginResponse> => {
   const headers = new Headers();
   headers.append('Content-Type', 'application/json');
+  headers.append('Authorization', `Bearer ${accessToken}`);
 
   const resp = await fetchBase(`/auth/${provider}`, {
     method: 'POST',

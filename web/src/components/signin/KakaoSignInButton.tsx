@@ -24,43 +24,33 @@ const KakaoTalkIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 const KakaoSignInButton: React.FC = () => {
   const handleClickSignIn = () => {
     window.Kakao.Auth.getStatusInfo(async (obj) => {
-      /*
       if (obj.status === 'connected') {
         const accessToken = window.Kakao.Auth.getAccessToken();
-        const resp = await requestSocialLogin({ accessToken, provider: 'kakao' });
+        const resp = await requestSocialLogin({
+          accessToken,
+          provider: 'kakao',
+        });
         console.log(resp);
 
         return;
       }
-      */
 
-      try {
-        window.Kakao.Auth.authorize({
-          redirectUri: `${window.origin}/auth/signin`,
-          scope: 'account_email,gender',
-        });
-      } catch (error) {
-        console.error(error);
-      }
-
-      /*
       window.Kakao.Auth.login({
-        throughTalk: true,
         persistAccessToken: true,
-        scope: 'account_email,gender',
         async success(resp) {
           window.Kakao.Auth.setAccessToken(resp.access_token);
 
-          const login = await requestSocialLogin({ accessToken: resp.access_token, provider: 'kakao' });
-          console.log(login);
+          const login = await requestSocialLogin({
+            accessToken: resp.access_token,
+            provider: 'kakao',
+          });
 
-          console.log(resp.access_token);
+          console.log(login);
         },
         fail(error) {
           console.error(error);
         },
       });
-      */
     });
   };
 

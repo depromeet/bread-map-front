@@ -1,5 +1,4 @@
 import Script from 'next/script';
-import { useRouter } from 'next/router';
 import * as React from 'react';
 import styled from '@emotion/styled';
 import { requestSocialLogin } from '@/remotes/network/auth';
@@ -33,29 +32,27 @@ const GoogleIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 );
 
 const GoogleSignInButton: React.FC = () => {
-  const [instance, setInstance] = React.useState<gapi.auth2.GoogleAuth | null>(null);
-
-  const router = useRouter();
-
-  React.useEffect(() => {
-    const hash = router.asPath.replace(router.pathname, '');
-    const search = new URLSearchParams(hash);
-    const idToken = search.get('id_token') ?? '';
-
-    if (idToken === '') return;
-    console.log(idToken);
-
-    requestSocialLogin({ accessToken: idToken, provider: 'google' })
-      .then(console.log)
-      .catch(console.error);
-  }, [router]);
+  const [instance, setInstance] = React.useState<gapi.auth2.GoogleAuth | null>(
+    null
+  );
 
   const handleClickSignIn = () => {
     if (instance === null) return;
 
     instance.signIn().then(
-      () => console.log('success'),
-      (error) => console.error(error),
+      async (currentUser) => {
+        try {
+          const { id_token } = currentUser.getAuthResponse();
+          const resp = await requestSocialLogin({
+            accessToken: id_token,
+            provider: 'google',
+          });
+          console.log(resp);
+        } catch (error) {
+          console.error(error);
+        }
+      },
+      (error) => console.error(error)
     );
   };
 
@@ -75,7 +72,8 @@ const GoogleSignInButton: React.FC = () => {
 
             const initInstance = window.gapi.auth2.init({
               client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
-              ux_mode: 'redirect',
+              scope: 'profile email',
+              ux_mode: 'popup',
               redirect_uri: `${window.origin}/auth/signin`,
             });
             setInstance(initInstance);
