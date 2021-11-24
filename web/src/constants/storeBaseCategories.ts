@@ -5,11 +5,7 @@ import {
   InfoWifiIcon,
 } from '@/components/icons';
 
-type StoreBaseCategoryText =
-  | '주차 가능'
-  | '와이파이'
-  | '배달'
-  | '반려동물';
+type StoreBaseCategoryText = '주차 가능' | '와이파이' | '배달' | '반려동물';
 
 type StoreBaseCategoryTextEng = 'PARKING' | 'WIFI' | 'DELIVERY' | 'PET';
 

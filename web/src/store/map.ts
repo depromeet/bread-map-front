@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 import type { BottomSheetRef } from 'react-spring-bottom-sheet';
-import type { BreadCategory } from '@/constants/breadCategory';
+import type { BreadCategory } from '@/constants/breadCategories';
 
 type BottomSheetType = 'single' | 'multiple';
 export const bottomSheetTypeAtom = atom<BottomSheetType>('multiple');

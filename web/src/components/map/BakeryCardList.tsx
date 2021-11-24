@@ -20,7 +20,6 @@ const BakeryCardList: React.FC = () => {
     (el) => el.bakeryId === currentBakeryId
   );
 
-  if (data === undefined) return null;
   return (
     <Base>
       {bottomSheetType === 'single' && currentBakeryEntity && (
@@ -40,7 +39,7 @@ const BakeryCardList: React.FC = () => {
             <MultipleTitle>내 주변 빵집</MultipleTitle>
             <SortTypeText>거리순</SortTypeText>
           </TitleBox>
-          {data.map((entity) => (
+          {data?.map((entity) => (
             <BakeryInfoCard
               title={entity.bakeryName}
               wentCount={entity.flagsCount}
