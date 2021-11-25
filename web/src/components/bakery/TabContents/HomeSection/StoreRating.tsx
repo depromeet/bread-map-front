@@ -2,6 +2,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { UserCircle } from '@/components/icons';
+import StarScore from '@/components/common/StarScore';
+import { Button } from '@/components/common';
 
 type StoreRatingProps = {
   userName: string;
@@ -20,6 +22,9 @@ const StoreRating = ({
   ratingCount,
   avgRating,
 }: StoreRatingProps) => {
+  const [score, setScore] = React.useState(0);
+  //TODO score FETCH;
+
   return (
     <Container>
       {!isNaN(personalRating) ? (
@@ -31,7 +36,10 @@ const StoreRating = ({
           <Title>
             <b>{userName}</b>님 빵집 어떠셨어요?
           </Title>
-          <div>Select-Star</div>
+          <StarScore submitScore={setScore} />
+          {score > 0 && (
+            <ReviewSubmitButton size={'small'}>평가하기</ReviewSubmitButton>
+          )}
         </>
       ) : (
         <div>
@@ -82,4 +90,9 @@ const ReviewCount = styled.div`
     margin-top: 2px;
     fill: ${({ theme }) => theme.color.gray500};
   }
+`;
+
+const ReviewSubmitButton = styled(Button)`
+  width: auto;
+  margin-top: 18px;
 `;

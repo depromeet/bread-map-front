@@ -4,37 +4,42 @@ import GrayStar from '@/components/icons/GrayStar';
 import OrangeStar from '@/components/icons/OrangeStar';
 import useSlider from './useSlider';
 
-const StarScore = () => {
+type StarScoreProps = {
+  submitScore?: (score: number) => void;
+};
+
+const StarScore = ({ submitScore }: StarScoreProps) => {
   const ref = React.useRef(null);
-  const { isSliding, value, pos, length } = useSlider(ref);
+  const { value } = useSlider(ref);
   const [score, setScore] = React.useState(0);
+
+  const clickStar = React.useCallback(() => {
+    const persent = Math.round(value * 100);
+    if (persent === 0) return;
+
+    const pos = Math.floor(persent / 20) + 1;
+    if (score != pos) setScore(pos);
+  }, [value, score]);
 
   React.useEffect(() => {
     clickStar();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value]);
+  }, [clickStar]);
 
-  const clickStar = () => {
-    const percent = Math.round(value * 100);
-    if (percent === 0) return;
-    else if (percent >= 0 && percent < 16) setScore(1);
-    else if (percent >= 16 && percent < 36) setScore(2);
-    else if (percent >= 36 && percent < 56) setScore(3);
-    else if (percent >= 56 && percent < 75) setScore(4);
-    else setScore(5);
-  };
+  React.useEffect(() => {
+    if (submitScore) submitScore(score);
+  }, [score, submitScore]);
 
-  const renderStar = () => {
-    const arr = [...Array(score).fill(1), ...Array(5 - score).fill(0)];
-    return arr.map((item, i) =>
-      item === 1 ? <OrangeStar key={i} /> : <GrayStar key={i} />
-    );
-  };
+  const renderStar = React.useCallback(() => {
+    return Array(5)
+      .fill(0)
+      .map((_, i) =>
+        i < score ? <OrangeStar key={i} /> : <GrayStar key={i} />
+      );
+  }, [score]);
 
   return (
-    <StarWrapper ref={ref}>
-      <ScoreText>{score}</ScoreText>
-      <FiveStars left={pos}>{renderStar()}</FiveStars>
+    <StarWrapper>
+      <FiveStars ref={ref}>{renderStar()}</FiveStars>
     </StarWrapper>
   );
 };
@@ -43,15 +48,7 @@ export default StarScore;
 
 const StarWrapper = styled.div`
   position: relative;
-  height: 100vh;
-  width: 160px;
+  display: inline-block;
 `;
 
-const ScoreText = styled.p`
-  text-align: center;
-`;
-
-const FiveStars = styled.div<{ left: number }>`
-  position: absolute;
-  left: ${({ left }) => (left ? left : 0)};
-`;
+const FiveStars = styled.div``;
