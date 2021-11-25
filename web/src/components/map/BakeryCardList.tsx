@@ -24,6 +24,7 @@ const BakeryCardList: React.FC = () => {
     <Base>
       {bottomSheetType === 'single' && currentBakeryEntity && (
         <BakeryInfoCard
+          bakeryId={currentBakeryEntity.bakeryId}
           title={currentBakeryEntity.bakeryName}
           wentCount={currentBakeryEntity.flagsCount}
           starCount={currentBakeryEntity.ratingCount}
@@ -41,6 +42,7 @@ const BakeryCardList: React.FC = () => {
           </TitleBox>
           {data?.map((entity) => (
             <BakeryInfoCard
+              bakeryId={entity.bakeryId}
               title={entity.bakeryName}
               wentCount={entity.flagsCount}
               starCount={entity.ratingCount}

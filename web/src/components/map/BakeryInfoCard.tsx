@@ -7,8 +7,10 @@ import {
   FlagIcon,
   QuoteIcon,
 } from '@/components/icons';
+import { useRouter } from 'next/router';
 
 interface BakeryInfoCardProps {
+  bakeryId: number;
   title: string;
   wentCount: number;
   starCount: number;
@@ -17,14 +19,21 @@ interface BakeryInfoCardProps {
 }
 
 const BakeryInfoCard: React.FC<BakeryInfoCardProps> = ({
+  bakeryId,
   title,
   wentCount,
   starCount,
   reviewCount,
   reviews,
 }) => {
+  const router = useRouter();
+  const cardClickHandler = React.useCallback(() => {
+    console.log(bakeryId);
+    router.push(`bread-store/${bakeryId}`);
+  }, [bakeryId, router]);
+
   return (
-    <Card>
+    <Card onClick={cardClickHandler}>
       <ImageBox>
         <FlagButton>
           <FlagIcon width={16} height={16} />
