@@ -2,6 +2,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { BakeryEntity } from '@/remotes/network/bakery/requestGetBakery';
+import StarScore from '@/components/common/StarScore';
 
 const addComma = (num: number) => {
   return num.toLocaleString('ko-kr');
@@ -25,7 +26,10 @@ const MenuCardList = ({
               <MenuInfo>
                 <div>
                   <MenuName>{menu.menuName}</MenuName>
-                  <div>star: {menu.avgRating}</div>
+                  <MenuScore>
+                    <StarScoreStyle score={menu.avgRating} />
+                    {menu.avgRating.toFixed(1)}
+                  </MenuScore>
                 </div>
                 <b>{addComma(menu.price)}원</b>
               </MenuInfo>
@@ -97,4 +101,16 @@ const NoDataText = styled.div`
   line-height: 1.5;
   font-weight: 500;
   color: ${({ theme }) => theme.color.gray500};
+`;
+
+const MenuScore = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+`;
+
+const StarScoreStyle = styled(StarScore)`
+  margin-top: 5px;
+  margin-right: 5px;
+  font-size: 1.2rem;
 `;

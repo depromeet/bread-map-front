@@ -2,6 +2,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { BakeryEntity } from '@/remotes/network/bakery/requestGetBakery';
+import StarScore from '@/components/common/StarScore';
 
 const MINUTE = 60;
 const HOUR = 3600;
@@ -44,15 +45,17 @@ const ReviewCardList = ({
               </Member>
               <MenuInfo>
                 <div>{review.menuName}</div>
-                <div>star</div>
-                <div>{review.rating}</div>
+                <ReviewScore>
+                  <StarScoreStyle score={review.rating} />
+                  {review.rating.toFixed(1)}
+                </ReviewScore>
               </MenuInfo>
               <MenuImage>
                 {review.imgPathList.map((img, idx) => (
                   <img key={idx} src={img} alt="review" />
                 ))}
               </MenuImage>
-              <MenuContent>{review.contents}</MenuContent>
+              <ReviewContent>{review.contents}</ReviewContent>
             </li>
           ))}
         </Container>
@@ -152,7 +155,19 @@ const MenuImage = styled.div`
     max-width: 140px;
   }
 `;
-const MenuContent = styled.div`
+const ReviewContent = styled.div`
   font-size: 14px;
   margin: 12px 0;
+`;
+
+const ReviewScore = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+`;
+
+const StarScoreStyle = styled(StarScore)`
+  margin-right: 5px;
+  display: inline-block;
+  width: auto;
 `;

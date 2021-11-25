@@ -2,8 +2,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { UserCircle } from '@/components/icons';
-import StarScore from '@/components/common/StarScoreSlider';
+import StarScoreSlider from '@/components/common/StarScoreSlider';
 import { Button } from '@/components/common';
+import StarScore from '@/components/common/StarScore';
 
 type StoreRatingProps = {
   userName: string;
@@ -36,7 +37,7 @@ const StoreRating = ({
           <Title>
             <b>{userName}</b>님 빵집 어떠셨어요?
           </Title>
-          <StarScore submitScore={setScore} />
+          <StarScoreSlider submitScore={setScore} />
           {score > 0 && (
             <ReviewSubmitButton size={'small'}>평가하기</ReviewSubmitButton>
           )}
@@ -50,7 +51,7 @@ const StoreRating = ({
           </ReviewCount>
           <AvgRating>{avgRating}</AvgRating>
 
-          <div> star</div>
+          <StarScore score={avgRating} />
         </div>
       )}
     </Container>

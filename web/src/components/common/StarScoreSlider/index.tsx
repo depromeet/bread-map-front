@@ -4,11 +4,11 @@ import GrayStar from '@/components/icons/GrayStar';
 import OrangeStar from '@/components/icons/OrangeStar';
 import useSlider from './useSlider';
 
-type StarScoreProps = {
+type StarScoreSliderProps = {
   submitScore?: (score: number) => void;
 };
 
-const StarScoreSlider = ({ submitScore }: StarScoreProps) => {
+const StarScoreSlider = ({ submitScore }: StarScoreSliderProps) => {
   const ref = React.useRef(null);
   const { value } = useSlider(ref);
   const [score, setScore] = React.useState(0);
