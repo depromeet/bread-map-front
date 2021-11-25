@@ -29,7 +29,7 @@ const BakeryInfoCard: React.FC<BakeryInfoCardProps> = ({
   const router = useRouter();
   const cardClickHandler = React.useCallback(() => {
     console.log(bakeryId);
-    router.push(`bread-store/${bakeryId}`);
+    router.push(`bakery/${bakeryId}`);
   }, [bakeryId, router]);
 
   return (

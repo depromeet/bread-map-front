@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { StoreDetailTabs } from '@/components/breadStore';
+import { StoreDetailTabs } from '@/components/bakery';
 import { Footer } from '@/components/common';
 
 const Store = () => {
