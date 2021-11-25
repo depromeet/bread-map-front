@@ -23,7 +23,8 @@ const BakeryMap: React.FC<BakeryMapProps> = ({ entities }) => {
     >
       <CurrentPositionButton />
       <BreadFilterButton />
-      <FlagFilterButton />
+      {/* TODO 차후 추가 */}
+      {/* <FlagFilterButton /> */}
       <BakeryMarkers entities={entities} />
     </Map>
   );
