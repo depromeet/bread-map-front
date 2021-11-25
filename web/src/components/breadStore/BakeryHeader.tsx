@@ -7,7 +7,7 @@ import { useGetBakery } from '@/remotes/hooks';
 const BakeryHeader = ({ bakeryId }: { bakeryId: number }) => {
   const { data } = useGetBakery(bakeryId);
   const router = useRouter();
-  const toDaedong = () => router.push('/daedong');
+  const toDaedong = () => router.push('/map');
 
   const shareClickHandler = () => {
     if (navigator && 'share' in navigator) {
@@ -44,6 +44,7 @@ const Container = styled.div`
   justify-content: space-between;
 
   svg {
+    cursor: pointer;
     color: ${({ theme }) => theme.color.black};
     path {
       stroke: ${({ theme }) => theme.color.black};
