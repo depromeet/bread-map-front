@@ -8,7 +8,7 @@ type StarScoreProps = {
   submitScore?: (score: number) => void;
 };
 
-const StarScore = ({ submitScore }: StarScoreProps) => {
+const StarScoreSlider = ({ submitScore }: StarScoreProps) => {
   const ref = React.useRef(null);
   const { value } = useSlider(ref);
   const [score, setScore] = React.useState(0);
@@ -44,7 +44,7 @@ const StarScore = ({ submitScore }: StarScoreProps) => {
   );
 };
 
-export default StarScore;
+export default StarScoreSlider;
 
 const StarWrapper = styled.div`
   position: relative;

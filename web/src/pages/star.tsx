@@ -1,5 +1,5 @@
 import React from 'react';
-import StarScore from '@/components/common/StarScore';
+import StarScore from '@/components/common/StarScoreSlider';
 
 const Star = () => {
   return <StarScore />;

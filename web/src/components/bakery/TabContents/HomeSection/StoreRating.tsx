@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { UserCircle } from '@/components/icons';
-import StarScore from '@/components/common/StarScore';
+import StarScore from '@/components/common/StarScoreSlider';
 import { Button } from '@/components/common';
 
 type StoreRatingProps = {
@@ -27,7 +27,7 @@ const StoreRating = ({
 
   return (
     <Container>
-      {!isNaN(personalRating) ? (
+      {isNaN(personalRating) ? (
         <>
           <img
             src={userImage || '/images/noProfileImg.png'}
