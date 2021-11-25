@@ -27,9 +27,8 @@ export default BreadFilterButton;
 
 const Button = styled.button<{ isFiltered: boolean }>`
   position: absolute;
-  top: 60px;
+  top: 30px;
   right: 22px;
-
   width: 44px;
   height: 44px;
   border: none;

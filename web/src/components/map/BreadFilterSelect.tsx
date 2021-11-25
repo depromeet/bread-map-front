@@ -90,6 +90,7 @@ const Header = styled.div`
 
 const IconButton = styled.button`
   width: 48px;
+  cursor: pointer;
   height: 48px;
   border-radius: 50%;
   background-color: ${({ theme }) => theme.color.white};
@@ -134,6 +135,7 @@ const ButtonGroup = styled.div`
 
 const CancelButton = styled.button`
   flex: 1;
+  cursor: pointer;
   border: 1px solid ${({ theme }) => theme.color.gray300};
   background-color: ${({ theme }) => theme.color.white};
   border-radius: 8px;
@@ -144,6 +146,7 @@ const CancelButton = styled.button`
 
 const SubmitButton = styled.button`
   flex: 1;
+  cursor: pointer;
   border: none;
   background-color: ${({ theme }) => theme.color.primary500};
   border-radius: 8px;

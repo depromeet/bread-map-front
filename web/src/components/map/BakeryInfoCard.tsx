@@ -63,6 +63,7 @@ export default BakeryInfoCard;
 
 const Card = styled.div`
   padding: 20px;
+  cursor: pointer;
   width: 100%;
   height: 148px;
   display: flex;

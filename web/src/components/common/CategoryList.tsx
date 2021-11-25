@@ -46,6 +46,7 @@ const Base = styled.ul`
 
 const Item = styled.li<{ isSelected: boolean }>`
   position: relative;
+  cursor: pointer;
   background-color: ${({ isSelected, theme }) =>
     isSelected ? theme.color.primary100 : theme.color.white};
   border: 1px solid
