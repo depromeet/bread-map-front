@@ -1,17 +1,18 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import { Navigation } from '@/components/icons';
-import { useNaverMap } from '@/lib/navermap';
+import { useNaverMap, useNaverMapGoToMyPosition } from '@/lib/navermap';
 
-const DEFAULT_POSITION = {
-  lat: 37.5666103,
-  lng: 126.9783882,
-};
+// 시청역 임시데이터
+// const DEFAULT_POSITION = {
+//   lat: 37.5666103,
+//   lng: 126.9783882,
+// };
 
 const CurrentPositionButton = React.forwardRef<HTMLButtonElement | null, {}>(
   (_, ref) => {
     const naverMap = useNaverMap();
-
+    const goToMyPosition = useNaverMapGoToMyPosition();
     const buttonRef = React.useRef<HTMLButtonElement | null>(null);
 
     React.useImperativeHandle<
@@ -21,8 +22,7 @@ const CurrentPositionButton = React.forwardRef<HTMLButtonElement | null, {}>(
 
     const handleClick = () => {
       if (naverMap === undefined) return;
-
-      naverMap.setCenter(DEFAULT_POSITION);
+      goToMyPosition();
     };
 
     return (

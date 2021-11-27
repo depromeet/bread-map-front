@@ -4,7 +4,11 @@ import { useTheme } from '@emotion/react';
 import { useAtom } from 'jotai';
 import { BottomSheet } from '@/components/common';
 import { useGetBakeries } from '@/remotes/hooks';
-import { bottomSheetRefAtom, mapRefAtom } from '@/store/map';
+import {
+  bottomSheetLastSnapPoint,
+  bottomSheetRefAtom,
+  mapRefAtom,
+} from '@/store/map';
 import BakeryMap from './BakeryMap';
 import BakeryCardList from './BakeryCardList';
 import { DEFAULT_POSITION } from './constants';
@@ -12,6 +16,9 @@ import { DEFAULT_POSITION } from './constants';
 const DaedongMapContainer: React.FC = () => {
   const theme = useTheme();
   const [mapRef, setMapRef] = useAtom(mapRefAtom);
+  const [bottomSheetLastSnap, setBottomSheetLastSnap] = useAtom(
+    bottomSheetLastSnapPoint
+  );
   const [bottomSheetRef, setBottomSheetRef] = useAtom(bottomSheetRefAtom);
 
   const { data } = useGetBakeries({
@@ -25,12 +32,25 @@ const DaedongMapContainer: React.FC = () => {
       if (mapRef && bottomSheetRef?.height) {
         mapRef.style.height =
           window.innerHeight -
-          bottomSheetRef?.height -
+          bottomSheetRef.height -
           theme.height.footer +
           'px';
+        setBottomSheetLastSnap(bottomSheetRef.height);
       }
     });
-  }, [bottomSheetRef?.height, mapRef, theme.height.footer]);
+  }, [
+    bottomSheetRef?.height,
+    mapRef,
+    setBottomSheetLastSnap,
+    theme.height.footer,
+  ]);
+
+  const defaultSnapPoint = React.useCallback(
+    ({ height }: { height: number }) => {
+      return bottomSheetLastSnap || height + 68 + 148;
+    },
+    [bottomSheetLastSnap]
+  );
 
   return (
     <Container ref={setMapRef}>
@@ -39,7 +59,7 @@ const DaedongMapContainer: React.FC = () => {
         open
         skipInitialTransition
         blocking={false}
-        defaultSnap={({ headerHeight }) => headerHeight + 68 + 148}
+        defaultSnap={defaultSnapPoint}
         snapPoints={({ headerHeight, maxHeight }) => [
           headerHeight,
           headerHeight + 148,
