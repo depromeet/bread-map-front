@@ -28,11 +28,17 @@ const KakaoSignInButton: React.FC = () => {
     window.Kakao.Auth.getStatusInfo(async (obj) => {
       if (obj.status === 'connected') {
         const accessToken = window.Kakao.Auth.getAccessToken();
-        await requestSocialLogin({
+        const authResponseData = await requestSocialLogin({
           accessToken,
           provider: 'kakao',
         });
-        router.push('/map');
+
+        if (window !== undefined) {
+          localStorage.setItem('accessToken', authResponseData.appToken);
+        }
+
+        if (authResponseData.isNewMember) router.push('/onboard');
+        else router.push('/map');
 
         return;
       }

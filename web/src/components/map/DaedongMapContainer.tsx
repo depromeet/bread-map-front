@@ -16,15 +16,16 @@ import { DEFAULT_POSITION } from './constants';
 const DaedongMapContainer: React.FC = () => {
   const theme = useTheme();
   const [mapRef, setMapRef] = useAtom(mapRefAtom);
+  // TODO: 최초 접근시 리렌더링 3번되는데..ㅠ 리팩토링 고민필요.
   const [bottomSheetLastSnap, setBottomSheetLastSnap] = useAtom(
     bottomSheetLastSnapPoint
   );
   const [bottomSheetRef, setBottomSheetRef] = useAtom(bottomSheetRefAtom);
 
   const { data } = useGetBakeries({
-    latitude: DEFAULT_POSITION.lat,
-    longitude: DEFAULT_POSITION.lng,
-    range: 100,
+    latitude: 37.56621061,
+    longitude: 126.995157,
+    range: 100000,
   });
 
   const bottomSheetSpringMapHeightChanger = React.useCallback(() => {

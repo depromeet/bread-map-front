@@ -45,11 +45,17 @@ const GoogleSignInButton: React.FC = () => {
       async (currentUser) => {
         try {
           const { id_token } = currentUser.getAuthResponse();
-          await requestSocialLogin({
+          const authResponseData = await requestSocialLogin({
             accessToken: id_token,
             provider: 'google',
           });
-          router.push('/map');
+
+          if (window !== undefined) {
+            localStorage.setItem('accessToken', authResponseData.appToken);
+          }
+
+          if (authResponseData.isNewMember) router.push('/onboard');
+          else router.push('/map');
         } catch (error) {
           console.error(error);
         }

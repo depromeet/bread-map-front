@@ -39,8 +39,14 @@ const requestGetBakeries = async ({
   longitude,
   range,
 }: GetBakeriesPayload): Promise<BakeryEntity[]> => {
+  const headers = new Headers();
+  headers.append(
+    'Authorization',
+    `Bearer ${localStorage.getItem('accessToken')}`
+  );
   const resp = await fetchBase(
-    `/bakery?latitude=${latitude}&longitude=${longitude}&range=${range}`
+    `/bakery?latitude=${latitude}&longitude=${longitude}&range=${range}`,
+    { headers }
   );
   const data = await resp.json();
 
