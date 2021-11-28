@@ -57,7 +57,7 @@ const StoreRating = ({
           <StarScoreSlider submitScore={submitScore} />
         </>
       ) : (
-        <div>
+        <>
           <Title>{bakeryName}</Title>
           <ReviewCount>
             <UserCircle />
@@ -66,7 +66,7 @@ const StoreRating = ({
           <AvgRating>{avgRating}</AvgRating>
 
           <StarScore score={avgRating} />
-        </div>
+        </>
       )}
     </Container>
   );
