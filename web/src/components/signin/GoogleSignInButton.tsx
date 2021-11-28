@@ -49,11 +49,7 @@ const GoogleSignInButton: React.FC = () => {
             accessToken: id_token,
             provider: 'google',
           });
-
-          if (window !== undefined) {
-            localStorage.setItem('accessToken', authResponseData.appToken);
-          }
-
+          
           if (authResponseData.isNewMember) router.push('/onboard');
           else router.push('/map');
         } catch (error) {

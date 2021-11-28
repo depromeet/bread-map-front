@@ -1,4 +1,4 @@
-import fetchBase from '@/remotes/network/fetchBase';
+import { fetchWithToken } from '@/remotes/network/fetchBase';
 
 interface CreateBakeryPayload {
   address: string;
@@ -15,7 +15,7 @@ interface CreateBakeryPayload {
 const requestCreateBakery = async (
   payload: CreateBakeryPayload
 ): Promise<void> => {
-  await fetchBase('/bakery', {
+  await fetchWithToken('/bakery', {
     method: 'POST',
     body: JSON.stringify(payload),
   });

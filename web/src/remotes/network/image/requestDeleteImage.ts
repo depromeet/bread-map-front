@@ -1,4 +1,4 @@
-import fetchBase from '@/remotes/network/fetchBase';
+import { fetchWithToken } from '@/remotes/network/fetchBase';
 
 interface DeleteImagePayload {
   fileName: string;
@@ -7,7 +7,7 @@ interface DeleteImagePayload {
 const requestDeleteImage = async ({
   fileName,
 }: DeleteImagePayload): Promise<void> => {
-  await fetchBase(`/s3/image?fileName=${fileName}`);
+  await fetchWithToken(`/s3/image?fileName=${fileName}`);
   return;
 };
 

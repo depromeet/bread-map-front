@@ -1,4 +1,4 @@
-import fetchBase from '@/remotes/network/fetchBase';
+import { fetchWithToken } from '@/remotes/network/fetchBase';
 
 interface ModifyBakeryRatingPayload {
   bakeryId: number;
@@ -9,7 +9,7 @@ const requestModifyBakeryRating = async ({
   bakeryId,
   rating,
 }: ModifyBakeryRatingPayload): Promise<void> => {
-  await fetchBase(`/bakery/${bakeryId}/rating`, {
+  await fetchWithToken(`/bakery/${bakeryId}/rating`, {
     method: 'POST',
     body: JSON.stringify({ rating }),
   });

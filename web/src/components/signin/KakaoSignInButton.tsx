@@ -33,10 +33,6 @@ const KakaoSignInButton: React.FC = () => {
           provider: 'kakao',
         });
 
-        if (window !== undefined) {
-          localStorage.setItem('accessToken', authResponseData.appToken);
-        }
-
         if (authResponseData.isNewMember) router.push('/onboard');
         else router.push('/map');
 
@@ -48,12 +44,15 @@ const KakaoSignInButton: React.FC = () => {
         async success(resp) {
           window.Kakao.Auth.setAccessToken(resp.access_token);
 
-          await requestSocialLogin({
+          const authResponseData = await requestSocialLogin({
             accessToken: resp.access_token,
             provider: 'kakao',
           });
-          router.push('/map');
+
+          if (authResponseData.isNewMember) router.push('/onboard');
+          else router.push('/map');
         },
+
         fail(error) {
           console.error(error);
         },

@@ -1,4 +1,4 @@
-import fetchBase from '@/remotes/network/fetchBase';
+import { fetchWithToken } from '@/remotes/network/fetchBase';
 
 type FlagType = 'NONE' | 'PICKED' | 'GONE';
 
@@ -11,7 +11,7 @@ const requestModifyBakeryFlag = async ({
   bakeryId,
   flagType,
 }: ModifyBakeryFlagPayload): Promise<void> => {
-  await fetchBase(`/bakery/${bakeryId}/flag`, {
+  await fetchWithToken(`/bakery/${bakeryId}/flag`, {
     method: 'POST',
     body: JSON.stringify({ flagType }),
   });

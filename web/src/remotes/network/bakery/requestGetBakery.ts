@@ -1,4 +1,4 @@
-import fetchBase from '@/remotes/network/fetchBase';
+import { fetchWithToken } from '@/remotes/network/fetchBase';
 
 interface GetBakeryPayload {
   bakeryId: number;
@@ -49,7 +49,7 @@ export interface BakeryEntity {
 const requestGetBakery = async ({
   bakeryId,
 }: GetBakeryPayload): Promise<BakeryEntity> => {
-  const resp = await fetchBase(`/bakery/${bakeryId}`);
+  const resp = await fetchWithToken(`/bakery/${bakeryId}`);
   const data = await resp.json();
   return data;
 };
