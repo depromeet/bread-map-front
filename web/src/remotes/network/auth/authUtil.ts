@@ -31,7 +31,6 @@ function tokenSaveLocalstorage(token: string) {
 function setRefreshTime() {
   if (REFRESH_TIME_OUT) return;
 
-  console.log('refreshTime');
   const expire = localStorage.getItem('expire');
   if (!expire) router.push('auth/signin');
 

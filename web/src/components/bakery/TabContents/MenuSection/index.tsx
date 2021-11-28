@@ -10,7 +10,7 @@ type MenuSectionProps = {
 };
 
 const MenuSection = ({ bakeryId }: MenuSectionProps) => {
-  const { data, error } = useGetBakeryMenu(bakeryId, 0, 10);
+  const { data, error } = useGetBakeryMenu(bakeryId, 1, 10);
 
   if (error) return <div>Error</div>;
   if (!data) return <div>Loading...</div>;

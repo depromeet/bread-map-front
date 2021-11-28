@@ -1,8 +1,7 @@
-/* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import styled from '@emotion/styled';
 import { BakeryEntity } from '@/remotes/network/bakery/requestGetBakery';
-import StarScore from '@/components/common/StarScore';
+import { StarScore } from '@/components/common';
 
 const addComma = (num: number) => {
   return num.toLocaleString('ko-kr');
@@ -19,7 +18,7 @@ const MenuCardList = ({
         <Container>
           {menus.map((menu, idx) => (
             <li key={idx}>
-              <img
+              <MenuImage
                 src={menu.imgPath || '/images/default_bread.png'}
                 alt={'menu'}
               />
@@ -38,7 +37,7 @@ const MenuCardList = ({
         </Container>
       ) : (
         <Container className={'nodata'}>
-          <img src={'/images/sadSobbang.png'} alt={'nodata'} />
+          <NodataImage src={'/images/sadSobbang.png'} alt={'nodata'} />
           <NoDataText>
             <div>빵순이를 위해 맛있는</div>
             <div>빵 정보를 공유해주세요.</div>
@@ -51,6 +50,8 @@ const MenuCardList = ({
 
 export default MenuCardList;
 
+const MenuImage = styled.img``;
+const NodataImage = styled.img``;
 const Container = styled.ul`
   list-style: none;
   margin: 24px 0;
@@ -70,7 +71,7 @@ const Container = styled.ul`
     width: 100%;
     display: flex;
     gap: 10px;
-    img {
+    ${MenuImage} {
       min-width: 100px;
       max-width: 140px;
       width: 30%;

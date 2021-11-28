@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { BakeryEntity } from '@/remotes/network/bakery/requestGetBakery';
-import StarScore from '@/components/common/StarScore';
+import { StarScore } from '@/components/common';
 
 const MINUTE = 60;
 const HOUR = 3600;

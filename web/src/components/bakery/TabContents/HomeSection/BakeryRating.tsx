@@ -5,8 +5,11 @@ import { UserCircle } from '@/components/icons';
 import StarScoreSlider from '@/components/common/StarScoreSlider';
 import { Button } from '@/components/common';
 import StarScore from '@/components/common/StarScore';
+import { mutateGetBakery } from '@/remotes/hooks/useGetBakery';
+import { requestModifyBakeryRating } from '@/remotes/network/bakery';
 
 type StoreRatingProps = {
+  bakeryId: number;
   userName: string;
   userImage?: string;
   bakeryName: string;
@@ -16,6 +19,7 @@ type StoreRatingProps = {
 };
 
 const StoreRating = ({
+  bakeryId,
   userName,
   userImage,
   bakeryName,
@@ -23,12 +27,25 @@ const StoreRating = ({
   ratingCount,
   avgRating,
 }: StoreRatingProps) => {
-  const [score, setScore] = React.useState(0);
-  //TODO score FETCH;
+  const [submitFlag, setSubmitFlag] = React.useState(
+    isNaN(personalRating) || personalRating === 0 ? false : true
+  );
+  const submitScore = (score: number) => {
+    if (score === 0) return;
+    try {
+      if (!submitFlag) {
+        requestModifyBakeryRating({ bakeryId, rating: score });
+        mutateGetBakery(bakeryId);
+      }
+      setSubmitFlag(true);
+    } catch (error) {
+      alert(JSON.stringify(error));
+    }
+  };
 
   return (
     <Container>
-      {isNaN(personalRating) ? (
+      {!submitFlag ? (
         <>
           <img
             src={userImage || '/images/noProfileImg.png'}
@@ -37,10 +54,7 @@ const StoreRating = ({
           <Title>
             <b>{userName}</b>님 빵집 어떠셨어요?
           </Title>
-          <StarScoreSlider submitScore={setScore} />
-          {score > 0 && (
-            <ReviewSubmitButton size={'small'}>평가하기</ReviewSubmitButton>
-          )}
+          <StarScoreSlider submitScore={submitScore} />
         </>
       ) : (
         <div>

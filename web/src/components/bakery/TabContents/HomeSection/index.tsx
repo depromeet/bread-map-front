@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { Button } from '@/components/common';
 import { useRouter } from 'next/router';
 import MenuCardList from './MenuCardList';
-import StoreRating from './StoreRating';
+import BakeryRating from './BakeryRating';
 import ReviewCardList from './ReviewCardList';
 import { useGetBakery } from '@/remotes/hooks';
 
@@ -15,10 +15,14 @@ const HomeSection = ({ bakeryId }: HomeSectionProps) => {
   const router = useRouter();
   const { data, error } = useGetBakery(bakeryId);
 
-  const toMenuTab = () =>
-    router.push({ query: { ...router.query, tab: 'menu' } });
-  const toReviewTab = () =>
-    router.push({ query: { ...router.query, tab: 'review' } });
+  const toMenuTab = React.useCallback(
+    () => router.push({ query: { ...router.query, tab: 'menu' } }),
+    [router]
+  );
+  const toReviewTab = React.useCallback(
+    () => router.push({ query: { ...router.query, tab: 'review' } }),
+    [router]
+  );
 
   if (error) return <div>Error!!</div>;
   if (!data) return <div>Loading...</div>;
@@ -40,15 +44,18 @@ const HomeSection = ({ bakeryId }: HomeSectionProps) => {
           </AddButtonStyle>
         </SectionHeader>
         <MenuCardList menus={data.bakeryMenuListResponseList} />
-        {data.bakeryMenuListResponseList?.length && (
+        {data.bakeryMenuListResponseList?.length ? (
           <Button onClick={toMenuTab} styleType={'none'}>
             전체 메뉴 보기
           </Button>
+        ) : (
+          ''
         )}
       </Section>
 
       <Section>
-        <StoreRating
+        <BakeryRating
+          bakeryId={data.bakeryId}
           userName={'소빵이'}
           bakeryName={data.bakeryName}
           personalRating={data.personalRating}
@@ -67,10 +74,12 @@ const HomeSection = ({ bakeryId }: HomeSectionProps) => {
           </AddButtonStyle>
         </SectionHeader>
         <ReviewCardList reviews={data.menuReviewsResponseList} />
-        {data.menuReviewsResponseList?.length && (
+        {data.menuReviewsResponseList?.length ? (
           <Button onClick={toReviewTab} styleType={'none'}>
             전체 리뷰 보기
           </Button>
+        ) : (
+          ''
         )}
       </Section>
     </Container>

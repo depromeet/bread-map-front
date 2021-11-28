@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Button } from '@/components/common';
-import StoreRating from './StoreRating';
+import BakeryRating from './BakeryRating';
 import ReviewCardList from '../HomeSection/ReviewCardList';
 import useGetBakeryMenuReivew from '@/remotes/hooks/useGetBakeryMenuReivew';
 import { useGetBakery } from '@/remotes/hooks';
@@ -13,7 +13,7 @@ type ReviewSectionProps = {
 const ReviewSection = ({ bakeryId }: ReviewSectionProps) => {
   const { data: bakeryData, error: bakeryError } = useGetBakery(bakeryId);
   const { data: bakeryMenuData, error: bakeryMenuError } =
-    useGetBakeryMenuReivew(bakeryId, 0, 10);
+    useGetBakeryMenuReivew(bakeryId, 1, 10);
 
   if (!bakeryMenuData || !bakeryData) return <div>Loading...</div>;
   if (bakeryMenuError || bakeryError) return <div>Error</div>;
@@ -21,8 +21,9 @@ const ReviewSection = ({ bakeryId }: ReviewSectionProps) => {
   return (
     <Container>
       <Section>
-        <StoreRating
+        <BakeryRating
           userName={'소빵이'}
+          bakeryId={bakeryData.bakeryId}
           bakeryName={bakeryData.bakeryName}
           personalRating={bakeryData.personalRating}
           ratingCount={bakeryData.ratingCount}

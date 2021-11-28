@@ -5,7 +5,7 @@ import { useGetBakeries } from '@/remotes/hooks';
 const Bakery = () => {
   return (
     <BakeryItem>
-      <Image src="https://via.placeholder.com/170" alt="image" />
+      <Image src="/images/default_bread2.png" alt="image" />
       <Info></Info>
     </BakeryItem>
   );
@@ -13,10 +13,12 @@ const Bakery = () => {
 
 const Bakeries = () => {
   const { data: bakeries, error: err } = useGetBakeries({
-    latitude: 37.5657037,
-    longitude: 126.9746676,
-    range: 10,
+    latitude: 37.56621061,
+    longitude: 126.995157,
+    range: 100000,
   });
+
+  console.log('bakeries');
 
   const error = null;
 

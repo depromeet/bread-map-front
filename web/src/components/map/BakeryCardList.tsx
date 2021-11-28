@@ -11,9 +11,9 @@ const BakeryCardList: React.FC = () => {
   const [currentBakeryId] = useAtom(currentBakeryIdAtom);
 
   const { data } = useGetBakeries({
-    latitude: DEFAULT_POSITION.lat,
-    longitude: DEFAULT_POSITION.lng,
-    range: 100,
+    latitude: 37.56621061,
+    longitude: 126.995157,
+    range: 100000,
   });
 
   const currentBakeryEntity = data?.find(
