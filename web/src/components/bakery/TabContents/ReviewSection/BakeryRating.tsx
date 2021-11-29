@@ -32,15 +32,11 @@ const StoreRating = ({
 
   const submitScore = (score: number) => {
     if (score === 0) return;
-    try {
-      if (!submitFlag) {
-        requestModifyBakeryRating({ bakeryId, rating: score });
-        mutateGetBakery(bakeryId);
-      }
-      setSubmitFlag(true);
-    } catch (error) {
-      alert(JSON.stringify(error));
+    if (!submitFlag) {
+      requestModifyBakeryRating({ bakeryId, rating: score });
+      mutateGetBakery(bakeryId);
     }
+    setSubmitFlag(true);
   };
 
   return (
@@ -63,7 +59,7 @@ const StoreRating = ({
             <UserCircle />
             {ratingCount}명이 평가했어요!
           </ReviewCount>
-          <AvgRating>{avgRating}</AvgRating>
+          <AvgRating>{avgRating.toFixed(1)}</AvgRating>
 
           <StarScore score={avgRating} />
         </div>

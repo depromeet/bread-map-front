@@ -15,7 +15,7 @@ const Onboard = () => {
     },
   });
   const startClickHandler = () => {
-    router.push('/daedong');
+    router.push('/map');
   };
 
   return (

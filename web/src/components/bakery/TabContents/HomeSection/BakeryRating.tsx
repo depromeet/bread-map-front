@@ -61,7 +61,7 @@ const StoreRating = ({
             <UserCircle />
             {ratingCount}명이 평가했어요!
           </ReviewCount>
-          <AvgRating>{avgRating}</AvgRating>
+          <AvgRating>{avgRating.toFixed(1)}</AvgRating>
 
           <StarScore score={avgRating} />
         </>
