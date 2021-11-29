@@ -6,6 +6,7 @@ import MenuCardList from './MenuCardList';
 import BakeryRating from './BakeryRating';
 import ReviewCardList from './ReviewCardList';
 import { useGetBakery } from '@/remotes/hooks';
+import useGetUser from '@/remotes/hooks/useUser';
 
 type HomeSectionProps = {
   bakeryId: number;
@@ -13,7 +14,8 @@ type HomeSectionProps = {
 
 const HomeSection = ({ bakeryId }: HomeSectionProps) => {
   const router = useRouter();
-  const { data, error } = useGetBakery(bakeryId);
+  const { data: bakeryData, error: bakeryError } = useGetBakery(bakeryId);
+  const { data: userData, error: userError } = useGetUser();
 
   const toMenuTab = React.useCallback(
     () => router.push({ query: { ...router.query, tab: 'menu' } }),
@@ -24,8 +26,8 @@ const HomeSection = ({ bakeryId }: HomeSectionProps) => {
     [router]
   );
 
-  if (error) return <div>Error!!</div>;
-  if (!data) return <div>Loading...</div>;
+  if (bakeryError || userError) return <div>Error!!</div>;
+  if (!bakeryData || !userData) return <div>Loading...</div>;
 
   return (
     <Container>
@@ -34,8 +36,8 @@ const HomeSection = ({ bakeryId }: HomeSectionProps) => {
           <Title>
             메뉴{' '}
             <b>
-              {data.bakeryMenuListResponseList
-                ? data.bakeryMenuListResponseList.length
+              {bakeryData.bakeryMenuListResponseList
+                ? bakeryData.bakeryMenuListResponseList.length
                 : 0}
             </b>
           </Title>
@@ -43,8 +45,8 @@ const HomeSection = ({ bakeryId }: HomeSectionProps) => {
             메뉴 입력
           </AddButtonStyle>
         </SectionHeader>
-        <MenuCardList menus={data.bakeryMenuListResponseList} />
-        {data.bakeryMenuListResponseList?.length ? (
+        <MenuCardList menus={bakeryData.bakeryMenuListResponseList} />
+        {bakeryData.bakeryMenuListResponseList?.length ? (
           <Button onClick={toMenuTab} styleType={'none'}>
             전체 메뉴 보기
           </Button>
@@ -55,26 +57,26 @@ const HomeSection = ({ bakeryId }: HomeSectionProps) => {
 
       <Section>
         <BakeryRating
-          bakeryId={data.bakeryId}
-          userName={'소빵이'}
-          bakeryName={data.bakeryName}
-          personalRating={data.personalRating}
-          ratingCount={data.ratingCount}
-          avgRating={data.avgRating}
+          bakeryId={bakeryData.bakeryId}
+          userName={userData.nickName}
+          bakeryName={bakeryData.bakeryName}
+          personalRating={bakeryData.personalRating}
+          ratingCount={bakeryData.ratingCount}
+          avgRating={bakeryData.avgRating}
         />
       </Section>
 
       <Section className={'grow'}>
         <SectionHeader>
           <Title>
-            리뷰 <b>{data.menuReviewsCount}</b>
+            리뷰 <b>{bakeryData.menuReviewsCount}</b>
           </Title>
           <AddButtonStyle styleType={'primary'} rounded size="small">
             리뷰 작성
           </AddButtonStyle>
         </SectionHeader>
-        <ReviewCardList reviews={data.menuReviewsResponseList} />
-        {data.menuReviewsResponseList?.length ? (
+        <ReviewCardList reviews={bakeryData.menuReviewsResponseList} />
+        {bakeryData.menuReviewsResponseList?.length ? (
           <Button onClick={toReviewTab} styleType={'none'}>
             전체 리뷰 보기
           </Button>

@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { BakeryEntity } from '@/remotes/network/bakery/requestGetBakery';
 import { StarScore } from '@/components/common';
 import { ReviewImage, UserImage } from '@/components/common/Images';
+import useGetUser from '@/remotes/hooks/useUser';
 
 const MINUTE = 60;
 const HOUR = 3600;
@@ -29,6 +30,8 @@ const ReviewCardList = ({
 }: {
   reviews: BakeryEntity['menuReviewsResponseList'];
 }) => {
+  const { data: user } = useGetUser();
+
   return (
     <>
       {reviews?.length ? (
@@ -36,9 +39,9 @@ const ReviewCardList = ({
           {reviews?.map((review, idx) => (
             <li key={idx}>
               <Member>
-                <UserImage src={review.memberName || ''} />
+                <UserImage src={user?.profileImage || ''} />
                 <div>
-                  <b>{review.memberName}님</b>
+                  <b>{user?.nickName}님</b>
                   <LastModifiedDate>
                     {dateDiff(review.lastModifiedDateTime)}
                   </LastModifiedDate>

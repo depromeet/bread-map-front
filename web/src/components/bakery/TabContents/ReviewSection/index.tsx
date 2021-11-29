@@ -5,6 +5,7 @@ import BakeryRating from './BakeryRating';
 import ReviewCardList from '../HomeSection/ReviewCardList';
 import useGetBakeryMenuReivew from '@/remotes/hooks/useGetBakeryMenuReivew';
 import { useGetBakery } from '@/remotes/hooks';
+import useGetUser from '@/remotes/hooks/useUser';
 
 type ReviewSectionProps = {
   bakeryId: number;
@@ -14,15 +15,16 @@ const ReviewSection = ({ bakeryId }: ReviewSectionProps) => {
   const { data: bakeryData, error: bakeryError } = useGetBakery(bakeryId);
   const { data: bakeryMenuData, error: bakeryMenuError } =
     useGetBakeryMenuReivew(bakeryId, 1, 10);
+  const { data: userData, error: userError } = useGetUser();
 
-  if (!bakeryMenuData || !bakeryData) return <div>Loading...</div>;
-  if (bakeryMenuError || bakeryError) return <div>Error</div>;
+  if (!bakeryMenuData || !bakeryData || !userData) return <div>Loading...</div>;
+  if (bakeryMenuError || bakeryError || userError) return <div>Error</div>;
 
   return (
     <Container>
       <Section>
         <BakeryRating
-          userName={'소빵이'}
+          userName={userData.nickName}
           bakeryId={bakeryData.bakeryId}
           bakeryName={bakeryData.bakeryName}
           personalRating={bakeryData.personalRating}
