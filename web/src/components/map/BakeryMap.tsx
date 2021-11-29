@@ -34,9 +34,12 @@ const BakeryMarkerList = ({
 const BakeryMarkersContainer = () => {
   const goToMyPosition = useNaverMapGoToMyPosition();
   const { data } = useSWR('getMyPosition', goToMyPosition);
-  if (!data) return null;
-  goToMyPosition();
 
+  React.useEffect(() => {
+    goToMyPosition();
+  }, [goToMyPosition]);
+
+  if (!data) return null;
   return <BakeryMarkerList position={data} />;
 };
 

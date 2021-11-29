@@ -1,10 +1,11 @@
+import React from 'react';
 import useSetMapCenter from './useSetMapCenter';
 import { getMyPosition } from './utils';
 
 const useNaverMapGoToMyPosition = () => {
   const setMapCenter = useSetMapCenter();
 
-  const goToMyPosition = async () => {
+  const goToMyPosition = React.useCallback(async () => {
     const { coords } = await getMyPosition();
     if (!coords) return;
 
@@ -15,7 +16,7 @@ const useNaverMapGoToMyPosition = () => {
     });
 
     return coords;
-  };
+  }, [setMapCenter]);
 
   return goToMyPosition;
 };
