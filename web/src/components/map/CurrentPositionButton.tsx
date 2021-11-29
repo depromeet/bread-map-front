@@ -2,17 +2,15 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import { Navigation } from '@/components/icons';
 import { useNaverMap, useNaverMapGoToMyPosition } from '@/lib/navermap';
-
-// 시청역 임시데이터
-// const DEFAULT_POSITION = {
-//   lat: 37.5666103,
-//   lng: 126.9783882,
-// };
+import useSWR from 'swr';
+import { mutateGetBakeries } from '@/remotes/hooks/useGetBakeries';
 
 const CurrentPositionButton = React.forwardRef<HTMLButtonElement | null, {}>(
   (_, ref) => {
     const naverMap = useNaverMap();
     const goToMyPosition = useNaverMapGoToMyPosition();
+    const { data } = useSWR('getMyPosition', goToMyPosition);
+
     const buttonRef = React.useRef<HTMLButtonElement | null>(null);
 
     React.useImperativeHandle<
@@ -20,15 +18,24 @@ const CurrentPositionButton = React.forwardRef<HTMLButtonElement | null, {}>(
       HTMLButtonElement | null
     >(ref, () => buttonRef.current);
 
-    const handleClick = () => {
+    const handleClick = async () => {
       if (naverMap === undefined) return;
-      goToMyPosition();
+      if (!data) return;
+
+      const coords = await goToMyPosition();
+      if (coords)
+        mutateGetBakeries({
+          latitude: coords.latitude,
+          longitude: coords.longitude,
+          // TODO 범위에 대한 로직 없음.
+          range: 100000,
+        });
     };
 
     return (
       <Button onClick={handleClick} ref={buttonRef}>
         <Navigation width={16} height={16} />
-        <span>내 위치</span>
+        <span>{data ? '내 위치' : 'Loading'}</span>
       </Button>
     );
   }

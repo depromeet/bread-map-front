@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { useGetBakeries } from '@/remotes/hooks';
+import { currentRangeBakeriesAtom } from '@/store/map';
+import { useAtom } from 'jotai';
 
 const Bakery = () => {
   return (
@@ -12,13 +13,7 @@ const Bakery = () => {
 };
 
 const Bakeries = () => {
-  const { data: bakeries, error: err } = useGetBakeries({
-    latitude: 37.56621061,
-    longitude: 126.995157,
-    range: 100000,
-  });
-
-  console.log('bakeries');
+  const [bakeries] = useAtom(currentRangeBakeriesAtom);
 
   const error = null;
 

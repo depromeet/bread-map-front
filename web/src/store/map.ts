@@ -1,11 +1,18 @@
 import { atom } from 'jotai';
 import type { BottomSheetRef } from 'react-spring-bottom-sheet';
 import type { BreadCategory } from '@/constants/breadCategories';
+import { BakeryEntity } from '@/remotes/network/bakery/requestGetBakeries';
 
 type BottomSheetType = 'single' | 'multiple';
 export const bottomSheetTypeAtom = atom<BottomSheetType>('multiple');
 
 export const currentBakeryIdAtom = atom<number | undefined>(undefined);
+
+export const currentPosition = atom<GeolocationCoordinates | undefined>(
+  undefined
+);
+
+export const currentRangeBakeriesAtom = atom<BakeryEntity[] | undefined>([]);
 
 export const bottomSheetRefAtom = atom<BottomSheetRef | null>(null);
 

@@ -1,22 +1,19 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
-import { useGetBakeries } from '@/remotes/hooks';
-import { bottomSheetTypeAtom, currentBakeryIdAtom } from '@/store/map';
+import {
+  bottomSheetTypeAtom,
+  currentBakeryIdAtom,
+  currentRangeBakeriesAtom,
+} from '@/store/map';
 import BakeryInfoCard from './BakeryInfoCard';
-import { DEFAULT_POSITION } from './constants';
 
 const BakeryCardList: React.FC = () => {
   const [bottomSheetType] = useAtom(bottomSheetTypeAtom);
   const [currentBakeryId] = useAtom(currentBakeryIdAtom);
+  const [bakeries] = useAtom(currentRangeBakeriesAtom);
 
-  const { data } = useGetBakeries({
-    latitude: 37.56621061,
-    longitude: 126.995157,
-    range: 100000,
-  });
-
-  const currentBakeryEntity = data?.find(
+  const currentBakeryEntity = bakeries?.find(
     (el) => el.bakeryId === currentBakeryId
   );
 
@@ -40,7 +37,7 @@ const BakeryCardList: React.FC = () => {
             <MultipleTitle>내 주변 빵집</MultipleTitle>
             <SortTypeText>거리순</SortTypeText>
           </TitleBox>
-          {data?.map((entity) => (
+          {bakeries?.map((entity) => (
             <BakeryInfoCard
               bakeryId={entity.bakeryId}
               title={entity.bakeryName}
