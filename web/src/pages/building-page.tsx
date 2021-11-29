@@ -1,16 +1,14 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Setting, Construction } from '@/components/icons';
+import { Construction } from '@/components/icons';
+import { Header } from '@/components/common';
 
-const Search = () => {
+const Building = () => {
   return (
     <Base>
-      <TopHeader>
-        <Blank />
-        <PageTitle>탐색</PageTitle>
-        <Setting />
-      </TopHeader>
-
+      <HeaderContainer>
+        <Header>공사중</Header>
+      </HeaderContainer>
       <Layout>
         <Content>
           <Construction />
@@ -28,27 +26,20 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default Building;
 
 const Base = styled.div`
   height: calc(100vh - ${({ theme }) => theme.height.footer}px);
   display: flex;
   flex-direction: column;
 `;
+const HeaderContainer = styled.div`
+  padding: 0 12px;
+  font-weight: bold;
 
-const Blank = styled.div`
-  width: 24px;
-`;
-
-const PageTitle = styled.header`
-  font-size: 18px;
-  font-weight: 700;
-`;
-
-const TopHeader = styled.div`
-  padding: 16px 20px;
-  display: flex;
-  justify-content: space-between;
+  svg {
+    cursor: pointer;
+  }
 `;
 
 const Layout = styled.div`

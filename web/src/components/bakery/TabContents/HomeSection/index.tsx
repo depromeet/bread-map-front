@@ -25,6 +25,14 @@ const HomeSection = ({ bakeryId }: HomeSectionProps) => {
     () => router.push({ query: { ...router.query, tab: 'review' } }),
     [router]
   );
+  const createReviewButtonClickHandler = React.useCallback(
+    () => router.push('/building-page'),
+    [router]
+  );
+  const createMenuButtonClickHandler = React.useCallback(
+    () => router.push('/building-page'),
+    [router]
+  );
 
   if (bakeryError || userError) return <div>Error!!</div>;
   if (!bakeryData || !userData) return <div>Loading...</div>;
@@ -41,7 +49,12 @@ const HomeSection = ({ bakeryId }: HomeSectionProps) => {
                 : 0}
             </b>
           </Title>
-          <AddButtonStyle styleType={'primary'} rounded size="small">
+          <AddButtonStyle
+            onClick={createMenuButtonClickHandler}
+            styleType={'primary'}
+            rounded
+            size="small"
+          >
             메뉴 입력
           </AddButtonStyle>
         </SectionHeader>
@@ -71,7 +84,12 @@ const HomeSection = ({ bakeryId }: HomeSectionProps) => {
           <Title>
             리뷰 <b>{bakeryData.menuReviewsCount}</b>
           </Title>
-          <AddButtonStyle styleType={'primary'} rounded size="small">
+          <AddButtonStyle
+            onClick={createReviewButtonClickHandler}
+            styleType={'primary'}
+            rounded
+            size="small"
+          >
             리뷰 작성
           </AddButtonStyle>
         </SectionHeader>

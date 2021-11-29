@@ -3,14 +3,20 @@ import styled from '@emotion/styled';
 import MenuCardList from './MenuCardList';
 import useGetBakeryMenu from '@/remotes/hooks/useGetBakeryMenu';
 import { Button } from '@/components/common';
-import { useGetBakery } from '@/remotes/hooks';
+import { useRouter } from 'next/router';
 
 type MenuSectionProps = {
   bakeryId: number;
 };
 
 const MenuSection = ({ bakeryId }: MenuSectionProps) => {
-  const { data, error } = useGetBakeryMenu(bakeryId, 1, 10);
+  const router = useRouter();
+  const { data, error } = useGetBakeryMenu(bakeryId, 1, 20);
+
+  const createMenuButtonClickHandler = React.useCallback(
+    () => router.push('/building-page'),
+    [router]
+  );
 
   if (error) return <div>Error</div>;
   if (!data) return <div>Loading...</div>;
@@ -22,7 +28,12 @@ const MenuSection = ({ bakeryId }: MenuSectionProps) => {
           <Title>
             메뉴 <b>{data.numberOfElements}</b>
           </Title>
-          <AddButtonStyle styleType={'primary'} rounded size="small">
+          <AddButtonStyle
+            onClick={createMenuButtonClickHandler}
+            styleType={'primary'}
+            rounded
+            size="small"
+          >
             메뉴 입력
           </AddButtonStyle>
         </SectionHeader>

@@ -10,7 +10,7 @@ const Header: React.FC = ({ children }) => {
     nextRouter.back();
   }, [nextRouter]);
   const colseClickHandler = React.useCallback(() => {
-    nextRouter.push('/daedong');
+    nextRouter.push('/map');
   }, [nextRouter]);
 
   return (

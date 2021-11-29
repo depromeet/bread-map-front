@@ -1,4 +1,3 @@
-import router from 'next/router';
 import { setRefreshTime } from './auth/authUtil';
 
 const arrayTypeGuard = (headers?: HeadersInit): headers is string[][] => {

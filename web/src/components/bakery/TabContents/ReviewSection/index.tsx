@@ -6,16 +6,23 @@ import ReviewCardList from '../HomeSection/ReviewCardList';
 import useGetBakeryMenuReivew from '@/remotes/hooks/useGetBakeryMenuReivew';
 import { useGetBakery } from '@/remotes/hooks';
 import useGetUser from '@/remotes/hooks/useUser';
+import { useRouter } from 'next/router';
 
 type ReviewSectionProps = {
   bakeryId: number;
 };
 
 const ReviewSection = ({ bakeryId }: ReviewSectionProps) => {
+  const router = useRouter();
   const { data: bakeryData, error: bakeryError } = useGetBakery(bakeryId);
   const { data: bakeryMenuData, error: bakeryMenuError } =
     useGetBakeryMenuReivew(bakeryId, 1, 10);
   const { data: userData, error: userError } = useGetUser();
+
+  const createReviewButtonClickHandler = React.useCallback(
+    () => router.push('/building-page'),
+    [router]
+  );
 
   if (!bakeryMenuData || !bakeryData || !userData) return <div>Loading...</div>;
   if (bakeryMenuError || bakeryError || userError) return <div>Error</div>;
@@ -38,7 +45,12 @@ const ReviewSection = ({ bakeryId }: ReviewSectionProps) => {
           <Title>
             리뷰 <b>{bakeryMenuData.numberOfElements}</b>
           </Title>
-          <AddButtonStyle styleType={'primary'} rounded size="small">
+          <AddButtonStyle
+            onClick={createReviewButtonClickHandler}
+            styleType={'primary'}
+            rounded
+            size="small"
+          >
             리뷰 작성
           </AddButtonStyle>
         </SectionHeader>

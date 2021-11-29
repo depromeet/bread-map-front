@@ -1,4 +1,3 @@
-import router from 'next/router';
 import { requestRefreshLogin } from '.';
 
 const EXPIRE_GAP = 5 * 24 * 60 * 60 * 60;
@@ -30,9 +29,8 @@ function tokenSaveLocalstorage(token: string) {
  */
 function setRefreshTime() {
   if (REFRESH_TIME_OUT) return;
-
   const expire = localStorage.getItem('expire');
-  if (!expire) router.push('auth/signin');
+  if (!expire && window) window.location.replace('/auth/signin');
 
   const refreshTime = Number(expire) - new Date().getTime() - EXPIRE_GAP * 1000;
 
