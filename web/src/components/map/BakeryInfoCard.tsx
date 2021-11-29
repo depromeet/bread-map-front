@@ -58,7 +58,7 @@ const BakeryInfoCard: React.FC<BakeryInfoCardProps> = ({
             <span>{reviewCount}</span>
           </div>
         </InfoCountBox>
-        <ReviewBox>
+        <ReviewBox onClick={(e) => e.stopPropagation()}>
           {reviews.map((review) => (
             <ReviewItem key={review}>
               <QuoteIcon />
@@ -77,6 +77,7 @@ const Card = styled.div`
   padding: 20px;
   cursor: pointer;
   width: 100%;
+  overflow: hidden;
   height: 148px;
   display: flex;
   align-items: center;
@@ -102,6 +103,8 @@ const ImageBox = styled.div`
 
 const InfoBox = styled.div`
   margin-left: 12px;
+  flex: 1;
+  overflow: hidden;
   height: 108px;
   display: flex;
   flex-direction: column;
@@ -111,7 +114,6 @@ const FlagButton = styled.button`
   position: absolute;
   right: 6px;
   bottom: 6px;
-
   width: 28px;
   height: 28px;
   border: none;
@@ -156,27 +158,25 @@ const InfoCountBox = styled.div`
 
 const ReviewBox = styled.div`
   display: flex;
-  overflow-x: scroll;
+  overflow: scroll;
   gap: 10px;
   margin-top: 16px;
   height: 50px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const ReviewItem = styled.div`
   width: 196px;
   height: 100%;
+  flex-shrink: 0;
   background-color: ${({ theme }) => theme.color.gray100};
   color: ${({ theme }) => theme.color.gray600};
   border-radius: 8px;
   padding: 8px;
   display: flex;
-
-  span {
-    margin-left: 2px;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 1.4;
-  }
 `;
 
 const ReviewText = styled.span`
@@ -184,7 +184,10 @@ const ReviewText = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  line-height: 1.5;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  margin-left: 2px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
 `;

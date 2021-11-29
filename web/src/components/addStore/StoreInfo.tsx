@@ -4,10 +4,7 @@ import styled from '@emotion/styled';
 import { Button } from '@/components/common';
 import { StoreMultiInput, StoreInput, StoreCardInput } from './StoreInput';
 import { StoreBaseCategoryInfo } from '@/constants/storeBaseCategories';
-import {
-  useStoreBaseCategories,
-  StoreBaseCategory,
-} from '@/components/common/StoreBaseCategoryList';
+import { useStoreBaseCategories } from '@/components/common/StoreBaseCategoryList';
 import { addStoreAddress } from '@/store';
 import { useAtom } from 'jotai';
 
