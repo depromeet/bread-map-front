@@ -3,6 +3,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { BakeryEntity } from '@/remotes/network/bakery/requestGetBakery';
 import { StarScore } from '@/components/common';
+import { ReviewImage, UserImage } from '@/components/common/Images';
 
 const MINUTE = 60;
 const HOUR = 3600;
@@ -35,7 +36,8 @@ const ReviewCardList = ({
           {reviews?.map((review, idx) => (
             <li key={idx}>
               <Member>
-                <img src={'/images/noProfileImg.png'} alt={'noprofile'} />
+                {/* TODO userImage 점검 */}
+                <UserImage src={review.memberName || ''} />
                 <div>
                   <b>{review.memberName}님</b>
                   <LastModifiedDate>
@@ -52,7 +54,7 @@ const ReviewCardList = ({
               </MenuInfo>
               <MenuImage>
                 {review.imgPathList.map((img, idx) => (
-                  <img key={idx} src={img} alt="review" />
+                  <ReviewImage key={idx} src={img} />
                 ))}
               </MenuImage>
               <ReviewContent>{review.contents}</ReviewContent>

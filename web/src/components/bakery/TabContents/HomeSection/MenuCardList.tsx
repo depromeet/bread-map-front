@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { BakeryEntity } from '@/remotes/network/bakery/requestGetBakery';
 import { StarScore } from '@/components/common';
+import { MenuImage } from '@/components/common/Images';
 
 const addComma = (num: number) => {
   return num.toLocaleString('ko-kr');
@@ -18,10 +19,7 @@ const MenuCardList = ({
         <Container>
           {menus.map((menu, idx) => (
             <li key={idx}>
-              <MenuImage
-                src={menu.imgPath || '/images/default_bread.png'}
-                alt={'menu'}
-              />
+              <MenuImage src={menu.imgPath || ''} />
               <MenuInfo>
                 <div>
                   <MenuName>{menu.menuName}</MenuName>
@@ -50,7 +48,6 @@ const MenuCardList = ({
 
 export default MenuCardList;
 
-const MenuImage = styled.img``;
 const NodataImage = styled.img``;
 const Container = styled.ul`
   list-style: none;
@@ -71,7 +68,8 @@ const Container = styled.ul`
     width: 100%;
     display: flex;
     gap: 10px;
-    ${MenuImage} {
+
+    img {
       min-width: 100px;
       max-width: 140px;
       width: 30%;

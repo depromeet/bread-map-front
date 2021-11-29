@@ -35,8 +35,7 @@ const BakeryMarkersContainer = () => {
   const goToMyPosition = useNaverMapGoToMyPosition();
   const { data } = useSWR('getMyPosition', goToMyPosition);
   if (!data) return null;
-
-  console.log(data);
+  goToMyPosition();
 
   return <BakeryMarkerList position={data} />;
 };

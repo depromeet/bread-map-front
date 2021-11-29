@@ -20,7 +20,7 @@ const MenuSection = ({ bakeryId }: MenuSectionProps) => {
       <Section className={'grow'}>
         <SectionHeader>
           <Title>
-            메뉴 <b>{data.number}</b>
+            메뉴 <b>{data.numberOfElements}</b>
           </Title>
           <AddButtonStyle styleType={'primary'} rounded size="small">
             메뉴 입력

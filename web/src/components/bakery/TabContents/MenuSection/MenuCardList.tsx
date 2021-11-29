@@ -3,6 +3,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { BakeryEntity } from '@/remotes/network/bakery/requestGetBakery';
 import StarScore from '@/components/common/StarScore';
+import { MenuImage } from '@/components/common/Images';
 
 const addComma = (num: number) => {
   return num.toLocaleString('ko-kr');
@@ -19,10 +20,7 @@ const MenuCardList = ({
         <Container>
           {menus.map((menu, idx) => (
             <li key={idx}>
-              <img
-                src={menu.imgPath || '/images/default_bread.png'}
-                alt={'menu'}
-              />
+              <MenuImage src={menu.imgPath || ''} />
               <MenuInfo>
                 <div>
                   <MenuName>{menu.menuName}</MenuName>

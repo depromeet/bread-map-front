@@ -7,6 +7,7 @@ import { Button } from '@/components/common';
 import StarScore from '@/components/common/StarScore';
 import { mutateGetBakery } from '@/remotes/hooks/useGetBakery';
 import { requestModifyBakeryRating } from '@/remotes/network/bakery';
+import { UserImage } from '@/components/common/Images';
 
 type StoreRatingProps = {
   bakeryId: number;
@@ -47,10 +48,7 @@ const StoreRating = ({
     <Container>
       {!submitFlag ? (
         <>
-          <img
-            src={userImage || '/images/noProfileImg.png'}
-            alt={'noprofile'}
-          />
+          <UserImage src={userImage || ''} />
           <Title>
             <b>{userName}</b>님 빵집 어떠셨어요?
           </Title>
@@ -105,9 +103,4 @@ const ReviewCount = styled.div`
     margin-top: 2px;
     fill: ${({ theme }) => theme.color.gray500};
   }
-`;
-
-const ReviewSubmitButton = styled(Button)`
-  width: auto;
-  margin-top: 18px;
 `;
