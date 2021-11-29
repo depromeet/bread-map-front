@@ -4,9 +4,9 @@ import Link from 'next/link';
 import styled from '@emotion/styled';
 import { Home, User, Edit, Compass } from '@/components/icons';
 
-type NavigationRoute = 'home' | 'search' | 'edit' | 'user';
+type NavigationRoute = 'map' | 'search' | 'edit' | 'user';
 
-const navigationIters: NavigationRoute[] = ['home', 'search', 'edit', 'user'];
+const navigationIters: NavigationRoute[] = ['map', 'search', 'edit', 'user'];
 
 interface NavigationItem {
   path: string;
@@ -16,7 +16,7 @@ interface NavigationItem {
 type NavigationMap = Record<NavigationRoute, NavigationItem>;
 
 const navigationMap: NavigationMap = {
-  home: {
+  map: {
     path: '/map',
     Icon: Home,
   },
