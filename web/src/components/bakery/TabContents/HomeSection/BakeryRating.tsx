@@ -31,12 +31,12 @@ const StoreRating = ({
   const [submitFlag, setSubmitFlag] = React.useState(
     isNaN(personalRating) || personalRating === 0 ? false : true
   );
-  const submitScore = (score: number) => {
+  const submitScore = async (score: number) => {
     if (score === 0) return;
     try {
       if (!submitFlag) {
-        requestModifyBakeryRating({ bakeryId, rating: score });
-        mutateGetBakery(bakeryId);
+        await requestModifyBakeryRating({ bakeryId, rating: score });
+        await mutateGetBakery(bakeryId);
       }
       setSubmitFlag(true);
     } catch (error) {

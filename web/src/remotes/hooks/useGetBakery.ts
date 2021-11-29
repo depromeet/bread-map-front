@@ -9,8 +9,8 @@ const useGetBakery = (id: number) => {
   });
 };
 
-const mutateGetBakery = (id: number) => {
-  mutate(['/bakery', id], requestGetBakery({ bakeryId: id }));
+const mutateGetBakery = async (id: number) => {
+  await mutate(['/bakery', id], requestGetBakery({ bakeryId: id }));
 };
 
 export default useGetBakery;
