@@ -42,12 +42,7 @@ const HomeSection = ({ bakeryId }: HomeSectionProps) => {
       <Section className={'grow'}>
         <SectionHeader>
           <Title>
-            메뉴{' '}
-            <b>
-              {bakeryData.bakeryMenuListResponseList
-                ? bakeryData.bakeryMenuListResponseList.length
-                : 0}
-            </b>
+            메뉴 <b>{bakeryData.menusCount}</b>
           </Title>
           <AddButtonStyle
             onClick={createMenuButtonClickHandler}

@@ -32,6 +32,7 @@ export interface BakeryEntity {
   avgRating: number;
   bakeryId: number;
   bakeryMenuListResponseList: MenuItemEntity[];
+  menusCount: number;
   bakeryName: string;
   basicInfoList: string[]; /// ['PET']
   businessHour: string;
