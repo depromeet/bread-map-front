@@ -20,6 +20,10 @@ class DaeDongDocument extends Document {
             type="text/javascript"
             src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=0ltvn9xwa9"
           />
+          <meta
+            name="google-site-verification"
+            content="ceD1DmtZCMS9LUBRGgF_GFYaN5PbaB7yyPX1rcGfl5A"
+          />
         </Head>
         <body>
           <Main />
