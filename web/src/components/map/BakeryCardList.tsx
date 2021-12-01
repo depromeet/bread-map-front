@@ -1,32 +1,45 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
-import { useGetBakeries } from '@/remotes/hooks';
-import { bottomSheetTypeAtom, currentBakeryIdAtom } from '@/store/map';
+import {
+  bottomSheetTypeAtom,
+  currentBakeryIdAtom,
+  currentFilterAtom,
+  currentRangeBakeriesAtom,
+} from '@/store/map';
 import BakeryInfoCard from './BakeryInfoCard';
-import { DEFAULT_POSITION } from './constants';
+import { ArrowDown } from '../icons';
 
 const BakeryCardList: React.FC = () => {
   const [bottomSheetType] = useAtom(bottomSheetTypeAtom);
   const [currentBakeryId] = useAtom(currentBakeryIdAtom);
+  const [breadFilter] = useAtom(currentFilterAtom);
+  const [bakeries] = useAtom(currentRangeBakeriesAtom);
 
-  const { data } = useGetBakeries({
-    latitude: DEFAULT_POSITION.lat,
-    longitude: DEFAULT_POSITION.lng,
-    range: 100,
-  });
-
-  const currentBakeryEntity = data?.find(
+  const currentBakeryEntity = bakeries?.find(
     (el) => el.bakeryId === currentBakeryId
   );
+
+  const afterFilterBakeries =
+    breadFilter.length > 0
+      ? bakeries?.filter((bakery) => {
+          for (let i = 0; i < breadFilter.length; i++) {
+            if (bakery.breadCategoryList.includes(breadFilter[i])) {
+              return true;
+            }
+          }
+          return false;
+        })
+      : bakeries;
 
   return (
     <Base>
       {bottomSheetType === 'single' && currentBakeryEntity && (
         <BakeryInfoCard
+          bakeryId={currentBakeryEntity.bakeryId}
           title={currentBakeryEntity.bakeryName}
           wentCount={currentBakeryEntity.flagsCount}
-          starCount={currentBakeryEntity.ratingCount}
+          starAvg={currentBakeryEntity.avgRating}
           reviewCount={currentBakeryEntity.menuReviewsCount}
           reviews={currentBakeryEntity.menuReviewList.map(
             (review) => review.contents
@@ -37,13 +50,16 @@ const BakeryCardList: React.FC = () => {
         <>
           <TitleBox>
             <MultipleTitle>내 주변 빵집</MultipleTitle>
-            <SortTypeText>거리순</SortTypeText>
+            <SortTypeText>
+              거리순 <ArrowDown />
+            </SortTypeText>
           </TitleBox>
-          {data?.map((entity) => (
+          {afterFilterBakeries?.map((entity) => (
             <BakeryInfoCard
+              bakeryId={entity.bakeryId}
               title={entity.bakeryName}
               wentCount={entity.flagsCount}
-              starCount={entity.ratingCount}
+              starAvg={entity.avgRating}
               reviewCount={entity.menuReviewsCount}
               reviews={entity.menuReviewList.map((review) => review.contents)}
               key={entity.bakeryId}
@@ -78,6 +94,13 @@ const MultipleTitle = styled.span`
 const SortTypeText = styled.span`
   font-size: 12px;
   line-height: 16px;
+  display: flex;
+  align-items: center;
   color: rgba(0, 0, 0, 0.5);
   margin-top: 8px;
+
+  svg {
+    width: 1em;
+    height: 1em;
+  }
 `;

@@ -5,27 +5,41 @@ import {
   CircleStarIcon,
   CircleWentIcon,
   FlagIcon,
+  PencilEdit,
   QuoteIcon,
 } from '@/components/icons';
+import { useRouter } from 'next/router';
+import { BakeryImage } from '../common/Images';
+import { addComma } from '@/utils/numberUtils';
 
 interface BakeryInfoCardProps {
+  bakeryId: number;
+  bakeryImage?: string;
   title: string;
   wentCount: number;
-  starCount: number;
+  starAvg: number;
   reviewCount: number;
   reviews: string[];
 }
 
 const BakeryInfoCard: React.FC<BakeryInfoCardProps> = ({
+  bakeryId,
+  bakeryImage,
   title,
   wentCount,
-  starCount,
+  starAvg,
   reviewCount,
   reviews,
 }) => {
+  const router = useRouter();
+  const cardClickHandler = React.useCallback(() => {
+    router.push(`bakery/${bakeryId}`);
+  }, [bakeryId, router]);
+
   return (
-    <Card>
+    <Card onClick={cardClickHandler}>
       <ImageBox>
+        <BakeryImage src={bakeryImage || ''} />
         <FlagButton>
           <FlagIcon width={16} height={16} />
         </FlagButton>
@@ -35,24 +49,34 @@ const BakeryInfoCard: React.FC<BakeryInfoCardProps> = ({
         <InfoCountBox>
           <div>
             <CircleWentIcon />
-            <span>{wentCount}</span>
+            <span>{addComma(wentCount)}</span>
           </div>
           <div>
             <CircleStarIcon />
-            <span>{starCount}</span>
+            <span>{starAvg.toFixed(1)}</span>
           </div>
           <div>
             <CircleReviewIcon />
-            <span>{reviewCount}</span>
+            <span>{addComma(reviewCount)}</span>
           </div>
         </InfoCountBox>
-        <ReviewBox>
-          {reviews.map((review) => (
-            <ReviewItem key={review}>
-              <QuoteIcon />
-              <span>{review}</span>
-            </ReviewItem>
-          ))}
+        <ReviewBox onClick={(e) => e.stopPropagation()}>
+          {reviews.length ? (
+            reviews.map((review) => (
+              <ReviewItem key={review}>
+                <QuoteIcon />
+                <ReviewText>{review}</ReviewText>
+              </ReviewItem>
+            ))
+          ) : (
+            <NoReviewData>
+              <PencilEdit />
+              <ReviewText>
+                <b>이 빵집</b> 맛있었나요?
+                <br />첫 리뷰를 작성해주세요
+              </ReviewText>
+            </NoReviewData>
+          )}
         </ReviewBox>
       </InfoBox>
     </Card>
@@ -63,7 +87,9 @@ export default BakeryInfoCard;
 
 const Card = styled.div`
   padding: 20px;
+  cursor: pointer;
   width: 100%;
+  overflow: hidden;
   height: 148px;
   display: flex;
   align-items: center;
@@ -72,15 +98,28 @@ const Card = styled.div`
 const ImageBox = styled.div`
   position: relative;
   width: 108px;
+  min-width: 108px;
   height: 108px;
   border-radius: 16px;
+  overflow: hidden;
   background-color: ${({ theme }) => theme.color.gray200};
+
+  img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 `;
 
 const InfoBox = styled.div`
   margin-left: 12px;
+  flex: 1;
+  overflow: hidden;
   height: 108px;
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
 `;
 
@@ -88,7 +127,6 @@ const FlagButton = styled.button`
   position: absolute;
   right: 6px;
   bottom: 6px;
-
   width: 28px;
   height: 28px;
   border: none;
@@ -111,13 +149,9 @@ const InfoTitle = styled.span`
 `;
 
 const InfoCountBox = styled.div`
-  margin-top: 4px;
   height: 20px;
   display: flex;
-
-  div + div {
-    margin-left: 12px;
-  }
+  gap: 8px;
 
   div {
     display: flex;
@@ -132,23 +166,53 @@ const InfoCountBox = styled.div`
 `;
 
 const ReviewBox = styled.div`
-  margin-top: 16px;
+  display: flex;
+  overflow: scroll;
+  gap: 10px;
   height: 50px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const ReviewItem = styled.div`
   width: 196px;
-  height: 50px;
+  height: 100%;
+  flex-shrink: 0;
   background-color: ${({ theme }) => theme.color.gray100};
   color: ${({ theme }) => theme.color.gray600};
   border-radius: 8px;
   padding: 8px;
   display: flex;
+`;
 
-  span {
-    margin-left: 2px;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 1.4;
+const ReviewText = styled.span`
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  margin-left: 2px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+`;
+
+const NoReviewData = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  border-radius: 8px;
+  padding: 6px 8px;
+  border: 1px solid ${({ theme }) => theme.color.gray200};
+  color: ${({ theme }) => theme.color.gray600};
+  svg {
+    fill: ${({ theme }) => theme.color.gray400};
+  }
+
+  ${ReviewText} {
+    margin-left: 4px;
   }
 `;

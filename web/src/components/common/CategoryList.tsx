@@ -20,8 +20,10 @@ const CategoryList: React.FC<CategoryListProps> = ({
           onClick={() => onChange(category)}
           key={category}
         >
-          <Icon width={48} height={48} />
-          <span>{text}</span>
+          <div>
+            <Icon width={48} height={48} />
+            <span>{text}</span>
+          </div>
         </Item>
       ))}
     </Base>
@@ -34,17 +36,19 @@ const Base = styled.ul`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
+  flex: 1 1 auto;
+  height: 0px;
   list-style: none;
-  margin-block-start: 24px;
-  margin-block-end: 0;
-  padding-inline: 20px;
-  height: calc(100% - 140px);
+  margin: 24px auto;
+  padding: 0 20px;
+  max-width: 550px;
+  width: 100%;
   overflow-y: auto;
 `;
 
 const Item = styled.li<{ isSelected: boolean }>`
-  width: 100px;
-  height: 100px;
+  position: relative;
+  cursor: pointer;
   background-color: ${({ isSelected, theme }) =>
     isSelected ? theme.color.primary100 : theme.color.white};
   border: 1px solid
@@ -53,10 +57,21 @@ const Item = styled.li<{ isSelected: boolean }>`
   border-radius: 10px;
   color: ${({ isSelected, theme }) =>
     isSelected ? theme.color.primary500 : theme.color.gray400};
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+
+  &:after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+  }
+  > div {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 
   span {
     font-weight: 700;

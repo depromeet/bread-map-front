@@ -4,9 +4,9 @@ import Link from 'next/link';
 import styled from '@emotion/styled';
 import { Home, User, Edit, Compass } from '@/components/icons';
 
-type NavigationRoute = 'home' | 'search' | 'edit' | 'user';
+type NavigationRoute = 'map' | 'search' | 'edit' | 'user';
 
-const navigationIters: NavigationRoute[] = ['home', 'search', 'edit', 'user'];
+const navigationIters: NavigationRoute[] = ['map', 'search', 'edit', 'user'];
 
 interface NavigationItem {
   path: string;
@@ -16,20 +16,20 @@ interface NavigationItem {
 type NavigationMap = Record<NavigationRoute, NavigationItem>;
 
 const navigationMap: NavigationMap = {
-  home: {
+  map: {
     path: '/map',
     Icon: Home,
   },
   search: {
-    path: '/search',
+    path: '/building-page',
     Icon: Compass,
   },
   edit: {
-    path: '/map#edit',
+    path: '/building-page',
     Icon: Edit,
   },
   user: {
-    path: '/profile',
+    path: '/building-page',
     Icon: User,
   },
 };
@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
 
         return (
           <Link href={path} key={iter} passHref>
-            <NavigationLink isSelected={path === router.asPath}>
+            <NavigationLink isSelected={`/${iter}` === router.asPath}>
               <Icon />
             </NavigationLink>
           </Link>

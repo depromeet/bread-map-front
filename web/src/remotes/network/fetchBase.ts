@@ -1,3 +1,5 @@
+import { setRefreshTime } from './auth/authUtil';
+
 const arrayTypeGuard = (headers?: HeadersInit): headers is string[][] => {
   if (Array.isArray(headers)) return true;
   return false;
@@ -48,6 +50,22 @@ export default function fetchBase(
   init?: RequestInit | undefined
 ): Promise<Response> {
   const headers = initHeader(init?.headers);
+
+  return fetch(`${process.env.NEXT_PUBLIC_BASE_URI}${url}`, {
+    ...init,
+    headers,
+  });
+}
+
+export function fetchWithToken(
+  url: string,
+  init?: RequestInit | undefined
+): Promise<Response> {
+  const token = localStorage.getItem('accessToken');
+  setRefreshTime();
+
+  const headers = new Headers(init?.headers);
+  headers.append('Authorization', `Bearer ${token}`);
 
   return fetch(`${process.env.NEXT_PUBLIC_BASE_URI}${url}`, {
     ...init,

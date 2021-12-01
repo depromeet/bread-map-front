@@ -2,6 +2,7 @@ import Script from 'next/script';
 import * as React from 'react';
 import styled from '@emotion/styled';
 import { requestSocialLogin } from '@/remotes/network/auth';
+import { useRouter } from 'next/router';
 
 const GoogleIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
@@ -35,6 +36,7 @@ const GoogleSignInButton: React.FC = () => {
   const [instance, setInstance] = React.useState<gapi.auth2.GoogleAuth | null>(
     null
   );
+  const router = useRouter();
 
   const handleClickSignIn = () => {
     if (instance === null) return;
@@ -43,11 +45,13 @@ const GoogleSignInButton: React.FC = () => {
       async (currentUser) => {
         try {
           const { id_token } = currentUser.getAuthResponse();
-          const resp = await requestSocialLogin({
+          const authResponseData = await requestSocialLogin({
             accessToken: id_token,
             provider: 'google',
           });
-          console.log(resp);
+          
+          if (authResponseData.isNewMember) router.push('/onboard');
+          else router.push('/map');
         } catch (error) {
           console.error(error);
         }

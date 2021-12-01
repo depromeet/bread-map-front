@@ -3,31 +3,55 @@ import styled from '@emotion/styled';
 import { useTheme } from '@emotion/react';
 import { useAtom } from 'jotai';
 import { BottomSheet } from '@/components/common';
-import { useGetBakeries } from '@/remotes/hooks';
-import { bottomSheetRefAtom } from '@/store/map';
+import {
+  bottomSheetLastSnapPoint,
+  bottomSheetRefAtom,
+  mapRefAtom,
+} from '@/store/map';
 import BakeryMap from './BakeryMap';
 import BakeryCardList from './BakeryCardList';
-import { DEFAULT_POSITION } from './constants';
 
 const DaedongMapContainer: React.FC = () => {
   const theme = useTheme();
+  const [mapRef, setMapRef] = useAtom(mapRefAtom);
+  const [bottomSheetLastSnap, setBottomSheetLastSnap] = useAtom(
+    bottomSheetLastSnapPoint
+  );
+  const [bottomSheetRef, setBottomSheetRef] = useAtom(bottomSheetRefAtom);
 
-  const [, setBottomSheetRef] = useAtom(bottomSheetRefAtom);
+  const bottomSheetSpringMapHeightChanger = React.useCallback(() => {
+    requestAnimationFrame(() => {
+      if (mapRef && bottomSheetRef?.height) {
+        mapRef.style.height =
+          window.innerHeight -
+          bottomSheetRef.height -
+          theme.height.footer +
+          'px';
+        setBottomSheetLastSnap(bottomSheetRef.height);
+      }
+    });
+  }, [
+    bottomSheetRef?.height,
+    mapRef,
+    setBottomSheetLastSnap,
+    theme.height.footer,
+  ]);
 
-  const { data } = useGetBakeries({
-    latitude: DEFAULT_POSITION.lat,
-    longitude: DEFAULT_POSITION.lng,
-    range: 100,
-  });
+  const defaultSnapPoint = React.useCallback(
+    ({ height }: { height: number }) => {
+      return bottomSheetLastSnap || height + 68 + 148;
+    },
+    [bottomSheetLastSnap]
+  );
 
   return (
-    <Container>
-      <BakeryMap entities={data} />
+    <Container ref={setMapRef}>
+      <BakeryMap />
       <BottomSheet
         open
         skipInitialTransition
         blocking={false}
-        defaultSnap={({ headerHeight }) => headerHeight + 68 + 148}
+        defaultSnap={defaultSnapPoint}
         snapPoints={({ headerHeight, maxHeight }) => [
           headerHeight,
           headerHeight + 148,
@@ -35,6 +59,7 @@ const DaedongMapContainer: React.FC = () => {
           maxHeight - theme.height.footer,
         ]}
         ref={setBottomSheetRef}
+        onSpringStart={bottomSheetSpringMapHeightChanger}
       >
         <BakeryCardList />
       </BottomSheet>
@@ -46,6 +71,7 @@ export default DaedongMapContainer;
 
 const Container = styled.div`
   width: 100%;
+  height: calc(100vh - 68px + 148px);
   position: relative;
-  height: ${({ theme }) => `calc(100vh - ${theme.height.footer}px)`};
+  transition: height 0.2s ease-in-out;
 `;

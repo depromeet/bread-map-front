@@ -77,19 +77,12 @@ interface NaverMapProps extends MapInitializeProps {
 }
 
 const NaverMap: React.FC<NaverMapProps> = ({
-  ncpClientId,
   children,
   mapOptions,
   ...rest
 }) => {
-  if (ncpClientId === undefined) return null;
   return (
     <>
-      <Script
-        id={'naver-maps-sdk'}
-        src={`${SCRIPT_URL}?ncpClientId=${ncpClientId}`}
-        strategy={'beforeInteractive'}
-      />
       <NoSSR>
         <NaverMapProvider>
           <MapInitialize {...rest}></MapInitialize>

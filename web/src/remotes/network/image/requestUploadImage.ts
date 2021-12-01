@@ -1,4 +1,4 @@
-import fetchBase from '@/remotes/network/fetchBase';
+import { fetchWithToken } from '@/remotes/network/fetchBase';
 
 interface UploadImagePayload {
   files: File[];
@@ -15,7 +15,7 @@ const requestUploadImage = async (
     formData.append('multipartFile', file);
   }
 
-  const resp = await fetchBase('/s3/image', {
+  const resp = await fetchWithToken('/s3/image', {
     method: 'POST',
     body: formData,
   });

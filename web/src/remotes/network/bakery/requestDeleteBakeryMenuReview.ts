@@ -1,4 +1,4 @@
-import fetchBase from '@/remotes/network/fetchBase';
+import { fetchWithToken } from '@/remotes/network/fetchBase';
 
 interface DeleteBakeryMenuReviewPayload {
   bakeryId: number;
@@ -9,7 +9,7 @@ const requestDeleteBakeryMenuReview = async ({
   bakeryId,
   menuReviewId,
 }: DeleteBakeryMenuReviewPayload): Promise<void> => {
-  await fetchBase(`/bakery/${bakeryId}/menu-review/${menuReviewId}`, {
+  await fetchWithToken(`/bakery/${bakeryId}/menu-review/${menuReviewId}`, {
     method: 'DELETE',
   });
   return;

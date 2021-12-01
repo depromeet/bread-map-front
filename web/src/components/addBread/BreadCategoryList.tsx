@@ -76,6 +76,7 @@ const Header = styled.div`
 const IconButton = styled.button`
   width: 48px;
   height: 48px;
+  cursor: pointer;
   border-radius: 50%;
   background-color: ${({ theme }) => theme.color.white};
   padding: 0;

@@ -1,4 +1,5 @@
 import fetchBase from '@/remotes/network/fetchBase';
+import { tokenSaveLocalstorage } from './authUtil';
 import type { SocialProvider, LoginResponse } from './types';
 
 interface SocialLoginPayload {
@@ -19,7 +20,9 @@ const requestSocialLogin = async ({
     headers,
     body: JSON.stringify({ accessToken }),
   });
-  const data = await resp.json();
+  const data = (await resp.json()) as LoginResponse;
+
+  if (data.appToken) tokenSaveLocalstorage(data.appToken);
 
   return data;
 };

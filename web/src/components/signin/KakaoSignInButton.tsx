@@ -2,6 +2,7 @@ import Script from 'next/script';
 import * as React from 'react';
 import styled from '@emotion/styled';
 import { requestSocialLogin } from '@/remotes/network/auth';
+import { useRouter } from 'next/router';
 
 const KakaoTalkIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
@@ -22,15 +23,18 @@ const KakaoTalkIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 );
 
 const KakaoSignInButton: React.FC = () => {
+  const router = useRouter();
   const handleClickSignIn = () => {
     window.Kakao.Auth.getStatusInfo(async (obj) => {
       if (obj.status === 'connected') {
         const accessToken = window.Kakao.Auth.getAccessToken();
-        const resp = await requestSocialLogin({
+        const authResponseData = await requestSocialLogin({
           accessToken,
           provider: 'kakao',
         });
-        console.log(resp);
+
+        if (authResponseData.isNewMember) router.push('/onboard');
+        else router.push('/map');
 
         return;
       }
@@ -40,13 +44,15 @@ const KakaoSignInButton: React.FC = () => {
         async success(resp) {
           window.Kakao.Auth.setAccessToken(resp.access_token);
 
-          const login = await requestSocialLogin({
+          const authResponseData = await requestSocialLogin({
             accessToken: resp.access_token,
             provider: 'kakao',
           });
 
-          console.log(login);
+          if (authResponseData.isNewMember) router.push('/onboard');
+          else router.push('/map');
         },
+
         fail(error) {
           console.error(error);
         },

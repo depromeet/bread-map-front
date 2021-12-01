@@ -1,4 +1,4 @@
-import fetchBase from '@/remotes/network/fetchBase';
+import { fetchWithToken } from '@/remotes/network/fetchBase';
 
 interface GetBakeriesPayload {
   latitude: number;
@@ -39,7 +39,7 @@ const requestGetBakeries = async ({
   longitude,
   range,
 }: GetBakeriesPayload): Promise<BakeryEntity[]> => {
-  const resp = await fetchBase(
+  const resp = await fetchWithToken(
     `/bakery?latitude=${latitude}&longitude=${longitude}&range=${range}`
   );
   const data = await resp.json();
