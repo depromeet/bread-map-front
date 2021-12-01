@@ -37,6 +37,3 @@ const InfoWifiIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 );
 
 export default InfoWifiIcon;
-
-{
-}

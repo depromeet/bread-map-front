@@ -6,6 +6,7 @@ const BoxIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     height="34"
     viewBox="0 0 34 34"
     fill="none"
+		className="nofill"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path

@@ -38,6 +38,7 @@ const BakeryCardList: React.FC = () => {
         <BakeryInfoCard
           bakeryId={currentBakeryEntity.bakeryId}
           title={currentBakeryEntity.bakeryName}
+          bakeryImage={currentBakeryEntity.imgPath}
           wentCount={currentBakeryEntity.flagsCount}
           starAvg={currentBakeryEntity.avgRating}
           reviewCount={currentBakeryEntity.menuReviewsCount}
@@ -58,6 +59,7 @@ const BakeryCardList: React.FC = () => {
             <BakeryInfoCard
               bakeryId={entity.bakeryId}
               title={entity.bakeryName}
+              bakeryImage={entity.imgPath}
               wentCount={entity.flagsCount}
               starAvg={entity.avgRating}
               reviewCount={entity.menuReviewsCount}
