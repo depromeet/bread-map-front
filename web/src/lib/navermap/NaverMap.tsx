@@ -33,7 +33,39 @@ const MapInitialize: React.FC<MapInitializeProps> = ({
     if (naverMap) {
       naverMap.setOptions(mapOptions);
     } else {
-      setNaverMap(new sdk.Map(el, mapOptions));
+      const map = new sdk.Map(el, mapOptions);
+      setNaverMap(map);
+
+      map.addListenerOnce('init_stylemap', () => {
+        map.setOptions('logoControlOptions', {
+          position: sdk.Position.BOTTOM_LEFT,
+        });
+        map.setOptions('mapDataControlOptions', {
+          position: sdk.Position.BOTTOM_RIGHT,
+        });
+        map.setOptions('scaleControlOptions', {
+          position: sdk.Position.BOTTOM_RIGHT,
+        });
+
+        map.setOptions('zoomControl', false);
+        map.setOptions('mapTypeControl', false);
+
+        const scaleControl = map.get('scaleControl') as naver.maps.ScaleControl;
+        const mapDataControl = map.get(
+          'mapDataControl'
+        ) as naver.maps.MapDataControl;
+
+        const scaleControlEl = scaleControl.getElement();
+        const mapDataControlEl = mapDataControl.getElement();
+
+        const yMov = 16;
+
+        scaleControlEl.style.transform = `translateY(-${yMov}px)`;
+        scaleControlEl.style.margin = '0 6px 0 0';
+        mapDataControlEl.style.padding = '0';
+        mapDataControlEl.style.margin = '0 12px 0 0';
+        mapDataControlEl.style.transform = `translateY(-${yMov + 2}px)`;
+      });
     }
   }, [naverMap, setNaverMap, mapOptions]);
 
@@ -45,19 +77,12 @@ interface NaverMapProps extends MapInitializeProps {
 }
 
 const NaverMap: React.FC<NaverMapProps> = ({
-  ncpClientId,
   children,
   mapOptions,
   ...rest
 }) => {
-  if (ncpClientId === undefined) return null;
   return (
     <>
-      <Script
-        id={'naver-maps-sdk'}
-        src={`${SCRIPT_URL}?ncpClientId=${ncpClientId}`}
-        strategy={'beforeInteractive'}
-      />
       <NoSSR>
         <NaverMapProvider>
           <MapInitialize {...rest}></MapInitialize>

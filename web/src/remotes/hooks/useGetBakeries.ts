@@ -1,7 +1,11 @@
-import useSWR from 'swr';
-import { fetchBakeries } from '@/lib/remotes/fetchBakeries';
+import useSWR, { mutate } from 'swr';
+import { requestGetBakeries } from '@/remotes/network/bakery';
 
-type UseGetBakeriesParams = Parameters<typeof fetchBakeries>[0];
+interface UseGetBakeriesParams {
+  latitude: number;
+  longitude: number;
+  range: number;
+}
 
 const useGetBakeries = ({
   latitude,
@@ -9,10 +13,27 @@ const useGetBakeries = ({
   range,
 }: UseGetBakeriesParams) => {
   return useSWR(
-    ['/bakery', latitude, longitude, range],
-    (_, latitude, longitude, range) =>
-      fetchBakeries({ latitude, longitude, range })
+    ['/bakeries'],
+    () => requestGetBakeries({ latitude, longitude, range }),
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
+  );
+};
+
+const mutateGetBakeries = ({
+  latitude,
+  longitude,
+  range,
+}: UseGetBakeriesParams) => {
+  mutate(
+    ['/bakeries'],
+    requestGetBakeries({ latitude, longitude, range }),
+    false
   );
 };
 
 export default useGetBakeries;
+export { mutateGetBakeries };

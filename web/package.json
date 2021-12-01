@@ -5,9 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "open-browser": "open http://localhost:3000",
-    "build": "next build",
+    "build": "next build && next export",
     "start": "next start",
     "lint": "next lint",
+    "export": "next export",
     "prettier": "prettier -w \"src/**/*.{ts,tsx}\"",
     "test": "jest --watch"
   },
@@ -19,6 +20,7 @@
     "@react-spring/web": "^9.3.0",
     "@use-gesture/react": "^10.1.1",
     "jotai": "^1.4.2",
+    "keen-slider": "^5.5.1",
     "next": "11.1.2",
     "react": "17.0.2",
     "react-daum-postcode": "^3.0.0",
@@ -32,19 +34,27 @@
     "@next/eslint-plugin-next": "^11.1.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.0",
+    "@testing-library/react-hooks": "^7.0.2",
+    "@types/gapi.auth2": "^0.0.55",
     "@types/jest": "^27.0.1",
+    "@types/kakao-js-sdk": "^1.39.1",
     "@types/navermaps": "^3.0.9",
     "@types/node": "^16.9.1",
     "@types/react": "17.0.20",
     "@types/react-dom": "^17.0.9",
     "babel-jest": "^27.2.0",
+    "debug": "^4.3.2",
     "eslint": "7.32.0",
     "eslint-config-next": "^11.1.2",
     "eslint-config-prettier": "^8.3.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.2.0",
+    "msw": "^0.35.0",
     "prettier": "^2.4.1",
     "react-test-renderer": "^17.0.2",
     "typescript": "4.4.3"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
