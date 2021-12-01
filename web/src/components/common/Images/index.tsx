@@ -40,7 +40,7 @@ const BakeryImage = ({ ...props }: ImageProps) => {
     (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
       const target = e.target as HTMLImageElement;
 
-      target.src = DEFAULT_IMG_SRC.BREAD_1;
+      target.src = DEFAULT_IMG_SRC.BREAD_2;
     },
     []
   );
@@ -53,7 +53,7 @@ const ReviewImage = ({ ...props }: ImageProps) => {
     (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
       const target = e.target as HTMLImageElement;
 
-      target.src = DEFAULT_IMG_SRC.BREAD_1;
+      target.src = DEFAULT_IMG_SRC.BREAD_2;
     },
     []
   );

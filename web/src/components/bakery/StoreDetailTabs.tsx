@@ -68,14 +68,12 @@ const TabContainer = styled.div`
   padding: 9px 0 0;
   flex-grow: 1;
   overflow: scroll;
-  &::-webkit-scrollbar {
-    display: none;
-  }
   background-color: ${({ theme }) => theme.color.gray200};
 `;
 
-const Tabs = styled.div`
+const Tabs = styled.ul`
   cursor: pointer;
+  margin: 0;
   background: ${({ theme }) => theme.color.white};
   border-top: 1px solid ${({ theme }) => theme.color.gray100};
   border-bottom: 1px solid ${({ theme }) => theme.color.gray300};
@@ -97,7 +95,16 @@ const Tabs = styled.div`
     transition: transform 0.2s ease-in-out;
     transform: translateX(12px);
     width: calc((100% - 24px) / 4);
-    border-bottom: 2px solid ${({ theme }) => theme.color.primary500};
+    border-bottom: 2px solid;
+    border-image: linear-gradient(
+      to right,
+      transparent 10%,
+      ${({ theme }) => theme.color.primary500} 10.01%,
+      ${({ theme }) => theme.color.primary500} 89.99%,
+      transparent 90%,
+      transparent 100%
+    );
+    border-image-slice: 1;
   }
   &.home {
     &::after {
@@ -123,6 +130,8 @@ const Tabs = styled.div`
   li {
     width: 100%;
     text-align: center;
-    padding: 12px 0;
+    padding: 16px 0;
+    font-size: 14px;
+    font-weight: 800;
   }
 `;

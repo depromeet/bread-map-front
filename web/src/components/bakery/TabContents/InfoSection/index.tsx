@@ -24,7 +24,7 @@ const InfoSection = ({ bakeryId }: ReviewSectionProps) => {
 
   return (
     <Container>
-      <Section className={'grow'}>
+      <Section>
         <InfoList>
           <li>
             <MapPinIcon />
@@ -38,7 +38,9 @@ const InfoSection = ({ bakeryId }: ReviewSectionProps) => {
             <EarthIcon />
             <WebSiteList>
               {data.websiteUrlList?.map((url, idx) => (
-                <div key={idx}>{url}</div>
+                <UrlLink href={url} key={idx}>
+                  {url}
+                </UrlLink>
               ))}
             </WebSiteList>
           </li>
@@ -51,7 +53,8 @@ const InfoSection = ({ bakeryId }: ReviewSectionProps) => {
           <FileTextIcon />
           빵집 정보 수정하기
         </EditButtonStyle>
-        <Divider />
+      </Section>
+      <Section className={'grow'}>
         <SectionHeader>
           <Title>시설정보</Title>
         </SectionHeader>
@@ -96,6 +99,11 @@ const InfoList = styled.ul`
     align-items: center;
     gap: 8px;
   }
+`;
+
+const UrlLink = styled.a`
+  color: ${({ theme }) => theme.color.primary500};
+  text-decoration: none;
 `;
 
 const WebSiteList = styled.div`

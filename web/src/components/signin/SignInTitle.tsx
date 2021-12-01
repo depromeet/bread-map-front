@@ -22,7 +22,7 @@ const SignInTitle: React.FC = () => {
   return (
     <Base>
       <Image
-        src={'/images/signin.png'}
+        src={'/images/signin.svg'}
         width={181}
         height={134}
         alt={'sign in character'}

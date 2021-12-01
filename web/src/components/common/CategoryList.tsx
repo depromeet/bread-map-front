@@ -36,6 +36,8 @@ const Base = styled.ul`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
+  flex: 1 1 auto;
+  height: 0px;
   list-style: none;
   margin: 24px auto;
   padding: 0 20px;

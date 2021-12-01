@@ -10,6 +10,11 @@ import { currentRangeBakeriesAtom } from '@/store/map';
 import { useAtom } from 'jotai';
 const BakeryMarkers = dynamic(() => import('./BakeryMarkers'), { ssr: false });
 
+/**
+ *
+ * @param param0 현재 위치
+ * @returns 마커
+ */
 const BakeryMarkerList = ({
   position,
 }: {
@@ -31,6 +36,10 @@ const BakeryMarkerList = ({
   return <BakeryMarkers entities={entities} />;
 };
 
+/**
+ * 현재위치 가져오는 컴포넌트
+ * @returns
+ */
 const BakeryMarkersContainer = () => {
   const goToMyPosition = useNaverMapGoToMyPosition();
   const { data } = useSWR('getMyPosition', goToMyPosition);

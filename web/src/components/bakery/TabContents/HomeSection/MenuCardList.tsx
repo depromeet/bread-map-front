@@ -3,10 +3,7 @@ import styled from '@emotion/styled';
 import { BakeryEntity } from '@/remotes/network/bakery/requestGetBakery';
 import { StarScore } from '@/components/common';
 import { MenuImage } from '@/components/common/Images';
-
-const addComma = (num: number) => {
-  return num.toLocaleString('ko-kr');
-};
+import { addComma } from '@/utils/numberUtils';
 
 const MenuCardList = ({
   menus,

@@ -5,17 +5,19 @@ import {
   CircleStarIcon,
   CircleWentIcon,
   FlagIcon,
+  PencilEdit,
   QuoteIcon,
 } from '@/components/icons';
 import { useRouter } from 'next/router';
 import { BakeryImage } from '../common/Images';
+import { addComma } from '@/utils/numberUtils';
 
 interface BakeryInfoCardProps {
   bakeryId: number;
   bakeryImage?: string;
   title: string;
   wentCount: number;
-  starCount: number;
+  starAvg: number;
   reviewCount: number;
   reviews: string[];
 }
@@ -25,7 +27,7 @@ const BakeryInfoCard: React.FC<BakeryInfoCardProps> = ({
   bakeryImage,
   title,
   wentCount,
-  starCount,
+  starAvg,
   reviewCount,
   reviews,
 }) => {
@@ -47,24 +49,34 @@ const BakeryInfoCard: React.FC<BakeryInfoCardProps> = ({
         <InfoCountBox>
           <div>
             <CircleWentIcon />
-            <span>{wentCount}</span>
+            <span>{addComma(wentCount)}</span>
           </div>
           <div>
             <CircleStarIcon />
-            <span>{starCount}</span>
+            <span>{starAvg.toFixed(1)}</span>
           </div>
           <div>
             <CircleReviewIcon />
-            <span>{reviewCount}</span>
+            <span>{addComma(reviewCount)}</span>
           </div>
         </InfoCountBox>
         <ReviewBox onClick={(e) => e.stopPropagation()}>
-          {reviews.map((review) => (
-            <ReviewItem key={review}>
-              <QuoteIcon />
-              <ReviewText>{review}</ReviewText>
-            </ReviewItem>
-          ))}
+          {reviews.length ? (
+            reviews.map((review) => (
+              <ReviewItem key={review}>
+                <QuoteIcon />
+                <ReviewText>{review}</ReviewText>
+              </ReviewItem>
+            ))
+          ) : (
+            <NoReviewData>
+              <PencilEdit />
+              <ReviewText>
+                <b>이 빵집</b> 맛있었나요?
+                <br />첫 리뷰를 작성해주세요
+              </ReviewText>
+            </NoReviewData>
+          )}
         </ReviewBox>
       </InfoBox>
     </Card>
@@ -107,6 +119,7 @@ const InfoBox = styled.div`
   overflow: hidden;
   height: 108px;
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
 `;
 
@@ -136,13 +149,9 @@ const InfoTitle = styled.span`
 `;
 
 const InfoCountBox = styled.div`
-  margin-top: 4px;
   height: 20px;
   display: flex;
-
-  div + div {
-    margin-left: 12px;
-  }
+  gap: 8px;
 
   div {
     display: flex;
@@ -160,7 +169,6 @@ const ReviewBox = styled.div`
   display: flex;
   overflow: scroll;
   gap: 10px;
-  margin-top: 16px;
   height: 50px;
 
   &::-webkit-scrollbar {
@@ -190,4 +198,21 @@ const ReviewText = styled.span`
   font-size: 12px;
   font-weight: 400;
   line-height: 1.4;
+`;
+
+const NoReviewData = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  border-radius: 8px;
+  padding: 6px 8px;
+  border: 1px solid ${({ theme }) => theme.color.gray200};
+  color: ${({ theme }) => theme.color.gray600};
+  svg {
+    fill: ${({ theme }) => theme.color.gray400};
+  }
+
+  ${ReviewText} {
+    margin-left: 4px;
+  }
 `;

@@ -76,6 +76,7 @@ export { default as MapPinIcon } from './MapPinIcon';
 export { default as NavigationIcon } from './NavigationIcon';
 export { default as PersonCircleIcon } from './PersonCircleIcon';
 export { default as PhoneIcon } from './PhoneIcon';
+export { default as PencilEdit } from './PencilEdit';
 export { default as PlusIcon } from './PlusIcon';
 export { default as ProfileIcon } from './ProfileIcon';
 export { default as QuoteIcon } from './QuoteIcon';

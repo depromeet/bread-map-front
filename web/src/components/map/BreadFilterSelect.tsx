@@ -75,7 +75,7 @@ const Base = styled.div`
   width: 100%;
   height: 100%;
   background: ${({ theme }) => theme.color.white};
-  z-index: 5;
+  z-index: 9999999;
   top: 0;
   left: 0;
 `;

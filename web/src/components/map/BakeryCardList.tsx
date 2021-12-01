@@ -8,6 +8,7 @@ import {
   currentRangeBakeriesAtom,
 } from '@/store/map';
 import BakeryInfoCard from './BakeryInfoCard';
+import { ArrowDown } from '../icons';
 
 const BakeryCardList: React.FC = () => {
   const [bottomSheetType] = useAtom(bottomSheetTypeAtom);
@@ -38,7 +39,7 @@ const BakeryCardList: React.FC = () => {
           bakeryId={currentBakeryEntity.bakeryId}
           title={currentBakeryEntity.bakeryName}
           wentCount={currentBakeryEntity.flagsCount}
-          starCount={currentBakeryEntity.ratingCount}
+          starAvg={currentBakeryEntity.avgRating}
           reviewCount={currentBakeryEntity.menuReviewsCount}
           reviews={currentBakeryEntity.menuReviewList.map(
             (review) => review.contents
@@ -49,14 +50,16 @@ const BakeryCardList: React.FC = () => {
         <>
           <TitleBox>
             <MultipleTitle>내 주변 빵집</MultipleTitle>
-            <SortTypeText>거리순</SortTypeText>
+            <SortTypeText>
+              거리순 <ArrowDown />
+            </SortTypeText>
           </TitleBox>
           {afterFilterBakeries?.map((entity) => (
             <BakeryInfoCard
               bakeryId={entity.bakeryId}
               title={entity.bakeryName}
               wentCount={entity.flagsCount}
-              starCount={entity.ratingCount}
+              starAvg={entity.avgRating}
               reviewCount={entity.menuReviewsCount}
               reviews={entity.menuReviewList.map((review) => review.contents)}
               key={entity.bakeryId}
@@ -91,6 +94,13 @@ const MultipleTitle = styled.span`
 const SortTypeText = styled.span`
   font-size: 12px;
   line-height: 16px;
+  display: flex;
+  align-items: center;
   color: rgba(0, 0, 0, 0.5);
   margin-top: 8px;
+
+  svg {
+    width: 1em;
+    height: 1em;
+  }
 `;
