@@ -1,38 +1,55 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
-import { Button, ConfirmModal } from '../common';
-import Postcode from '../postcode/Postcode';
-import { useRouter } from 'next/router';
-import StoreInput from './StoreInput/StoreInput';
-import { Close } from '../icons';
 import { useAtom } from 'jotai';
-import { addStoreAddress } from '@/store';
+import { useRouter } from 'next/router';
+import styled from '@emotion/styled';
+import useGeocode from '@/remotes/hooks/useGeocode';
+import { addBakeryAddress } from '@/store';
+import AddBakeryInput from './AddBakeryInput/AddBakeryInput';
+import Postcode from '../postcode/Postcode';
+import { Button, ConfirmModal } from '../common';
+import { Close } from '../icons';
 
 const StoreAddress: React.FC = () => {
   const router = useRouter();
   const [confirmModalIsOpen, setConfirmModalIsOpen] = React.useState(false);
-  const [address, setAddress] = useAtom(addStoreAddress);
+  const [addressDetail, setAddressDetail] = React.useState<string>('');
+  const [address, setAddress] = React.useState<string>('');
+  const [, setAddressInfo] = useAtom(addBakeryAddress);
+  const { data } = useGeocode(address);
 
   const postCompliteHandler = React.useCallback(
     (addr: string) => {
-      setAddress({ address: addr });
+      setAddress(addr);
     },
     [setAddress]
   );
 
-  const addressDetailChangeHandler = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setAddress((prev) => prev && { ...prev, detailAddress: e.target.value });
-  };
+  console.log(address, data, addressDetail);
+
+  const addressDetailChangeHandler = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setAddressDetail(e.target.value);
+    },
+    []
+  );
 
   const resetAddress = React.useCallback(() => {
-    setAddress({ address: '', addressDetail: '' });
+    setAddress('');
   }, [setAddress]);
 
   const buttonClickHandler = React.useCallback(() => {
-    router.push({ query: { tab: 3 } });
-  }, [router]);
+    if (data) {
+      setAddressInfo({
+        address,
+        addressDetail,
+        latitude: data.documents[0].x,
+        longitude: data.documents[0].y,
+      });
+      router.push({ query: { tab: 3 } });
+    } else {
+      resetAddress();
+    }
+  }, [address, addressDetail, data, resetAddress, router, setAddressInfo]);
 
   const confirmModalClose = React.useCallback(() => {
     setConfirmModalIsOpen(false);
@@ -51,28 +68,28 @@ const StoreAddress: React.FC = () => {
       <Title>
         <b>주소</b>를 입력해주세요.
       </Title>
-      {!address?.address ? (
+      {!address ? (
         <PostcodeStyle compliteHandler={postCompliteHandler} />
       ) : (
         <AddressContents>
           <Address>
-            <StoreInput
+            <AddBakeryInput
               isRequired
               readOnly
               name={'address'}
               label={'기본주소'}
               placeholder={'주소를 입력해주세요.'}
-              value={address?.address}
+              value={address}
               alertText={'주소를 입력해주세요.'}
             />
             <Close onClick={confirmModalOpen} />
           </Address>
 
-          <StoreInput
+          <AddBakeryInput
             name={'addressDetail'}
             label={'상세주소'}
             placeholder={'상세주소를 입력해주세요.'}
-            value={address?.addressDetail}
+            value={addressDetail}
             onChange={addressDetailChangeHandler}
           />
 
@@ -91,7 +108,7 @@ const StoreAddress: React.FC = () => {
         styleType={'primary'}
         size={'large'}
         onClick={buttonClickHandler}
-        disabled={address?.address === '' ? true : false}
+        disabled={address && data ? false : true}
       >
         다음
       </ButtonStyle>

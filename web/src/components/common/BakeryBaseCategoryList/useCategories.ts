@@ -1,14 +1,14 @@
 import React from 'react';
-import { StoreBaseCategoryInfo } from '@/constants/storeBaseCategories';
+import { BakeryBaseCategoryInfo } from '@/constants/bakeryBaseCategories';
 
 const useCategories = (
   isMultiSelect: boolean,
-  selected: StoreBaseCategoryInfo[] = []
+  selected: BakeryBaseCategoryInfo[] = []
 ) => {
   const [selectedCategory, setSelectedCategory] =
-    React.useState<StoreBaseCategoryInfo[]>(selected);
+    React.useState<BakeryBaseCategoryInfo[]>(selected);
   const [prevCategory, setPrevCategory] = React.useState<
-    StoreBaseCategoryInfo[]
+    BakeryBaseCategoryInfo[]
   >([]);
   const [isOpenFirst, setIsOpenFirst] = React.useState(true);
 
@@ -18,7 +18,7 @@ const useCategories = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpenFirst]);
 
-  const multiSelectFn = (categoryInfo: StoreBaseCategoryInfo) => {
+  const multiSelectFn = (categoryInfo: BakeryBaseCategoryInfo) => {
     const isSelected = selectedCategory.some(
       (s) => s.category === categoryInfo.category
     );
@@ -32,11 +32,11 @@ const useCategories = (
     }
   };
 
-  const oneSelectFn = (categoryInfo: StoreBaseCategoryInfo) => {
+  const oneSelectFn = (categoryInfo: BakeryBaseCategoryInfo) => {
     setSelectedCategory([categoryInfo]);
   };
 
-  const onClickCategory = (categoryInfo: StoreBaseCategoryInfo) => {
+  const onClickCategory = (categoryInfo: BakeryBaseCategoryInfo) => {
     if (isOpenFirst) setIsOpenFirst(false);
     isMultiSelect ? multiSelectFn(categoryInfo) : oneSelectFn(categoryInfo);
   };

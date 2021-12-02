@@ -1,30 +1,36 @@
 /* eslint-disable @next/next/no-img-element */
 import * as React from 'react';
-import styled from '@emotion/styled';
-import { Button } from '@/components/common';
-import { StoreMultiInput, StoreInput, StoreCardInput } from './StoreInput';
-import { StoreBaseCategoryInfo } from '@/constants/storeBaseCategories';
-import { useStoreBaseCategories } from '@/components/common/StoreBaseCategoryList';
-import { addStoreAddress } from '@/store';
 import { useAtom } from 'jotai';
+import styled from '@emotion/styled';
+import { BakeryBaseCategoryInfo } from '@/constants/bakeryBaseCategories';
+import { useBakeryBaseCategories } from '@/components/common/BakeryBaseCategoryList';
+import { Button } from '@/components/common';
+import { addBakeryAddress } from '@/store';
+import {
+  AddBakeryMultiInput,
+  AddBakeryInput,
+  AddBakeryCardInput,
+  AddBakeryTextArea,
+} from './AddBakeryInput';
 
 export type SubmitData = {
-  name?: string;
-  storeTel?: string;
-  homepages?: string[];
+  bakeryName?: string;
+  imgPathList?: string;
+  telNumber?: string;
+  websiteUrlList?: string[];
   businessHour?: string;
-  baseInfo?: StoreBaseCategoryInfo[];
+  basicInfoList?: BakeryBaseCategoryInfo[];
 };
 
 const StoreAddress: React.FC = () => {
   const [subMitData, setSubMitData] = React.useState<SubmitData>({});
   const [isSubmit, setIsSubmit] = React.useState<boolean>(false);
-  const [addressInfo, _] = useAtom(addStoreAddress);
-  const { selectedCategory, onClickCategory } = useStoreBaseCategories(true);
+  const [addressInfo, _] = useAtom(addBakeryAddress);
+  const { selectedCategory, onClickCategory } = useBakeryBaseCategories(true);
 
   const valueChangeHandler = (
     name: string,
-    value: string | string[] | StoreBaseCategoryInfo[] | null
+    value: string | string[] | BakeryBaseCategoryInfo[] | null
   ) => {
     setSubMitData((prev) =>
       prev ? { ...prev, [name]: value } : { [name]: value }
@@ -33,11 +39,13 @@ const StoreAddress: React.FC = () => {
 
   const subMitHandler = () => {
     setIsSubmit(true);
-    // 입력된 빵집 정보
+
     console.log({
-      ...addressInfo,
+      address: `${addressInfo.address} ${addressInfo.addressDetail}`.trim(),
+      latitude: addressInfo.latitude,
+      longitude: addressInfo.longitude,
+      basicInfoList: selectedCategory.map((category) => category.category),
       ...subMitData,
-      baseInfo: selectedCategory.map((category) => category.text),
     });
   };
 
@@ -48,39 +56,39 @@ const StoreAddress: React.FC = () => {
         알려주시겠어요?
       </Title>
       <StoreInfoWrapper>
-        <StoreInput
-          name="name"
+        <AddBakeryInput
+          name="bakeryName"
           isRequired
           placeholder={'빵집 이름을 입력해 주세요.'}
           label={'빵집 이름'}
-          value={subMitData.name}
+          value={subMitData.bakeryName}
           isSubmit={isSubmit}
           alertText={'빵집 이름을 입력해 주세요.'}
           changeHandler={valueChangeHandler}
         />
-        <StoreInput
+        <AddBakeryTextArea
           name="businessHour"
           value={subMitData.businessHour}
           placeholder={'00:00-00:00 (공휴일도 알려주세요!)'}
           label={'영업시간'}
           changeHandler={valueChangeHandler}
         />
-        <StoreMultiInput
-          name="homepages"
-          value={subMitData.homepages}
+        <AddBakeryMultiInput
+          name="websiteUrlList"
+          value={subMitData.websiteUrlList}
           label={'홈페이지'}
           placeholder={'URL을 입력해 주세요'}
           changeHandler={valueChangeHandler}
         />
-        <StoreInput
-          name="storeTel"
-          value={subMitData.storeTel}
+        <AddBakeryInput
+          name="telNumber"
+          value={subMitData.telNumber}
           placeholder={'000-0000-0000'}
           label={'전화번호'}
           changeHandler={valueChangeHandler}
         />
-        <StoreCardInput
-          name="baseInfo"
+        <AddBakeryCardInput
+          name="basicInfoList"
           value={selectedCategory}
           label={'기본정보'}
           changeHandler={onClickCategory}

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { withRouter } from 'next/router';
-import { StoreOnBoard, StoreAddress, StoreInfo } from '@/components/addStore';
+import { StoreOnBoard, StoreAddress, StoreInfo } from '@/components/addBakery';
 import { WithRouterProps } from 'next/dist/client/with-router';
 import { NextComponentType, NextPageContext } from 'next';
 import { Header } from '@/components/common';

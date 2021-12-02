@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { StoreBaseCategoryInfo } from '@/constants/storeBaseCategories';
+import { BakeryBaseCategoryInfo } from '@/constants/bakeryBaseCategories';
 
-export interface StoreInputBaseProps {
+export interface AddBakeryInputBaseProps {
   isRequired?: boolean;
   value: unknown;
   label: string;
@@ -12,25 +12,25 @@ export interface StoreInputBaseProps {
   name: string;
   changeHandler?: (
     name: string,
-    value: string | string[] | StoreBaseCategoryInfo[] | null
+    value: string | string[] | BakeryBaseCategoryInfo[] | null
   ) => void;
 }
 
-interface StoreInputProps
-  extends StoreInputBaseProps,
+interface AddBakeryInputProps
+  extends AddBakeryInputBaseProps,
     React.HTMLAttributes<HTMLInputElement> {
   readOnly?: boolean;
   value: string | undefined;
 }
 
-const StoreInput = ({
+const AddBakeryInput = ({
   isRequired = false,
   label,
   alertText,
   isSubmit = false,
   changeHandler,
   ...props
-}: StoreInputProps) => {
+}: AddBakeryInputProps) => {
   const { name, value, onChange } = props;
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (onChange) return onChange(e);
@@ -46,7 +46,7 @@ const StoreInput = ({
   );
 };
 
-export default StoreInput;
+export default AddBakeryInput;
 
 const AlertText = styled.p`
   font-size: 0.75rem;
