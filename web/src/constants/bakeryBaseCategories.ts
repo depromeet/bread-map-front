@@ -18,7 +18,7 @@ export type BakeryBaseCategoryTextEng =
   | 'WIFI'
   | 'DELIVERY'
   | 'PET'
-  | 'PARCEL';
+  | 'SHIPPING';
 
 export interface BakeryBaseCategoryInfo {
   icon: React.FC<React.SVGProps<SVGSVGElement>>;
@@ -49,7 +49,7 @@ const BakeryBaseCategory: BakeryBaseCategoryInfo[] = [
   },
   {
     icon: BoxIcon,
-    category: 'PARCEL',
+    category: 'SHIPPING',
     text: '택배',
   },
 ];
