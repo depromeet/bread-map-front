@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { BakeryEntity } from '@/remotes/network/bakery/requestGetBakery';
 import { Button } from '@/components/common';
 import {
   ClockIcon,

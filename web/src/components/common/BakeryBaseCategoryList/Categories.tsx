@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import storeBaseCategory, {
-  StoreBaseCategoryInfo,
-} from '@/constants/storeBaseCategories';
+import BakeryBaseCategory, {
+  BakeryBaseCategoryInfo,
+} from '@/constants/bakeryBaseCategories';
 
 interface CategoriesProps {
-  selectedCategory?: StoreBaseCategoryInfo[] | null;
-  onClickCategory: (category: StoreBaseCategoryInfo) => void;
+  selectedCategory?: BakeryBaseCategoryInfo[] | null;
+  onClickCategory: (category: BakeryBaseCategoryInfo) => void;
 }
 
 const Categories = ({ selectedCategory, onClickCategory }: CategoriesProps) => {
@@ -17,7 +17,7 @@ const Categories = ({ selectedCategory, onClickCategory }: CategoriesProps) => {
 
   return (
     <CategoriesWrapper>
-      {Object.values(storeBaseCategory).map((value) => (
+      {Object.values(BakeryBaseCategory).map((value) => (
         <Category
           key={value.category}
           onClick={() => onClickCategory(value)}

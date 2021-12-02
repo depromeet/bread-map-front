@@ -2,9 +2,9 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Button, ConfirmModal } from '@/components/common';
 import { Close, Plus } from '@/components/icons';
-import { StoreInputBaseProps } from './StoreInput';
+import { AddBakeryInputBaseProps } from './AddBakeryInput';
 
-interface StoreMultiInputProps extends StoreInputBaseProps {
+interface StoreMultiInputProps extends AddBakeryInputBaseProps {
   value: string[] | undefined;
 }
 

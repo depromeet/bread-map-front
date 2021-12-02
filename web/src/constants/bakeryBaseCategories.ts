@@ -6,27 +6,27 @@ import {
   BoxIcon,
 } from '@/components/icons';
 
-type StoreBaseCategoryText =
+type BakeryBaseCategoryText =
   | '주차 가능'
   | '와이파이'
   | '배달'
   | '반려동물'
   | '택배';
 
-type StoreBaseCategoryTextEng =
+export type BakeryBaseCategoryTextEng =
   | 'PARKING'
   | 'WIFI'
   | 'DELIVERY'
   | 'PET'
-  | 'PARCEL';
+  | 'SHIPPING';
 
-export interface StoreBaseCategoryInfo {
+export interface BakeryBaseCategoryInfo {
   icon: React.FC<React.SVGProps<SVGSVGElement>>;
-  category: StoreBaseCategoryTextEng;
-  text: StoreBaseCategoryText;
+  category: BakeryBaseCategoryTextEng;
+  text: BakeryBaseCategoryText;
 }
 
-const storeBaseCategory: StoreBaseCategoryInfo[] = [
+const BakeryBaseCategory: BakeryBaseCategoryInfo[] = [
   {
     icon: InfoParkingIcon,
     category: 'PARKING',
@@ -49,9 +49,9 @@ const storeBaseCategory: StoreBaseCategoryInfo[] = [
   },
   {
     icon: BoxIcon,
-    category: 'PARCEL',
+    category: 'SHIPPING',
     text: '택배',
   },
 ];
 
-export default storeBaseCategory;
+export default BakeryBaseCategory;

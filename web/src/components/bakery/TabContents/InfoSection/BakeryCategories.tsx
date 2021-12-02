@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import storeBaseCategory, {
-  StoreBaseCategoryInfo,
-} from '@/constants/storeBaseCategories';
+import bakeryBaseCategory, {
+  BakeryBaseCategoryInfo,
+} from '@/constants/bakeryBaseCategories';
 
 interface CategoriesProps {
-  selectedCategory?: StoreBaseCategoryInfo['category'][] | null;
+  selectedCategory?: BakeryBaseCategoryInfo['category'][] | null;
 }
 
 const BakeryCategories = ({ selectedCategory }: CategoriesProps) => (
   <CategoriesWrapper>
-    {Object.values(storeBaseCategory)
+    {Object.values(bakeryBaseCategory)
       .filter((value) => selectedCategory?.includes(value.category))
       .map((value) => (
         <Card key={value.category}>
