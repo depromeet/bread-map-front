@@ -24,8 +24,6 @@ const StoreAddress: React.FC = () => {
     [setAddress]
   );
 
-  console.log(address, data, addressDetail);
-
   const addressDetailChangeHandler = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setAddressDetail(e.target.value);
@@ -42,8 +40,8 @@ const StoreAddress: React.FC = () => {
       setAddressInfo({
         address,
         addressDetail,
-        latitude: data.documents[0].x,
-        longitude: data.documents[0].y,
+        latitude: data.documents[0].y,
+        longitude: data.documents[0].x,
       });
       router.push({ query: { tab: 3 } });
     } else {
@@ -60,6 +58,7 @@ const StoreAddress: React.FC = () => {
   }, []);
 
   const onConfirmHandler = React.useCallback(() => {
+    setConfirmModalIsOpen(false);
     resetAddress();
   }, [resetAddress]);
 

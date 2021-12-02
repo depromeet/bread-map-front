@@ -13,7 +13,7 @@ type BakeryBaseCategoryText =
   | '반려동물'
   | '택배';
 
-type BakeryBaseCategoryTextEng =
+export type BakeryBaseCategoryTextEng =
   | 'PARKING'
   | 'WIFI'
   | 'DELIVERY'

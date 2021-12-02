@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { withRouter } from 'next/router';
-import { StoreOnBoard, StoreAddress, StoreInfo } from '@/components/addBakery';
+import { AddBakeryOnBoard, AddBakeryAddress, AddBakeryInfo } from '@/components/addBakery';
 import { WithRouterProps } from 'next/dist/client/with-router';
 import { NextComponentType, NextPageContext } from 'next';
 import { Header } from '@/components/common';
@@ -12,13 +12,13 @@ const AddBread: NextComponentType<NextPageContext, any, WithRouterProps> = ({
   const {
     query: { tab },
   } = router;
-
+  
   return (
     <AddStoreLayout>
       <Header />
-      {(tab === '1' || !tab) && <StoreOnBoard />}
-      {tab === '2' && <StoreAddress />}
-      {tab === '3' && <StoreInfo />}
+      {(tab === '1' || !tab) && <AddBakeryOnBoard />}
+      {tab === '2' && <AddBakeryAddress />}
+      {tab === '3' && <AddBakeryInfo />}
     </AddStoreLayout>
   );
 };

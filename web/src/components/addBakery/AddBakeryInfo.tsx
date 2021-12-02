@@ -4,6 +4,7 @@ import { useAtom } from 'jotai';
 import styled from '@emotion/styled';
 import { BakeryBaseCategoryInfo } from '@/constants/bakeryBaseCategories';
 import { useBakeryBaseCategories } from '@/components/common/BakeryBaseCategoryList';
+import { requestCreateBakery } from '@/remotes/network/bakery';
 import { Button } from '@/components/common';
 import { addBakeryAddress } from '@/store';
 import {
@@ -12,10 +13,11 @@ import {
   AddBakeryCardInput,
   AddBakeryTextArea,
 } from './AddBakeryInput';
+import { useRouter } from 'next/router';
 
 export type SubmitData = {
   bakeryName?: string;
-  imgPathList?: string;
+  imgPathList?: string[];
   telNumber?: string;
   websiteUrlList?: string[];
   businessHour?: string;
@@ -23,10 +25,15 @@ export type SubmitData = {
 };
 
 const StoreAddress: React.FC = () => {
+  const router = useRouter();
   const [subMitData, setSubMitData] = React.useState<SubmitData>({});
   const [isSubmit, setIsSubmit] = React.useState<boolean>(false);
   const [addressInfo, _] = useAtom(addBakeryAddress);
   const { selectedCategory, onClickCategory } = useBakeryBaseCategories(true);
+
+  if (addressInfo.address.trim() === '') {
+    router.replace({ query: { tab: 1 } });
+  }
 
   const valueChangeHandler = (
     name: string,
@@ -37,16 +44,30 @@ const StoreAddress: React.FC = () => {
     );
   };
 
-  const subMitHandler = () => {
+  const subMitHandler = async () => {
     setIsSubmit(true);
-
-    console.log({
-      address: `${addressInfo.address} ${addressInfo.addressDetail}`.trim(),
-      latitude: addressInfo.latitude,
-      longitude: addressInfo.longitude,
-      basicInfoList: selectedCategory.map((category) => category.category),
-      ...subMitData,
-    });
+    if (subMitData.bakeryName) {
+      const response = await requestCreateBakery({
+        bakeryName: subMitData.bakeryName,
+        imgPathList: [],
+        telNumber: subMitData.telNumber,
+        websiteUrlList: subMitData.websiteUrlList,
+        businessHour: subMitData.businessHour,
+        basicInfoList: selectedCategory.map((category) => category.category),
+        address: `${addressInfo.address} ${addressInfo.addressDetail}`.trim(),
+        latitude: Number(addressInfo.latitude),
+        longitude: Number(addressInfo.longitude),
+      });
+      //TODO 스낵바로 바꾸는것 ! 또는 바텀시트 모달 이용
+      if (response.status >= 400 || !response.ok) {
+        response.message
+          ? alert(response.message)
+          : alert('등록하는 과정에서 오류가 생겼어요 !');
+      } else {
+        alert('등록이 완료되었습니다.');
+        router.push('/map');
+      }
+    }
   };
 
   return (
