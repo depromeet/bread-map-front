@@ -2,6 +2,7 @@ import React from 'react';
 import SettingIcon from '@/components/icons/SettingIcon';
 import styled from '@emotion/styled';
 import { ProfileTitle } from '.';
+import { WishSection, WentSection, ReviewSection } from './TabContents';
 
 interface MainProfileProps {
   pageTitle: ProfileTitle;
@@ -61,7 +62,11 @@ const MainProfile = ({ pageTitle, setPageTitle }: MainProfileProps) => {
             리뷰
           </Tab>
         </Tabs>
-        <Content></Content>
+        <Content>
+          {tab === 'wish' && <WishSection />}
+          {tab === 'went' && <WentSection />}
+          {tab === 'review' && <ReviewSection />}
+        </Content>
       </MyContentSection>
     </MainProfileWrapper>
   );
