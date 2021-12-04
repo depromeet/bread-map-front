@@ -44,7 +44,7 @@ const MainProfile = ({ pageTitle, setPageTitle }: MainProfileProps) => {
             active={TabType.Wish === tab}
             onClick={() => changeTab(TabType.Wish)}
           >
-            가고 싶어요
+            가보고 싶어요
           </Tab>
           <Tab
             data-tab={TabType.Went}
@@ -149,6 +149,7 @@ const Tab = styled.a<{ active: boolean }>`
   width: 100%;
   padding: 15px 0;
   text-align: center;
+  cursor: pointer;
 
   &::after {
     content: '';
