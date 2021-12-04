@@ -34,7 +34,11 @@ const StoreTextArea = ({
   const { name, value, onChange } = props;
   const TextAreaChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (onChange) return onChange(e);
-    else if (changeHandler) return changeHandler(name, e.currentTarget.value);
+    else if (changeHandler) {
+      e.target.style.height = 'auto';
+      e.target.style.height = e.target.scrollHeight + 'px';
+      changeHandler(name, e.currentTarget.value);
+    }
   };
 
   return (
@@ -64,6 +68,7 @@ const AlertText = styled.p`
 const Row = styled.div`
   position: relative;
   margin-bottom: 2rem;
+  height: auto;
 
   &:last-child {
     margin-bottom: 4.5rem;
@@ -93,7 +98,8 @@ const Text = styled.span<{ isRequired?: boolean }>`
 
 const TextArea = styled.textarea`
   display: block;
-  height: 2rem;
+  min-height: 2rem;
+  height: fit-content;
   width: 100%;
   border: none;
   padding: 0;

@@ -14,6 +14,7 @@ import {
   AddBakeryTextArea,
 } from './AddBakeryInput';
 import { useRouter } from 'next/router';
+import { CreateBakeryPayload } from '@/remotes/network/bakery/requestCreateBakery';
 
 export type SubmitData = {
   bakeryName?: string;
@@ -22,6 +23,34 @@ export type SubmitData = {
   websiteUrlList?: string[];
   businessHour?: string;
   basicInfoList?: BakeryBaseCategoryInfo[];
+};
+
+interface PostResponse {
+  ok: boolean;
+  message: string | null;
+}
+
+const createBakery = async ({
+  imgPathList = null,
+  websiteUrlList = null,
+  ...params
+}: CreateBakeryPayload): Promise<PostResponse> => {
+  const response = await requestCreateBakery({
+    ...params,
+    imgPathList,
+    websiteUrlList,
+  });
+
+  if (response.status >= 400 || !response.ok)
+    return {
+      ok: false,
+      message: response.message || '등록하는 과정에서 오류가 생겼어요 !',
+    };
+  else
+    return {
+      ok: true,
+      message: null,
+    };
 };
 
 const StoreAddress: React.FC = () => {
@@ -47,9 +76,9 @@ const StoreAddress: React.FC = () => {
   const subMitHandler = async () => {
     setIsSubmit(true);
     if (subMitData.bakeryName) {
-      const response = await requestCreateBakery({
+      const response = await createBakery({
         bakeryName: subMitData.bakeryName,
-        imgPathList: [],
+        imgPathList: subMitData.imgPathList,
         telNumber: subMitData.telNumber,
         websiteUrlList: subMitData.websiteUrlList,
         businessHour: subMitData.businessHour,
@@ -58,8 +87,9 @@ const StoreAddress: React.FC = () => {
         latitude: Number(addressInfo.latitude),
         longitude: Number(addressInfo.longitude),
       });
-      //TODO 스낵바로 바꾸는것 ! 또는 바텀시트 모달 이용
-      if (response.status >= 400 || !response.ok) {
+
+      // TOdo : 스낵바
+      if (!response.ok) {
         response.message
           ? alert(response.message)
           : alert('등록하는 과정에서 오류가 생겼어요 !');

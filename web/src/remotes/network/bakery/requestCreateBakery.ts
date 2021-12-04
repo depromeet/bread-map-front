@@ -1,16 +1,16 @@
 import { BakeryBaseCategoryTextEng } from '@/constants/bakeryBaseCategories';
 import { fetchWithToken } from '@/remotes/network/fetchBase';
 
-interface CreateBakeryPayload {
+export interface CreateBakeryPayload {
   address: string;
-  bakeryName?: string | null;
+  bakeryName: string;
   basicInfoList?: BakeryBaseCategoryTextEng[];
   businessHour?: string;
-  imgPathList?: string[];
+  imgPathList?: string[] | null;
   latitude: number;
   longitude: number;
   telNumber?: string;
-  websiteUrlList?: string[];
+  websiteUrlList?: string[] | null;
 }
 
 interface CreateBakeryResponse extends Response {

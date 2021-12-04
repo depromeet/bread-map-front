@@ -35,17 +35,21 @@ const InfoSection = ({ bakeryId }: ReviewSectionProps) => {
           </li>
           <li>
             <EarthIcon />
-            <WebSiteList>
-              {data.websiteUrlList?.map((url, idx) => (
-                <UrlLink href={url} key={idx}>
-                  {url}
-                </UrlLink>
-              ))}
-            </WebSiteList>
+            {data.websiteUrlList.length > 0 ? (
+              <WebSiteList>
+                {data.websiteUrlList.map((url, idx) => (
+                  <UrlLink href={url} key={idx}>
+                    {url}
+                  </UrlLink>
+                ))}
+              </WebSiteList>
+            ) : (
+              <div>제공된 정보가 없습니다.</div>
+            )}
           </li>
           <li>
             <PhoneIcon />
-            <div>{data.telNumber}</div>
+            <div>{data.telNumber || '제공된 정보가 없습니다.'}</div>
           </li>
         </InfoList>
         <EditButtonStyle styleType={'none'} size={'tiny'} rounded>
