@@ -38,6 +38,9 @@ const BakeryCardList: React.FC = () => {
         <BakeryInfoCard
           bakeryId={currentBakeryEntity.bakeryId}
           title={currentBakeryEntity.bakeryName}
+          bakeryImage={
+            process.env.NEXT_PUBLIC_S3_URI + currentBakeryEntity.imgPath
+          }
           wentCount={currentBakeryEntity.flagsCount}
           starAvg={currentBakeryEntity.avgRating}
           reviewCount={currentBakeryEntity.menuReviewsCount}
@@ -58,6 +61,7 @@ const BakeryCardList: React.FC = () => {
             <BakeryInfoCard
               bakeryId={entity.bakeryId}
               title={entity.bakeryName}
+              bakeryImage={process.env.NEXT_PUBLIC_S3_URI + entity.imgPath}
               wentCount={entity.flagsCount}
               starAvg={entity.avgRating}
               reviewCount={entity.menuReviewsCount}

@@ -25,7 +25,7 @@ const navigationMap: NavigationMap = {
     Icon: Compass,
   },
   edit: {
-    path: '/building-page',
+    path: '/add-bakery?tab=1',
     Icon: Edit,
   },
   user: {

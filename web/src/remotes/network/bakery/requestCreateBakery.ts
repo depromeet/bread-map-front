@@ -1,25 +1,33 @@
+import { BakeryBaseCategoryTextEng } from '@/constants/bakeryBaseCategories';
 import { fetchWithToken } from '@/remotes/network/fetchBase';
 
 interface CreateBakeryPayload {
   address: string;
-  bakeryName: string;
-  basicInfoList: string[];
-  businessHour: string;
-  imgPathList: string[];
+  bakeryName?: string | null;
+  basicInfoList?: BakeryBaseCategoryTextEng[];
+  businessHour?: string;
+  imgPathList?: string[];
   latitude: number;
-  lognitude: number;
-  telNumber: string;
-  websiteUrlList: string[];
+  longitude: number;
+  telNumber?: string;
+  websiteUrlList?: string[];
+}
+
+interface CreateBakeryResponse extends Response {
+  message: string | undefined;
 }
 
 const requestCreateBakery = async (
   payload: CreateBakeryPayload
-): Promise<void> => {
-  await fetchWithToken('/bakery', {
+): Promise<CreateBakeryResponse> => {
+  const headers = new Headers();
+  headers.append('Content-Type', 'application/json');
+
+  return (await fetchWithToken('/bakery', {
     method: 'POST',
     body: JSON.stringify(payload),
-  });
-  return;
+    headers,
+  })) as CreateBakeryResponse;
 };
 
 export default requestCreateBakery;

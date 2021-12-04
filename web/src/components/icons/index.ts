@@ -37,6 +37,7 @@ export { default as Setting } from './Setting';
 export { default as Construction } from './Construction';
 
 // Icon
+export { default as BoxIcon } from './BoxIcon';
 export { default as BreadBeganKitoIcon } from './BreadBeganKitoIcon';
 export { default as BreadCakeIcon } from './BreadCakeIcon';
 export { default as BreadCaneleIcon } from './BreadCaneleIcon';
