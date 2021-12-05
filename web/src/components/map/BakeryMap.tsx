@@ -1,7 +1,11 @@
 import dynamic from 'next/dynamic';
 import * as React from 'react';
 import styled from '@emotion/styled';
-import { NaverMap, useNaverMapGoToMyPosition } from '@/lib/navermap';
+import {
+  NaverMap,
+  useNaverMapGoToMyPosition,
+  useDrawCurrentPosition,
+} from '@/lib/navermap';
 import CurrentPositionButton from './CurrentPositionButton';
 import BreadFilterButton from './BreadFilterButton';
 import { useGetBakeries } from '@/remotes/hooks';
@@ -47,6 +51,8 @@ const BakeryMarkersContainer = () => {
   React.useEffect(() => {
     goToMyPosition();
   }, [goToMyPosition]);
+
+  useDrawCurrentPosition();
 
   if (!data) return null;
   return <BakeryMarkerList position={data} />;
