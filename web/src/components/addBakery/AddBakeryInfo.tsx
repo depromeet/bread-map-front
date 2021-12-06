@@ -20,9 +20,9 @@ import { mutateGetBakeries } from '@/remotes/hooks/useGetBakeries';
 
 export type SubmitData = {
   bakeryName?: string;
-  imgPathList?: string[];
+  imgPathList?: string[] | null;
   telNumber?: string;
-  websiteUrlList?: string[];
+  websiteUrlList?: string[] | null;
   businessHour?: string;
   basicInfoList?: BakeryBaseCategoryInfo[];
 };
@@ -57,7 +57,14 @@ const createBakery = async ({
 
 const StoreAddress: React.FC = () => {
   const router = useRouter();
-  const [subMitData, setSubMitData] = React.useState<SubmitData>({});
+  const [subMitData, setSubMitData] = React.useState<SubmitData>({
+    bakeryName: '',
+    imgPathList: null,
+    telNumber: '',
+    websiteUrlList: null,
+    businessHour: '',
+    basicInfoList: [],
+  });
   const [, setCurrentLatLng] = useAtom(currentLatLng);
   const [isSubmit, setIsSubmit] = React.useState<boolean>(false);
   const [addressInfo, _] = useAtom(addBakeryAddress);

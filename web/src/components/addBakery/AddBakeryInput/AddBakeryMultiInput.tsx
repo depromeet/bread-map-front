@@ -6,7 +6,7 @@ import { AddBakeryInputBaseProps } from './AddBakeryInput';
 import { keyframes, Theme } from '@emotion/react';
 
 interface StoreMultiInputProps extends AddBakeryInputBaseProps {
-  value: string[] | undefined;
+  value: string[] | undefined | null;
 }
 
 const StoreMultiInput = ({
