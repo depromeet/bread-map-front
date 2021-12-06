@@ -12,10 +12,7 @@ const useSetMapSize = () => {
   return React.useCallback(
     ({ width = window.innerWidth, height }: Size) => {
       const sdk = getNavermapSDK();
-      if (sdk === undefined) return;
-
-      console.log(map);
-      console.log(width, height);
+      if (sdk === undefined || height === 0) return;
       const size = new sdk.Size(width, height);
 
       map?.setSize(size);

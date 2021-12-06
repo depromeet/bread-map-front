@@ -12,11 +12,12 @@ import BreadFilterButton from './BreadFilterButton';
 import { useGetBakeries } from '@/remotes/hooks';
 import useSWR from 'swr';
 import {
+  bottomSheetRefAtom,
   currentLatLng,
   currentRangeBakeriesAtom,
-  mapRefAtom,
 } from '@/store/map';
 import { useAtom } from 'jotai';
+import { useTheme } from '@emotion/react';
 const BakeryMarkers = dynamic(() => import('./BakeryMarkers'), { ssr: false });
 
 /**
@@ -70,13 +71,17 @@ const BakeryMarkersContainer = () => {
  */
 const AutoMapSizing = () => {
   const setMapSize = useSetMapSize();
-  const [mapRef] = useAtom(mapRefAtom);
+  const theme = useTheme();
+  const [bottomSheetRef] = useAtom(bottomSheetRefAtom);
 
   React.useEffect(() => {
-    if (mapRef)
-      setMapSize({
-        height: Number(mapRef?.style.height.replace(/[^0-9]/g, '')),
-      });
+    requestAnimationFrame(() => {
+      if (bottomSheetRef)
+        setMapSize({
+          height:
+            window.innerHeight - bottomSheetRef.height - theme.height.footer,
+        });
+    });
   });
 
   return null;
