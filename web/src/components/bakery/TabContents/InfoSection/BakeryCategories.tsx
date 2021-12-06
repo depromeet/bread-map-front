@@ -29,15 +29,17 @@ const CategoriesWrapper = styled.ul`
   display: flex;
   padding: 0;
   width: 100%;
+  max-width: 550px;
   list-style: none;
   margin: 0 auto;
-  gap: 0.5em;
+  gap: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 `;
 
 const Card = styled.li`
-  border-radius: 0.5em;
+  border-radius: 8px;
   width: 100%;
-  max-width: 130px;
   position: relative;
   background: ${({ theme }) => theme.color.gray50};
   border: 1px solid ${({ theme }) => theme.color.gray50};

@@ -10,6 +10,10 @@ export const currentBakeryIdAtom = atom<number | undefined>(undefined);
 
 export const currentRangeBakeriesAtom = atom<BakeryEntity[] | undefined>([]);
 
+export const currentLatLng = atom<{ latitude?: number; longitude?: number }>(
+  {}
+);
+
 export const bottomSheetRefAtom = atom<BottomSheetRef | null>(null);
 
 export const mapRefAtom = atom<HTMLDivElement | null>(null);

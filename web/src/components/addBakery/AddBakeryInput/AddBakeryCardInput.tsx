@@ -38,6 +38,7 @@ const AlertText = styled.p`
 
 const Row = styled.div`
   margin-bottom: 2rem;
+  flex-grow: 1;
 
   &:last-child {
     margin-bottom: 4.5rem;
