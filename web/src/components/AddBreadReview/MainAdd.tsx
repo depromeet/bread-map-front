@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { BreadCategory, BreadCategoryItem } from '@/constants/breadCategories';
+import { BreadCategory } from '@/constants/breadCategories';
 import { useCategories } from '@/components/common/BreadCategoryList';
 import { useToast } from '@/components/common/ToastPopup';
 import { Plus } from '@/components/icons';
@@ -74,7 +74,7 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
   const editCategory = (category: BreadCategory) => {
     setSingleReview({
       ...singleReview,
-      category: category,
+      category,
     });
   };
 
@@ -89,12 +89,11 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
     }
 
     updateBreadsReview(updatedReview);
-    setSingleReview(initialSingleReview);
     setProgress((prev) => prev - 1);
   };
 
   React.useEffect(() => {
-    editCategory(selectedCategory[0].category || null);
+    editCategory(selectedCategory[0]?.category || null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCategory]);
 
@@ -140,7 +139,7 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
     console.log('reviews', breadsReview);
   };
 
-  const checkSelected = (): BreadCategory[] | null => {
+  const checkSelectedCategory = (): BreadCategory[] | null => {
     const category = breadsReview[currentProgress]?.category;
     if (category === null) return null;
     else return [category];
@@ -150,33 +149,30 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
     <>
       {isCategoryPage && (
         <CategorySelect
-          {...{
-            setIsCategoryPage,
-            onClickCategory,
-            onCancelCategory,
-            setIsOpenFirst,
-          }}
-          selectedCategory={checkSelected()}
+          setIsCategoryPage={setIsCategoryPage}
+          onClickCategory={onClickCategory}
+          onCancelCategory={onCancelCategory}
+          setIsOpenFirst={setIsOpenFirst}
+          selectedCategory={checkSelectedCategory()}
         />
       )}
       {progress >= 2 && !isCategoryPage && (
         <ReviewTab
           length={Object.keys(breadsReview).length}
-          {...{ currentProgress, setCurrentProgress }}
+          currentProgress={currentProgress}
+          setCurrentProgress={setCurrentProgress}
         />
       )}
       {progress === 1 && !isCategoryPage && (
         <StartAdd
-          {...{
-            setIsCategoryPage,
-            selectedCategory,
-            stars,
-            singleReview,
-            editScore,
-            editContent,
-            isSubmitted,
-            toastStatus,
-          }}
+          setIsCategoryPage={setIsCategoryPage}
+          selectedCategory={selectedCategory}
+          stars={stars}
+          singleReview={singleReview}
+          editScore={editScore}
+          editContent={editContent}
+          isSubmitted={isSubmitted}
+          toastStatus={toastStatus}
         />
       )}
       {progress >= 2 && !isCategoryPage && (
