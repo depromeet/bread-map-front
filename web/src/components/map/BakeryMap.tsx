@@ -3,14 +3,19 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import {
   NaverMap,
-  useNaverMapGoToMyPosition,
+  useGoToPosition,
   useDrawCurrentPosition,
+  useSetMapSize,
 } from '@/lib/navermap';
 import CurrentPositionButton from './CurrentPositionButton';
 import BreadFilterButton from './BreadFilterButton';
 import { useGetBakeries } from '@/remotes/hooks';
 import useSWR from 'swr';
-import { currentRangeBakeriesAtom } from '@/store/map';
+import {
+  currentLatLng,
+  currentRangeBakeriesAtom,
+  mapRefAtom,
+} from '@/store/map';
 import { useAtom } from 'jotai';
 const BakeryMarkers = dynamic(() => import('./BakeryMarkers'), { ssr: false });
 
@@ -45,17 +50,36 @@ const BakeryMarkerList = ({
  * @returns
  */
 const BakeryMarkersContainer = () => {
-  const goToMyPosition = useNaverMapGoToMyPosition();
+  const { goToMyPosition, goToPosition } = useGoToPosition();
   const { data } = useSWR('getMyPosition', goToMyPosition);
+  const [{ latitude, longitude }] = useAtom(currentLatLng);
 
   React.useEffect(() => {
-    goToMyPosition();
-  }, [goToMyPosition]);
+    if (latitude && longitude) goToPosition({ latitude, longitude });
+    else goToMyPosition();
+  }, [goToMyPosition, goToPosition, latitude, longitude]);
 
   useDrawCurrentPosition();
 
   if (!data) return null;
   return <BakeryMarkerList position={data} />;
+};
+
+/**
+ * 맵 사이즈 조절용 함수
+ */
+const AutoMapSizing = () => {
+  const setMapSize = useSetMapSize();
+  const [mapRef] = useAtom(mapRefAtom);
+
+  React.useEffect(() => {
+    if (mapRef)
+      setMapSize({
+        height: Number(mapRef?.style.height.replace(/[^0-9]/g, '')),
+      });
+  });
+
+  return null;
 };
 
 const BakeryMap: React.FC = () => {
@@ -65,6 +89,7 @@ const BakeryMap: React.FC = () => {
         zoom: 10,
       }}
     >
+      <AutoMapSizing />
       <CurrentPositionButton />
       <BreadFilterButton />
       {/* TODO 차후 추가 */}
