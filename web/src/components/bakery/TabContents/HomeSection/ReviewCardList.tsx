@@ -63,7 +63,7 @@ const ReviewCardList = ({
         </Container>
       ) : (
         <Container className={'nodata'}>
-          <img src={'/images/sadSobbang.png'} alt={'nodata'} />
+          <img src={'/images/sadSobbang.svg'} alt={'nodata'} />
           <NoDataText>
             <div>빵순이를 위해 맛있는</div>
             <div>빵 정보를 공유해주세요.</div>
