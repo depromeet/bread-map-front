@@ -62,8 +62,8 @@ const BakeryInfoCard: React.FC<BakeryInfoCardProps> = ({
         </InfoCountBox>
         <ReviewBox onClick={(e) => e.stopPropagation()}>
           {reviews.length ? (
-            reviews.map((review) => (
-              <ReviewItem key={review}>
+            reviews.map((review, idx) => (
+              <ReviewItem key={idx}>
                 <QuoteIcon />
                 <ReviewText>{review}</ReviewText>
               </ReviewItem>

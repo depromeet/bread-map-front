@@ -1,11 +1,10 @@
-/* eslint-disable @next/next/no-img-element */
 import * as React from 'react';
 import { useAtom } from 'jotai';
 import styled from '@emotion/styled';
 import { BakeryBaseCategoryInfo } from '@/constants/bakeryBaseCategories';
 import { useBakeryBaseCategories } from '@/components/common/BakeryBaseCategoryList';
 import { requestCreateBakery } from '@/remotes/network/bakery';
-import { Button } from '@/components/common';
+import { BottomModal, Button } from '@/components/common';
 import { addBakeryAddress } from '@/store';
 import {
   AddBakeryMultiInput,
@@ -15,6 +14,9 @@ import {
 } from './AddBakeryInput';
 import { useRouter } from 'next/router';
 import { CreateBakeryPayload } from '@/remotes/network/bakery/requestCreateBakery';
+import ResultModal from './ResultModal';
+import { currentLatLng } from '@/store/map';
+import { mutateGetBakeries } from '@/remotes/hooks/useGetBakeries';
 
 export type SubmitData = {
   bakeryName?: string;
@@ -56,22 +58,64 @@ const createBakery = async ({
 const StoreAddress: React.FC = () => {
   const router = useRouter();
   const [subMitData, setSubMitData] = React.useState<SubmitData>({});
+  const [, setCurrentLatLng] = useAtom(currentLatLng);
   const [isSubmit, setIsSubmit] = React.useState<boolean>(false);
   const [addressInfo, _] = useAtom(addBakeryAddress);
   const { selectedCategory, onClickCategory } = useBakeryBaseCategories(true);
+  const [isOpenCreatedModal, setIsOpenCreatedModal] = React.useState({
+    open: false,
+    ok: false,
+    text: '',
+  });
 
-  if (addressInfo.address.trim() === '') {
+  if (
+    addressInfo.address.trim() === '' ||
+    addressInfo.latitude === '' ||
+    addressInfo.longitude === ''
+  ) {
     router.replace({ query: { tab: 1 } });
   }
 
-  const valueChangeHandler = (
-    name: string,
-    value: string | string[] | BakeryBaseCategoryInfo[] | null
-  ) => {
-    setSubMitData((prev) =>
-      prev ? { ...prev, [name]: value } : { [name]: value }
-    );
-  };
+  const valueChangeHandler = React.useCallback(
+    (
+      name: string,
+      value: string | string[] | BakeryBaseCategoryInfo[] | null
+    ) => {
+      setSubMitData((prev) =>
+        prev ? { ...prev, [name]: value } : { [name]: value }
+      );
+    },
+    []
+  );
+
+  const resultModalButtonClickHandler = React.useCallback(() => {
+    // TODO: 로직이좀.... 맘에 안드네요..ㅠ
+    if (isOpenCreatedModal.ok) {
+      setCurrentLatLng({
+        latitude: Number(addressInfo.latitude),
+        longitude: Number(addressInfo.longitude),
+      });
+      mutateGetBakeries({
+        latitude: Number(addressInfo.latitude),
+        longitude: Number(addressInfo.longitude),
+        range: 100000,
+      });
+
+      setIsOpenCreatedModal({
+        open: false,
+        ok: false,
+        text: '',
+      });
+
+      router.push('/map');
+    }
+  }, [
+    addressInfo.latitude,
+    addressInfo.longitude,
+    isOpenCreatedModal.ok,
+    router,
+    setCurrentLatLng,
+  ]);
 
   const subMitHandler = async () => {
     setIsSubmit(true);
@@ -87,15 +131,24 @@ const StoreAddress: React.FC = () => {
         latitude: Number(addressInfo.latitude),
         longitude: Number(addressInfo.longitude),
       });
-
-      // TOdo : 스낵바
       if (!response.ok) {
         response.message
-          ? alert(response.message)
-          : alert('등록하는 과정에서 오류가 생겼어요 !');
+          ? setIsOpenCreatedModal({
+              open: true,
+              ok: false,
+              text: response.message,
+            })
+          : setIsOpenCreatedModal({
+              open: true,
+              ok: false,
+              text: '등록하는 과정에서\n오류가 생겼어요 !',
+            });
       } else {
-        alert('등록이 완료되었습니다.');
-        router.push('/map');
+        setIsOpenCreatedModal({
+          open: true,
+          ok: true,
+          text: '빵집 등록이\n완료되었어요.',
+        });
       }
     }
   };
@@ -150,6 +203,10 @@ const StoreAddress: React.FC = () => {
           </Button>
         </SubMitButtonWrapper>
       </StoreInfoWrapper>
+      <ResultModal
+        isOpenModal={isOpenCreatedModal}
+        buttonClickHandler={resultModalButtonClickHandler}
+      ></ResultModal>
     </>
   );
 };

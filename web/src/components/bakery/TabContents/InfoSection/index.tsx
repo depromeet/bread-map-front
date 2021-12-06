@@ -31,7 +31,7 @@ const InfoSection = ({ bakeryId }: ReviewSectionProps) => {
           </li>
           <li>
             <ClockIcon />
-            <div>{data.businessHour || '제공된 정보가 없습니다.'}</div>
+            <pre>{data.businessHour || '제공된 정보가 없습니다.'}</pre>
           </li>
           <li>
             <EarthIcon />
@@ -101,6 +101,11 @@ const InfoList = styled.ul`
     display: flex;
     align-items: center;
     gap: 8px;
+
+    pre {
+      font-family: inherit;
+      margin: 0;
+    }
   }
 `;
 
