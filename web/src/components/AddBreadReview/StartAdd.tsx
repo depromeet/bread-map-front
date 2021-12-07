@@ -51,7 +51,7 @@ const StartAdd = ({
             <SelectBreadBtn onClick={() => setIsCategoryPage(true)}>
               {selectedCategory.length < 1
                 ? '빵 종류 선택'
-                : selectedCategory[0]?.text}
+                : selectedCategory[0]?.category}
             </SelectBreadBtn>
             <ArrowDown />
           </SelectArea>
