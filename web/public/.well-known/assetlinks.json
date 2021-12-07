@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.daedongbread.dev.twa",
+      "sha256_cert_fingerprints": [
+        "E5:6E:67:6E:8D:1E:03:46:E1:84:20:74:8E:FB:E8:71:50:F1:E4:5C:EB:9C:5A:43:A4:28:08:27:7C:A2:7A:3F"
+      ]
+    }
+  }
+]
