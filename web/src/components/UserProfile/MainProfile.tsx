@@ -2,6 +2,7 @@ import React from 'react';
 import SettingIcon from '@/components/icons/SettingIcon';
 import styled from '@emotion/styled';
 import { ProfileTitle } from '.';
+import { WishSection, WentSection, ReviewSection } from './TabContents';
 
 interface MainProfileProps {
   pageTitle: ProfileTitle;
@@ -44,7 +45,7 @@ const MainProfile = ({ pageTitle, setPageTitle }: MainProfileProps) => {
             active={TabType.Wish === tab}
             onClick={() => changeTab(TabType.Wish)}
           >
-            가고 싶어요
+            가보고 싶어요
           </Tab>
           <Tab
             data-tab={TabType.Went}
@@ -61,7 +62,11 @@ const MainProfile = ({ pageTitle, setPageTitle }: MainProfileProps) => {
             리뷰
           </Tab>
         </Tabs>
-        <Content></Content>
+        <Content>
+          {tab === 'wish' && <WishSection />}
+          {tab === 'went' && <WentSection />}
+          {tab === 'review' && <ReviewSection />}
+        </Content>
       </MyContentSection>
     </MainProfileWrapper>
   );
@@ -149,6 +154,7 @@ const Tab = styled.a<{ active: boolean }>`
   width: 100%;
   padding: 15px 0;
   text-align: center;
+  cursor: pointer;
 
   &::after {
     content: '';

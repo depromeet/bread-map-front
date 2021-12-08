@@ -29,10 +29,8 @@ const AddBreadReview = () => {
   return (
     <>
       <MainAdd
-        {...{
-          breadsReview,
-          updateBreadsReview,
-        }}
+        breadsReview={breadsReview}
+        updateBreadsReview={updateBreadsReview}
       />
     </>
   );

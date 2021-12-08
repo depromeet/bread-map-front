@@ -57,7 +57,7 @@ const BakeryCardList: React.FC = () => {
               거리순 <ArrowDown />
             </SortTypeText>
           </TitleBox>
-          {afterFilterBakeries?.map((entity) => (
+          {afterFilterBakeries?.map((entity, idx) => (
             <BakeryInfoCard
               bakeryId={entity.bakeryId}
               title={entity.bakeryName}

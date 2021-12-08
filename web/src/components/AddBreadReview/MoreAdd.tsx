@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useRef } from 'react';
 import styled from '@emotion/styled';
-import { BreadCategory, BreadCategoryItem } from '@/constants/breadCategories';
+import { BreadCategoryItem } from '@/constants/breadCategories';
 import { Toast } from '@/components/common/ToastPopup';
 import { ArrowDown, GrayStar, OrangeStar, Plus } from '@/components/icons';
 import { BreadsReview, Review } from '.';
@@ -68,7 +68,7 @@ const MoreAdd = ({
           <Text isRequired>빵 종류</Text>
           <SelectArea>
             <SelectBreadBtn onClick={() => setIsCategoryPage(true)}>
-              {breadsReview[currentProgress]?.text || '빵 종류 선택'}
+              {breadsReview[currentProgress]?.category || '빵 종류 선택'}
             </SelectBreadBtn>
             <ArrowDown />
           </SelectArea>

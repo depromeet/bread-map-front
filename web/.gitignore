@@ -57,3 +57,5 @@ yarn-error.log*
 # End of https://www.toptal.com/developers/gitignore/api/react,yarn
 
 .env
+**/public/sw.js
+**/public/workbox-*.js

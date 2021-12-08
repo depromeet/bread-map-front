@@ -3,9 +3,10 @@ import styled from '@emotion/styled';
 import { Button, ConfirmModal } from '@/components/common';
 import { Close, Plus } from '@/components/icons';
 import { AddBakeryInputBaseProps } from './AddBakeryInput';
+import { keyframes, Theme } from '@emotion/react';
 
 interface StoreMultiInputProps extends AddBakeryInputBaseProps {
-  value: string[] | undefined;
+  value: string[] | undefined | null;
 }
 
 const StoreMultiInput = ({
@@ -72,7 +73,11 @@ const StoreMultiInput = ({
         value={inputValue}
         onChange={inputChangeHandler}
       />
-      <AddButtonStyle styleType="none" onClick={addHomepage}>
+      <AddButtonStyle
+        styleType="none"
+        className={inputValue !== '' ? 'blank' : ''}
+        onClick={addHomepage}
+      >
         <Plus width={16} height={16} />
         {label} 추가
       </AddButtonStyle>
@@ -166,6 +171,18 @@ const Input = styled.input`
   }
 `;
 
+const Blank = (theme: Theme) => keyframes`
+  0% {
+    color: ${theme.color.black};
+  }
+  50% {
+    color: ${theme.color.primary500};
+  }
+  100% {
+    color: ${theme.color.black};
+  }
+`;
+
 const AddButtonStyle = styled(Button)`
   display: flex;
   justify-content: center;
@@ -173,5 +190,9 @@ const AddButtonStyle = styled(Button)`
   gap: 5px;
   svg {
     stroke: ${({ theme }) => theme.color.gray400};
+  }
+
+  &.blank {
+    animation: ${({ theme }) => Blank(theme)} 2s ease-in-out infinite;
   }
 `;
