@@ -9,8 +9,7 @@ const WishSection: React.FC = () => {
 
   if (error) return <div>Error</div>;
   if (!data) return <div>Loading...</div>;
-
-  console.log(data);
+  if (data && data.length === 0) return <div>No data</div>;
 
   return (
     <Base>
