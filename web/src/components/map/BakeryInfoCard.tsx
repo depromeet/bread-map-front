@@ -11,6 +11,7 @@ import {
 import { useRouter } from 'next/router';
 import { BakeryImage } from '../common/Images';
 import { addComma } from '@/utils/numberUtils';
+import { requestModifyBakeryFlag } from '@/remotes/network/bakery';
 
 interface BakeryInfoCardProps {
   bakeryId: number;
@@ -40,7 +41,11 @@ const BakeryInfoCard: React.FC<BakeryInfoCardProps> = ({
     <Card onClick={cardClickHandler}>
       <ImageBox>
         <BakeryImage src={bakeryImage || ''} />
-        <FlagButton>
+        <FlagButton
+          onClick={() =>
+            requestModifyBakeryFlag({ bakeryId, flagType: 'PICKED' })
+          }
+        >
           <FlagIcon width={16} height={16} />
         </FlagButton>
       </ImageBox>
