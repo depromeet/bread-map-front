@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-title-in-document-head */
 /* eslint-disable @next/next/no-sync-scripts */
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 
@@ -11,6 +12,11 @@ class DaeDongDocument extends Document {
           <meta
             name="description"
             content="대동빵지도에서 맛있는 빵집을 공유해보세요"
+          />
+          <title>대동빵지도</title>
+          <meta
+            name="naver-site-verification"
+            content="e2908052f351a549f79ca05f9b41c61520efe6c0"
           />
           <meta name="keywords" content="대동빵지도, 빵지도, 빵집, 빵맛집" />
           <meta name="theme-color" content="#ff6e40" />
