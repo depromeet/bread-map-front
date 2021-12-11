@@ -5,11 +5,12 @@ import { BreadCategory } from '@/constants/breadCategories';
 import MainAdd from './MainAdd';
 
 export interface Review {
-  category: BreadCategory | null;
-  name: string;
+  categoryName: BreadCategory | null;
+  menuName: string;
   price: number;
-  text: string;
-  star: number;
+  contents: string;
+  rating: number;
+  imgPathList: string[];
 }
 
 export interface BreadsReview {
@@ -29,6 +30,7 @@ const AddBreadReview = () => {
   return (
     <>
       <MainAdd
+        // TODO: bakeryId={bakeryId}
         breadsReview={breadsReview}
         updateBreadsReview={updateBreadsReview}
       />

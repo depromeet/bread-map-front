@@ -10,7 +10,7 @@ interface MoreAddProps {
   setIsCategoryPage: React.Dispatch<React.SetStateAction<boolean>>;
   selectedCategory: BreadCategoryItem[];
   currentProgress: number;
-  stars: number[];
+  rating: number[];
   singleReview: Review;
   deleteSingleReview: (targetProgress: number) => void;
   editScore: (clickedIndex: number) => void;
@@ -24,7 +24,7 @@ const MoreAdd = ({
   setIsCategoryPage,
   selectedCategory,
   currentProgress,
-  stars,
+  rating,
   singleReview,
   deleteSingleReview,
   editScore,
@@ -32,7 +32,7 @@ const MoreAdd = ({
   isSubmitted,
   toastStatus,
 }: MoreAddProps) => {
-  const currentStar = breadsReview[currentProgress]?.star || 0;
+  const currentRating = breadsReview[currentProgress]?.rating || 0;
 
   const fileRef = useRef<HTMLInputElement | null>(null);
   const addPhoto = () => {
@@ -68,23 +68,25 @@ const MoreAdd = ({
           <Text isRequired>빵 종류</Text>
           <SelectArea>
             <SelectBreadBtn onClick={() => setIsCategoryPage(true)}>
-              {breadsReview[currentProgress]?.category || '빵 종류 선택'}
+              {breadsReview[currentProgress]?.categoryName || '빵 종류 선택'}
             </SelectBreadBtn>
             <ArrowDown />
           </SelectArea>
-          {isSubmitted && singleReview.category === null && (
+          {isSubmitted && singleReview.categoryName === null && (
             <AlertText>빵 종류를 선택해주세요.</AlertText>
           )}
         </Row>
         <Row>
           <Text isRequired>메뉴명</Text>
           <Input
-            name="name"
+            name="menuName"
             placeholder="메뉴명을 입력해주세요"
-            value={breadsReview[currentProgress]?.name || singleReview?.name}
+            value={
+              breadsReview[currentProgress]?.menuName || singleReview?.menuName
+            }
             onChange={(e) => editContent(e)}
           />
-          {isSubmitted && singleReview.name === '' && (
+          {isSubmitted && singleReview.menuName === '' && (
             <AlertText>메뉴명을 입력해주세요.</AlertText>
           )}
         </Row>
@@ -105,18 +107,20 @@ const MoreAdd = ({
           <Text>별점</Text>
           <StarArea>
             {renderStar([
-              ...Array(currentStar).fill(1),
-              ...Array(5 - currentStar).fill(0),
+              ...Array(currentRating).fill(1),
+              ...Array(5 - currentRating).fill(0),
             ])}
           </StarArea>
         </Row>
         <Row>
           <Text>한줄평</Text>
           <Input
-            name="text"
+            name="contents"
             placeholder="한줄평을 적어주세요"
             value={
-              breadsReview[currentProgress]?.text || singleReview?.text || ''
+              breadsReview[currentProgress]?.contents ||
+              singleReview?.contents ||
+              ''
             }
             onChange={(e) => editContent(e)}
           />

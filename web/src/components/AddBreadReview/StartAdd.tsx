@@ -8,7 +8,7 @@ import { Review } from '.';
 interface StartAddProps {
   setIsCategoryPage: React.Dispatch<React.SetStateAction<boolean>>;
   selectedCategory: BreadCategoryItem[];
-  stars: number[];
+  rating: number[];
   singleReview: Review;
   editScore: (clickedIndex: number) => void;
   editContent: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -19,7 +19,7 @@ interface StartAddProps {
 const StartAdd = ({
   setIsCategoryPage,
   selectedCategory,
-  stars,
+  rating,
   singleReview,
   editScore,
   editContent,
@@ -62,12 +62,12 @@ const StartAdd = ({
         <Row>
           <Text isRequired>메뉴명</Text>
           <Input
-            name="name"
+            name="menuName"
             placeholder="메뉴명을 입력해주세요"
-            value={singleReview?.name}
+            value={singleReview?.menuName}
             onChange={(e) => editContent(e)}
           />
-          {isSubmitted && singleReview.name === '' && (
+          {isSubmitted && singleReview.menuName === '' && (
             <AlertText>메뉴명을 입력해주세요.</AlertText>
           )}
         </Row>
@@ -87,7 +87,7 @@ const StartAdd = ({
         <Row>
           <Text>별점</Text>
           <StarArea>
-            {stars.map((star, i) => (
+            {rating.map((star, i) => (
               <StarBtn key={i} onClick={() => editScore(i)}>
                 {star === 1 ? <OrangeStar /> : <GrayStar />}
               </StarBtn>
@@ -97,7 +97,7 @@ const StartAdd = ({
         <Row>
           <Text>한줄평</Text>
           <Input
-            name="text"
+            name="contents"
             placeholder="한줄평을 적어주세요"
             onChange={(e) => editContent(e)}
           />

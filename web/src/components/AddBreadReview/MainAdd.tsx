@@ -9,26 +9,34 @@ import StartAdd from './StartAdd';
 import CategorySelect from './CategorySelect';
 import { Review, BreadsReview, BreadsUpdate } from './index';
 import ReviewTab from './ReviewTab';
+import { requestCreateBakeryMenuReview } from '@/remotes/network/bakery';
+import { CreateBakeryMenuReviewPayload } from '@/remotes/network/bakery/requestCreateBakeryMenuReview';
 
-const initialStar = [0, 0, 0, 0, 0];
+const initialRating = [0, 0, 0, 0, 0];
 
 const initialSingleReview: Review = {
-  category: null,
-  name: '',
+  categoryName: null,
+  menuName: '',
   price: 0,
-  text: '',
-  star: 0,
+  contents: '',
+  rating: 0,
+  imgPathList: [],
 };
 
 interface MainAddProps {
+  bakeryId: number;
   breadsReview: BreadsReview;
   updateBreadsReview: BreadsUpdate;
 }
 
-const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
+const MainAdd = ({
+  bakeryId,
+  breadsReview,
+  updateBreadsReview,
+}: MainAddProps) => {
   const [progress, setProgress] = React.useState(1);
   const [currentProgress, setCurrentProgress] = React.useState(1);
-  const [stars, setStars] = React.useState<number[]>(initialStar);
+  const [rating, setRating] = React.useState<number[]>(initialRating);
   const [singleReview, setSingleReview] =
     React.useState<Review>(initialSingleReview);
 
@@ -43,6 +51,11 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
   } = useCategories(isMultiSelect);
   const [isSubmitted, setIsSubmitted] = React.useState(false);
   const { toastStatus, openToast } = useToast();
+  const [isOpenCreatedModal, setIsOpenCreatedModal] = React.useState({
+    open: false,
+    ok: false,
+    text: '',
+  });
 
   React.useEffect(() => {
     setIsSubmitted(false);
@@ -55,8 +68,8 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
   }, [currentProgress]);
 
   const editScore = (clickedIndex: number) => {
-    setStars((stars) =>
-      stars.map((_, i) => {
+    setRating((rating) =>
+      rating.map((_, i) => {
         if (clickedIndex < i) return 0;
         return 1;
       })
@@ -71,10 +84,10 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
     });
   };
 
-  const editCategory = (category: BreadCategory) => {
+  const editCategory = (categoryName: BreadCategory) => {
     setSingleReview({
       ...singleReview,
-      category,
+      categoryName,
     });
   };
 
@@ -100,10 +113,10 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
   React.useEffect(() => {
     setSingleReview({
       ...singleReview,
-      star: stars.reduce((acc, cur) => acc + cur, 0),
+      rating: rating.reduce((acc, cur) => acc + cur, 0),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [stars]);
+  }, [rating]);
 
   React.useEffect(() => {
     updateBreadsReview({
@@ -114,14 +127,14 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
   }, [singleReview]);
 
   const initializeSingleReview = () => {
-    setStars(initialStar);
+    setRating(initialRating);
     setSingleReview(initialSingleReview);
     initializeCategories();
   };
 
   const checkEmptySection = (): boolean => {
-    if (breadsReview[progress].category === null) return true;
-    else if (breadsReview[progress].name === '') return true;
+    if (breadsReview[progress].categoryName === null) return true;
+    else if (breadsReview[progress].menuName === '') return true;
     else if (breadsReview[progress].price === 0) return true;
     else return false;
   };
@@ -140,9 +153,73 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
   };
 
   const checkSelectedCategory = (): BreadCategory[] | null => {
-    const category = breadsReview[currentProgress]?.category;
+    const category = breadsReview[currentProgress]?.categoryName;
     if (category === null) return null;
     else return [category];
+  };
+
+  interface PostResponse {
+    ok: boolean;
+    message: string | null;
+  }
+
+  const createBakeryMenuReview = async ({
+    bakeryId,
+    reviews,
+  }: CreateBakeryMenuReviewPayload): Promise<PostResponse> => {
+    const response = await requestCreateBakeryMenuReview({
+      bakeryId,
+      reviews,
+    });
+
+    if (response.status >= 400 || !response.ok)
+      return {
+        ok: false,
+        message: response.message || '등록하는 과정에서 오류가 생겼어요 !',
+      };
+    else
+      return {
+        ok: true,
+        message: null,
+      };
+  };
+
+  type ReviewType = {
+    categoryName: string;
+    contents: string;
+    imgPathList: string[];
+    menuName: string;
+    price: number;
+    rating: number;
+  };
+
+  const submitReview = async () => {
+    const reviews: CreateBakeryMenuReviewPayload['reviews'] = Object.values(
+      breadsReview
+    ).map((item: Review) => {
+      return { ...item, price: +item.price } as ReviewType;
+    });
+
+    const response = await createBakeryMenuReview({ bakeryId: 5, reviews });
+    if (!response.ok) {
+      response.message
+        ? setIsOpenCreatedModal({
+            open: true,
+            ok: false,
+            text: response.message,
+          })
+        : setIsOpenCreatedModal({
+            open: true,
+            ok: false,
+            text: '등록하는 과정에서\n오류가 생겼어요 !',
+          });
+    } else {
+      setIsOpenCreatedModal({
+        open: true,
+        ok: true,
+        text: `${reviews.length}개의 빵 리뷰 등록이\n완료되었어요.`,
+      });
+    }
   };
 
   return (
@@ -167,7 +244,7 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
         <StartAdd
           setIsCategoryPage={setIsCategoryPage}
           selectedCategory={selectedCategory}
-          stars={stars}
+          rating={rating}
           singleReview={singleReview}
           editScore={editScore}
           editContent={editContent}
@@ -181,7 +258,7 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
           setIsCategoryPage={setIsCategoryPage}
           selectedCategory={selectedCategory}
           currentProgress={currentProgress}
-          stars={stars}
+          rating={rating}
           singleReview={singleReview}
           deleteSingleReview={deleteSingleReview}
           editScore={editScore}
@@ -196,7 +273,7 @@ const MainAdd = ({ breadsReview, updateBreadsReview }: MainAddProps) => {
             <Plus />
             <span>다른 빵 추가하기</span>
           </MoreAddBtn>
-          <SubmitBtn>확인</SubmitBtn>
+          <SubmitBtn onClick={submitReview}>확인</SubmitBtn>
         </BtnWrapper>
       )}
     </>
