@@ -4,7 +4,7 @@ const withPWA = require('next-pwa');
 
 const nextConfig = { reactStrictMode: true };
 
-module.exports = withPlugins([
+const settings = withPlugins([
   [
     withPWA,
     {
@@ -15,3 +15,5 @@ module.exports = withPlugins([
   ],
   nextConfig,
 ]);
+
+module.exports = process.env.NODE_ENV === 'development' ? nextConfig : settings;
