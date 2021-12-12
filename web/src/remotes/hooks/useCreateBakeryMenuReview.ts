@@ -6,7 +6,7 @@ interface PostResponse {
   message: string | null;
 }
 
-const postCreateBakeryMenuReview = async ({
+const useCreateBakeryMenuReview = async ({
   bakeryId,
   reviews,
 }: CreateBakeryMenuReviewPayload): Promise<PostResponse> => {
@@ -27,4 +27,4 @@ const postCreateBakeryMenuReview = async ({
     };
 };
 
-export default postCreateBakeryMenuReview;
+export default useCreateBakeryMenuReview;
