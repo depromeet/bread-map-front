@@ -1,33 +1,32 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { useAtom } from 'jotai';
-import { currentBakeryIdAtom, currentRangeBakeriesAtom } from '@/store/map';
+import { useGetUserFlagBakeries } from '@/remotes/hooks';
 
 import BakeryInfoCard from '@/components/map/BakeryInfoCard';
 
 const WishSection: React.FC = () => {
-  const [currentBakeryId] = useAtom(currentBakeryIdAtom);
-  const [bakeries] = useAtom(currentRangeBakeriesAtom);
+  const { data, error } = useGetUserFlagBakeries();
 
-  const currentBakeryEntity = bakeries?.find(
-    (el) => el.bakeryId === currentBakeryId
-  );
+  if (error) return <div>Error</div>;
+  if (!data) return <div>Loading...</div>;
+  if (data && data.length === 0) return <div>No data</div>;
 
   return (
     <Base>
-      <h1>가보고 싶어요 컨텐츠</h1>
-      {currentBakeryEntity && (
-        <BakeryInfoCard
-          bakeryId={currentBakeryEntity.bakeryId}
-          title={currentBakeryEntity.bakeryName}
-          wentCount={currentBakeryEntity.flagsCount}
-          starAvg={currentBakeryEntity.avgRating}
-          reviewCount={currentBakeryEntity.menuReviewsCount}
-          reviews={currentBakeryEntity.menuReviewList.map(
-            (review) => review.contents
-          )}
-        />
-      )}
+      {data
+        .filter((item) => item.flagType === 'PICKED')
+        .map((item, idx) => (
+          <BakeryInfoCard
+            key={item.bakeryId}
+            bakeryId={item.bakeryId}
+            title={item.bakeryName}
+            bakeryImage={process.env.NEXT_PUBLIC_S3_URI + item.imgPath}
+            wentCount={item.flagsCount}
+            starAvg={item.avgRating}
+            reviewCount={item.menuReviewsCount}
+            reviews={item.menuReviewContentList}
+          />
+        ))}
     </Base>
   );
 };

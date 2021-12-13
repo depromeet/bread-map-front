@@ -11,8 +11,12 @@ const requestModifyBakeryFlag = async ({
   bakeryId,
   flagType,
 }: ModifyBakeryFlagPayload): Promise<void> => {
+  const headers = new Headers();
+  headers.append('Content-Type', 'application/json');
+
   await fetchWithToken(`/bakery/${bakeryId}/flag`, {
     method: 'POST',
+    headers,
     body: JSON.stringify({ flagType }),
   });
   return;

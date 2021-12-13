@@ -12,8 +12,61 @@ const CategoryList: React.FC<CategoryListProps> = ({
   selectedItems,
   onChange,
 }) => {
+  const ref = React.useRef<HTMLUListElement | null>(null);
+
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const el = ref.current;
+    if (el === null) return;
+
+    let startY: number | undefined = undefined;
+    let rAF: ReturnType<typeof window.requestAnimationFrame>;
+
+    const handleScrub = (delta: number) => {
+      window.cancelAnimationFrame(rAF);
+
+      rAF = window.requestAnimationFrame(() => {
+        if (startY === undefined) return;
+        const nextPosition = startY - delta;
+        startY = delta;
+        el.scrollTop += nextPosition;
+      });
+    }
+
+    const handleTouchStart = (e: TouchEvent) => {
+      startY = e.touches[0].clientY;
+    }
+
+    const handleTouchEnd = () => {
+      startY = undefined;
+    }
+
+    const handleTouchMove = (e: TouchEvent) => {
+      handleScrub(e.changedTouches[0].clientY);
+    }
+
+    const bindEvent = () => {
+      el.addEventListener('touchstart', handleTouchStart);
+      el.addEventListener('touchend', handleTouchEnd);
+      el.addEventListener('touchmove', handleTouchMove);
+    };
+
+    const unbindEvent = () => {
+      el.removeEventListener('touchstart', handleTouchStart);
+      el.removeEventListener('touchend', handleTouchEnd);
+      el.removeEventListener('touchmove', handleTouchMove);
+    };
+
+    bindEvent();
+
+    return () => {
+      unbindEvent();
+    };
+  }, []);
+
   return (
-    <Base>
+    <Base ref={ref}>
       {categoryItems.map(({ Icon, category, text }) => (
         <Item
           isSelected={selectedItems.find((el) => el === category) !== undefined}
@@ -43,7 +96,7 @@ const Base = styled.ul`
   padding: 0 20px;
   max-width: 550px;
   width: 100%;
-  overflow-y: auto;
+  overflow-y: scroll;
 `;
 
 const Item = styled.li<{ isSelected: boolean }>`

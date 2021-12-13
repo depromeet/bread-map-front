@@ -5,6 +5,8 @@ import { getNavermapSDK } from './utils';
 const isBrowser = typeof window !== 'undefined';
 const isNavigator = typeof navigator !== 'undefined';
 
+const centerCircle = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="7" r="6.5" fill="#1965F0" stroke="white"/></svg>'
+
 interface UseWatchPositionParams {
   success: PositionCallback;
   error?: PositionErrorCallback | null | undefined;
@@ -40,7 +42,7 @@ const useWatchPosition = ({
 const useDrawCurrentPosition = () => {
   const map = useNaverMap();
 
-  const circleRef = React.useRef<naver.maps.Circle | null>(null);
+  const markerRef = React.useRef<naver.maps.Marker | null>(null);
 
   useWatchPosition({
     success(position) {
@@ -49,21 +51,19 @@ const useDrawCurrentPosition = () => {
       const sdk = getNavermapSDK();
       if (sdk === undefined) return;
 
-      if (circleRef.current !== null) {
-        circleRef.current.setMap(null);
+      if (markerRef.current !== null) {
+        markerRef.current.setMap(null);
       }
 
-      circleRef.current = new sdk.Circle({
+      markerRef.current= new sdk.Marker({
         map,
-        center: {
+        position: {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         },
-        strokeColor: '#ffffff',
-        strokeWeight: 2,
-        fillColor: '#1965f0',
-        fillOpacity: 1,
-        radius: 8,
+        icon: {
+          content: centerCircle,
+        },
       });
     },
     error(error) {
