@@ -20,7 +20,7 @@
     "@react-spring/web": "^9.3.0",
     "@use-gesture/react": "^10.1.1",
     "jotai": "^1.4.2",
-    "keen-slider": "^5.5.1",
+    "keen-slider": "^6.4.0",
     "next": "11.1.3",
     "next-compose-plugins": "^2.2.1",
     "next-pwa": "^5.4.4",
