@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
 import { CategoryList } from '@/components/common';
-import { ChevronLeftIcon, XIcon } from '@/components/icons';
+import { ChevronLeftIcon } from '@/components/icons';
 import { currentFilterAtom } from '@/store/map';
 import type { BreadCategory } from '@/constants/breadCategories';
 
@@ -21,15 +21,29 @@ const BreadFilterSelect: React.FC<BreadFilterSelectProps> = ({
 
   const [selectedItems, setSelectedItems] = React.useState<BreadCategory[]>([]);
 
-  const handleCancel = () => {
+  const handleCancel = React.useCallback(() => {
     setSelectedItems(currentFilter);
     onClose();
-  };
+  }, [currentFilter, onClose]);
 
-  const handleSubmit = () => {
+  const handleReset = React.useCallback(() => setSelectedItems([]), []);
+
+  const handleSubmit = React.useCallback(() => {
     setCurrentFilter(selectedItems);
     onClose();
-  };
+  }, [onClose, selectedItems, setCurrentFilter]);
+
+  const handleCategoryChange = React.useCallback(
+    (item: BreadCategory) =>
+      setSelectedItems((prev) => {
+        const idx = prev.indexOf(item);
+
+        return idx > -1
+          ? [...prev.slice(0, idx), ...prev.slice(idx + 1)]
+          : [...prev, item];
+      }),
+    []
+  );
 
   if (!open) return null;
   return (
@@ -39,25 +53,15 @@ const BreadFilterSelect: React.FC<BreadFilterSelectProps> = ({
           <ChevronLeftIcon />
         </IconButton>
         <Title>빵종류 모아보기</Title>
-        <IconButton onClick={handleCancel}>
-          <XIcon />
-        </IconButton>
+        <ResetButton onClick={handleReset} disabled={!selectedItems.length}>
+          초기화
+        </ResetButton>
       </Header>
       <Content>
         <ContentSummary>{summaryText}</ContentSummary>
         <CategoryList
           selectedItems={selectedItems}
-          onChange={(item) => {
-            setSelectedItems((prev) => {
-              const idx = prev.indexOf(item);
-
-              if (idx > -1) {
-                return [...prev.slice(0, idx), ...prev.slice(idx + 1)];
-              } else {
-                return [...prev, item];
-              }
-            });
-          }}
+          onChange={handleCategoryChange}
         />
         <ButtonGroup>
           <CancelButton onClick={handleCancel}>취소하기</CancelButton>
@@ -99,6 +103,15 @@ const IconButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const ResetButton = styled(IconButton)`
+  font-size: 12px;
+  color: ${({ theme }) => theme.color.primary500};
+  justify-content: flex-start;
+  &:disabled {
+    color: ${({ theme }) => theme.color.gray600};
+  }
 `;
 
 const Title = styled.span`
