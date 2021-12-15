@@ -11,7 +11,7 @@ const Onboard = () => {
   const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
     initial: 0,
     slideChanged(s) {
-      setCurrentSlide(s.details().relativeSlide);
+      setCurrentSlide(s.track.details.rel);
     },
   });
   const startClickHandler = () => {
@@ -76,13 +76,13 @@ const Onboard = () => {
       </div>
       {slider && (
         <Dots>
-          {Array(slider.details().size)
+          {Array(slider.current?.track.details.length)
             .fill(0)
             .map((_, idx) => (
               <li
                 key={idx}
                 onClick={() => {
-                  slider.moveToSlideRelative(idx);
+                  slider.current?.moveToIdx(idx);
                 }}
                 className={'dot' + (currentSlide === idx ? ' active' : '')}
               />
