@@ -6964,10 +6964,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"keen-slider@npm:^5.5.1":
-  version: 5.5.1
-  resolution: "keen-slider@npm:5.5.1"
-  checksum: 478838457739dca7cb238d1183552abe6c84ca36811a3a5d515fc2f57edacbe035557fc0a50b3e13a66257c8432b5bb769ff524511a5d643d83fb381ec90e82f
+"keen-slider@npm:^6.4.0":
+  version: 6.4.0
+  resolution: "keen-slider@npm:6.4.0"
+  checksum: 2f4f688ab30b7e95ff7921a76153b2002ef2df3d416cb0f0a95913ba9a7b9efaf0991ff838ab528c6c9de1d66892de5695232c4323559a170bf6bb98a5e9a70f
   languageName: node
   linkType: hard
 
@@ -10267,7 +10267,7 @@ typescript@4.4.3:
     identity-obj-proxy: ^3.0.0
     jest: ^27.2.0
     jotai: ^1.4.2
-    keen-slider: ^5.5.1
+    keen-slider: ^6.4.0
     next: 11.1.3
     next-compose-plugins: ^2.2.1
     next-pwa: ^5.4.4

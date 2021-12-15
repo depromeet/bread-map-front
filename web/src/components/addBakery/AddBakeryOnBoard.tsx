@@ -1,11 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import * as React from 'react';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
-import { Button } from '../common';
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
-import { TDetails } from 'keen-slider';
-import { useRouter } from 'next/router';
+import { Button } from '../common';
 
 const previewStore = [
   {
@@ -44,28 +43,57 @@ const previewStore = [
 
 const StoreOnBoard = () => {
   const router = useRouter();
-  const [details, setDetails] = React.useState<TDetails>();
-  const [sliderRef] = useKeenSlider<HTMLDivElement>({
-    initial: 0,
-    loop: true,
-    centered: true,
-    slidesPerView: 2,
-    spacing: 40,
-    breakpoints: {
-      '(min-width: 768px)': {
-        slidesPerView: 5,
-      },
-      '(max-width: 767px)': {
-        slidesPerView: 3,
-      },
-      '(max-width: 420px)': {
-        slidesPerView: 2,
+  const [activeSlide, setActiveSlide] = React.useState<number>(0);
+  const [sliderRef] = useKeenSlider<HTMLDivElement>(
+    {
+      loop: true,
+      breakpoints: {
+        '(min-width: 768px)': {
+          slides: { origin: 'center', perView: 5, spacing: 40 },
+        },
+        '(max-width: 767px)': {
+          slides: { origin: 'center', perView: 3, spacing: 40 },
+        },
+        '(max-width: 420px)': {
+          slides: { origin: 'center', perView: 2, spacing: 40 },
+        },
       },
     },
-    slideChanged(s) {
-      setDetails(s.details());
-    },
-  });
+    [
+      (slider) => {
+        let timeout: ReturnType<typeof setTimeout>;
+        let mouseOver = false;
+
+        const clearNextTimeout = () => clearTimeout(timeout);
+        const nextTimeout = () => {
+          clearTimeout(timeout);
+          if (mouseOver) return;
+          timeout = setTimeout(() => {
+            slider.next();
+          }, 1500);
+        };
+
+        slider.on('created', () => {
+          slider.container.addEventListener('mouseover', () => {
+            mouseOver = true;
+            clearNextTimeout();
+          });
+          slider.container.addEventListener('mouseout', () => {
+            mouseOver = false;
+            nextTimeout();
+          });
+          nextTimeout();
+        });
+
+        slider.on('slideChanged', (slider) =>
+          setActiveSlide(slider.track.details.rel)
+        );
+        slider.on('dragStarted', clearNextTimeout);
+        slider.on('animationEnded', nextTimeout);
+        slider.on('updated', nextTimeout);
+      },
+    ]
+  );
 
   const buttonClickHandler = React.useCallback(() => {
     router.push({
@@ -87,7 +115,7 @@ const StoreOnBoard = () => {
           {previewStore.map((store, idx) => (
             <Slide
               className={`keen-slider__slide ${
-                details?.relativeSlide === idx ? 'active' : ''
+                activeSlide === idx ? 'active' : ''
               }`}
               key={idx}
             >
@@ -136,9 +164,9 @@ const SliderWrapper = styled.div`
 `;
 
 const Slider = styled.div`
+  overflow: visible !important;
   margin: auto;
   width: 100%;
-  overflow: visible;
 `;
 
 const Slide = styled.div`
@@ -146,6 +174,7 @@ const Slide = styled.div`
   opacity: 0.6;
   font-size: 0.8rem;
   text-align: center;
+  overflow: visible !important;
 
   img {
     width: 100%;
@@ -154,10 +183,9 @@ const Slide = styled.div`
   &.active {
     opacity: 1;
     font-size: 1rem;
-    overflow: visible;
 
     > div {
-      transform: scale(1.4);
+      transform: scale(1.4) translateY(-5px);
       transition: transform 0.2s ease-in-out;
     }
   }
@@ -182,7 +210,6 @@ const StorePioneer = styled.span`
 `;
 
 const ButtonStyle = styled(Button)`
-  position: sticky;
-  bottom: 16px;
+  margin: 0 0 16px;
   width: 100%;
 `;
