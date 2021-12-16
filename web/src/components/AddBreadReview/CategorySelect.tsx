@@ -1,52 +1,78 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Categories } from '@/components/common/BreadCategoryList';
-import { BreadCategory, BreadCategoryItem } from '@/constants/breadCategories';
+import {
+  Categories,
+  useCategories,
+} from '@/components/common/BreadCategoryList';
+import { BreadCategory, categoryItems } from '@/constants/breadCategories';
+import { Review } from '.';
 
 interface CategorySelectProps {
   setIsCategoryPage: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedCategory: BreadCategory[] | null;
-  onClickCategory: (categoryInfo: BreadCategoryItem) => void;
-  onCancelCategory: () => void;
-  setIsOpenFirst: React.Dispatch<React.SetStateAction<boolean>>;
+  setSingleReview: React.Dispatch<React.SetStateAction<Review>>;
+  selected?: BreadCategory | null;
 }
 
 const CategorySelect = ({
+  selected,
   setIsCategoryPage,
-  selectedCategory,
-  onClickCategory,
-  onCancelCategory,
-  setIsOpenFirst,
+  setSingleReview,
 }: CategorySelectProps) => {
+  const initCategory = React.useMemo(() => {
+    const item = categoryItems.find((item) => item.category === selected);
+    return item ? [item] : [];
+  }, [selected]);
+
+  const { selectedCategory, onClickCategory } = useCategories(
+    false,
+    initCategory
+  );
+
   const onClickOk = () => {
+    setSingleReview((prev) => ({
+      ...prev,
+      categoryName: selectedCategory[0].category,
+    }));
     setIsCategoryPage(false);
   };
 
   const onClickCancel = () => {
-    onCancelCategory();
     setIsCategoryPage(false);
   };
 
-  React.useEffect(() => {
-    setIsOpenFirst(true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
-    <>
-      <Categories
-        selectedCategory={selectedCategory}
-        onClickCategory={onClickCategory}
-      />
-      <BtnWrapper>
-        <CancelBtn onClick={onClickCancel}>취소</CancelBtn>
-        <OkBtn onClick={onClickOk}>확인</OkBtn>
-      </BtnWrapper>
-    </>
+    <CategoryLayout>
+      <CategoryWrapper>
+        <Categories
+          selectedCategory={
+            selectedCategory[0] ? [selectedCategory[0].category] : []
+          }
+          onClickCategory={onClickCategory}
+        />
+        <BtnWrapper>
+          <CancelBtn onClick={onClickCancel}>취소</CancelBtn>
+          <OkBtn onClick={onClickOk}>확인</OkBtn>
+        </BtnWrapper>
+      </CategoryWrapper>
+    </CategoryLayout>
   );
 };
 
 export default CategorySelect;
+
+const CategoryLayout = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: white;
+  height: 100%;
+  width: 100%;
+  z-index: 9;
+`;
+
+const CategoryWrapper = styled.div`
+  padding: 0 20px;
+`;
 
 const BtnWrapper = styled.div`
   display: flex;

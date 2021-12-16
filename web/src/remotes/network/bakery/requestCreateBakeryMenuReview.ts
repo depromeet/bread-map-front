@@ -1,9 +1,10 @@
+import { BreadCategory } from '@/constants/breadCategories';
 import { fetchWithToken } from '@/remotes/network/fetchBase';
 
 export interface CreateBakeryMenuReviewPayload {
   bakeryId: number;
   reviews: {
-    categoryName: string;
+    categoryName: BreadCategory | null;
     contents: string;
     imgPathList: string[];
     menuName: string;
