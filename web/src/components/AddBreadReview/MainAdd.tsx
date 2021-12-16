@@ -49,7 +49,10 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
   };
 
   const addReview = (singleReview: Review) => {
-    setIsSubmitted(true);
+    if (checkEmptySection(singleReview)) {
+      setIsSubmitted(true);
+      return openToast();
+    }
 
     updateBreadsReview((prev) => {
       const reviews = [...prev];
@@ -57,8 +60,6 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
       reviews.push(initialSingleReview);
       return reviews;
     });
-
-    if (checkEmptySection(singleReview)) return openToast();
 
     setCurrentProgress((prev) => prev + 1);
 
