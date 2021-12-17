@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { AddBreadReview } from '@/components/AddBreadReview';
+import AddBreadReview from '@/components/AddBreadReview';
 import { Header } from '@/components/common';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';

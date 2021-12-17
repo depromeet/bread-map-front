@@ -29,8 +29,8 @@ const requestCreateBakeryMenuReview = async ({
     body: JSON.stringify(reviews),
     headers,
   });
-  const data = await resp.json();
-  return data;
+
+  return resp as CreateBakeryMenuReviewResponse;
 };
 
 export default requestCreateBakeryMenuReview;

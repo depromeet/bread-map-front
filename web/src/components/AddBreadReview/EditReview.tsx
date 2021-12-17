@@ -12,7 +12,7 @@ import {
 import { useAtom } from 'jotai';
 import { singleReviewAtom } from './MainAdd';
 
-interface StartAddProps {
+interface EditReviewProps {
   singleReview: Review;
   isSubmitted: boolean;
   toastStatus: boolean;
@@ -20,13 +20,13 @@ interface StartAddProps {
   submitReview: (singleReview: Review) => void;
 }
 
-const StartAdd = ({
+const EditReview = ({
   singleReview,
   isSubmitted,
   toastStatus,
   nextProgress,
   submitReview,
-}: StartAddProps) => {
+}: EditReviewProps) => {
   const [currentReview, setCurrentReview] = useAtom(singleReviewAtom);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   React.useEffect(() => setCurrentReview(singleReview), [singleReview.breadId]);
@@ -116,7 +116,7 @@ const StartAdd = ({
   );
 };
 
-export default StartAdd;
+export default EditReview;
 
 const Content = styled.div``;
 

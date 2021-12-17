@@ -1,5 +1,8 @@
+import React from 'react';
 import { BreadCategory } from '@/constants/breadCategories';
-export { default as AddBreadReview } from './MainAdd';
+import { requestCreateBakeryMenuReview } from '@/remotes/network/bakery';
+import { requestUploadImage } from '@/remotes/network/image';
+import MainAdd from './MainAdd';
 export interface Review {
   breadId: number;
   categoryName: BreadCategory | null;
@@ -9,3 +12,9 @@ export interface Review {
   rating: number;
   imgPathList: { url: string; file: File }[];
 }
+
+const AddBreadReview = ({ bakeryId }: { bakeryId: number }) => {
+  return <MainAdd bakeryId={bakeryId} />;
+};
+
+export default AddBreadReview;

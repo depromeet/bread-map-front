@@ -1,14 +1,17 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useToast } from '@/components/common/ToastPopup';
-import StartAdd from './StartAdd';
+import EditReview from './EditReview';
 import { Review } from './index';
 import ReviewTab from './ReviewTab';
 import { atom } from 'jotai';
+import { requestUploadImage } from '@/remotes/network/image';
+import { requestCreateBakeryMenuReview } from '@/remotes/network/bakery';
+import ResultModal from './ResultModal';
+import router from 'next/router';
 interface MainAddProps {
   bakeryId: number;
 }
-
 const initialSingleReview: Review = {
   breadId: 0,
   categoryName: null,
@@ -27,6 +30,12 @@ export const checkHasError = (review: Review) =>
   review.price < 0;
 
 const MainAdd = ({ bakeryId }: MainAddProps) => {
+  const [loadingState, setLoadingState] = React.useState({
+    open: false,
+    loading: false,
+    done: false,
+    text: '빵 리뷰을 등록 할까요?',
+  });
   const [errorReviews, setErrorReviews] = React.useState(new Set<number>());
   const [breadsReview, updateBreadsReview] = React.useState([
     initialSingleReview,
@@ -36,6 +45,11 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
   const { toastStatus, openToast } = useToast();
 
   const singleReview = breadsReview[currentProgress];
+
+  const initBreadReview = React.useCallback(
+    () => updateBreadsReview([initialSingleReview]),
+    []
+  );
 
   const checkEmptySection = React.useCallback(
     (singleReview: Review) => {
@@ -99,6 +113,63 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
     [checkEmptySection, currentProgress, openToast]
   );
 
+  const createImages = React.useCallback(async (reviews: Review[]) => {
+    setLoadingState((prev) => ({
+      ...prev,
+      text: '이미지 등록 중',
+      loading: true,
+      done: false,
+    }));
+    const preProcessReviewsData = await Promise.all(
+      reviews.map(async (review) => {
+        const imageUrls =
+          review.imgPathList.length > 0
+            ? await requestUploadImage({
+                files: review.imgPathList.map((image) => image.file),
+              })
+            : [];
+
+        return {
+          categoryName: review.categoryName,
+          contents: review.contents,
+          imgPathList: imageUrls,
+          menuName: review.menuName,
+          price: +review.price,
+          rating: review.rating,
+        };
+      })
+    );
+    return preProcessReviewsData;
+  }, []);
+
+  const creatReviews = React.useCallback(
+    async (bakeryId: number, reviews: Review[]) => {
+      const reviewDatas = await createImages(reviews);
+      setLoadingState((prev) => ({ ...prev, message: '리뷰 등록 중' }));
+      const response = await requestCreateBakeryMenuReview({
+        bakeryId,
+        reviews: reviewDatas,
+      });
+
+      if (!response.ok) {
+        setLoadingState((prev) => ({
+          ...prev,
+          text: response.message || '등록하는 과정에서\n오류가 생겼어요 !',
+        }));
+      } else {
+        setLoadingState((prev) => ({
+          ...prev,
+          text: response.message || '리뷰 등록이 완료 되었어요!',
+          loading: false,
+          done: true,
+        }));
+        initBreadReview();
+        router.push(`/bakery/${bakeryId}`);
+      }
+    },
+    [createImages, initBreadReview]
+  );
+
   const submitReview = React.useCallback(
     (singleReview: Review) => {
       const errorReviewIdx = checkEmptySection(singleReview);
@@ -113,9 +184,15 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
         setIsSubmitted(true);
         return openToast();
       }
+
+      setLoadingState((prev) => ({ ...prev, open: true }));
     },
     [checkEmptySection, currentProgress, openToast]
   );
+
+  const modalSubmit = React.useCallback(() => {
+    creatReviews(bakeryId, breadsReview);
+  }, [bakeryId, breadsReview, creatReviews]);
 
   return (
     <>
@@ -137,18 +214,40 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
           <b>어떤 빵</b>을<br /> 먹었나요?
         </Title>
       )}
-      <StartAdd
+      <EditReview
         singleReview={singleReview}
         isSubmitted={isSubmitted}
         toastStatus={toastStatus}
         nextProgress={addReview}
         submitReview={submitReview}
       />
+
+      <ResultModal
+        isOpenModal={loadingState}
+        buttonClickHandler={modalSubmit}
+        modalSetHandler={setLoadingState}
+      />
     </>
   );
 };
 
 export default MainAdd;
+
+// const LoadingPage = styled.div`
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100vh;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   text-align: center;
+//   z-index: 11;
+//   background: #fff;
+//   font-size: 2rem;
+//   font-weight: bold;
+// `;
 
 const BreadHeader = styled.div`
   display: flex;
