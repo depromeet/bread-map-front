@@ -20,8 +20,8 @@ const ReviewSection = ({ bakeryId }: ReviewSectionProps) => {
   const { data: userData, error: userError } = useGetUser();
 
   const createReviewButtonClickHandler = React.useCallback(
-    () => router.push('/building-page'),
-    [router]
+    () => router.push(`/add-bread/${bakeryId}`),
+    [bakeryId, router]
   );
 
   if (!bakeryMenuData || !bakeryData || !userData) return <div>Loading...</div>;

@@ -26,12 +26,12 @@ const HomeSection = ({ bakeryId }: HomeSectionProps) => {
     [router]
   );
   const createReviewButtonClickHandler = React.useCallback(
-    () => router.push('/building-page'),
-    [router]
+    () => router.push(`/add-bread/${bakeryId}`),
+    [bakeryId, router]
   );
   const createMenuButtonClickHandler = React.useCallback(
-    () => router.push('/building-page'),
-    [router]
+    () => router.push(`/add-bread/${bakeryId}`),
+    [bakeryId, router]
   );
 
   if (bakeryError || userError) return <div>Error!!</div>;

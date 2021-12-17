@@ -14,8 +14,8 @@ const MenuSection = ({ bakeryId }: MenuSectionProps) => {
   const { data, error } = useGetBakeryMenu(bakeryId, 1, 20);
 
   const createMenuButtonClickHandler = React.useCallback(
-    () => router.push('/building-page'),
-    [router]
+    () => router.push(`/add-bread/${bakeryId}`),
+    [bakeryId, router]
   );
 
   if (error) return <div>Error</div>;
