@@ -27,6 +27,8 @@ const VisibleKeyFrame = keyframes`
 
 const ToastMessage = styled.div`
   position: fixed;
+  text-align: center;
+  white-space: nowrap;
   top: 60px;
   left: 50%;
   padding: 10px 12px;

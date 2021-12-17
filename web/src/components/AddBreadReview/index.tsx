@@ -1,6 +1,7 @@
 import { BreadCategory } from '@/constants/breadCategories';
 export { default as AddBreadReview } from './MainAdd';
 export interface Review {
+  breadId: number;
   categoryName: BreadCategory | null;
   menuName: string;
   price: number;

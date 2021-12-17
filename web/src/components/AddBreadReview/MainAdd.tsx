@@ -4,11 +4,13 @@ import { useToast } from '@/components/common/ToastPopup';
 import StartAdd from './StartAdd';
 import { Review } from './index';
 import ReviewTab from './ReviewTab';
+import { atom } from 'jotai';
 interface MainAddProps {
   bakeryId: number;
 }
 
 const initialSingleReview: Review = {
+  breadId: 0,
   categoryName: null,
   menuName: '',
   price: -1,
@@ -17,74 +19,103 @@ const initialSingleReview: Review = {
   imgPathList: [],
 };
 
-export const checkEmptySection = (review: Review) => {
-  return (
-    review.categoryName === null ||
-    review.menuName.trim() === '' ||
-    review.price < 0
-  );
-};
+export const singleReviewAtom = atom<Review>(initialSingleReview);
+
+export const checkHasError = (review: Review) =>
+  review.categoryName === null ||
+  review.menuName.trim() === '' ||
+  review.price < 0;
 
 const MainAdd = ({ bakeryId }: MainAddProps) => {
-  const [errorReviews, setErrorReviews] = React.useState<Set<number>>(
-    new Set<number>()
-  );
-  const [breadsReview, updateBreadsReview] = React.useState<Review[]>([
+  const [errorReviews, setErrorReviews] = React.useState(new Set<number>());
+  const [breadsReview, updateBreadsReview] = React.useState([
     initialSingleReview,
   ]);
-
   const [currentProgress, setCurrentProgress] = React.useState(0);
-  const singleReview = breadsReview[currentProgress];
-
   const [isSubmitted, setIsSubmitted] = React.useState(false);
   const { toastStatus, openToast } = useToast();
 
-  const deleteSingleReview = () => {
+  const singleReview = breadsReview[currentProgress];
+
+  const checkEmptySection = React.useCallback(
+    (singleReview: Review) => {
+      const errorReviewIdx = [];
+      for (const idx in breadsReview) {
+        console.log(+idx, currentProgress);
+        if (+idx === currentProgress) {
+          checkHasError(singleReview) && errorReviewIdx.push(+idx);
+          continue;
+        }
+        checkHasError(breadsReview[idx]) && errorReviewIdx.push(+idx);
+      }
+      setErrorReviews(new Set([...errorReviewIdx]));
+      return errorReviewIdx;
+    },
+    [breadsReview, currentProgress]
+  );
+
+  const progressChangeHandler = React.useCallback(
+    ({ singleReview, tabIdx }: { singleReview: Review; tabIdx: number }) => {
+      updateBreadsReview((prev) => {
+        const reviews = [...prev];
+        reviews[currentProgress] = singleReview;
+        return reviews;
+      });
+      setCurrentProgress(tabIdx);
+    },
+    [currentProgress]
+  );
+
+  const deleteSingleReview = React.useCallback(() => {
     updateBreadsReview((prev) =>
       prev.filter((_, idx) => !(idx === currentProgress))
     );
-
-    if (currentProgress === breadsReview.length - 1)
+    currentProgress === breadsReview.length - 1 &&
       setCurrentProgress((prev) => prev - 1);
-  };
+  }, [breadsReview.length, currentProgress]);
 
-  const addReview = (singleReview: Review) => {
-    if (checkEmptySection(singleReview)) {
-      setIsSubmitted(true);
-      return openToast();
-    }
+  const addReview = React.useCallback(
+    (singleReview: Review) => {
+      const errorReviewIdx = checkEmptySection(singleReview);
+      updateBreadsReview((prev) => {
+        const reviews = [...prev];
+        reviews[currentProgress] = singleReview;
+        if (errorReviewIdx.length === 0)
+          reviews.push({
+            ...initialSingleReview,
+            breadId: currentProgress + 1,
+          });
+        return reviews;
+      });
 
-    updateBreadsReview((prev) => {
-      const reviews = [...prev];
-      reviews[currentProgress] = singleReview;
-      reviews.push(initialSingleReview);
-      return reviews;
-    });
+      window.scrollTo({ top: 0 });
+      if (errorReviewIdx.length > 0) {
+        setIsSubmitted(true);
+        return openToast();
+      }
+      setCurrentProgress((prev) => prev + 1);
+      setIsSubmitted(false);
+    },
+    [checkEmptySection, currentProgress, openToast]
+  );
 
-    setCurrentProgress((prev) => prev + 1);
+  const submitReview = React.useCallback(
+    (singleReview: Review) => {
+      const errorReviewIdx = checkEmptySection(singleReview);
 
-    window.scrollTo({ top: 0 });
-  };
+      updateBreadsReview((prev) => {
+        const reviews = [...prev];
+        reviews[currentProgress] = singleReview;
+        return reviews;
+      });
 
-  const submitReview = (singleReview: Review) => {
-    const errorReviews = [];
-    for (const idx in breadsReview) {
-      if (
-        (+idx === currentProgress && checkEmptySection(singleReview)) ||
-        checkEmptySection(breadsReview[idx])
-      )
-        errorReviews.push(+idx);
-    }
-
-    updateBreadsReview((prev) => {
-      const reviews = [...prev];
-      reviews[currentProgress] = singleReview;
-      return reviews;
-    });
-
-    setErrorReviews(new Set([...errorReviews]));
-    if (errorReviews.length > 0) openToast();
-  };
+      if (errorReviewIdx.length > 0) {
+        setIsSubmitted(true);
+        return openToast();
+      }
+    },
+    [checkEmptySection, currentProgress, openToast]
+  );
 
   return (
     <>
@@ -93,7 +124,7 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
           <ReviewTab
             length={breadsReview.length}
             currentProgress={currentProgress}
-            setCurrentProgress={setCurrentProgress}
+            tabClickHandler={progressChangeHandler}
             errorReviews={errorReviews}
           />
           <BreadHeader>

@@ -1,20 +1,29 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { keyframes } from '@emotion/react';
+import { useAtom } from 'jotai';
+import { Review } from '.';
+import { singleReviewAtom } from './MainAdd';
 
 interface ReviewTabProps {
   length: number;
   currentProgress: number;
-  setCurrentProgress: React.Dispatch<React.SetStateAction<number>>;
+  tabClickHandler: ({
+    singleReview,
+    tabIdx,
+  }: {
+    singleReview: Review;
+    tabIdx: number;
+  }) => void;
   errorReviews: Set<number>;
 }
 
 const ReviewTab = ({
   length,
   currentProgress,
-  setCurrentProgress,
+  tabClickHandler,
   errorReviews,
 }: ReviewTabProps) => {
+  const [singleReview] = useAtom(singleReviewAtom);
   const wrapperRef = React.useRef<HTMLDivElement | null>(null);
   const tabRef = React.useRef<HTMLLIElement | null>(null);
 
@@ -22,7 +31,11 @@ const ReviewTab = ({
     <TabWrapper ref={wrapperRef}>
       <Tabs>
         {[...Array(length).fill(0)].map((_, i) => (
-          <Tab ref={tabRef} key={i} onClick={() => setCurrentProgress(i)}>
+          <Tab
+            ref={tabRef}
+            key={i}
+            onClick={() => tabClickHandler({ singleReview, tabIdx: i })}
+          >
             <a
               className={
                 (currentProgress === i ? 'active ' : '') +
@@ -52,6 +65,7 @@ const TabWrapper = styled.div`
 `;
 
 const Tabs = styled.ul`
+  margin: 0;
   display: flex;
   list-style: none;
   padding: 0;

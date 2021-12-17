@@ -6,6 +6,8 @@ import {
 } from '@/components/common/BreadCategoryList';
 import { BreadCategory, categoryItems } from '@/constants/breadCategories';
 import { Review } from '.';
+import { Button } from '../common';
+import { ArrowPrev } from '../icons';
 
 interface CategorySelectProps {
   setIsCategoryPage: React.Dispatch<React.SetStateAction<boolean>>;
@@ -43,6 +45,10 @@ const CategorySelect = ({
   return (
     <CategoryLayout>
       <CategoryWrapper>
+        <CategoryHeader>
+          <ArrowPrev onClick={onClickCancel} />
+          빵종류
+        </CategoryHeader>
         <Categories
           selectedCategory={
             selectedCategory[0] ? [selectedCategory[0].category] : []
@@ -50,8 +56,12 @@ const CategorySelect = ({
           onClickCategory={onClickCategory}
         />
         <BtnWrapper>
-          <CancelBtn onClick={onClickCancel}>취소</CancelBtn>
-          <OkBtn onClick={onClickOk}>확인</OkBtn>
+          <Button styleType={'none'} onClick={onClickCancel}>
+            취소
+          </Button>
+          <Button styleType={'primary'} onClick={onClickOk}>
+            확인
+          </Button>
         </BtnWrapper>
       </CategoryWrapper>
     </CategoryLayout>
@@ -65,40 +75,44 @@ const CategoryLayout = styled.div`
   top: 0;
   left: 0;
   background: white;
-  height: 100%;
+  height: 100vh;
+  overflow: scroll;
   width: 100%;
   z-index: 9;
 `;
 
 const CategoryWrapper = styled.div`
+  display: flex;
+  max-width: 600px;
+  margin: 0 auto;
+  flex-direction: column;
+  gap: 16px;
   padding: 0 20px;
+  height: 100%;
+`;
+
+const CategoryHeader = styled.div`
+  position: sticky;
+  padding: 16px 0;
+  font-weight: bold;
+  z-index: 9;
+  background-color: ${({ theme }) => theme.color.white};
+  top: 0;
+  display: grid;
+  grid-template-columns: 24px 1fr 24px;
+  text-align: center;
+  svg {
+    color: ${({ theme }) => theme.color.black};
+    path {
+      stroke: ${({ theme }) => theme.color.black};
+    }
+  }
 `;
 
 const BtnWrapper = styled.div`
   display: flex;
-  position: absolute;
-  bottom: 1rem;
-  left: 0;
-  padding: 0 1.25rem;
+  margin: auto 0 0;
+  gap: 10px;
   width: 100%;
-`;
-
-const CancelBtn = styled.button`
-  color: ${({ theme }) => theme.color.gray700};
-  border: ${({ theme }) => `1px solid ${theme.color.gray300}`};
-  background: ${({ theme }) => theme.color.white};
-  border-radius: 0.5rem;
-  padding: 1rem 0;
-  width: 100%;
-  margin: 0 5px;
-`;
-
-const OkBtn = styled.button`
-  color: ${({ theme }) => theme.color.white};
-  border: ${({ theme }) => `1px solid ${theme.color.primary500}`};
-  background: ${({ theme }) => theme.color.primary500};
-  border-radius: 0.5rem;
-  padding: 1rem 0;
-  width: 100%;
-  margin: 0 5px;
+  padding-bottom: 16px;
 `;

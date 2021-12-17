@@ -82,12 +82,16 @@ const Category = styled.div<{ isSelected: boolean }>`
   }
 
   span {
+    font-size: 12px;
+    font-weight: bold;
     color: ${({ isSelected, theme }) =>
       isSelected ? theme.color.primary500 : theme.color.gray400};
     margin-top: 0.5rem;
   }
 
   svg {
+    width: 48px;
+    height: 48px;
     path {
       fill: ${({ isSelected, theme }) =>
         isSelected ? theme.color.primary500 : theme.color.gray400};

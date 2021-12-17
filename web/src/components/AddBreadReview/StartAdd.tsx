@@ -9,6 +9,8 @@ import {
   PhotoInput,
   ScoreInput,
 } from './AddBreadReviewInput';
+import { useAtom } from 'jotai';
+import { singleReviewAtom } from './MainAdd';
 
 interface StartAddProps {
   singleReview: Review;
@@ -25,9 +27,9 @@ const StartAdd = ({
   nextProgress,
   submitReview,
 }: StartAddProps) => {
-  const [currentReview, setCurrentReview] =
-    React.useState<Review>(singleReview);
-  React.useEffect(() => setCurrentReview(singleReview), [singleReview]);
+  const [currentReview, setCurrentReview] = useAtom(singleReviewAtom);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  React.useEffect(() => setCurrentReview(singleReview), [singleReview.breadId]);
 
   const editContent = React.useCallback(
     ({ target }: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,79 +39,78 @@ const StartAdd = ({
         [name]: value,
       }));
     },
-    []
+    [setCurrentReview]
   );
 
-  const editScore = React.useCallback((rating: number) => {
-    setCurrentReview((prev) => ({ ...prev, rating }));
-  }, []);
+  const editScore = React.useCallback(
+    (rating: number) => {
+      setCurrentReview((prev) => ({ ...prev, rating }));
+    },
+    [setCurrentReview]
+  );
 
   return (
     <>
-      <>
-        <Content>
-          <Row>
-            <CategoryInput
-              isSubmitted={isSubmitted}
-              categoryName={currentReview.categoryName}
-              setCurrentReview={setCurrentReview}
-            />
-          </Row>
-          <Row>
-            <ReviewTextInput
-              name="menuName"
-              required
-              placeholder={'메뉴명을 입력해주세요.'}
-              label={'메뉴명'}
-              value={currentReview.menuName}
-              isSubmit={isSubmitted}
-              alertText={'메뉴명을 입력해주세요.'}
-              onChange={editContent}
-            />
-          </Row>
-          <Row>
-            <ReviewTextInput
-              name="price"
-              type="number"
-              required
-              placeholder={'원'}
-              label={'가격'}
-              value={currentReview.price < 0 ? '' : currentReview.price}
-              isSubmit={isSubmitted}
-              alertText={'가격을 입력해주세요.'}
-              onChange={editContent}
-            />
-          </Row>
-          <Row>
-            <ScoreInput rating={currentReview.rating} editScore={editScore} />
-          </Row>
-          <Row>
-            <ReviewTextInput
-              name="contents"
-              placeholder={'한줄평을 적어주세요.'}
-              label={'한줄평'}
-              value={currentReview.contents}
-              isSubmit={isSubmitted}
-              onChange={editContent}
-            />
-          </Row>
-          <Row>
-            <PhotoInput
-              photos={currentReview.imgPathList}
-              setCurrentReview={setCurrentReview}
-            />
-          </Row>
-        </Content>
-        <BtnWrapper>
-          <MoreAddBtn onClick={() => nextProgress(currentReview)}>
-            <Plus />
-            <span>다른 빵 추가하기</span>
-          </MoreAddBtn>
-          <SubmitBtn onClick={() => submitReview(currentReview)}>
-            확인
-          </SubmitBtn>
-        </BtnWrapper>
-      </>
+      <Content>
+        <Row>
+          <CategoryInput
+            isSubmitted={isSubmitted}
+            categoryName={currentReview.categoryName}
+            setCurrentReview={setCurrentReview}
+          />
+        </Row>
+        <Row>
+          <ReviewTextInput
+            name="menuName"
+            required
+            placeholder={'메뉴명을 입력해주세요.'}
+            label={'메뉴명'}
+            value={currentReview.menuName}
+            isSubmit={isSubmitted}
+            alertText={'메뉴명을 입력해주세요.'}
+            onChange={editContent}
+          />
+        </Row>
+        <Row>
+          <ReviewTextInput
+            name="price"
+            type="number"
+            required
+            placeholder={'원'}
+            label={'가격'}
+            value={currentReview.price < 0 ? '' : currentReview.price}
+            isSubmit={isSubmitted}
+            alertText={'가격을 입력해주세요.'}
+            onChange={editContent}
+          />
+        </Row>
+        <Row>
+          <ScoreInput rating={currentReview.rating} editScore={editScore} />
+        </Row>
+        <Row>
+          <ReviewTextInput
+            name="contents"
+            placeholder={'한줄평을 적어주세요.'}
+            label={'한줄평'}
+            value={currentReview.contents}
+            isSubmit={isSubmitted}
+            onChange={editContent}
+          />
+        </Row>
+        <Row>
+          <PhotoInput
+            photos={currentReview.imgPathList}
+            setCurrentReview={setCurrentReview}
+          />
+        </Row>
+      </Content>
+      <BtnWrapper>
+        <MoreAddBtn onClick={() => nextProgress(currentReview)}>
+          <Plus />
+          <span>다른 빵 추가하기</span>
+        </MoreAddBtn>
+        <SubmitBtn onClick={() => submitReview(currentReview)}>확인</SubmitBtn>
+      </BtnWrapper>
       {toastStatus && <Toast message={'필수정보를 입력해주세요 💪'} />}
     </>
   );
@@ -125,6 +126,7 @@ const Row = styled.div`
 `;
 
 const BtnWrapper = styled.div`
+  margin-top: auto;
   width: 100%;
 `;
 
