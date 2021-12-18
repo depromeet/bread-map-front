@@ -107,15 +107,13 @@ const StoreAddress: React.FC = () => {
         longitude: Number(addressInfo.longitude),
         range: 100000,
       });
-
-      setIsOpenCreatedModal({
-        open: false,
-        ok: false,
-        text: '',
-      });
-
       router.push('/map');
     }
+    setIsOpenCreatedModal({
+      open: false,
+      ok: false,
+      text: '',
+    });
   }, [
     addressInfo.latitude,
     addressInfo.longitude,
@@ -213,7 +211,7 @@ const StoreAddress: React.FC = () => {
       <ResultModal
         isOpenModal={isOpenCreatedModal}
         buttonClickHandler={resultModalButtonClickHandler}
-      ></ResultModal>
+      />
     </>
   );
 };

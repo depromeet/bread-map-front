@@ -1,52 +1,49 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { useAtom } from 'jotai';
+import { Review } from '.';
+import { singleReviewAtom } from './MainAdd';
 
 interface ReviewTabProps {
   length: number;
   currentProgress: number;
-  setCurrentProgress: React.Dispatch<React.SetStateAction<number>>;
+  tabClickHandler: ({
+    singleReview,
+    tabIdx,
+  }: {
+    singleReview: Review;
+    tabIdx: number;
+  }) => void;
+  errorReviews: Set<number>;
 }
 
 const ReviewTab = ({
   length,
   currentProgress,
-  setCurrentProgress,
+  tabClickHandler,
+  errorReviews,
 }: ReviewTabProps) => {
+  const [singleReview] = useAtom(singleReviewAtom);
   const wrapperRef = React.useRef<HTMLDivElement | null>(null);
   const tabRef = React.useRef<HTMLLIElement | null>(null);
-  const [tabsWidth, setTabsWidth] = React.useState(0);
-
-  React.useEffect(() => {
-    if (tabRef.current === null) return;
-
-    const itemWidth = tabRef.current.getBoundingClientRect().width!;
-    setTabsWidth(length * itemWidth);
-  }, [tabRef, length]);
-
-  React.useEffect(() => {
-    if (wrapperRef.current === null) return;
-
-    const wrapperWidth = wrapperRef.current.getBoundingClientRect().width!;
-    if (currentProgress < 5 || wrapperWidth > tabsWidth) return;
-    wrapperRef.current.scrollLeft = tabsWidth;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tabsWidth]);
-
-  const onClickTab = (i: number) => {
-    setCurrentProgress(i);
-  };
 
   return (
     <TabWrapper ref={wrapperRef}>
-      <Tabs tabsWidth={tabsWidth}>
-        {[...Array(length)].map((_, i) => (
+      <Tabs>
+        {[...Array(length).fill(0)].map((_, i) => (
           <Tab
             ref={tabRef}
             key={i}
-            onClick={() => onClickTab(i + 1)}
-            active={currentProgress === i + 1}
+            onClick={() => tabClickHandler({ singleReview, tabIdx: i })}
           >
-            <a data-testid="tab"> {i + 1}번째 빵</a>
+            <a
+              className={
+                (currentProgress === i ? 'active ' : '') +
+                (errorReviews.has(i) ? 'error' : '')
+              }
+            >
+              {i + 1}번째 빵
+            </a>
           </Tab>
         ))}
       </Tabs>
@@ -67,14 +64,17 @@ const TabWrapper = styled.div`
   }
 `;
 
-const Tabs = styled.ul<{ tabsWidth: number }>`
+const Tabs = styled.ul`
+  margin: 0;
+  display: flex;
   list-style: none;
   padding: 0;
-  width: ${({ tabsWidth }) => (tabsWidth ? `${tabsWidth}px` : '100%')};
 `;
 
-const Tab = styled.li<{ active: boolean }>`
+const Tab = styled.li`
   display: inline-block;
+  flex-shrink: 0;
+
   > a {
     cursor: pointer;
     position: relative;
@@ -83,17 +83,24 @@ const Tab = styled.li<{ active: boolean }>`
     font-weight: bold;
     padding: 10px 2px;
     margin: 0 8px;
-    color: ${({ theme, active }) =>
-      active ? theme.color.black : theme.color.gray700};
-    &::after {
-      opacity: ${({ active }) => (active ? '1' : '0')};
-      content: '';
-      position: absolute;
-      height: 3px;
-      width: 100%;
-      left: 0;
-      bottom: 0px;
-      background-color: ${({ theme }) => theme.color.primary500};
+    color: ${({ theme }) => theme.color.gray700};
+
+    &.active {
+      color: ${({ theme }) => theme.color.black};
+
+      &::after {
+        opacity: 1;
+        content: '';
+        position: absolute;
+        height: 3px;
+        width: 100%;
+        left: 0;
+        bottom: 0px;
+        background-color: ${({ theme }) => theme.color.primary500};
+      }
+    }
+    &.error {
+      color: #ed4337;
     }
   }
 `;

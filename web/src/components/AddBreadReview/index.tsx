@@ -1,42 +1,20 @@
 import React from 'react';
-import { atom, useAtom } from 'jotai';
-import { useAtomDevtools } from 'jotai/devtools';
 import { BreadCategory } from '@/constants/breadCategories';
+import { requestCreateBakeryMenuReview } from '@/remotes/network/bakery';
+import { requestUploadImage } from '@/remotes/network/image';
 import MainAdd from './MainAdd';
-
 export interface Review {
+  breadId: number;
   categoryName: BreadCategory | null;
   menuName: string;
   price: number;
   contents: string;
   rating: number;
-  imgPathList: string[];
+  imgPathList: { url: string; file: File }[];
 }
 
-export interface BreadsReview {
-  [key: number]: Review;
-}
-
-export type BreadsUpdate = (update: React.SetStateAction<BreadsReview>) => void;
-
-const initialState = {};
-
-const breadsReviewAtom = atom<BreadsReview>(initialState);
-
-const AddBreadReview = () => {
-  const [breadsReview, updateBreadsReview] = useAtom(breadsReviewAtom);
-  useAtomDevtools(breadsReviewAtom);
-
-  return (
-    <>
-      <MainAdd
-        bakeryId={5}
-        // TODO: bakeryId={bakeryId}
-        breadsReview={breadsReview}
-        updateBreadsReview={updateBreadsReview}
-      />
-    </>
-  );
+const AddBreadReview = ({ bakeryId }: { bakeryId: number }) => {
+  return <MainAdd bakeryId={bakeryId} />;
 };
 
 export default AddBreadReview;

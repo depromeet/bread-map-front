@@ -25,8 +25,10 @@ const Categories = ({ selectedCategory, onClickCategory }: CategoriesProps) => {
           onClick={() => onClickCategory(value)}
           isSelected={isSelected(value.category)}
         >
-          <value.Icon />
-          <span>{value.text}</span>
+          <div>
+            <value.Icon />
+            <span>{value.text}</span>
+          </div>
         </Category>
       ))}
     </CategoriesWrapper>
@@ -45,6 +47,7 @@ const Category = styled.div<{ isSelected: boolean }>`
   border-radius: 0.5em;
   width: 100%;
   display: flex;
+  position: relative;
   flex-direction: column;
   padding: 0.8em;
   justify-content: center;
@@ -62,13 +65,33 @@ const Category = styled.div<{ isSelected: boolean }>`
     display: none;
   }
 
-  > span {
+  &:after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+  }
+
+  > div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  span {
+    font-size: 12px;
+    font-weight: bold;
     color: ${({ isSelected, theme }) =>
       isSelected ? theme.color.primary500 : theme.color.gray400};
     margin-top: 0.5rem;
   }
 
   svg {
+    width: 48px;
+    height: 48px;
     path {
       fill: ${({ isSelected, theme }) =>
         isSelected ? theme.color.primary500 : theme.color.gray400};

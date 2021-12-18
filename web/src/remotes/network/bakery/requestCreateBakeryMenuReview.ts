@@ -1,9 +1,10 @@
+import { BreadCategory } from '@/constants/breadCategories';
 import { fetchWithToken } from '@/remotes/network/fetchBase';
 
 export interface CreateBakeryMenuReviewPayload {
   bakeryId: number;
   reviews: {
-    categoryName: string;
+    categoryName: BreadCategory | null;
     contents: string;
     imgPathList: string[];
     menuName: string;
@@ -28,8 +29,8 @@ const requestCreateBakeryMenuReview = async ({
     body: JSON.stringify(reviews),
     headers,
   });
-  const data = await resp.json();
-  return data;
+
+  return resp as CreateBakeryMenuReviewResponse;
 };
 
 export default requestCreateBakeryMenuReview;

@@ -75,6 +75,7 @@ export { default as InfoPetIcon } from './InfoPetIcon';
 export { default as InfoWifiIcon } from './InfoWifiIcon';
 export { default as MapPinIcon } from './MapPinIcon';
 export { default as NavigationIcon } from './NavigationIcon';
+export { default as OkSobbang } from './OkSobbang';
 export { default as PersonCircleIcon } from './PersonCircleIcon';
 export { default as PhoneIcon } from './PhoneIcon';
 export { default as PencilEdit } from './PencilEdit';

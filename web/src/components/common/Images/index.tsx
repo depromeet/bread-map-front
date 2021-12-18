@@ -10,6 +10,7 @@ const DEFAULT_IMG_SRC = {
 type ImageProps = React.HTMLAttributes<HTMLImageElement> & { src: string };
 
 const UserImage = ({ ...props }: ImageProps) => {
+  const ImageSrc = process.env.NEXT_PUBLIC_S3_URI + props.src;
   const imgErrorHandler = React.useCallback(
     (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
       const target = e.target as HTMLImageElement;
@@ -19,10 +20,18 @@ const UserImage = ({ ...props }: ImageProps) => {
     []
   );
 
-  return <Image onError={imgErrorHandler} {...props} alt={'userAvatar'} />;
+  return (
+    <Image
+      onError={imgErrorHandler}
+      {...props}
+      src={ImageSrc}
+      alt={'userAvatar'}
+    />
+  );
 };
 
 const MenuImage = ({ ...props }: ImageProps) => {
+  const ImageSrc = process.env.NEXT_PUBLIC_S3_URI + props.src;
   const imgErrorHandler = React.useCallback(
     (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
       const target = e.target as HTMLImageElement;
@@ -32,10 +41,18 @@ const MenuImage = ({ ...props }: ImageProps) => {
     []
   );
 
-  return <Image onError={imgErrorHandler} {...props} alt={'menu'} />;
+  return (
+    <ImageMenu
+      onError={imgErrorHandler}
+      {...props}
+      src={ImageSrc}
+      alt={'menu'}
+    />
+  );
 };
 
 const BakeryImage = ({ ...props }: ImageProps) => {
+  const ImageSrc = process.env.NEXT_PUBLIC_S3_URI + props.src;
   const imgErrorHandler = React.useCallback(
     (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
       const target = e.target as HTMLImageElement;
@@ -45,10 +62,13 @@ const BakeryImage = ({ ...props }: ImageProps) => {
     []
   );
 
-  return <Image onError={imgErrorHandler} {...props} alt={'bakery'} />;
+  return (
+    <Image onError={imgErrorHandler} {...props} src={ImageSrc} alt={'bakery'} />
+  );
 };
 
 const ReviewImage = ({ ...props }: ImageProps) => {
+  const ImageSrc = process.env.NEXT_PUBLIC_S3_URI + props.src;
   const imgErrorHandler = React.useCallback(
     (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
       const target = e.target as HTMLImageElement;
@@ -57,10 +77,15 @@ const ReviewImage = ({ ...props }: ImageProps) => {
     },
     []
   );
-
-  return <Image onError={imgErrorHandler} {...props} alt={'review'} />;
+  return (
+    <Image onError={imgErrorHandler} {...props} src={ImageSrc} alt={'review'} />
+  );
 };
 
 export { UserImage, MenuImage, BakeryImage, ReviewImage };
 
 const Image = styled.img``;
+const ImageMenu = styled.img`
+  width: 140px;
+  height: 140px;
+`;
