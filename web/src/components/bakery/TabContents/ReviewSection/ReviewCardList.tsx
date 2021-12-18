@@ -39,13 +39,7 @@ const ReviewCardList = ({
           {reviews?.map((review, idx) => (
             <li key={idx}>
               <Member>
-                <UserImage
-                  src={
-                    user?.profileImage
-                      ? process.env.NEXT_PUBLIC_S3_URI + user.profileImage
-                      : ''
-                  }
-                />
+                <UserImage src={user?.profileImage || ''} />
                 <div>
                   <b>{user?.nickName}님</b>
                   <LastModifiedDate>
@@ -62,10 +56,7 @@ const ReviewCardList = ({
               </MenuInfo>
               <MenuImage>
                 {review.imgPathList.map((img, idx) => (
-                  <ReviewImage
-                    key={idx}
-                    src={process.env.NEXT_PUBLIC_S3_URI + img}
-                  />
+                  <ReviewImage key={idx} src={img} />
                 ))}
               </MenuImage>
               <MenuContent>{review.contents}</MenuContent>
