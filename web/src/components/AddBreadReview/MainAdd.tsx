@@ -135,7 +135,7 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
           imgPathList: imageUrls,
           menuName: review.menuName,
           price: +review.price,
-          rating: review.rating,
+          rating: review.rating < 0 ? 0 : review.rating,
         };
       })
     );
