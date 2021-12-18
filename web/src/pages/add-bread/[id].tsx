@@ -3,15 +3,10 @@ import styled from '@emotion/styled';
 import AddBreadReview from '@/components/AddBreadReview';
 import { Header } from '@/components/common';
 import { useRouter } from 'next/router';
-import { GetServerSideProps } from 'next';
 
-interface AddBreadProps {
-  id: number;
-}
-
-const AddBread = ({ id }: AddBreadProps) => {
+const AddBread = () => {
   const router = useRouter();
-  if (isNaN(+id)) router.replace('/map');
+  const id = router.query.id as string;
 
   return (
     <>
@@ -21,16 +16,6 @@ const AddBread = ({ id }: AddBreadProps) => {
       </AddBreadLayout>
     </>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { id } = context.query;
-
-  return {
-    props: {
-      id,
-    },
-  };
 };
 
 export default AddBread;
