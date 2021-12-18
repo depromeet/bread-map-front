@@ -95,3 +95,5 @@ export { default as WishIcon } from './WishIcon';
 export { default as XCircleFilledIcon } from './XCircleFilledIcon';
 export { default as XCircleIcon } from './XCircleIcon';
 export { default as XIcon } from './XIcon';
+export { default as TouchAreaDownIcon } from './TouchAreaDownIcon';
+export { default as TouchAreaUpIcon } from './TouchAreaUpIcon';

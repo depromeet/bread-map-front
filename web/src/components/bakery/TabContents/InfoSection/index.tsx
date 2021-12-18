@@ -10,6 +10,10 @@ import {
 } from '@/components/icons';
 import BakeryCategories from './BakeryCategories';
 import { useGetBakery } from '@/remotes/hooks';
+import WebSiteList from './WebSiteList';
+
+const IconWidth = 16;
+const lineGap = 8;
 
 type ReviewSectionProps = {
   bakeryId: number;
@@ -35,17 +39,10 @@ const InfoSection = ({ bakeryId }: ReviewSectionProps) => {
           </li>
           <li>
             <EarthIcon />
-            {data.websiteUrlList.length > 0 ? (
-              <WebSiteList>
-                {data.websiteUrlList.map((url, idx) => (
-                  <UrlLink href={url} key={idx}>
-                    {url}
-                  </UrlLink>
-                ))}
-              </WebSiteList>
-            ) : (
-              <div>제공된 정보가 없습니다.</div>
-            )}
+            <WebSiteList
+              urlList={data.websiteUrlList}
+              paddingLeft={IconWidth + lineGap}
+            />
           </li>
           <li>
             <PhoneIcon />
@@ -101,28 +98,21 @@ const InfoList = styled.ul`
     display: flex;
     align-items: center;
     gap: 8px;
+    position: relative;
+
+    &:nth-of-type(3) {
+      > svg {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+    }
 
     pre {
       font-family: inherit;
       margin: 0;
     }
   }
-`;
-
-const UrlLink = styled.a`
-  color: ${({ theme }) => theme.color.primary500};
-  text-decoration: none;
-`;
-
-const WebSiteList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-`;
-
-const Divider = styled.hr`
-  width: 100%;
-  border-top: 1px solid ${({ theme }) => theme.color.gray300};
 `;
 
 const SectionHeader = styled.div`
