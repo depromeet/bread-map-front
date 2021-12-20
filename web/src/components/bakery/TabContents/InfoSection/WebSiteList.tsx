@@ -2,43 +2,33 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { TouchAreaDownIcon, TouchAreaUpIcon } from '@/components/icons';
 
-const urlHeight = 16;
-
 interface WebsiteListProps {
   urlList: string[];
-  paddingLeft: number;
 }
 
-const WebSiteList = ({ urlList, paddingLeft }: WebsiteListProps) => {
+const WebSiteList = ({ urlList = [] }: WebsiteListProps) => {
   const [opened, setOpened] = React.useState(false);
-  const [height, setHight] = React.useState(urlHeight);
 
-  const onClickUrl = (idx: number) => {
-    if (idx !== 0) return;
+  const onToggleDrop = () => {
     setOpened((prev) => !prev);
   };
-
-  React.useEffect(() => {
-    if (opened) setHight(urlList.length * urlHeight);
-    else setHight(urlHeight);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [opened]);
 
   return (
     <>
       {urlList.length > 0 ? (
-        <Container height={height} paddingLeft={paddingLeft}>
-          {urlList.map((url, idx) => (
-            <Wrapper key={idx}>
-              <UrlLink href={url}>{url}</UrlLink>
-              {idx === 0 && !opened && (
-                <TouchAreaDownIcon onClick={() => onClickUrl(idx)} />
-              )}
-              {idx === 0 && opened && (
-                <TouchAreaUpIcon onClick={() => onClickUrl(idx)} />
-              )}
-            </Wrapper>
-          ))}
+        <Container opened={opened}>
+          <Wrapper>
+            <UrlLink href={urlList[0]}>{urlList[0]}</UrlLink>
+            <DropButton onClick={onToggleDrop}>
+              {opened ? <TouchAreaUpIcon /> : <TouchAreaDownIcon />}
+            </DropButton>
+          </Wrapper>
+          {opened &&
+            urlList.slice(1).map((url, idx) => (
+              <Wrapper key={idx}>
+                <UrlLink href={url}>{url}</UrlLink>
+              </Wrapper>
+            ))}
         </Container>
       ) : (
         <div>제공된 정보가 없습니다.</div>
@@ -49,12 +39,12 @@ const WebSiteList = ({ urlList, paddingLeft }: WebsiteListProps) => {
 
 export default WebSiteList;
 
-const Container = styled.div<{ height: number; paddingLeft: number }>`
+const Container = styled.div<{ opened: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 3px;
-  height: ${({ height }) => `${height}px`};
-  padding-left: ${({ paddingLeft }) => `${paddingLeft}px`};
+  min-height: 16px;
+  height: ${({ opened }) => (opened ? 'auto' : 0)};
   overflow: hidden;
 `;
 
@@ -67,6 +57,11 @@ const Wrapper = styled.div`
     margin-left: 5px;
     cursor: pointer;
   }
+`;
+
+const DropButton = styled.button`
+  border: none;
+  background: none;
 `;
 
 const UrlLink = styled.a`

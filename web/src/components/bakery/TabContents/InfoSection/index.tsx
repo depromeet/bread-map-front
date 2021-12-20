@@ -12,9 +12,6 @@ import BakeryCategories from './BakeryCategories';
 import { useGetBakery } from '@/remotes/hooks';
 import WebSiteList from './WebSiteList';
 
-const IconWidth = 16;
-const lineGap = 8;
-
 type ReviewSectionProps = {
   bakeryId: number;
 };
@@ -25,6 +22,7 @@ const InfoSection = ({ bakeryId }: ReviewSectionProps) => {
   if (error) return <div>Error</div>;
   if (!data) return <div>Loading...</div>;
 
+  //urlList={data.websiteUrlList}
   return (
     <Container>
       <Section>
@@ -39,10 +37,7 @@ const InfoSection = ({ bakeryId }: ReviewSectionProps) => {
           </li>
           <li>
             <EarthIcon />
-            <WebSiteList
-              urlList={data.websiteUrlList}
-              paddingLeft={IconWidth + lineGap}
-            />
+            <WebSiteList urlList={data.websiteUrlList} />
           </li>
           <li>
             <PhoneIcon />
@@ -105,6 +100,9 @@ const InfoList = styled.ul`
         position: absolute;
         left: 0;
         top: 0;
+      }
+      > div {
+        padding-left: 24px;
       }
     }
 
