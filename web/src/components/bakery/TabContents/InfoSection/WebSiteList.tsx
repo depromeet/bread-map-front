@@ -6,7 +6,7 @@ interface WebsiteListProps {
   urlList: string[];
 }
 
-const WebSiteList = ({ urlList = [] }: WebsiteListProps) => {
+const WebSiteList = ({ urlList }: WebsiteListProps) => {
   const [opened, setOpened] = React.useState(false);
 
   const onToggleDrop = () => {
