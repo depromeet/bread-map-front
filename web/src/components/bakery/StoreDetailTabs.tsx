@@ -95,6 +95,7 @@ const Tabs = styled.ul`
     transition: transform 0.2s ease-in-out;
     transform: translateX(12px);
     width: calc((100% - 24px) / 4);
+    border: 0px;
     border-bottom: 2px solid;
     border-image: linear-gradient(
       to right,
