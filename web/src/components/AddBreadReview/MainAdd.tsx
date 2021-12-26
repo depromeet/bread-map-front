@@ -11,6 +11,7 @@ import ResultModal from './ResultModal';
 import router from 'next/router';
 import ReviewDeleteModal from './ReviewDeleteModal';
 import { Button } from '../common';
+import ReviewMaxLengthModal from './ReviewMaxLengthModal';
 interface MainAddProps {
   bakeryId: number;
 }
@@ -39,6 +40,8 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
     text: '빵 리뷰을 등록 할까요?',
   });
   const [isOpenRemoveModal, setIsOpenRemoveModal] = React.useState(false);
+  const [isOpenReviewMaxLengthModal, setIsOpenReviewMaxLengthModal] =
+    React.useState(false);
   const [errorReviews, setErrorReviews] = React.useState(new Set<number>());
   const [breadsReview, updateBreadsReview] = React.useState([
     initialSingleReview,
@@ -95,6 +98,11 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
 
   const addReview = React.useCallback(
     (singleReview: Review) => {
+      if (breadsReview.length >= 10) {
+        setIsOpenReviewMaxLengthModal(true);
+        return;
+      }
+
       const errorReviewIdx = checkEmptySection(singleReview);
       updateBreadsReview((prev) => {
         const reviews = [...prev];
@@ -112,10 +120,11 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
         setIsSubmitted(true);
         return openToast();
       }
+
       setCurrentProgress((prev) => prev + 1);
       setIsSubmitted(false);
     },
-    [checkEmptySection, currentProgress, openToast]
+    [breadsReview.length, checkEmptySection, currentProgress, openToast]
   );
 
   const createImages = React.useCallback(async (reviews: Review[]) => {
@@ -159,6 +168,7 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
       if (!response.ok) {
         setLoadingState((prev) => ({
           ...prev,
+          done: true,
           text: response.message || '등록하는 과정에서\n오류가 생겼어요 !',
         }));
       } else {
@@ -243,6 +253,11 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
         index={currentProgress}
         isOpenModal={isOpenRemoveModal}
         deleteSingleReview={deleteSingleReview}
+      />
+
+      <ReviewMaxLengthModal
+        closeModal={() => setIsOpenReviewMaxLengthModal(false)}
+        isOpenModal={isOpenReviewMaxLengthModal}
       />
     </>
   );
