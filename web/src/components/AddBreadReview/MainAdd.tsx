@@ -174,7 +174,9 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
       } else {
         setLoadingState((prev) => ({
           ...prev,
-          text: response.message || '리뷰 등록이 완료 되었어요!',
+          text:
+            response.message ||
+            `${breadsReview.length}개의 빵 리뷰 등록이\n완료 되었어요!`,
           loading: false,
           done: true,
         }));
@@ -182,7 +184,7 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
         router.push(`/bakery/${bakeryId}`);
       }
     },
-    [createImages, initBreadReview]
+    [breadsReview.length, createImages, initBreadReview]
   );
 
   const submitReview = React.useCallback(
