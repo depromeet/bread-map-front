@@ -26,7 +26,6 @@ const ResultModal = ({
   buttonClickHandler,
   modalSetHandler,
 }: ResultModalProps) => {
-  console.log(isOpenModal);
   const modalDoneHandler = () => {
     modalSetHandler({
       open: false,

@@ -9,6 +9,8 @@ import { requestUploadImage } from '@/remotes/network/image';
 import { requestCreateBakeryMenuReview } from '@/remotes/network/bakery';
 import ResultModal from './ResultModal';
 import router from 'next/router';
+import ReviewDeleteModal from './ReviewDeleteModal';
+import { Button } from '../common';
 interface MainAddProps {
   bakeryId: number;
 }
@@ -36,6 +38,7 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
     done: false,
     text: '빵 리뷰을 등록 할까요?',
   });
+  const [isOpenRemoveModal, setIsOpenRemoveModal] = React.useState(false);
   const [errorReviews, setErrorReviews] = React.useState(new Set<number>());
   const [breadsReview, updateBreadsReview] = React.useState([
     initialSingleReview,
@@ -86,6 +89,8 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
     );
     currentProgress === breadsReview.length - 1 &&
       setCurrentProgress((prev) => prev - 1);
+
+    setIsOpenRemoveModal(false);
   }, [breadsReview.length, currentProgress]);
 
   const addReview = React.useCallback(
@@ -206,7 +211,12 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
           />
           <BreadHeader>
             <Title>{currentProgress + 1}번째 빵</Title>
-            <DeleteBtn onClick={deleteSingleReview}>삭제</DeleteBtn>
+            <DeleteBtn
+              styleType={'none'}
+              onClick={() => setIsOpenRemoveModal(true)}
+            >
+              삭제
+            </DeleteBtn>
           </BreadHeader>
         </>
       ) : (
@@ -227,27 +237,18 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
         buttonClickHandler={modalSubmit}
         modalSetHandler={setLoadingState}
       />
+
+      <ReviewDeleteModal
+        closeModal={() => setIsOpenRemoveModal(false)}
+        index={currentProgress}
+        isOpenModal={isOpenRemoveModal}
+        deleteSingleReview={deleteSingleReview}
+      />
     </>
   );
 };
 
 export default MainAdd;
-
-// const LoadingPage = styled.div`
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   height: 100vh;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   text-align: center;
-//   z-index: 11;
-//   background: #fff;
-//   font-size: 2rem;
-//   font-weight: bold;
-// `;
 
 const BreadHeader = styled.div`
   display: flex;
@@ -262,12 +263,7 @@ const Title = styled.h1`
   }
 `;
 
-const DeleteBtn = styled.button`
+const DeleteBtn = styled(Button)`
   padding: 10px;
-  border: ${({ theme }) => ` 1px solid ${theme.color.gray300}`};
-  border-radius: 0.5rem;
-  background: none;
-  font-size: 0.87rem;
-  font-weight: bold;
-  color: ${({ theme }) => theme.color.gray700};
+  width: auto;
 `;

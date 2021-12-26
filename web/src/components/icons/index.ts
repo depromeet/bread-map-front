@@ -83,6 +83,7 @@ export { default as PlusIcon } from './PlusIcon';
 export { default as ProfileIcon } from './ProfileIcon';
 export { default as QuoteIcon } from './QuoteIcon';
 export { default as ReviewIcon } from './ReviewIcon';
+export { default as SadSobbang } from './SadSobbang';
 export { default as SearchIcon } from './SearchIcon';
 export { default as SettingIcon } from './SettingIcon';
 export { default as ShareFilledIcon } from './ShareFilledIcon';
