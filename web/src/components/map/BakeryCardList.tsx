@@ -61,7 +61,7 @@ const BakeryCardList: React.FC = () => {
             <BakeryInfoCard
               bakeryId={entity.bakeryId}
               title={entity.bakeryName}
-              bakeryImage={process.env.NEXT_PUBLIC_S3_URI + entity.imgPath}
+              bakeryImage={entity.imgPath}
               wentCount={entity.flagsCount}
               starAvg={entity.avgRating}
               reviewCount={entity.menuReviewsCount}

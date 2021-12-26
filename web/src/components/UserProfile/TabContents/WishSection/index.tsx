@@ -20,7 +20,7 @@ const WishSection: React.FC = () => {
             key={item.bakeryId}
             bakeryId={item.bakeryId}
             title={item.bakeryName}
-            bakeryImage={process.env.NEXT_PUBLIC_S3_URI + item.imgPath}
+            bakeryImage={item.imgPath}
             wentCount={item.flagsCount}
             starAvg={item.avgRating}
             reviewCount={item.menuReviewsCount}
