@@ -12,6 +12,7 @@ import router from 'next/router';
 import ReviewDeleteModal from './ReviewDeleteModal';
 import { Button } from '../common';
 import ReviewMaxLengthModal from './ReviewMaxLengthModal';
+import { mutateGetBakery } from '@/remotes/hooks/useGetBakery';
 interface MainAddProps {
   bakeryId: number;
 }
@@ -36,6 +37,7 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
   const [loadingState, setLoadingState] = React.useState({
     open: false,
     loading: false,
+    error: false,
     done: false,
     text: '빵 리뷰을 등록 할까요?',
   });
@@ -132,6 +134,7 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
       ...prev,
       text: '이미지 등록 중',
       loading: true,
+      error: false,
       done: false,
     }));
     const preProcessReviewsData = await Promise.all(
@@ -168,7 +171,7 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
       if (!response.ok) {
         setLoadingState((prev) => ({
           ...prev,
-          done: true,
+          error: true,
           text: response.message || '등록하는 과정에서\n오류가 생겼어요 !',
         }));
       } else {
@@ -178,10 +181,10 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
             response.message ||
             `${breadsReview.length}개의 빵 리뷰 등록이\n완료 되었어요!`,
           loading: false,
+          error: false,
           done: true,
         }));
         initBreadReview();
-        router.push(`/bakery/${bakeryId}`);
       }
     },
     [breadsReview.length, createImages, initBreadReview]
@@ -246,6 +249,7 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
 
       <ResultModal
         isOpenModal={loadingState}
+        bakeryId={bakeryId}
         buttonClickHandler={modalSubmit}
         modalSetHandler={setLoadingState}
       />

@@ -2,10 +2,14 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { BottomModal, Button } from '../common';
 import { OkSobbang } from '@/components/icons';
+import { mutateGetBakery } from '@/remotes/hooks/useGetBakery';
+import { useRouter } from 'next/router';
 
 interface ResultModalProps {
+  bakeryId: number;
   isOpenModal: {
     open: boolean;
+    error: boolean;
     loading: boolean;
     done: boolean;
     text: string;
@@ -14,6 +18,7 @@ interface ResultModalProps {
   modalSetHandler: React.Dispatch<
     React.SetStateAction<{
       open: boolean;
+      error: boolean;
       loading: boolean;
       done: boolean;
       text: string;
@@ -22,17 +27,26 @@ interface ResultModalProps {
 }
 
 const ResultModal = ({
+  bakeryId,
   isOpenModal,
   buttonClickHandler,
   modalSetHandler,
 }: ResultModalProps) => {
+  const router = useRouter();
   const modalDoneHandler = () => {
     modalSetHandler({
       open: false,
       loading: false,
+      error: false,
       done: false,
       text: '빵 리뷰를 등록 할까요?',
     });
+  };
+
+  const refetchBakeryInfo = () => {
+    modalDoneHandler();
+    mutateGetBakery(bakeryId);
+    router.push(`/bakery/${bakeryId}`);
   };
 
   return (
@@ -51,8 +65,11 @@ const ResultModal = ({
             <Button onClick={buttonClickHandler}>등록</Button>
           </>
         )}
-        {!isOpenModal.loading && isOpenModal.done && (
+        {!isOpenModal.loading && isOpenModal.error && (
           <Button onClick={modalDoneHandler}>확인</Button>
+        )}
+        {!isOpenModal.loading && isOpenModal.done && (
+          <Button onClick={refetchBakeryInfo}>확인</Button>
         )}
       </BottomModalButton>
     </BottomModal>
