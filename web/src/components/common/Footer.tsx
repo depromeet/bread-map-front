@@ -4,52 +4,39 @@ import Link from 'next/link';
 import styled from '@emotion/styled';
 import { Home, User, Edit, Compass } from '@/components/icons';
 
-type NavigationRoute = 'map' | 'search' | 'edit' | 'user';
-
-const navigationIters: NavigationRoute[] = ['map', 'search', 'edit', 'user'];
-
 interface NavigationItem {
   path: string;
   Icon: React.FC<React.SVGProps<SVGSVGElement>>;
 }
 
-type NavigationMap = Record<NavigationRoute, NavigationItem>;
-
-const navigationMap: NavigationMap = {
-  map: {
-    path: '/map',
-    Icon: Home,
-  },
-  search: {
-    path: '/building-page',
-    Icon: Compass,
-  },
-  edit: {
+const navigationMap: NavigationItem[] = [
+  { path: '/map', Icon: Home },
+  // {
+  //   path: '/building-page',
+  //   Icon: Compass,
+  // },
+  {
     path: '/add-bakery?tab=1',
     Icon: Edit,
   },
-  user: {
-    path: '/building-page',
-    Icon: User,
-  },
-};
+  // {
+  //   path: '/building-page',
+  //   Icon: User,
+  // },
+];
 
 const Footer: React.FC = () => {
   const router = useRouter();
 
   return (
     <Base>
-      {navigationIters.map((iter) => {
-        const { path, Icon } = navigationMap[iter];
-
-        return (
-          <Link href={path} key={iter} passHref>
-            <NavigationLink isSelected={`/${iter}` === router.asPath}>
-              <Icon />
-            </NavigationLink>
-          </Link>
-        );
-      })}
+      {navigationMap.map(({ path, Icon }) => (
+        <Link href={path} key={path} passHref>
+          <NavigationLink isSelected={path.split('?')[0] === router.asPath}>
+            <Icon />
+          </NavigationLink>
+        </Link>
+      ))}
     </Base>
   );
 };
