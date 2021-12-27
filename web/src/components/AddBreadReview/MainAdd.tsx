@@ -9,6 +9,10 @@ import { requestUploadImage } from '@/remotes/network/image';
 import { requestCreateBakeryMenuReview } from '@/remotes/network/bakery';
 import ResultModal from './ResultModal';
 import router from 'next/router';
+import ReviewDeleteModal from './ReviewDeleteModal';
+import { Button } from '../common';
+import ReviewMaxLengthModal from './ReviewMaxLengthModal';
+import { mutateGetBakery } from '@/remotes/hooks/useGetBakery';
 interface MainAddProps {
   bakeryId: number;
 }
@@ -33,9 +37,13 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
   const [loadingState, setLoadingState] = React.useState({
     open: false,
     loading: false,
+    error: false,
     done: false,
     text: '빵 리뷰을 등록 할까요?',
   });
+  const [isOpenRemoveModal, setIsOpenRemoveModal] = React.useState(false);
+  const [isOpenReviewMaxLengthModal, setIsOpenReviewMaxLengthModal] =
+    React.useState(false);
   const [errorReviews, setErrorReviews] = React.useState(new Set<number>());
   const [breadsReview, updateBreadsReview] = React.useState([
     initialSingleReview,
@@ -86,10 +94,17 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
     );
     currentProgress === breadsReview.length - 1 &&
       setCurrentProgress((prev) => prev - 1);
+
+    setIsOpenRemoveModal(false);
   }, [breadsReview.length, currentProgress]);
 
   const addReview = React.useCallback(
     (singleReview: Review) => {
+      if (breadsReview.length >= 10) {
+        setIsOpenReviewMaxLengthModal(true);
+        return;
+      }
+
       const errorReviewIdx = checkEmptySection(singleReview);
       updateBreadsReview((prev) => {
         const reviews = [...prev];
@@ -107,10 +122,11 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
         setIsSubmitted(true);
         return openToast();
       }
+
       setCurrentProgress((prev) => prev + 1);
       setIsSubmitted(false);
     },
-    [checkEmptySection, currentProgress, openToast]
+    [breadsReview.length, checkEmptySection, currentProgress, openToast]
   );
 
   const createImages = React.useCallback(async (reviews: Review[]) => {
@@ -118,6 +134,7 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
       ...prev,
       text: '이미지 등록 중',
       loading: true,
+      error: false,
       done: false,
     }));
     const preProcessReviewsData = await Promise.all(
@@ -154,20 +171,23 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
       if (!response.ok) {
         setLoadingState((prev) => ({
           ...prev,
+          error: true,
           text: response.message || '등록하는 과정에서\n오류가 생겼어요 !',
         }));
       } else {
         setLoadingState((prev) => ({
           ...prev,
-          text: response.message || '리뷰 등록이 완료 되었어요!',
+          text:
+            response.message ||
+            `${breadsReview.length}개의 빵 리뷰 등록이\n완료 되었어요!`,
           loading: false,
+          error: false,
           done: true,
         }));
         initBreadReview();
-        router.push(`/bakery/${bakeryId}`);
       }
     },
-    [createImages, initBreadReview]
+    [breadsReview.length, createImages, initBreadReview]
   );
 
   const submitReview = React.useCallback(
@@ -206,7 +226,12 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
           />
           <BreadHeader>
             <Title>{currentProgress + 1}번째 빵</Title>
-            <DeleteBtn onClick={deleteSingleReview}>삭제</DeleteBtn>
+            <DeleteBtn
+              styleType={'none'}
+              onClick={() => setIsOpenRemoveModal(true)}
+            >
+              삭제
+            </DeleteBtn>
           </BreadHeader>
         </>
       ) : (
@@ -224,30 +249,27 @@ const MainAdd = ({ bakeryId }: MainAddProps) => {
 
       <ResultModal
         isOpenModal={loadingState}
+        bakeryId={bakeryId}
         buttonClickHandler={modalSubmit}
         modalSetHandler={setLoadingState}
+      />
+
+      <ReviewDeleteModal
+        closeModal={() => setIsOpenRemoveModal(false)}
+        index={currentProgress}
+        isOpenModal={isOpenRemoveModal}
+        deleteSingleReview={deleteSingleReview}
+      />
+
+      <ReviewMaxLengthModal
+        closeModal={() => setIsOpenReviewMaxLengthModal(false)}
+        isOpenModal={isOpenReviewMaxLengthModal}
       />
     </>
   );
 };
 
 export default MainAdd;
-
-// const LoadingPage = styled.div`
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   height: 100vh;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   text-align: center;
-//   z-index: 11;
-//   background: #fff;
-//   font-size: 2rem;
-//   font-weight: bold;
-// `;
 
 const BreadHeader = styled.div`
   display: flex;
@@ -262,12 +284,7 @@ const Title = styled.h1`
   }
 `;
 
-const DeleteBtn = styled.button`
+const DeleteBtn = styled(Button)`
   padding: 10px;
-  border: ${({ theme }) => ` 1px solid ${theme.color.gray300}`};
-  border-radius: 0.5rem;
-  background: none;
-  font-size: 0.87rem;
-  font-weight: bold;
-  color: ${({ theme }) => theme.color.gray700};
+  width: auto;
 `;
