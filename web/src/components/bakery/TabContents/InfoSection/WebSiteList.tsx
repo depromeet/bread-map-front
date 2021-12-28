@@ -24,7 +24,7 @@ const WebSiteList = ({ urlList }: WebsiteListProps) => {
   const matchedLinks = React.useMemo(() => {
     const links: MatchLink = {};
 
-    urlList.map((url) => {
+    urlList?.map((url) => {
       if (regex.test(url)) {
         const result = url.match(regex)!;
         const name = result[2]
@@ -39,7 +39,7 @@ const WebSiteList = ({ urlList }: WebsiteListProps) => {
 
   return (
     <>
-      {urlList.length > 0 ? (
+      {urlList?.length > 0 ? (
         <LinkSection>
           <Container opened={opened}>
             <Wrapper>

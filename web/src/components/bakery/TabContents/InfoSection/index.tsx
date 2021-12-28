@@ -22,6 +22,8 @@ const InfoSection = ({ bakeryId }: ReviewSectionProps) => {
   if (error) return <div>Error</div>;
   if (!data) return <div>Loading...</div>;
 
+  const urlList = data.websiteUrlList?.filter((url) => url.trim() !== '');
+
   return (
     <Container>
       <Section>
@@ -36,7 +38,7 @@ const InfoSection = ({ bakeryId }: ReviewSectionProps) => {
           </li>
           <li>
             <EarthIcon />
-            <WebSiteList urlList={data.websiteUrlList} />
+            <WebSiteList urlList={urlList} />
           </li>
           <li>
             <PhoneIcon />
