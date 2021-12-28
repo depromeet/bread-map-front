@@ -22,7 +22,6 @@ const InfoSection = ({ bakeryId }: ReviewSectionProps) => {
   if (error) return <div>Error</div>;
   if (!data) return <div>Loading...</div>;
 
-  //urlList={data.websiteUrlList}
   return (
     <Container>
       <Section>
@@ -87,7 +86,7 @@ const InfoList = styled.ul`
   margin: 0;
   color: ${({ theme }) => theme.color.gray500};
   font-size: 12px;
-  gap: 3px;
+  gap: 8px;
   li {
     line-height: 1;
     display: flex;
