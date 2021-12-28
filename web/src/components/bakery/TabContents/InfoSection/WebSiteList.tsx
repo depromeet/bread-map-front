@@ -9,9 +9,6 @@ interface WebsiteListProps {
 
 const WebSiteList = ({ urlList }: WebsiteListProps) => {
   const [opened, setOpened] = React.useState(false);
-  const [matchedLinks, setMatchedLinks] = React.useState<MatchLink | null>(
-    null
-  );
 
   const onToggleDrop = () => {
     setOpened((prev) => !prev);
@@ -24,8 +21,8 @@ const WebSiteList = ({ urlList }: WebsiteListProps) => {
     tistory?: string;
   }
 
-  const matchLink = React.useCallback(() => {
-    const matchedLinks: MatchLink = {};
+  const matchedLinks = React.useMemo(() => {
+    const links: MatchLink = {};
 
     urlList.map((url) => {
       if (regex.test(url)) {
@@ -33,16 +30,12 @@ const WebSiteList = ({ urlList }: WebsiteListProps) => {
         const name = result[2]
           ?.replaceAll('.', '')
           .toLowerCase() as keyof MatchLink;
-        matchedLinks[name] = convertHttpsLink(result[0]);
+        links[name] = convertHttpsLink(result[0]);
       }
     });
 
-    setMatchedLinks(matchedLinks);
+    return links;
   }, [urlList]);
-
-  React.useEffect(() => {
-    matchLink();
-  }, [matchLink]);
 
   return (
     <>
