@@ -10,6 +10,7 @@ import {
 } from '@/components/icons';
 import BakeryCategories from './BakeryCategories';
 import { useGetBakery } from '@/remotes/hooks';
+import WebSiteList from './WebSiteList';
 
 type ReviewSectionProps = {
   bakeryId: number;
@@ -20,6 +21,8 @@ const InfoSection = ({ bakeryId }: ReviewSectionProps) => {
 
   if (error) return <div>Error</div>;
   if (!data) return <div>Loading...</div>;
+
+  const urlList = data.websiteUrlList?.filter((url) => url.trim() !== '');
 
   return (
     <Container>
@@ -35,17 +38,7 @@ const InfoSection = ({ bakeryId }: ReviewSectionProps) => {
           </li>
           <li>
             <EarthIcon />
-            {data.websiteUrlList.length > 0 ? (
-              <WebSiteList>
-                {data.websiteUrlList.map((url, idx) => (
-                  <UrlLink href={url} key={idx}>
-                    {url}
-                  </UrlLink>
-                ))}
-              </WebSiteList>
-            ) : (
-              <div>제공된 정보가 없습니다.</div>
-            )}
+            <WebSiteList urlList={urlList} />
           </li>
           <li>
             <PhoneIcon />
@@ -95,34 +88,30 @@ const InfoList = styled.ul`
   margin: 0;
   color: ${({ theme }) => theme.color.gray500};
   font-size: 12px;
-  gap: 3px;
+  gap: 8px;
   li {
     line-height: 1;
     display: flex;
     align-items: center;
     gap: 8px;
+    position: relative;
+
+    &:nth-of-type(3) {
+      > svg {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+      > div {
+        padding-left: 24px;
+      }
+    }
 
     pre {
       font-family: inherit;
       margin: 0;
     }
   }
-`;
-
-const UrlLink = styled.a`
-  color: ${({ theme }) => theme.color.primary500};
-  text-decoration: none;
-`;
-
-const WebSiteList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-`;
-
-const Divider = styled.hr`
-  width: 100%;
-  border-top: 1px solid ${({ theme }) => theme.color.gray300};
 `;
 
 const SectionHeader = styled.div`
