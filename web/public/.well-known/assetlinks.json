@@ -5,20 +5,7 @@
       "namespace": "android_app",
       "package_name": "app.daedongbread.twa",
       "sha256_cert_fingerprints": [
-        "F1:CB:0F:B6:3D:5B:55:FD:11:FA:94:D0:34:B3:F6:F8:9D:9F:6D:F7:E2:17:26:F7:2C:6C:79:88:CF:6E:C3:56",
-        "22:2A:47:94:F8:1D:13:FD:72:27:2E:7F:55:47:36:7B:77:BF:D4:2C:CC:8B:6C:F2:F7:55:E7:1A:7E:44:59:EF",
         "75:9E:8B:97:5B:BE:A8:3B:8C:ED:B3:FF:AE:53:AE:89:BA:B8:D3:81:CC:8A:4D:73:C2:35:DA:3E:AD:BA:A9:62"
-      ]
-    }
-  },
-  {
-    "relation": ["delegate_permission/common.handle_all_urls"],
-    "target": {
-      "namespace": "android_app",
-      "package_name": "app.daedongbread.dev.twa",
-      "sha256_cert_fingerprints": [
-        "E5:6E:67:6E:8D:1E:03:46:E1:84:20:74:8E:FB:E8:71:50:F1:E4:5C:EB:9C:5A:43:A4:28:08:27:7C:A2:7A:3F",
-        "27:22:90:63:33:23:67:33:8E:3A:C5:6B:3B:2E:19:F4:5B:1F:64:AD:D9:E7:1A:E7:B2:66:A7:05:C2:C7:12:11"
       ]
     }
   }

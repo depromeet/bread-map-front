@@ -6,7 +6,7 @@
   "language": "ko-KR",
   "background_color": "#ff6e40",
   "orientation": "portrait",
-  "display": "fullscreen",
+  "display": "standalone",
   "scope": "/",
   "start_url": "/",
   "categories": ["food", "lifestyle", "social", "personalization"],
