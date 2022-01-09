@@ -1,0 +1,1 @@
+export { bindHook } from './bindHook';
