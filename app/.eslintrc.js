@@ -23,7 +23,6 @@ module.exports = {
     ],
 
     'import/extensions': 'off',
-    'import/named': 2,
     'import/no-extraneous-dependencies': 'off',
     'import/no-named-as-default': 0,
     'import/prefer-default-export': 'off',
