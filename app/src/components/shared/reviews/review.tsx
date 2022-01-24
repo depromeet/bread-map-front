@@ -1,0 +1,137 @@
+import React from 'react';
+import { FlatList } from 'react-native';
+import styled from '@emotion/native';
+
+interface MenuReview {
+  breadCategoryId: number;
+  contents: string;
+  imgPathList: string[];
+  lastModifiedDateTime: string;
+  memberId: number;
+  memberName: string;
+  menuId: number;
+  menuName: string;
+  menuReviewId: number;
+  rating: number;
+}
+
+interface ReviewProps {
+  review: MenuReview;
+}
+
+const Review: React.FC<ReviewProps> = ({ review }) => {
+  const imgs = [
+    { id: 1, src: require('../images/bread.png') },
+    { id: 2, src: require('../images/bread2.png') },
+    { id: 3, src: require('../images/bread.png') },
+    { id: 4, src: require('../images/bread2.png') },
+  ];
+
+  return (
+    <Container>
+      <ReviewContent>
+        <Reviewer>
+          <ProfileImg source={{ uri: 'https://via.placeholder.com/100' }} />
+          <Info>
+            <Nickname>{review?.memberName}</Nickname>
+            <UpdatedAt>{review?.lastModifiedDateTime}</UpdatedAt>
+          </Info>
+        </Reviewer>
+        <BreadNameAndScore>
+          <Name>{review?.menuName}</Name>
+          <Stars>별</Stars>
+          <Score>{review?.rating}</Score>
+        </BreadNameAndScore>
+        <ReviewText>{review?.contents}</ReviewText>
+      </ReviewContent>
+      <ImgSlide horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20 }}>
+        <FlatList
+          // eslint-disable-next-line react-native/no-inline-styles
+          style={{ flexDirection: 'row' }}
+          data={imgs}
+          keyExtractor={img => img.id.toString()}
+          renderItem={({ item }) => {
+            return <ReviewImg source={item.src} />;
+          }}
+        />
+      </ImgSlide>
+    </Container>
+  );
+};
+
+export default Review;
+
+const Container = styled.View`
+  position: relative;
+`;
+
+const ReviewContent = styled.View`
+  margin: 20px;
+  padding-bottom: 20px;
+  border-bottom-width: 1px;
+  border-bottom-color: ${({ theme }) => theme.color.gray300};
+  // TODO: 마지막 리뷰는 border 제거
+`;
+
+const Reviewer = styled.View`
+  flex-direction: row;
+`;
+
+const ProfileImg = styled.Image`
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+`;
+
+const Info = styled.View`
+  margin-left: 8px;
+  justify-content: center;
+`;
+
+const Nickname = styled.Text`
+  font-weight: bold;
+  font-size: 14px;
+`;
+
+const UpdatedAt = styled.Text`
+  font-size: 12px;
+  color: ${({ theme }) => theme.color.gray600};
+  margin-top: 2px;
+`;
+
+const BreadNameAndScore = styled.View`
+  flex-direction: row;
+  margin: 16px 0 160px;
+`;
+
+const Name = styled.Text`
+  font-weight: bold;
+  font-size: 12px;
+  color: ${({ theme }) => theme.color.gray600};
+`;
+
+const Stars = styled.Text`
+  margin: 0 4px 0 8px;
+`;
+
+const Score = styled.Text`
+  font-size: 12px;
+`;
+
+const ImgSlide = styled.ScrollView`
+  position: absolute;
+  left: 0;
+  top: 100px;
+`;
+
+const ReviewImg = styled.Image`
+  width: 140px;
+  height: 140px;
+  border-radius: 8px;
+  margin-right: 8px;
+`;
+
+const ReviewText = styled.Text`
+  color: ${({ theme }) => theme.color.gray700};
+  font-size: 14px;
+`;
