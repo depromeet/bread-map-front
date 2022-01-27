@@ -1,25 +1,20 @@
 import React from 'react';
-import { View, Text } from 'react-native';
 import styled from '@emotion/native';
+import { Rating } from '../rating';
 
 interface MenuProps {
   name: string;
   price: number;
-  score: number;
+  rating: number;
 }
 
-const Menu: React.FC<MenuProps> = ({ name, price, score }) => {
+const Menu: React.FC<MenuProps> = ({ name, price, rating }) => {
   return (
     <Container>
       <Img source={{ uri: 'https://via.placeholder.com/100' }} />
       <MenuInfo>
         <MenuName>{name}</MenuName>
-        <ScoreArea>
-          <View>
-            <Text>별</Text>
-          </View>
-          <Text>{score}</Text>
-        </ScoreArea>
+        <Rating rating={rating} textPosition={'right'} />
         <Price>{price.toLocaleString()}원</Price>
       </MenuInfo>
     </Container>
@@ -47,10 +42,8 @@ const MenuInfo = styled.View`
 const MenuName = styled.Text`
   font-weight: bold;
   font-size: 16px;
-`;
-
-const ScoreArea = styled.View`
-  flex-direction: row;
+  margin-bottom: 4px;
+  color: ${({ theme }) => theme.color.black};
 `;
 
 const Price = styled.Text`
