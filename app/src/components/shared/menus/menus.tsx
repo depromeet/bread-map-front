@@ -5,7 +5,7 @@ import Menu from './menu';
 interface MenuInfo {
   name: string;
   price: number;
-  score: number;
+  rating: number;
 }
 
 interface MenuProps {
@@ -18,7 +18,7 @@ const Menus: React.FC<MenuProps> = ({ bakeryMenu }) => {
       data={bakeryMenu}
       keyExtractor={menu => menu.name}
       renderItem={({ item }) => {
-        return <Menu name={item.name} price={item.price} score={item.score} />;
+        return <Menu name={item.name} price={item.price} rating={item.rating} />;
       }}
     />
   );

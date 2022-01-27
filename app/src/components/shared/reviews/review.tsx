@@ -1,6 +1,7 @@
 import React from 'react';
 import { FlatList } from 'react-native';
 import styled from '@emotion/native';
+import { Rating } from '../rating';
 
 interface MenuReview {
   breadCategoryId: number;
@@ -37,11 +38,10 @@ const Review: React.FC<ReviewProps> = ({ review }) => {
             <UpdatedAt>{review?.lastModifiedDateTime}</UpdatedAt>
           </Info>
         </Reviewer>
-        <BreadNameAndScore>
+        <ReviewRating>
           <Name>{review?.menuName}</Name>
-          <Stars>별</Stars>
-          <Score>{review?.rating}</Score>
-        </BreadNameAndScore>
+          <Rating rating={review?.rating} textPosition={'right'} size={13} />
+        </ReviewRating>
         <ReviewText>{review?.contents}</ReviewText>
       </ReviewContent>
       <ImgSlide horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20 }}>
@@ -99,8 +99,9 @@ const UpdatedAt = styled.Text`
   margin-top: 2px;
 `;
 
-const BreadNameAndScore = styled.View`
+const ReviewRating = styled.View`
   flex-direction: row;
+  align-items: center;
   margin: 16px 0 160px;
 `;
 
@@ -108,14 +109,7 @@ const Name = styled.Text`
   font-weight: bold;
   font-size: 12px;
   color: ${({ theme }) => theme.color.gray600};
-`;
-
-const Stars = styled.Text`
-  margin: 0 4px 0 8px;
-`;
-
-const Score = styled.Text`
-  font-size: 12px;
+  margin-right: 8px;
 `;
 
 const ImgSlide = styled.ScrollView`
