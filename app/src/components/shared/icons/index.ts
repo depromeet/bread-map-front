@@ -1,0 +1,15 @@
+export { default as InfoShippingIcon } from './InfoShippingIcon';
+export { default as InfoPetIcon } from './InfoPetIcon';
+export { default as InfoParkingIcon } from './InfoParkingIcon';
+export { default as InfoDeliveryIcon } from './InfoDeliveryIcon';
+export { default as InfoWifiIcon } from './InfoWifiIcon';
+export { default as BreadCakeIcon } from './BreadCakeIcon';
+export { default as ChevronDownIcon } from './ChevronDownIcon';
+export { default as ClockIcon } from './ClockIcon';
+export { default as EarthIcon } from './EarthIcon';
+export { default as FileTextIcon } from './FileTextIcon';
+export { default as MapPinIcon } from './MapPinIcon';
+export { default as PhoneIcon } from './PhoneIcon';
+export { default as ShareIcon } from './ShareIcon';
+export { default as StarGradientIcon } from './StarGradientIcon';
+export { default as StarIcon } from './StarIcon';
