@@ -1,5 +1,5 @@
-import { Theme } from '@emotion/react';
 import { Dimensions } from 'react-native';
+import { Theme } from '@emotion/react';
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
 const { width: screenWidth, height: screenHeight } = Dimensions.get('screen');

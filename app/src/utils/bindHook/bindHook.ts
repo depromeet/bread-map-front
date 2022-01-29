@@ -19,14 +19,14 @@ type Options = {
 export const bindHook = <HookProps extends Record<string, unknown>, HookResult>(
   useHook: HookType<HookProps, HookResult>,
   ViewComponent: VFC<HookResult>,
-  options?: Options,
+  options?: Options
 ) => {
   const { displayName } = options ?? {};
 
   const MemoizedViewComponent = memo(ViewComponent) as unknown as VFC<HookResult>;
 
-  const Component = memo<HookProps>((props) =>
-    createElement(MemoizedViewComponent, useHook(props)),
+  const Component = memo<HookProps>(props =>
+    createElement(MemoizedViewComponent, useHook(props))
   ) as unknown as VFC<HookProps>;
 
   if (displayName) {
