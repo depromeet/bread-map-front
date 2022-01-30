@@ -10,14 +10,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "&quot;${SRCROOT}/../node_modules/react-native-config/ios/ReactNativeConfig/BuildXCConfig.rb&quot; &quot;${SRCROOT}/..&quot; &quot;${SRCROOT}/tmp.xcconfig&quot;&#10;">
-            </ActionContent>
-         </ExecutionAction>
-         <ExecutionAction
-            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
-            <ActionContent
-               title = "Run Script"
-               scriptText = "# Type a script or drag a script file from your workspace to insert its path.&#10;cp &quot;${PROJECT_DIR}/../.env.development&quot; &quot;${PROJECT_DIR}/../.env&quot;&#10;echo &quot;.env.development&quot; &gt; /tmp/envfile&#10;">
+               scriptText = "cp &quot;${PROJECT_DIR}/../.env.development&quot; &quot;${PROJECT_DIR}/../.env&quot;&#10;echo &quot;.env.development&quot; &gt; /tmp/envfile&#10;">
             </ActionContent>
          </ExecutionAction>
       </PreActions>
