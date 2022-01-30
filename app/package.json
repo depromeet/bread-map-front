@@ -15,6 +15,8 @@
     "@emotion/native": "^11.0.0",
     "@emotion/react": "^11.7.1",
     "@gorhom/bottom-sheet": "^4",
+    "@react-native-cookies/cookies": "^6.0.11",
+    "axios": "^0.25.0",
     "react": "17.0.2",
     "react-native": "0.66.4",
     "react-native-config": "^1.4.5",
@@ -23,6 +25,7 @@
     "react-native-reanimated": "^2.3.1",
     "react-native-router-flux": "^4.3.1",
     "react-native-svg": "^12.1.1",
+    "react-query": "^3.34.12",
     "reanimated-bottom-sheet": "^1.0.0-alpha.22"
   },
   "devDependencies": {
