@@ -1,0 +1,1 @@
+export { BakeryMarker } from './BakeryMarker';

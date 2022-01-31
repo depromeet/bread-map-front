@@ -9,7 +9,8 @@
     "android:dev-release": "react-native run-android --variant=developmentrelease",
     "ios:dev": "react-native run-ios --scheme daedongbreadDev",
     "ios:prod": "react-native run-ios --scheme daedongbreadProd",
-    "postinstall": "rndebugger-open && yarn ios"
+    "start": "rndebugger-open && yarn ios:dev"
+
   },
   "dependencies": {
     "@emotion/native": "^11.0.0",
@@ -20,7 +21,7 @@
     "react": "17.0.2",
     "react-native": "0.66.4",
     "react-native-config": "^1.4.5",
-    "react-native-gesture-handler": "^2.1.1",
+    "react-native-gesture-handler": "^2.2.0",
     "react-native-maps": "^0.30.1",
     "react-native-reanimated": "^2.3.1",
     "react-native-router-flux": "^4.3.1",
