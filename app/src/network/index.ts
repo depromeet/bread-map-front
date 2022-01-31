@@ -1,1 +1,1 @@
-export { fetcher } from './axios';
+export { useGetBakeries } from './bakery';

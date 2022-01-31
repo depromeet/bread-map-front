@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { useQuery } from 'react-query';
-import requestGetBakeries from '../../network/Getbakery';
+import { useGetBakeries } from '../../network';
 
 type UseExampleProps = {
   start: number;
 };
 
 export const useExample = ({ start }: UseExampleProps) => {
-  const { data, isLoading } = useQuery('getBakeries', requestGetBakeries);
+  const data = { latitude: 37.6799006, longitude: 127.0549781, range: 100000 };
+  const { bakeries, loading } = useGetBakeries(data);
   const [count, setCount] = useState(start);
 
   const increase = () => setCount(prev => prev + 1);
@@ -17,7 +17,7 @@ export const useExample = ({ start }: UseExampleProps) => {
     count,
     increase,
     decrease,
-    loading: isLoading,
-    data,
+    loading,
+    bakeries,
   };
 };

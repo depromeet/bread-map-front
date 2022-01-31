@@ -18,11 +18,13 @@ const App: FC = () => {
             style={{ flex: 1 }}
             provider={Platform.OS === 'ios' ? PROVIDER_DEFAULT : PROVIDER_GOOGLE}
             initialRegion={{
-              latitude: 37.78825,
-              longitude: -122.4324,
+              latitude: 37.6799006,
+              longitude: 127.0549781,
               latitudeDelta: 0.0922,
               longitudeDelta: 0.0421,
             }}
+            minZoomLevel={17}
+            maxZoomLevel={25}
           />
           <Example start={50} />
         </MapContainer>
