@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Text, View, StyleSheet } from 'react-native';
+import Config from 'react-native-config';
 import { bindHook } from '../../utils';
 import { useExample } from './useExample';
 
@@ -8,6 +9,8 @@ export const Example = bindHook(useExample, ({ count, increase, decrease }) => (
     <Text>{count}</Text>
     <Button title={'up'} onPress={increase} />
     <Button title={'down'} onPress={decrease} />
+
+    <Text>config: {Config.API_URI}</Text>
   </View>
 ));
 
