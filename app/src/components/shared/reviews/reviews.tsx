@@ -2,9 +2,6 @@ import React from 'react';
 import { FlatList } from 'react-native';
 import Review from './review';
 
-// TODO: ios -> 하단 스크롤 끝까지 안됨, 확인필요
-// TODO: android -> 화면 스크롤 안됨, 확인필요
-
 interface MenuReview {
   breadCategoryId: number;
   contents: string;

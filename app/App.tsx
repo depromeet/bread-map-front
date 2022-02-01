@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import { Platform } from 'react-native';
 import MapView, { PROVIDER_DEFAULT, PROVIDER_GOOGLE } from 'react-native-maps';
-import { ThemeProvider } from '@emotion/react';
 import styled from '@emotion/native';
-import { theme } from './src/styles/theme';
+import { ThemeProvider } from '@emotion/react';
 import { Example } from './src/components/example/example';
+import { theme } from './src/styles/theme';
 
 const App: FC = () => {
   return (
