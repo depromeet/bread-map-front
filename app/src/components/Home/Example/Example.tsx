@@ -22,6 +22,6 @@ export const Example = bindHook(useExample, ({ bakeries, loading, count, increas
 
 const ExampleContainer = styled.View`
   flex: 1;
-  align-items: 'center';
-  justify-content: 'center';
+  align-items: center;
+  justify-content: center;
 `;

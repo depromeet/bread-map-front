@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button, ScrollView, StyleSheet } from 'react-native';
+import { Example } from '@/components/Home/Example';
+import { theme } from '@/styles/theme';
+import { bindHook } from '@/utils';
 import BottomSheet from '@gorhom/bottom-sheet';
-import { theme } from '../../../styles/theme';
-import { bindHook } from '../../../utils';
-import { Example } from '../../Example';
 import { useMapButtonSheet } from './useMapBottomSheet';
 
 const MapBottomSheet = bindHook(useMapButtonSheet, ({ bottomSheetRef, snapPoints, handleSheetChanges }) => (

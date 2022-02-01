@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import MapView, { PROVIDER_DEFAULT, PROVIDER_GOOGLE } from 'react-native-maps';
-import { Example } from '@/components/Example';
+import { MapBottomSheet, BakeryMarker } from '@/components/Home';
 import styled from '@emotion/native';
 
 const Home = () => (
@@ -16,8 +16,15 @@ const Home = () => (
       }}
       minZoomLevel={17}
       maxZoomLevel={25}
-    />
-    <Example start={50} />
+    >
+      <BakeryMarker
+        coord={{
+          latitude: 37.6799006,
+          longitude: 127.0549781,
+        }}
+      />
+    </Map>
+    <MapBottomSheet start={50} />
   </MapContainer>
 );
 
