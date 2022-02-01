@@ -6,8 +6,7 @@ import styled from '@emotion/native';
 
 const Home = () => (
   <MapContainer>
-    <MapView
-      style={{ flex: 1 }}
+    <Map
       provider={Platform.OS === 'ios' ? PROVIDER_DEFAULT : PROVIDER_GOOGLE}
       initialRegion={{
         latitude: 37.6799006,
@@ -27,4 +26,8 @@ export { Home };
 const MapContainer = styled.View`
   flex: 1;
   background-color: ${({ theme }) => theme.color.primary500};
+`;
+
+const Map = styled(MapView)`
+  flex: 1;
 `;
