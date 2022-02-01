@@ -3,10 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android:prod": "react-native run-android --variant=productionDebug",
-    "android:prod-release": "react-native run-android --variant=productionRelease",
-    "android:dev": "react-native run-android --variant=developmentDebug",
-    "android:dev-release": "react-native run-android --variant=developmentRelease",
+    "android:prod": "react-native run-android --variant=productiondebug",
+    "android:prod-release": "react-native run-android --variant=productionrelease",
+    "android:dev": "react-native run-android --variant=developmentdebug",
+    "android:dev-release": "react-native run-android --variant=developmentrelease",
     "ios:dev": "react-native run-ios --scheme daedongbreadDev",
     "ios:prod": "react-native run-ios --scheme daedongbreadProd",
     "postinstall": "rndebugger-open && yarn ios"
