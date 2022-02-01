@@ -20,14 +20,14 @@ interface ReviewProps {
   review: MenuReview;
 }
 
-const Review: React.FC<ReviewProps> = ({ review }) => {
-  const imgs = [
-    { id: 1, src: require('../images/bread.png') },
-    { id: 2, src: require('../images/bread2.png') },
-    { id: 3, src: require('../images/bread.png') },
-    { id: 4, src: require('../images/bread2.png') },
-  ];
+const imgs = [
+  { id: 1, src: require('../images/bread.png') },
+  { id: 2, src: require('../images/bread2.png') },
+  { id: 3, src: require('../images/bread.png') },
+  { id: 4, src: require('../images/bread2.png') },
+];
 
+const Review: React.FC<ReviewProps> = ({ review }) => {
   return (
     <Container>
       <ReviewContent>
