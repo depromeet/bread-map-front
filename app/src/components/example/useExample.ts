@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useGetBakeries } from '../../network';
+import { useGetBakeries } from '@/apis';
 
 type UseExampleProps = {
   start: number;

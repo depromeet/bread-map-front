@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Dimensions } from 'react-native';
 import { Easing, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import { resizePixel } from '@/utils';
 
 type UseBakeryMarkerProps = {
   coord: {
@@ -9,22 +9,18 @@ type UseBakeryMarkerProps = {
   };
 };
 
-const getPixel = (x: number) => {
-  return (x / 360) * Dimensions.get('screen').width;
-};
-
 const DEFAULT_ICON_SIZE = [
   {
-    width: getPixel(16),
-    height: getPixel(16),
+    width: resizePixel(16),
+    height: resizePixel(16),
   },
   {
-    width: getPixel(24),
-    height: getPixel(24),
+    width: resizePixel(24),
+    height: resizePixel(24),
   },
   {
-    width: getPixel(32),
-    height: getPixel(32),
+    width: resizePixel(32),
+    height: resizePixel(32),
   },
 ];
 
