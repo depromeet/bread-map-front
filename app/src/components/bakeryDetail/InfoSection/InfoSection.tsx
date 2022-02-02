@@ -46,7 +46,7 @@ const InfoSection: React.FC<InfoProps> = bindHook(useInfoSection, ({ info, facil
       <Title>시설정보</Title>
       <Facilityies>
         {facilities?.map(facility => (
-          <Item>
+          <Item key={facility.category}>
             {<facility.icon strokeColor={'orange'} />}
             <FacilityText>{facility.text}</FacilityText>
           </Item>
