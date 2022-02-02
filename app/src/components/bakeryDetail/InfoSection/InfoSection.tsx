@@ -1,20 +1,11 @@
 import React from 'react';
 import { FlatList } from 'react-native';
 import styled from '@emotion/native';
-import {
-  ClockIcon,
-  EarthIcon,
-  FileTextIcon,
-  InfoDeliveryIcon,
-  InfoParkingIcon,
-  InfoPetIcon,
-  InfoShippingIcon,
-  InfoWifiIcon,
-  MapPinIcon,
-  PhoneIcon,
-} from '../../shared/icons';
+import { bindHook } from '../../../utils';
+import { ClockIcon, EarthIcon, FileTextIcon, MapPinIcon, PhoneIcon } from '../../shared/icons';
 import Devider from '../Devider';
 import InfoRow from './InfoRow';
+import { useInfoSection } from './useInfoSection';
 
 type BakeryInfo = {
   address: string;
@@ -38,35 +29,7 @@ type InfoProps = {
   info: BakeryInfo;
 };
 
-const facilities = [
-  {
-    icon: InfoParkingIcon,
-    category: 'PARKING',
-    text: '주차 가능',
-  },
-  {
-    icon: InfoWifiIcon,
-    category: 'WIFI',
-    text: '와이파이',
-  },
-  {
-    icon: InfoDeliveryIcon,
-    category: 'DELIVERY',
-    text: '배달',
-  },
-  {
-    icon: InfoPetIcon,
-    category: 'PET',
-    text: '반려동물',
-  },
-  {
-    icon: InfoShippingIcon,
-    category: 'SHIPPING',
-    text: '택배',
-  },
-];
-
-const InfoSection: React.FC<InfoProps> = ({ info }) => (
+const InfoSection: React.FC<InfoProps> = bindHook(useInfoSection, ({ info, facilities }) => (
   <Container>
     <Devider />
     <BakeryInformation>
@@ -84,11 +47,11 @@ const InfoSection: React.FC<InfoProps> = ({ info }) => (
       <Title>시설정보</Title>
       <Facilityies>
         <FlatList
-          data={facilities.filter(facility => info.basicInfoList?.includes(facility.category))}
+          data={facilities}
           keyExtractor={item => item.text}
           renderItem={({ item }) => (
             <Item>
-              <item.icon strokeColor={'orange'} />
+              {<item.icon strokeColor={'orange'} />}
               <FacilityText>{item.text}</FacilityText>
             </Item>
           )}
@@ -97,7 +60,7 @@ const InfoSection: React.FC<InfoProps> = ({ info }) => (
       </Facilityies>
     </FacilityInfo>
   </Container>
-);
+));
 
 export { InfoSection };
 

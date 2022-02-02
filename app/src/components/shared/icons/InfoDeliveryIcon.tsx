@@ -1,11 +1,11 @@
 import * as React from 'react';
 import Svg, { Path, SvgProps } from 'react-native-svg';
 
-type FacilityIconProps = {
+export type InfoIconProps = {
   strokeColor: 'orange' | 'gray';
 };
 
-const InfoDeliveryIcon: React.FC<SvgProps & FacilityIconProps> = props => (
+const InfoDeliveryIcon: React.FC<SvgProps & InfoIconProps> = props => (
   <Svg width={48} height={48} viewBox="0 0 48 48" fill="none" {...props}>
     <Path
       fillRule="evenodd"

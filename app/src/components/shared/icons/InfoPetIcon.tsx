@@ -1,11 +1,8 @@
 import * as React from 'react';
 import Svg, { Path, SvgProps } from 'react-native-svg';
+import { InfoIconProps } from './InfoDeliveryIcon';
 
-type PetIconProps = {
-  strokeColor: 'orange' | 'gray';
-};
-
-const InfoPetIcon: React.FC<SvgProps & PetIconProps> = props => (
+const InfoPetIcon: React.FC<SvgProps & InfoIconProps> = props => (
   <Svg width={48} height={48} viewBox="0 0 48 48" fill="none" {...props}>
     <Path
       fillRule="evenodd"
