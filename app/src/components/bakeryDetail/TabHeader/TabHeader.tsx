@@ -7,21 +7,19 @@ interface TabHeaderProps {
   addBtnText: string;
 }
 
-const TabHeader: React.FC<TabHeaderProps> = ({ title, totalCount, addBtnText }) => {
-  return (
-    <Container>
-      <Header>
-        <TabTitle>{title}</TabTitle>
-        <TabTotalCount>{totalCount}</TabTotalCount>
-      </Header>
-      <AddButton>
-        <ButtonText>{addBtnText}</ButtonText>
-      </AddButton>
-    </Container>
-  );
-};
+const TabHeader: React.FC<TabHeaderProps> = ({ title, totalCount, addBtnText }) => (
+  <Container>
+    <Header>
+      <TabTitle>{title}</TabTitle>
+      <TabTotalCount>{totalCount}</TabTotalCount>
+    </Header>
+    <AddButton>
+      <ButtonText>{addBtnText}</ButtonText>
+    </AddButton>
+  </Container>
+);
 
-export default TabHeader;
+export { TabHeader };
 
 const Container = styled.View`
   flex-direction: row;

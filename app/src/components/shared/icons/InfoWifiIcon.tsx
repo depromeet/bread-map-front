@@ -24,4 +24,4 @@ const InfoWifiIcon: React.FC<SvgProps & FacilityIconProps> = props => (
   </Svg>
 );
 
-export default InfoWifiIcon;
+export { InfoWifiIcon };

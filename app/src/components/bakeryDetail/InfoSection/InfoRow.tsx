@@ -6,14 +6,12 @@ interface InfoRowProps {
   text: string;
 }
 
-const InfoRow: React.FC<InfoRowProps> = ({ icon, text }) => {
-  return (
-    <Row>
-      {icon}
-      <InfoText>{text}</InfoText>
-    </Row>
-  );
-};
+const InfoRow: React.FC<InfoRowProps> = ({ icon, text }) => (
+  <Row>
+    {icon}
+    <InfoText>{text}</InfoText>
+  </Row>
+);
 
 export default InfoRow;
 

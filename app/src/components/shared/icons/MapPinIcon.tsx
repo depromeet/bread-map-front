@@ -20,4 +20,4 @@ const MapPinIcon: React.FC<SvgProps> = props => (
   </Svg>
 );
 
-export default MapPinIcon;
+export { MapPinIcon };

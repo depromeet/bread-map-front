@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from '@emotion/native';
-import { Reviews } from '../shared/reviews';
-import TabHeader from './tabHeader';
-import { Devider } from '.';
+import { Reviews } from '../../shared/Reviews';
+import Devider from '../Devider';
+import { TabHeader } from '../TabHeader';
 
 interface MenuReview {
   breadCategoryId: number;
@@ -21,16 +21,14 @@ interface ReviewSectionProps {
   reviews: MenuReview[];
 }
 
-const ReviewSection: React.FC<ReviewSectionProps> = ({ reviews }) => {
-  return (
-    <Container>
-      <Devider />
-      <TabHeader title={'리뷰'} totalCount={30} addBtnText={'리뷰 작성'} />
-      <Reviews reviews={reviews} />
-    </Container>
-  );
-};
+const ReviewSection: React.FC<ReviewSectionProps> = ({ reviews }) => (
+  <Container>
+    <Devider />
+    <TabHeader title={'리뷰'} totalCount={30} addBtnText={'리뷰 작성'} />
+    <Reviews reviews={reviews} />
+  </Container>
+);
 
-export default ReviewSection;
+export { ReviewSection };
 
 const Container = styled.ScrollView``;

@@ -36,4 +36,4 @@ const FileTextIcon: React.FC<SvgProps> = props => (
   </Svg>
 );
 
-export default FileTextIcon;
+export { FileTextIcon };

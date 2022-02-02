@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList } from 'react-native';
-import Review from './review';
+import Review from './Review';
 
 interface MenuReview {
   breadCategoryId: number;
@@ -19,16 +19,12 @@ interface ReviewsProps {
   reviews: MenuReview[];
 }
 
-const Reviews: React.FC<ReviewsProps> = ({ reviews }) => {
-  return (
-    <FlatList
-      data={reviews}
-      keyExtractor={review => review.menuReviewId.toString()}
-      renderItem={({ item }) => {
-        return <Review review={item} />;
-      }}
-    />
-  );
-};
+const Reviews: React.FC<ReviewsProps> = ({ reviews }) => (
+  <FlatList
+    data={reviews}
+    keyExtractor={review => review.menuReviewId.toString()}
+    renderItem={({ item }) => <Review review={item} />}
+  />
+);
 
 export default Reviews;

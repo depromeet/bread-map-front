@@ -14,4 +14,4 @@ const InfoParkingIcon: React.FC<SvgProps & FacilityIconProps> = props => (
   </Svg>
 );
 
-export default InfoParkingIcon;
+export { InfoParkingIcon };

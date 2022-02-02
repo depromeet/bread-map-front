@@ -24,4 +24,4 @@ const InfoShippingIcon: React.FC<SvgProps & FacilityIconProps> = props => (
   </Svg>
 );
 
-export default InfoShippingIcon;
+export { InfoShippingIcon };

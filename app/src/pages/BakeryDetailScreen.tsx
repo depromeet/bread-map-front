@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from '@emotion/native';
-import { InfoSection } from '../components/bakeryDetail';
-import BakeryDetailHeader from '../components/bakeryDetail/header';
+import { Header, ReviewSection } from '../components/bakeryDetail';
 
 const bakeryMenu = [
   {
@@ -155,22 +154,20 @@ const info = {
   address: '서울 서초구 서초중앙로 18',
   bakeryId: 5,
   bakeryName: '루엘드파리',
-  basicInfoList: ['PET', 'WIFI'],
+  basicInfoList: ['PET', 'WIFI', 'PARKING', 'DELIVERY', 'SHIPPING'],
   businessHour: '매일 08:00 ~ 21:00',
   telNumber: '02-322-0939',
   websiteUrlList: ['https://smartstore.naver.com/ruelledeparis'],
 };
 
-const BakeryDetailScreen = () => {
-  return (
-    <Container>
-      <BakeryDetailHeader />
-      {/* <MenuSection bakeryMenu={bakeryMenu} /> */}
-      {/* <ReviewSection reviews={reviews} /> */}
-      <InfoSection info={info} />
-    </Container>
-  );
-};
+const BakeryDetailScreen = () => (
+  <Container>
+    <Header bakeryName={info.bakeryName} />
+    {/* <MenuSection bakeryMenu={bakeryMenu} /> */}
+    <ReviewSection reviews={reviews} />
+    {/* <InfoSection info={info} /> */}
+  </Container>
+);
 
 export default BakeryDetailScreen;
 

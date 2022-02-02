@@ -1,14 +1,25 @@
 import React, { FC } from 'react';
-import { Platform } from 'react-native';
-import MapView, { PROVIDER_DEFAULT, PROVIDER_GOOGLE } from 'react-native-maps';
 import styled from '@emotion/native';
 import { ThemeProvider } from '@emotion/react';
-import { Example } from './src/components/example/example';
+import BakeryDetailScreen from './src/pages/BakeryDetailScreen';
 import { theme } from './src/styles/theme';
 
 const App: FC = () => {
   return (
     <ThemeProvider theme={theme}>
+      <BakeryDetailScreen />
+    </ThemeProvider>
+  );
+};
+export default App;
+
+const MapContainer = styled.View`
+  flex: 1;
+  background-color: ${({ theme }) => theme.color.primary500};
+`;
+
+/*
+<ThemeProvider theme={theme}>
       <MapContainer>
         <MapView
           style={{ flex: 1 }}
@@ -23,11 +34,5 @@ const App: FC = () => {
         <Example start={50} />
       </MapContainer>
     </ThemeProvider>
-  );
-};
-export default App;
 
-const MapContainer = styled.View`
-  flex: 1;
-  background-color: ${({ theme }) => theme.color.primary500};
-`;
+*/

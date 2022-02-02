@@ -16,4 +16,4 @@ const InfoPetIcon: React.FC<SvgProps & FacilityIconProps> = props => (
   </Svg>
 );
 
-export default InfoPetIcon;
+export { InfoPetIcon };

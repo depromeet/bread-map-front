@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/native';
-import { Rating } from '../rating';
+import { Rating } from '../Rating';
 
 interface MenuProps {
   name: string;
@@ -8,18 +8,16 @@ interface MenuProps {
   rating: number;
 }
 
-const Menu: React.FC<MenuProps> = ({ name, price, rating }) => {
-  return (
-    <Container>
-      <Img source={{ uri: 'https://via.placeholder.com/100' }} />
-      <MenuInfo>
-        <MenuName>{name}</MenuName>
-        <Rating rating={rating} textPosition={'right'} />
-        <Price>{price.toLocaleString()}원</Price>
-      </MenuInfo>
-    </Container>
-  );
-};
+const Menu: React.FC<MenuProps> = ({ name, price, rating }) => (
+  <Container>
+    <Img source={{ uri: 'https://via.placeholder.com/100' }} />
+    <MenuInfo>
+      <MenuName>{name}</MenuName>
+      <Rating rating={rating} textPosition={'right'} />
+      <Price>{price.toLocaleString()}원</Price>
+    </MenuInfo>
+  </Container>
+);
 
 export default Menu;
 

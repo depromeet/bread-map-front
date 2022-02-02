@@ -16,4 +16,4 @@ const InfoDeliveryIcon: React.FC<SvgProps & FacilityIconProps> = props => (
   </Svg>
 );
 
-export default InfoDeliveryIcon;
+export { InfoDeliveryIcon };

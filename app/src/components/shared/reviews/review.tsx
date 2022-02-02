@@ -1,7 +1,7 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, ScrollView } from 'react-native';
 import styled from '@emotion/native';
-import { Rating } from '../rating';
+import { Rating } from '../Rating';
 
 interface MenuReview {
   breadCategoryId: number;
@@ -27,37 +27,38 @@ const imgs = [
   { id: 4, src: require('../images/bread2.png') },
 ];
 
-const Review: React.FC<ReviewProps> = ({ review }) => {
-  return (
-    <Container>
-      <ReviewContent>
-        <Reviewer>
-          <ProfileImg source={{ uri: 'https://via.placeholder.com/100' }} />
-          <Info>
-            <Nickname>{review?.memberName}</Nickname>
-            <UpdatedAt>{review?.lastModifiedDateTime}</UpdatedAt>
-          </Info>
-        </Reviewer>
-        <ReviewRating>
-          <Name>{review?.menuName}</Name>
-          <Rating rating={review?.rating} textPosition={'right'} size={13} />
-        </ReviewRating>
-        <ReviewText>{review?.contents}</ReviewText>
-      </ReviewContent>
-      <ImgSlide horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20 }}>
-        <FlatList
-          // eslint-disable-next-line react-native/no-inline-styles
-          style={{ flexDirection: 'row' }}
-          data={imgs}
-          keyExtractor={img => img.id.toString()}
-          renderItem={({ item }) => {
-            return <ReviewImg source={item.src} />;
-          }}
-        />
-      </ImgSlide>
-    </Container>
-  );
-};
+const Review: React.FC<ReviewProps> = ({ review }) => (
+  <Container>
+    <ReviewContent>
+      <Reviewer>
+        <ProfileImg source={{ uri: 'https://via.placeholder.com/100' }} />
+        <Info>
+          <Nickname>{review?.memberName}</Nickname>
+          <UpdatedAt>{review?.lastModifiedDateTime}</UpdatedAt>
+        </Info>
+      </Reviewer>
+      <ReviewRating>
+        <Name>{review?.menuName}</Name>
+        <Rating rating={review?.rating} textPosition={'right'} />
+      </ReviewRating>
+      <ReviewText>{review?.contents}</ReviewText>
+    </ReviewContent>
+    <ScrollView
+      style={{ position: 'absolute', left: 0, top: 100 }}
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={{ paddingHorizontal: 20 }}
+    >
+      <FlatList
+        // eslint-disable-next-line react-native/no-inline-styles
+        style={{ flexDirection: 'row' }}
+        data={imgs}
+        keyExtractor={img => img.id.toString()}
+        renderItem={({ item }) => <ReviewImg source={item.src} />}
+      />
+    </ScrollView>
+  </Container>
+);
 
 export default Review;
 

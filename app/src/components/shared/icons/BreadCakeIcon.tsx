@@ -21,4 +21,4 @@ const BreadCakeIcon: React.FC<Animated.AnimateProps<SvgProps>> = props => (
   </AnimateSvg>
 );
 
-export default BreadCakeIcon;
+export { BreadCakeIcon };

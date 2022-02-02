@@ -12,10 +12,9 @@ import {
   InfoWifiIcon,
   MapPinIcon,
   PhoneIcon,
-} from '../shared/icons';
-import Devider from './devider';
-import InfoRow from './infoRow';
-import { useContainerWidth } from './useContainerWidth';
+} from '../../shared/icons';
+import Devider from '../Devider';
+import InfoRow from './InfoRow';
 
 interface BakeryInfo {
   address: string;
@@ -67,49 +66,40 @@ const facilities = [
   },
 ];
 
-const MARGIN = 10 * 2;
-const NUM_COLUMNS = 3;
+const InfoSection: React.FC<InfoProps> = ({ info }) => (
+  <Container>
+    <Devider />
+    <BakeryInfo>
+      <InfoRow icon={<MapPinIcon />} text={info.address} />
+      <InfoRow icon={<ClockIcon />} text={info.businessHour} />
+      <InfoRow icon={<EarthIcon />} text={info.websiteUrlList[0]} />
+      <InfoRow icon={<PhoneIcon />} text={info.telNumber} />
+      <EditBtn>
+        <FileTextIcon />
+        <BtnText>빵집 정보 수정하기</BtnText>
+      </EditBtn>
+    </BakeryInfo>
+    <Devider />
+    <FacilityInfo>
+      <Title>시설정보</Title>
+      <Facilityies>
+        <FlatList
+          data={facilities.filter(facility => info.basicInfoList?.includes(facility.category))}
+          keyExtractor={item => item.text}
+          renderItem={({ item }) => (
+            <Item>
+              <item.icon strokeColor={'orange'} />
+              <FacilityText>{item.text}</FacilityText>
+            </Item>
+          )}
+          numColumns={3}
+        />
+      </Facilityies>
+    </FacilityInfo>
+  </Container>
+);
 
-const InfoSection: React.FC<InfoProps> = ({ info }) => {
-  const { containerWidth, setContainerWidth } = useContainerWidth();
-  const facilityData = Object.values(facilities).filter(value => info.basicInfoList?.includes(value.category));
-
-  return (
-    <Container>
-      <Devider />
-      <BakeryInfo>
-        <InfoRow icon={<MapPinIcon />} text={info.address} />
-        <InfoRow icon={<ClockIcon />} text={info.businessHour} />
-        <InfoRow icon={<EarthIcon />} text={info.websiteUrlList[0]} />
-        <InfoRow icon={<PhoneIcon />} text={info.telNumber} />
-        <EditBtn>
-          <FileTextIcon />
-          <BtnText>빵집 정보 수정하기</BtnText>
-        </EditBtn>
-      </BakeryInfo>
-      <Devider />
-      <FacilityInfo>
-        <Title>시설정보</Title>
-        <Facilityies>
-          <FlatList
-            data={facilityData}
-            onLayout={e => setContainerWidth(e.nativeEvent.layout.width)}
-            keyExtractor={item => item.text}
-            renderItem={({ item }) => (
-              <Item width={(containerWidth - MARGIN) / NUM_COLUMNS}>
-                <item.icon strokeColor={'orange'} />
-                <FacilityText>{item.text}</FacilityText>
-              </Item>
-            )}
-            numColumns={NUM_COLUMNS}
-          />
-        </Facilityies>
-      </FacilityInfo>
-    </Container>
-  );
-};
-
-export default InfoSection;
+export { InfoSection };
 
 const Container = styled.ScrollView``;
 
@@ -144,16 +134,12 @@ const Title = styled.Text`
   margin: 24px 0;
 `;
 
-const Facilityies = styled.View`
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`;
+const Facilityies = styled.View``;
 
-const Item = styled.View<{ width: number }>`
+const Item = styled.View`
   background-color: ${({ theme }) => theme.color.gray50};
   border-radius: 10px;
-  width: ${({ width }) => width};
+  width: 30%;
   height: 100px;
   justify-content: space-evenly;
   align-items: center;

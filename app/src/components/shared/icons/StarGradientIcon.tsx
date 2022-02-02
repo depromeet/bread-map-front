@@ -3,10 +3,18 @@ import Svg, { Path, Stop, LinearGradient, SvgProps } from 'react-native-svg';
 
 type StarGradientProps = {
   start: number;
+  size?: number;
 } & SvgProps;
 
 const StarGradientIcon: React.FC<StarGradientProps> = props => (
-  <Svg width={32} height={31} viewBox="0 0 32 31" fill="none" preserveAspectRatio="none" {...props}>
+  <Svg
+    width={props.size ? props.size : 13}
+    height={props.size ? props.size : 13}
+    viewBox="0 0 32 31"
+    fill="none"
+    preserveAspectRatio="none"
+    {...props}
+  >
     <LinearGradient id="starGradient">
       <Stop offset={props.start} stopColor="#FF6E40" />
       <Stop offset={props.start + 0.0000001} stopColor="#E1E1E1" />
@@ -20,4 +28,4 @@ const StarGradientIcon: React.FC<StarGradientProps> = props => (
   </Svg>
 );
 
-export default StarGradientIcon;
+export { StarGradientIcon };

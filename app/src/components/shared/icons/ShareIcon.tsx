@@ -2,7 +2,7 @@ import * as React from 'react';
 import Svg, { Path, SvgProps } from 'react-native-svg';
 
 const ShareIcon: React.FC<SvgProps> = props => (
-  <Svg width="24" height="24" viewBox="0 0 24 24" fill="none" {...props}>
+  <Svg width={24} height={24} viewBox="0 0 24 24" fill="none" {...props}>
     <Path
       d="M18 8C19.6569 8 21 6.65685 21 5C21 3.34315 19.6569 2 18 2C16.3431 2 15 3.34315 15 5C15 6.65685 16.3431 8 18 8Z"
       stroke="black"
@@ -41,4 +41,4 @@ const ShareIcon: React.FC<SvgProps> = props => (
   </Svg>
 );
 
-export default ShareIcon;
+export { ShareIcon };

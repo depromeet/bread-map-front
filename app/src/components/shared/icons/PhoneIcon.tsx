@@ -13,4 +13,4 @@ const PhoneIcon: React.FC<SvgProps> = props => (
   </Svg>
 );
 
-export default PhoneIcon;
+export { PhoneIcon };

@@ -34,4 +34,4 @@ const EarthIcon: React.FC<SvgProps> = props => (
   </Svg>
 );
 
-export default EarthIcon;
+export { EarthIcon };

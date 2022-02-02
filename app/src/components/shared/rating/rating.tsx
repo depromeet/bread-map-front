@@ -6,47 +6,44 @@ type TextPosition = 'top' | 'right';
 
 interface RatingProps {
   rating: number;
-  textPosition: TextPosition | 'none';
+  textPosition: TextPosition;
   size?: number;
 }
 
-const Rating: React.FC<RatingProps> = ({ rating, textPosition, size, ...props }) => {
-  const starSize = size ?? 18;
+const Rating: React.FC<RatingProps> = ({ rating, textPosition, size, ...props }) => (
+  <Container textPosition={textPosition} {...props}>
+    {textPosition === 'top' && <TopScore>{rating}</TopScore>}
+    <Stars textPosition={textPosition}>
+      {Array(5)
+        .fill(0)
+        .map((_, idx) => {
+          let check = rating - idx;
+          if (check >= 1) {
+            return <StarIcon size={size} fillColor={'orange'} key={idx} />;
+          }
+          if (check <= 0) {
+            return <StarIcon size={size} fillColor={'gray'} key={idx} />;
+          }
 
-  return (
-    <Container percent={40} textPosition={textPosition} {...props}>
-      {textPosition === 'top' && <TopScore>{rating}</TopScore>}
-      <Stars>
-        {Array(5)
-          .fill(0)
-          .map((_, idx) => {
-            let check = rating - idx;
-            if (check >= 1) {
-              return <StarIcon width={starSize} height={starSize} fillColor={'orange'} key={idx} />;
-            }
-            if (check <= 0) {
-              return <StarIcon width={starSize} height={starSize} fillColor={'gray'} key={idx} />;
-            }
+          return <StarGradientIcon size={size} start={check} key={idx} />;
+        })}
+    </Stars>
+    {textPosition === 'right' && <RightScore>{rating}</RightScore>}
+  </Container>
+);
 
-            return <StarGradientIcon width={starSize} height={starSize} start={check} key={idx} />;
-          })}
-      </Stars>
-      {textPosition === 'right' && <RightScore>{rating}</RightScore>}
-    </Container>
-  );
-};
+export { Rating };
 
-export default Rating;
-
-const Container = styled.View<{ percent: number; textPosition: TextPosition | 'none' }>`
+const Container = styled.View<{ textPosition: TextPosition }>`
   width: 100%;
   align-items: center;
   flex-direction: ${({ textPosition }) => (textPosition === 'right' ? 'row' : 'column')};
 `;
 
-const Stars = styled.View`
+const Stars = styled.View<{ textPosition: TextPosition }>`
   flex-direction: row;
   align-items: center;
+  transform: ${({ textPosition }) => (textPosition === 'top' ? 'scale(1.3)' : 'scale(1)')};
 `;
 
 const TopScore = styled.Text`
