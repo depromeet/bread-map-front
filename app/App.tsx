@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import BakeryDetailScreen from '@/pages/BakeryDetailScreen';
 import { ThemeProvider } from '@emotion/react';
-import { Home } from './src/pages';
 import { theme } from './src/styles/theme';
 
 const queryClient = new QueryClient();
@@ -10,7 +10,8 @@ const App: FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
-        <Home />
+        {/* <Home /> */}
+        <BakeryDetailScreen />
       </ThemeProvider>
     </QueryClientProvider>
   );

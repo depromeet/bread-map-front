@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/native';
-import { Reviews } from '../../shared/Reviews';
-import Devider from '../Devider';
+import { Reviews } from '@shared/Reviews';
+import Divider from '../Divider';
 import { TabHeader } from '../TabHeader';
 
 type MenuReview = {
@@ -23,7 +23,7 @@ type ReviewSectionProps = {
 
 const ReviewSection: React.FC<ReviewSectionProps> = ({ reviews }) => (
   <Container>
-    <Devider />
+    <Divider />
     <TabHeader title={'리뷰'} totalCount={30} addBtnText={'리뷰 작성'} />
     <Reviews reviews={reviews} />
   </Container>
@@ -31,4 +31,4 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ reviews }) => (
 
 export { ReviewSection };
 
-const Container = styled.ScrollView``;
+const Container = styled.View``;

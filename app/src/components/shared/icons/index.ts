@@ -13,3 +13,4 @@ export { PhoneIcon } from './PhoneIcon';
 export { ShareIcon } from './ShareIcon';
 export { StarGradientIcon } from './StarGradientIcon';
 export { StarIcon } from './StarIcon';
+export type { InfoIconProps } from './InfoDeliveryIcon';

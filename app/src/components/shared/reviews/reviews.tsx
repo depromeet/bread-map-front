@@ -22,9 +22,9 @@ type ReviewsProps = {
 const Reviews: React.FC<ReviewsProps> = ({ reviews }) => (
   <FlatList
     data={reviews}
-    keyExtractor={review => review.menuReviewId.toString()}
+    keyExtractor={(review, idx) => review.menuReviewId.toString() + idx}
     renderItem={({ item }) => <Review review={item} />}
   />
 );
 
-export default Reviews;
+export { Reviews };

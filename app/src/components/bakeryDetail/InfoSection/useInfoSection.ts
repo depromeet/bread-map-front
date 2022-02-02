@@ -1,7 +1,7 @@
 import React from 'react';
 import { SvgProps } from 'react-native-svg';
-import { InfoParkingIcon, InfoWifiIcon, InfoDeliveryIcon, InfoPetIcon, InfoShippingIcon } from '../../shared/icons';
-import { InfoIconProps } from '../../shared/icons/InfoDeliveryIcon';
+import { InfoParkingIcon, InfoWifiIcon, InfoDeliveryIcon, InfoPetIcon, InfoShippingIcon } from '@shared/Icons';
+import type { InfoIconProps } from '@shared/Icons';
 
 type FacilityCategory = 'PARKING' | 'WIFI' | 'DELIVERY' | 'PET' | 'SHIPPING';
 type FacilityText = '주차 가능' | '와이파이' | '배달' | '반려동물' | '택배';

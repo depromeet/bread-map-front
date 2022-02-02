@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/native';
-import { Menus } from '../../shared/Menus';
-import Devider from '../Devider';
+import { Menus } from '@shared/Menus';
+import Divider from '../Divider';
 import { TabHeader } from '../TabHeader';
 
 type MenuItem = {
@@ -16,7 +16,7 @@ type MenuSectionProps = {
 
 const MenuSection: React.FC<MenuSectionProps> = ({ bakeryMenu }) => (
   <Container>
-    <Devider />
+    <Divider />
     <TabHeader title={'메뉴'} totalCount={6} addBtnText={'메뉴 입력'} />
     <Content>
       <Menus bakeryMenu={bakeryMenu} />
@@ -26,7 +26,7 @@ const MenuSection: React.FC<MenuSectionProps> = ({ bakeryMenu }) => (
 
 export { MenuSection };
 
-const Container = styled.ScrollView``;
+const Container = styled.View``;
 
 const Content = styled.View`
   padding: 0 20px;

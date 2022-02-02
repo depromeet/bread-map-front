@@ -1,6 +1,6 @@
 import React from 'react';
+import { Header, InfoSection } from '@/components/BakeryDetail';
 import styled from '@emotion/native';
-import { Header, ReviewSection } from '../components/bakeryDetail';
 
 const bakeryMenu = [
   {
@@ -164,8 +164,8 @@ const BakeryDetailScreen = () => (
   <Container>
     <Header bakeryName={info.bakeryName} />
     {/* <MenuSection bakeryMenu={bakeryMenu} /> */}
-    <ReviewSection reviews={reviews} />
-    {/* <InfoSection info={info} /> */}
+    {/* <ReviewSection reviews={reviews} /> */}
+    <InfoSection info={info} />
   </Container>
 );
 

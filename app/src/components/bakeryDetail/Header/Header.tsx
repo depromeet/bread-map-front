@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/native';
-import { ChevronDownIcon, ShareIcon } from '../../shared/icons';
+import { ChevronDownIcon, ShareIcon } from '@shared/Icons';
 
 type tabMenuProps = {
   name: string;
