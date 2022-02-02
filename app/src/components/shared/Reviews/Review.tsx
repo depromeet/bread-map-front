@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, ScrollView } from 'react-native';
+import { FlatList } from 'react-native';
 import styled from '@emotion/native';
 import { Rating } from '../Rating';
 
@@ -43,20 +43,16 @@ const Review: React.FC<ReviewProps> = ({ review }) => (
       </ReviewRating>
       <ReviewText>{review?.contents}</ReviewText>
     </ReviewContent>
-    <ScrollView
-      style={{ position: 'absolute', left: 0, top: 100 }}
+    <FlatList
+      // eslint-disable-next-line react-native/no-inline-styles
+      style={{ flexDirection: 'row', position: 'absolute', left: 0, top: 100 }}
+      data={imgs}
       horizontal
       showsHorizontalScrollIndicator={false}
       contentContainerStyle={{ paddingHorizontal: 20 }}
-    >
-      <FlatList
-        // eslint-disable-next-line react-native/no-inline-styles
-        style={{ flexDirection: 'row' }}
-        data={imgs}
-        keyExtractor={img => img.id.toString()}
-        renderItem={({ item }) => <ReviewImg source={item.src} />}
-      />
-    </ScrollView>
+      keyExtractor={img => img.id.toString()}
+      renderItem={({ item }) => <ReviewImg source={item.src} />}
+    />
   </Container>
 );
 
@@ -111,12 +107,6 @@ const Name = styled.Text`
   font-size: 12px;
   color: ${({ theme }) => theme.color.gray600};
   margin-right: 8px;
-`;
-
-const ImgSlide = styled.ScrollView`
-  position: absolute;
-  left: 0;
-  top: 100px;
 `;
 
 const ReviewImg = styled.Image`

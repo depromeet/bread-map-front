@@ -1,9 +1,8 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { bindHook } from '@/utils';
 import styled from '@emotion/native';
-import { bindHook } from '../../../utils';
-import { ClockIcon, EarthIcon, FileTextIcon, MapPinIcon, PhoneIcon } from '../../shared/icons';
-import Devider from '../Devider';
+import { ClockIcon, EarthIcon, FileTextIcon, MapPinIcon, PhoneIcon } from '@shared/Icons';
+import Divider from '../Divider';
 import InfoRow from './InfoRow';
 import { useInfoSection } from './useInfoSection';
 
@@ -31,7 +30,7 @@ type InfoProps = {
 
 const InfoSection: React.FC<InfoProps> = bindHook(useInfoSection, ({ info, facilities }) => (
   <Container>
-    <Devider />
+    <Divider />
     <BakeryInformation>
       <InfoRow icon={<MapPinIcon />} text={info.address} />
       <InfoRow icon={<ClockIcon />} text={info.businessHour} />
@@ -42,21 +41,16 @@ const InfoSection: React.FC<InfoProps> = bindHook(useInfoSection, ({ info, facil
         <BtnText>빵집 정보 수정하기</BtnText>
       </EditBtn>
     </BakeryInformation>
-    <Devider />
+    <Divider />
     <FacilityInfo>
       <Title>시설정보</Title>
       <Facilityies>
-        <FlatList
-          data={facilities}
-          keyExtractor={item => item.text}
-          renderItem={({ item }) => (
-            <Item>
-              {<item.icon strokeColor={'orange'} />}
-              <FacilityText>{item.text}</FacilityText>
-            </Item>
-          )}
-          numColumns={3}
-        />
+        {facilities?.map(facility => (
+          <Item key={facility.category}>
+            {<facility.icon strokeColor={'orange'} />}
+            <FacilityText>{facility.text}</FacilityText>
+          </Item>
+        ))}
       </Facilityies>
     </FacilityInfo>
   </Container>
@@ -64,7 +58,7 @@ const InfoSection: React.FC<InfoProps> = bindHook(useInfoSection, ({ info, facil
 
 export { InfoSection };
 
-const Container = styled.ScrollView``;
+const Container = styled.View``;
 
 const BakeryInformation = styled.View`
   padding: 24px 20px;
@@ -97,7 +91,10 @@ const Title = styled.Text`
   margin: 24px 0;
 `;
 
-const Facilityies = styled.View``;
+const Facilityies = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
 
 const Item = styled.View`
   background-color: ${({ theme }) => theme.color.gray50};

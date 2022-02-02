@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/native';
-import { StarGradientIcon, StarIcon } from '../icons';
+import { StarGradientIcon, StarIcon } from '../Icons';
 
 type TextPosition = 'top' | 'right';
 

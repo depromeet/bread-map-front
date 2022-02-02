@@ -27,4 +27,4 @@ const Reviews: React.FC<ReviewsProps> = ({ reviews }) => (
   />
 );
 
-export default Reviews;
+export { Reviews };

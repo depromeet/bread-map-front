@@ -1,0 +1,1 @@
+export { useGetBakeries } from './useGetBakeries';
