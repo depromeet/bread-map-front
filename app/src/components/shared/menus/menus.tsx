@@ -2,11 +2,11 @@ import React from 'react';
 import { FlatList } from 'react-native';
 import Menu from './Menu';
 
-interface MenuInfo {
+type MenuInfo = {
   name: string;
   price: number;
   rating: number;
-}
+};
 
 interface MenuProps {
   bakeryMenu: MenuInfo[];

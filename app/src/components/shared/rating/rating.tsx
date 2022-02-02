@@ -4,11 +4,11 @@ import { StarGradientIcon, StarIcon } from '../icons';
 
 type TextPosition = 'top' | 'right';
 
-interface RatingProps {
+type RatingProps = {
   rating: number;
   textPosition: TextPosition;
   size?: number;
-}
+};
 
 const Rating: React.FC<RatingProps> = ({ rating, textPosition, size, ...props }) => (
   <Container textPosition={textPosition} {...props}>

@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from '@emotion/native';
 
-interface TabHeaderProps {
+type TabHeaderProps = {
   title: string;
   totalCount: number;
   addBtnText: string;
-}
+};
 
 const TabHeader: React.FC<TabHeaderProps> = ({ title, totalCount, addBtnText }) => (
   <Container>

@@ -1,10 +1,10 @@
 import * as React from 'react';
 import Svg, { Path, SvgProps } from 'react-native-svg';
 
-interface StarIconProps {
+type StarIconProps = {
   fillColor: 'orange' | 'gray';
   size?: number;
-}
+};
 
 const StarIcon: React.FC<SvgProps & StarIconProps> = props => (
   <Svg

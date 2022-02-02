@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from '@emotion/native';
 
-interface InfoRowProps {
+type InfoRowProps = {
   icon: SVGElement;
   text: string;
-}
+};
 
 const InfoRow: React.FC<InfoRowProps> = ({ icon, text }) => (
   <Row>

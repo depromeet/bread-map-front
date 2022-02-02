@@ -4,7 +4,7 @@ import { Reviews } from '../../shared/Reviews';
 import Devider from '../Devider';
 import { TabHeader } from '../TabHeader';
 
-interface MenuReview {
+type MenuReview = {
   breadCategoryId: number;
   contents: string;
   imgPathList: string[];
@@ -15,11 +15,11 @@ interface MenuReview {
   menuName: string;
   menuReviewId: number;
   rating: number;
-}
+};
 
-interface ReviewSectionProps {
+type ReviewSectionProps = {
   reviews: MenuReview[];
-}
+};
 
 const ReviewSection: React.FC<ReviewSectionProps> = ({ reviews }) => (
   <Container>

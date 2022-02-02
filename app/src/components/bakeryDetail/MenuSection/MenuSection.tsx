@@ -4,15 +4,15 @@ import { Menus } from '../../shared/Menus';
 import Devider from '../Devider';
 import { TabHeader } from '../TabHeader';
 
-interface MenuItem {
+type MenuItem = {
   name: string;
   price: number;
   rating: number;
-}
+};
 
-interface MenuSectionProps {
+type MenuSectionProps = {
   bakeryMenu: MenuItem[];
-}
+};
 
 const MenuSection: React.FC<MenuSectionProps> = ({ bakeryMenu }) => (
   <Container>

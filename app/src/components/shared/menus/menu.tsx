@@ -2,11 +2,11 @@ import React from 'react';
 import styled from '@emotion/native';
 import { Rating } from '../Rating';
 
-interface MenuProps {
+type MenuProps = {
   name: string;
   price: number;
   rating: number;
-}
+};
 
 const Menu: React.FC<MenuProps> = ({ name, price, rating }) => (
   <Container>

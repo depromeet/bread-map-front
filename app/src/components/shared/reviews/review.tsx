@@ -3,7 +3,7 @@ import { FlatList, ScrollView } from 'react-native';
 import styled from '@emotion/native';
 import { Rating } from '../Rating';
 
-interface MenuReview {
+type MenuReview = {
   breadCategoryId: number;
   contents: string;
   imgPathList: string[];
@@ -14,11 +14,11 @@ interface MenuReview {
   menuName: string;
   menuReviewId: number;
   rating: number;
-}
+};
 
-interface ReviewProps {
+type ReviewProps = {
   review: MenuReview;
-}
+};
 
 const imgs = [
   { id: 1, src: require('../images/bread.png') },

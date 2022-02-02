@@ -2,7 +2,7 @@ import React from 'react';
 import { FlatList } from 'react-native';
 import Review from './Review';
 
-interface MenuReview {
+type MenuReview = {
   breadCategoryId: number;
   contents: string;
   imgPathList: string[];
@@ -13,11 +13,11 @@ interface MenuReview {
   menuName: string;
   menuReviewId: number;
   rating: number;
-}
+};
 
-interface ReviewsProps {
+type ReviewsProps = {
   reviews: MenuReview[];
-}
+};
 
 const Reviews: React.FC<ReviewsProps> = ({ reviews }) => (
   <FlatList

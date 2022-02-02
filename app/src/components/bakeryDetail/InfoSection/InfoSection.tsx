@@ -16,7 +16,7 @@ import {
 import Devider from '../Devider';
 import InfoRow from './InfoRow';
 
-interface BakeryInfo {
+type BakeryInfo = {
   address: string;
   //avgRating: number;
   bakeryId: number;
@@ -32,11 +32,11 @@ interface BakeryInfo {
   //ratingCount: number;
   telNumber: string;
   websiteUrlList: string[];
-}
+};
 
-interface InfoProps {
+type InfoProps = {
   info: BakeryInfo;
-}
+};
 
 const facilities = [
   {
@@ -69,7 +69,7 @@ const facilities = [
 const InfoSection: React.FC<InfoProps> = ({ info }) => (
   <Container>
     <Devider />
-    <BakeryInfo>
+    <BakeryInformation>
       <InfoRow icon={<MapPinIcon />} text={info.address} />
       <InfoRow icon={<ClockIcon />} text={info.businessHour} />
       <InfoRow icon={<EarthIcon />} text={info.websiteUrlList[0]} />
@@ -78,7 +78,7 @@ const InfoSection: React.FC<InfoProps> = ({ info }) => (
         <FileTextIcon />
         <BtnText>빵집 정보 수정하기</BtnText>
       </EditBtn>
-    </BakeryInfo>
+    </BakeryInformation>
     <Devider />
     <FacilityInfo>
       <Title>시설정보</Title>
@@ -103,7 +103,7 @@ export { InfoSection };
 
 const Container = styled.ScrollView``;
 
-const BakeryInfo = styled.View`
+const BakeryInformation = styled.View`
   padding: 24px 20px;
 `;
 

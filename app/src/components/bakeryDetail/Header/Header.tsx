@@ -2,9 +2,9 @@ import React from 'react';
 import styled from '@emotion/native';
 import { ChevronDownIcon, ShareIcon } from '../../shared/icons';
 
-interface tabMenuProps {
+type tabMenuProps = {
   name: string;
-}
+};
 
 const Tabs: React.FC<tabMenuProps> = ({ name }) => (
   <TabButton>
